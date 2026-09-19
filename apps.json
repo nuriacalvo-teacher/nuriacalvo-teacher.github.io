@@ -616,28 +616,6 @@
   ],
   "about": {
     "headline": "Profesora, lingüista, artista y curiosa por naturaleza.",
-    "highlights": [
-      {
-        "value": "Nº 1",
-        "label": "Oposiciones de Inglés · Aragón",
-        "accent": "indigo"
-      },
-      {
-        "value": "+20",
-        "label": "Años de experiencia docente",
-        "accent": "violet"
-      },
-      {
-        "value": "7",
-        "label": "Idiomas",
-        "accent": "emerald"
-      },
-      {
-        "value": "4",
-        "label": "Álbumes publicados",
-        "accent": "rose"
-      }
-    ],
     "sections": [
       {
         "title": "Experiencia lingüística y educativa",
