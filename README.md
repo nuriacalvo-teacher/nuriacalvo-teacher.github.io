@@ -1,0 +1,123 @@
+# Nuria Calvo · English Apps
+
+Página principal de **Nuria Calvo**, profesora de Inglés del IES Goya (Zaragoza).
+Reúne, organizadas por temas y cursos, las aplicaciones educativas publicadas en
+esta cuenta de GitHub.
+
+🔗 **https://nuriacalvo-teacher.github.io**
+
+| Fichero | Para qué sirve |
+|---|---|
+| `index.html` | La página. No hace falta tocarla nunca. |
+| `apps.json` | **El catálogo.** Aquí se decide qué apps se ven y en qué orden. |
+
+Cada app vive en su propio repositorio (`present-tenses`, `irregular-verbs`,
+`habits`…). Esta página solo las enlaza: **no hay que copiar nada aquí** cuando
+crees una app nueva.
+
+---
+
+## Añadir una app nueva (sin tocar código)
+
+Cada vez que subas una app nueva a GitHub:
+
+1. Abre la página y pulsa el botón **⚙️ Profesora** (arriba a la derecha).
+2. Escribe la contraseña (por defecto: `nuria123`).
+3. Ve a la pestaña **Repositorios de GitHub** y pulsa **Cargar mis repositorios**.
+   Aparecerán *todos* tus repositorios, incluidos los que no tienen nada que ver
+   con inglés.
+4. Marca **solo** los que quieras publicar y pulsa **Añadir seleccionados al catálogo**.
+5. En la pestaña **Mis apps**, pulsa el lápiz ✏️ de cada app nueva para ponerle
+   título, descripción, curso, tema, color e icono.
+6. Ve a **Publicar cambios** → **Descargar apps.json**.
+7. Sube ese fichero a este repositorio: entra en `apps.json`, pulsa el lápiz ✏️,
+   borra todo, pega el contenido nuevo y pulsa **Commit changes**.
+
+En un minuto la página muestra los cambios al alumnado.
+
+> **Importante:** lo que editas en el panel se guarda solo en tu navegador hasta
+> que subes el `apps.json` a GitHub. Mientras tanto verás abajo el aviso
+> *«Vista previa local sin publicar»*: nadie más ve esos cambios.
+
+## Las cosas del día a día
+
+- **Ocultar o mostrar una app:** el interruptor de la izquierda en «Mis apps».
+  Las apps ocultas siguen en el catálogo, pero no las ve nadie.
+- **Cambiar el orden:** las flechas ↑ ↓. Ese es el orden que ve el alumnado con
+  la opción *«Orden de la profesora»*.
+- **Destacar en la portada:** la estrella ★. Las destacadas salen arriba del todo.
+- **Marcar como «Próximamente»:** en el lápiz ✏️, campo *Estado*. La app aparece
+  anunciada pero sin enlace, hasta que la termines.
+- **Cambiar tu nombre, centro o el texto de portada:** pestaña *Portada y perfil*.
+
+## En clase
+
+- El botón **QR** de cada tarjeta abre un código QR grande para proyectar: el
+  alumnado lo escanea con el móvil y entra directamente a la app.
+- **Imprimir listado** (al final de la página) saca en papel todas las apps con
+  sus direcciones.
+- El portal se ve en **modo claro u oscuro** (botón ☀️/🌙); el modo claro va mejor
+  en proyectores con mucha luz ambiente.
+- Atajo: la tecla `/` lleva directamente al buscador.
+
+---
+
+## Detalles técnicos
+
+- Una sola página, sin instalación, sin servidor y sin base de datos: lee
+  `apps.json` y lo pinta.
+- Si `apps.json` no se puede leer (por ejemplo al abrir el fichero desde el disco
+  con doble clic), la página usa una copia de seguridad del catálogo que lleva
+  incrustada, así nunca se ve vacía.
+- La página **no llama a la API de GitHub cuando entra el alumnado**: eso se hace
+  solo dentro del panel de profesora. Si lo hiciera en cada visita, un aula
+  entera compartiendo la misma conexión agotaría el límite de peticiones de
+  GitHub y la página fallaría.
+- Campos de cada app en `apps.json`: `title`, `subtitle`, `description`,
+  `category`, `levels`, `tags`, `icon`, `accent`, `status` (`live` / `beta` /
+  `soon`), `featured`, `visible`, `url`, `repo`, `updated`.
+
+### Cambiar la bio de «Sobre mí»
+
+El texto de la sección *Sobre mí* está en `apps.json`, dentro del apartado
+`about`. Se edita igual que el resto: entra en `apps.json` en GitHub, pulsa el
+lápiz ✏️, cambia el texto entre comillas y haz *Commit changes*.
+
+- `headline` → la frase grande bajo tu nombre.
+- `highlights` → las cuatro cifras destacadas (`value` es el número, `label` el texto).
+- `sections` → cada bloque de colores, con su `title`, `icon`, `accent` (color),
+  sus `paragraphs`, y opcionalmente `chips` (las etiquetas de idiomas) o `items`
+  (las listas con año o lugar a la derecha).
+- `closing` → el bloque final, con su `quote` en cursiva.
+
+Dentro de un párrafo, lo que pongas entre dos asteriscos sale **en negrita**:
+`Obtuve el **n.º 1 en las oposiciones**` se ve como *Obtuve el* **n.º 1 en las
+oposiciones**. No se admite ningún otro código: cualquier otra cosa se muestra
+tal cual, así que no se puede romper la página escribiendo texto.
+
+### Poner tu foto en lugar de las iniciales
+
+En `apps.json`, dentro de `teacher`, añade una línea con la dirección de la
+imagen:
+
+```json
+"photo": "https://nuriacalvo-teacher.github.io/nuriacalvo-teacher.github.io/foto.jpg",
+```
+
+Lo más cómodo es subir la foto a este mismo repositorio (cuadrada, 600×600 px
+aproximadamente) y poner solo `"photo": "foto.jpg"`. Si no pones nada, se siguen
+viendo las iniciales sobre el fondo de color.
+
+### Cambiar la contraseña del panel
+
+En `index.html`, busca la línea:
+
+```js
+const TEACHER_KEY = 'nuria123';
+```
+
+y cambia el texto entre comillas. Ten en cuenta que es una contraseña de
+conveniencia, no de seguridad: sirve para que nadie toque el panel sin querer,
+pero cualquiera que mire el código de la página puede leerla. No pasa nada,
+porque el panel solo genera un fichero que luego subes tú a GitHub: nadie puede
+modificar la web desde ahí.

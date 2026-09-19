@@ -1,0 +1,2382 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuria Calvo · English Apps | IES Goya Zaragoza</title>
+<meta name="description" content="Aplicaciones interactivas de inglés creadas por Nuria Calvo, profesora del IES Goya de Zaragoza. Gramática, vocabulario, writing, speaking y lecturas para ESO y Bachillerato.">
+<meta name="author" content="Nuria Calvo">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nuria Calvo · English Apps">
+<meta property="og:description" content="Aplicaciones interactivas de inglés para ESO y Bachillerato. IES Goya, Zaragoza.">
+<meta property="og:locale" content="es_ES">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%234f46e5'/%3E%3Ctext x='50' y='70' font-family='Verdana,sans-serif' font-size='54' font-weight='bold' fill='white' text-anchor='middle'%3ENC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<style>
+/* ===========================================================
+   TOKENS
+   =========================================================== */
+:root{
+  --bg:#080b16;
+  --bg-2:#0c1120;
+  --surface:rgba(18,24,42,.86);
+  --surface-solid:#121a2a;
+  --surface-hi:rgba(30,38,62,.7);
+  --border:rgba(148,163,184,.16);
+  --border-hi:rgba(148,163,184,.30);
+  --text:#f1f5f9;
+  --text-2:#cbd5e1;
+  --muted:#94a3b8;
+  --brand:#6366f1;
+  --brand-2:#818cf8;
+  --brand-ink:#ffffff;
+  --ring:rgba(129,140,248,.55);
+  --shadow:0 20px 45px -25px rgba(0,0,0,.95);
+  --shadow-lg:0 40px 80px -40px rgba(0,0,0,1);
+  --glass:blur(14px) saturate(150%);
+  --radius:22px;
+  --radius-sm:14px;
+  --maxw:1240px;
+}
+:root[data-theme="light"]{
+  --bg:#f4f6fc;
+  --bg-2:#eef1fa;
+  --surface:rgba(255,255,255,.92);
+  --surface-solid:#ffffff;
+  --surface-hi:rgba(241,245,255,.9);
+  --border:rgba(15,23,42,.10);
+  --border-hi:rgba(15,23,42,.20);
+  --text:#0f172a;
+  --text-2:#334155;
+  --muted:#64748b;
+  --brand:#4f46e5;
+  --brand-2:#4338ca;
+  --ring:rgba(79,70,229,.45);
+  --shadow:0 18px 40px -28px rgba(15,23,42,.45);
+  --shadow-lg:0 40px 70px -45px rgba(15,23,42,.5);
+}
+
+/* Acentos por categoría */
+[data-accent="indigo"] { --acc:#6366f1; --acc-2:#a5b4fc; }
+[data-accent="emerald"]{ --acc:#10b981; --acc-2:#6ee7b7; }
+[data-accent="amber"]  { --acc:#f59e0b; --acc-2:#fcd34d; }
+[data-accent="rose"]   { --acc:#f43f5e; --acc-2:#fda4af; }
+[data-accent="sky"]    { --acc:#0ea5e9; --acc-2:#7dd3fc; }
+[data-accent="violet"] { --acc:#8b5cf6; --acc-2:#c4b5fd; }
+[data-accent="teal"]   { --acc:#14b8a6; --acc-2:#5eead4; }
+[data-accent="slate"]  { --acc:#64748b; --acc-2:#cbd5e1; }
+[data-accent="orange"] { --acc:#f97316; --acc-2:#fdba74; }
+[data-accent="pink"]   { --acc:#ec4899; --acc-2:#f9a8d4; }
+[data-accent="lime"]   { --acc:#84cc16; --acc-2:#bef264; }
+[data-accent="cyan"]   { --acc:#06b6d4; --acc-2:#67e8f9; }
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; scroll-padding-top:150px; }
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:-2;
+  background:
+    radial-gradient(900px 600px at 12% -8%, rgba(99,102,241,.22), transparent 60%),
+    radial-gradient(800px 600px at 92% 4%, rgba(236,72,153,.14), transparent 62%),
+    radial-gradient(900px 700px at 50% 108%, rgba(14,165,233,.14), transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+}
+:root[data-theme="light"] body::before{
+  background:
+    radial-gradient(900px 600px at 12% -8%, rgba(99,102,241,.16), transparent 60%),
+    radial-gradient(800px 600px at 92% 4%, rgba(236,72,153,.10), transparent 62%),
+    radial-gradient(900px 700px at 50% 108%, rgba(14,165,233,.12), transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+button,input,select,textarea{ font:inherit; color:inherit; }
+:focus-visible{ outline:3px solid var(--ring); outline-offset:3px; border-radius:8px; }
+.wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:16px; }
+@media (min-width:768px){ .wrap{ padding-inline:32px; } }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+.skip{ position:absolute; left:-9999px; top:8px; z-index:200; background:var(--brand); color:#fff; padding:12px 18px; border-radius:12px; font-weight:800; }
+.skip:focus{ left:16px; }
+
+/* ===========================================================
+   HEADER
+   =========================================================== */
+.site-header{
+  position:sticky; top:0; z-index:70;
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:var(--glass);
+  -webkit-backdrop-filter:var(--glass);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:12px; }
+.brand{ display:flex; align-items:center; gap:12px; min-width:0; }
+.brand-mark{
+  width:46px; height:46px; flex:none; border-radius:15px;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6 55%,#ec4899);
+  display:grid; place-items:center; color:#fff; font-weight:900; font-size:1.05rem; letter-spacing:.02em;
+  box-shadow:0 10px 26px -10px rgba(99,102,241,.9);
+}
+.brand-text{ min-width:0; overflow:hidden; }
+.brand-name{ font-size:1.06rem; font-weight:900; letter-spacing:-.01em; line-height:1.15; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+@media (max-width:620px){ .brand-sub{ display:none; } .brand-name{ font-size:1rem; } }
+.brand-sub{ font-size:.74rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.09em; white-space:nowrap; }
+.header-nav{ display:none; gap:4px; }
+@media (min-width:1000px){ .header-nav{ display:flex; } }
+.header-nav a{
+  padding:9px 14px; border-radius:11px; font-weight:700; font-size:.92rem; color:var(--text-2);
+  transition:background .18s, color .18s;
+}
+.header-nav a:hover{ background:var(--surface-hi); color:var(--text); }
+.header-actions{ display:flex; align-items:center; gap:8px; }
+.icon-btn{
+  width:42px; height:42px; display:grid; place-items:center; flex:none;
+  border-radius:13px; border:1px solid var(--border); background:var(--surface);
+  cursor:pointer; color:var(--text-2); transition:.18s;
+}
+.icon-btn:hover{ color:var(--text); border-color:var(--border-hi); transform:translateY(-1px); }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  padding:12px 20px; border-radius:14px; border:1px solid transparent;
+  font-weight:800; font-size:.94rem; cursor:pointer; transition:.18s; white-space:nowrap;
+}
+.btn-primary{ background:linear-gradient(135deg,var(--brand),#8b5cf6); color:#fff; box-shadow:0 14px 30px -14px rgba(99,102,241,.95); }
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 20px 38px -16px rgba(99,102,241,1); }
+.btn-ghost{ background:var(--surface); border-color:var(--border); color:var(--text-2); }
+.btn-ghost:hover{ color:var(--text); border-color:var(--border-hi); transform:translateY(-2px); }
+.btn-sm{ padding:9px 14px; font-size:.86rem; border-radius:11px; }
+.btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+
+/* ===========================================================
+   HERO
+   =========================================================== */
+.hero{ position:relative; padding-block:56px 44px; }
+@media (min-width:768px){ .hero{ padding-block:84px 60px; } }
+.hero-grid{ display:grid; gap:40px; align-items:center; }
+@media (min-width:1000px){ .hero-grid{ grid-template-columns:1.25fr .85fr; gap:56px; } }
+.eyebrow{
+  display:inline-flex; align-items:center; gap:9px;
+  padding:7px 15px; border-radius:999px;
+  background:color-mix(in srgb, var(--brand) 16%, transparent);
+  border:1px solid color-mix(in srgb, var(--brand) 38%, transparent);
+  color:var(--brand-2); font-size:.76rem; font-weight:800; text-transform:uppercase; letter-spacing:.11em;
+}
+:root[data-theme="light"] .eyebrow{ color:var(--brand); }
+.hero h1{
+  margin:20px 0 0; font-size:clamp(2.3rem,6.2vw,4.1rem); line-height:1.05;
+  font-weight:900; letter-spacing:-.035em;
+}
+.hero h1 .grad{
+  background:linear-gradient(120deg,#818cf8 0%,#c084fc 45%,#f472b6 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero-lead{ margin:20px 0 0; font-size:clamp(1.02rem,2.1vw,1.25rem); color:var(--text-2); max-width:56ch; }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+@media (max-width:520px){ .hero-cta .btn{ flex:1 1 100%; } }
+.hero-meta{ display:flex; flex-wrap:wrap; gap:18px; margin-top:26px; color:var(--muted); font-size:.9rem; font-weight:600; }
+.hero-meta span{ display:inline-flex; align-items:center; gap:8px; }
+
+.stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+.stat{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px; backdrop-filter:var(--glass); -webkit-backdrop-filter:var(--glass);
+  box-shadow:var(--shadow); position:relative; overflow:hidden;
+}
+.stat::after{
+  content:""; position:absolute; inset:auto -30% -60% auto; width:140px; height:140px; border-radius:50%;
+  background:radial-gradient(circle, color-mix(in srgb, var(--acc,#6366f1) 30%, transparent), transparent 70%);
+}
+.stat-num{ font-size:2.1rem; font-weight:900; letter-spacing:-.03em; line-height:1; color:var(--acc,var(--brand-2)); }
+.stat-label{ margin-top:6px; font-size:.83rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+
+/* ===========================================================
+   TOOLBAR
+   =========================================================== */
+.toolbar-wrap{ position:sticky; top:71px; z-index:60; padding-block:12px;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:var(--glass); -webkit-backdrop-filter:var(--glass);
+  border-bottom:1px solid transparent; transition:border-color .2s;
+}
+.toolbar-wrap.stuck{ border-bottom-color:var(--border); }
+.toolbar-wrap.unstick{ position:relative; top:auto; border-bottom-color:transparent; }
+.toolbar{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:14px; box-shadow:var(--shadow); display:grid; gap:12px;
+}
+.search-row{ display:flex; gap:10px; flex-wrap:wrap; }
+.search-box{ position:relative; flex:1 1 260px; min-width:0; }
+.search-box i{ position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
+.search-box input{
+  width:100%; padding:13px 46px 13px 44px; border-radius:14px;
+  background:var(--bg); border:1px solid var(--border); font-weight:600; font-size:.98rem;
+  transition:.18s;
+}
+.search-box input::placeholder{ color:var(--muted); }
+.search-box input:focus{ border-color:var(--brand); outline:none; box-shadow:0 0 0 4px color-mix(in srgb, var(--brand) 18%, transparent); }
+.search-kbd{
+  position:absolute; right:12px; top:50%; transform:translateY(-50%);
+  font-size:.7rem; font-weight:800; color:var(--muted);
+  border:1px solid var(--border); border-radius:7px; padding:3px 8px; background:var(--surface-hi);
+}
+.search-box input:not(:placeholder-shown) ~ .search-kbd{ display:none; }
+select.control{
+  padding:13px 14px; border-radius:14px; background:var(--bg); border:1px solid var(--border);
+  font-weight:700; font-size:.9rem; cursor:pointer; max-width:100%;
+}
+select.control:focus{ border-color:var(--brand); outline:none; }
+.chips{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.chip{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:9px 15px; border-radius:999px; cursor:pointer;
+  background:var(--bg); border:1px solid var(--border);
+  font-weight:700; font-size:.87rem; color:var(--text-2); transition:.18s;
+}
+.chip:hover{ border-color:var(--border-hi); color:var(--text); transform:translateY(-1px); }
+.chip i{ font-size:.85em; color:var(--acc,var(--muted)); }
+.chip[aria-pressed="true"]{
+  background:color-mix(in srgb, var(--acc,var(--brand)) 18%, transparent);
+  border-color:color-mix(in srgb, var(--acc,var(--brand)) 55%, transparent);
+  color:var(--text);
+}
+.chip[aria-pressed="true"] i{ color:var(--acc,var(--brand)); }
+.chip-count{ font-size:.74rem; font-weight:800; opacity:.65; }
+.toolbar-foot{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding-top:2px; }
+.result-count{ font-size:.86rem; font-weight:700; color:var(--muted); }
+.result-count b{ color:var(--text); }
+.view-toggle{ display:flex; gap:4px; background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:4px; }
+.view-toggle button{
+  padding:7px 12px; border-radius:9px; border:none; background:transparent; cursor:pointer;
+  color:var(--muted); font-weight:800; font-size:.82rem; transition:.15s;
+}
+.view-toggle button[aria-pressed="true"]{ background:var(--brand); color:#fff; }
+
+/* ===========================================================
+   SECCIONES + TARJETAS
+   =========================================================== */
+.section{ padding-block:40px; }
+.section-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:22px; }
+.section-title{ display:flex; align-items:center; gap:13px; font-size:1.42rem; font-weight:900; letter-spacing:-.02em; margin:0; }
+.section-title .dot{
+  width:38px; height:38px; border-radius:12px; display:grid; place-items:center; flex:none;
+  background:color-mix(in srgb, var(--acc,var(--brand)) 17%, transparent);
+  color:var(--acc,var(--brand)); font-size:.95rem;
+  border:1px solid color-mix(in srgb, var(--acc,var(--brand)) 32%, transparent);
+}
+.section-sub{ color:var(--muted); font-size:.92rem; font-weight:600; margin:6px 0 0 51px; }
+
+.grid{ display:grid; gap:18px; grid-template-columns:repeat(auto-fill,minmax(285px,1fr)); }
+.grid.list-view{ grid-template-columns:1fr; }
+
+.card{
+  position:relative; display:flex; flex-direction:column;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:22px; box-shadow:var(--shadow); overflow:hidden;
+  backdrop-filter:var(--glass); -webkit-backdrop-filter:var(--glass);
+  transition:transform .25s cubic-bezier(.2,.8,.3,1), border-color .25s, box-shadow .25s;
+}
+.card::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--acc),var(--acc-2));
+  opacity:.85;
+}
+.card::after{
+  content:""; position:absolute; top:-70px; right:-70px; width:190px; height:190px; border-radius:50%;
+  background:radial-gradient(circle, color-mix(in srgb, var(--acc) 22%, transparent), transparent 70%);
+  opacity:0; transition:opacity .3s; pointer-events:none;
+}
+.card:hover{ transform:translateY(-5px); border-color:color-mix(in srgb, var(--acc) 45%, transparent); box-shadow:var(--shadow-lg); }
+.card:hover::after{ opacity:1; }
+.card:focus-within{ border-color:color-mix(in srgb, var(--acc) 55%, transparent); }
+.card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:16px; }
+.card-icon{
+  width:52px; height:52px; flex:none; border-radius:16px; display:grid; place-items:center; font-size:1.3rem;
+  background:color-mix(in srgb, var(--acc) 16%, transparent);
+  color:var(--acc);
+  border:1px solid color-mix(in srgb, var(--acc) 34%, transparent);
+  transition:transform .25s;
+}
+.card:hover .card-icon{ transform:scale(1.07) rotate(-4deg); }
+.card h3{ margin:0; font-size:1.2rem; font-weight:900; letter-spacing:-.02em; line-height:1.25; }
+.card h3 a::after{ content:""; position:absolute; inset:0; z-index:1; }
+.card-subtitle{ margin:4px 0 0; font-size:.83rem; font-weight:700; color:var(--acc); }
+.card-desc{ margin:12px 0 0; font-size:.93rem; color:var(--text-2); flex:1 1 auto; }
+.badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
+.badge{
+  font-size:.71rem; font-weight:800; padding:4px 10px; border-radius:999px;
+  background:var(--surface-hi); border:1px solid var(--border); color:var(--text-2);
+  text-transform:uppercase; letter-spacing:.04em; white-space:nowrap;
+}
+.badge.level{ background:color-mix(in srgb, var(--acc) 13%, transparent); border-color:color-mix(in srgb, var(--acc) 30%, transparent); color:var(--acc); }
+.status{ display:inline-flex; align-items:center; gap:6px; font-size:.7rem; font-weight:900; padding:5px 11px; border-radius:999px; text-transform:uppercase; letter-spacing:.06em; white-space:nowrap; }
+.status.live{ background:rgba(16,185,129,.14); color:#34d399; border:1px solid rgba(16,185,129,.35); }
+.status.beta{ background:rgba(245,158,11,.14); color:#fbbf24; border:1px solid rgba(245,158,11,.35); }
+.status.soon{ background:rgba(148,163,184,.14); color:var(--muted); border:1px solid var(--border-hi); }
+:root[data-theme="light"] .status.live{ color:#047857; }
+:root[data-theme="light"] .status.beta{ color:#b45309; }
+.status .pulse{ width:6px; height:6px; border-radius:50%; background:currentColor; animation:pulse 2s infinite; }
+@keyframes pulse{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:.35; transform:scale(.8);} }
+.card-foot{ display:flex; align-items:center; gap:8px; margin-top:20px; padding-top:16px; border-top:1px solid var(--border); }
+.card-open{
+  flex:1 1 auto; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:11px 16px; border-radius:13px; font-weight:800; font-size:.9rem;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--acc) 90%, #000 0%), color-mix(in srgb, var(--acc) 62%, #6366f1));
+  color:#fff; transition:.2s; border:none; cursor:pointer;
+}
+.card-open:hover{ filter:brightness(1.12); }
+.card-open i{ transition:transform .2s; }
+.card:hover .card-open i{ transform:translateX(3px); }
+.mini-btn{
+  position:relative; z-index:2;
+  width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:12px;
+  border:1px solid var(--border); background:var(--bg); color:var(--muted); cursor:pointer; transition:.18s;
+}
+.mini-btn:hover{ color:var(--text); border-color:var(--border-hi); }
+.card.is-soon{ opacity:.72; }
+.card.is-soon .card-open{ background:var(--surface-hi); color:var(--muted); cursor:not-allowed; }
+.card-flags{ display:flex; flex-wrap:wrap; justify-content:flex-end; gap:6px; }
+.flag-featured{
+  display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+  font-size:.7rem; font-weight:900; padding:5px 11px; border-radius:999px;
+  text-transform:uppercase; letter-spacing:.06em;
+  background:linear-gradient(135deg, rgba(245,158,11,.22), rgba(244,63,94,.18));
+  border:1px solid rgba(245,158,11,.45); color:#fbbf24;
+}
+:root[data-theme="light"] .flag-featured{ color:#b45309; }
+.card.is-featured{ border-color:color-mix(in srgb, var(--acc) 34%, transparent); }
+/* Vista lista */
+.grid.list-view .card{ flex-direction:row; align-items:center; gap:18px; padding:18px 22px; }
+.grid.list-view .card::before{ width:3px; height:auto; bottom:0; right:auto; background:linear-gradient(180deg,var(--acc),var(--acc-2)); }
+.grid.list-view .card-top{ margin:0; }
+.grid.list-view .card-body{ flex:1 1 auto; min-width:0; }
+.grid.list-view .card-desc{ margin-top:4px; }
+.grid.list-view .card-foot{ margin:0; padding:0; border:none; flex:none; }
+.grid.list-view .card-open{ flex:none; }
+.grid.list-view .flag-featured{ display:none; }
+@media (max-width:700px){ .grid.list-view .card{ flex-direction:column; align-items:stretch; } .grid.list-view .card-foot{ margin-top:16px; padding-top:16px; border-top:1px solid var(--border); } }
+
+.reveal{ opacity:0; transform:translateY(22px); }
+.reveal.in{ opacity:1; transform:none; transition:opacity .55s ease, transform .55s cubic-bezier(.2,.8,.3,1); }
+
+.empty{
+  text-align:center; padding:70px 20px; border:2px dashed var(--border); border-radius:var(--radius); color:var(--muted);
+}
+.empty i{ font-size:2.6rem; opacity:.5; }
+.empty h3{ margin:16px 0 6px; color:var(--text); font-size:1.2rem; }
+
+/* ===========================================================
+   SOBRE MÍ + FOOTER
+   =========================================================== */
+.about{ display:grid; gap:26px; background:var(--surface); border:1px solid var(--border);
+  border-radius:28px; padding:30px; box-shadow:var(--shadow); }
+@media (min-width:900px){ .about{ grid-template-columns:.9fr 1.1fr; padding:44px; gap:44px; align-items:center; } }
+.about h2{ margin:14px 0 0; font-size:clamp(1.6rem,3.4vw,2.2rem); font-weight:900; letter-spacing:-.03em; }
+.about p{ color:var(--text-2); margin:16px 0 0; }
+.about-list{ list-style:none; padding:0; margin:22px 0 0; display:grid; gap:12px; }
+.about-list li{ display:flex; gap:12px; align-items:flex-start; font-size:.95rem; color:var(--text-2); font-weight:600; }
+.about-list i{ color:var(--brand-2); margin-top:4px; }
+.avatar-big{
+  width:100%; aspect-ratio:1/1; max-width:300px; margin-inline:auto; border-radius:34px;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6 50%,#ec4899);
+  display:grid; place-items:center; color:#fff; font-size:5rem; font-weight:900; letter-spacing:-.04em;
+  box-shadow:0 30px 60px -30px rgba(99,102,241,.9);
+}
+/* --- Sobre mí ampliado --- */
+.about-head{ display:grid; gap:26px; align-items:center; }
+@media (min-width:900px){ .about-head{ grid-template-columns:300px 1fr; gap:44px; } }
+.about-lead{ font-size:clamp(1.05rem,2.2vw,1.3rem); font-weight:700; color:var(--text); margin:14px 0 0; }
+#aboutHighlights{ margin-top:26px; grid-template-columns:repeat(2,1fr); }
+@media (min-width:600px){ #aboutHighlights{ grid-template-columns:repeat(4,1fr); } }
+#aboutHighlights .stat{ padding:16px; }
+#aboutHighlights .stat-num{ font-size:1.55rem; }
+#aboutHighlights .stat-label{ font-size:.71rem; letter-spacing:.04em; }
+
+.about-grid{ display:grid; gap:18px; margin-top:26px; align-items:start; }
+@media (min-width:920px){ .about-grid{ grid-template-columns:1fr 1fr; } }
+.about-card{
+  position:relative; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:26px; box-shadow:var(--shadow); overflow:hidden;
+  backdrop-filter:var(--glass); -webkit-backdrop-filter:var(--glass);
+}
+.about-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--acc),var(--acc-2)); }
+.about-card-head{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+.about-card-head .card-icon{ width:48px; height:48px; font-size:1.2rem; }
+.about-card h3{ margin:0; font-size:1.18rem; font-weight:900; letter-spacing:-.02em; color:var(--acc); line-height:1.25; }
+:root[data-theme="light"] .about-card h3{ color:color-mix(in srgb, var(--acc) 82%, #000); }
+.about-card p{ margin:0 0 13px; color:var(--text-2); font-size:.96rem; }
+.about-card p:last-child{ margin-bottom:0; }
+.about-card strong{ color:var(--text); font-weight:800; }
+.mini-title{ font-size:.72rem; font-weight:900; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin:20px 0 10px; }
+.lang-chips{ display:flex; flex-wrap:wrap; gap:7px; }
+.lang-chip{
+  font-size:.82rem; font-weight:800; padding:6px 13px; border-radius:999px;
+  background:color-mix(in srgb, var(--acc) 13%, transparent);
+  border:1px solid color-mix(in srgb, var(--acc) 32%, transparent); color:var(--acc);
+}
+:root[data-theme="light"] .lang-chip{ color:color-mix(in srgb, var(--acc) 80%, #000); }
+.work-list{ list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+.work-list li{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  padding:11px 15px; border-radius:13px; background:var(--bg); border:1px solid var(--border);
+  font-weight:700; font-size:.93rem; transition:border-color .18s, transform .18s;
+}
+.work-list li:hover{ border-color:color-mix(in srgb, var(--acc) 40%, transparent); transform:translateX(3px); }
+.work-list .meta{
+  font-size:.74rem; font-weight:900; letter-spacing:.05em; color:var(--acc);
+  background:color-mix(in srgb, var(--acc) 13%, transparent); padding:3px 10px; border-radius:999px; white-space:nowrap;
+}
+.about-closing{
+  margin-top:18px; padding:32px; border-radius:28px; position:relative; overflow:hidden;
+  border:1px solid color-mix(in srgb, var(--brand) 34%, transparent);
+  background:
+    radial-gradient(700px 300px at 8% 0%, color-mix(in srgb, var(--brand) 16%, transparent), transparent 70%),
+    radial-gradient(600px 300px at 96% 100%, rgba(236,72,153,.14), transparent 70%),
+    var(--surface);
+  box-shadow:var(--shadow);
+}
+.about-closing h3{ margin:0 0 16px; font-size:1.4rem; font-weight:900; letter-spacing:-.02em;
+  display:flex; align-items:center; gap:12px; }
+.about-closing h3 i{ color:#f43f5e; }
+.about-closing p{ color:var(--text-2); font-size:1rem; margin:0 0 13px; max-width:78ch; }
+.about-closing strong{ color:var(--text); font-weight:800; }
+.about-quote{
+  margin:22px 0 0; padding:18px 22px; border-radius:16px; border-left:4px solid var(--brand);
+  background:color-mix(in srgb, var(--brand) 10%, transparent);
+  font-size:1.05rem; font-weight:800; color:var(--text); font-style:italic;
+}
+.avatar-big img{ width:100%; height:100%; object-fit:cover; border-radius:34px; }
+
+.site-footer{ border-top:1px solid var(--border); margin-top:40px; padding-block:30px; color:var(--muted); font-size:.87rem; }
+.footer-inner{ display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center; }
+.footer-links{ display:flex; gap:16px; flex-wrap:wrap; font-weight:700; }
+.footer-links a:hover{ color:var(--text); }
+
+/* ===========================================================
+   MODALES
+   =========================================================== */
+.modal{
+  position:fixed; inset:0; z-index:120; display:none;
+  align-items:center; justify-content:center; padding:16px;
+  background:rgba(2,6,23,.72); backdrop-filter:blur(6px);
+}
+.modal.open{ display:flex; animation:fade .2s ease; }
+@keyframes fade{ from{opacity:0} to{opacity:1} }
+.modal-box{
+  width:100%; max-width:520px; max-height:92vh; overflow:auto;
+  background:var(--surface-solid); border:1px solid var(--border-hi); border-radius:26px;
+  box-shadow:var(--shadow-lg); padding:26px; animation:pop .24s cubic-bezier(.2,.9,.3,1);
+}
+.modal-box.wide{ max-width:1080px; }
+@keyframes pop{ from{ opacity:0; transform:translateY(16px) scale(.97);} to{ opacity:1; transform:none; } }
+.modal-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:18px; }
+.modal-head h2{ margin:0; font-size:1.3rem; font-weight:900; letter-spacing:-.02em; }
+.modal-head p{ margin:4px 0 0; color:var(--muted); font-size:.88rem; }
+#qrCanvas{ background:#fff; padding:18px; border-radius:20px; display:grid; place-items:center; margin-inline:auto; width:fit-content; }
+#qrCanvas img, #qrCanvas canvas{ display:block; }
+.qr-url{ margin-top:16px; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.8rem; color:var(--muted); word-break:break-all; text-align:center; }
+
+/* ===========================================================
+   PANEL DE PROFESORA
+   =========================================================== */
+.field{ display:block; margin-bottom:14px; }
+.field > span{ display:block; font-size:.76rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:6px; }
+.field input, .field select, .field textarea{
+  width:100%; padding:11px 14px; border-radius:12px; background:var(--bg);
+  border:1px solid var(--border); font-weight:600; font-size:.92rem;
+}
+.field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--brand); outline:none; }
+.field textarea{ min-height:80px; resize:vertical; font-family:inherit; }
+.tabs{ display:flex; gap:6px; border-bottom:1px solid var(--border); margin-bottom:20px; overflow-x:auto; }
+.tabs button{
+  padding:11px 16px; border:none; background:transparent; cursor:pointer; white-space:nowrap;
+  font-weight:800; font-size:.9rem; color:var(--muted); border-bottom:3px solid transparent; transition:.18s;
+}
+.tabs button[aria-selected="true"]{ color:var(--text); border-bottom-color:var(--brand); }
+.admin-row{
+  display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:15px;
+  border:1px solid var(--border); background:var(--bg); margin-bottom:9px; flex-wrap:wrap;
+}
+.admin-row.hidden-app{ opacity:.55; }
+.admin-row .grow{ flex:1 1 200px; min-width:0; }
+.admin-row strong{ display:block; font-size:.96rem; }
+.admin-row small{ color:var(--muted); font-size:.78rem; }
+.switch{ position:relative; width:46px; height:26px; flex:none; }
+.switch input{ opacity:0; width:0; height:0; position:absolute; }
+.switch .track{ position:absolute; inset:0; background:var(--surface-hi); border:1px solid var(--border); border-radius:999px; cursor:pointer; transition:.2s; }
+.switch .track::before{ content:""; position:absolute; width:18px; height:18px; left:3px; top:3px; border-radius:50%; background:var(--muted); transition:.2s; }
+.switch input:checked + .track{ background:color-mix(in srgb, var(--brand) 40%, transparent); border-color:var(--brand); }
+.switch input:checked + .track::before{ transform:translateX(20px); background:#fff; }
+.switch input:focus-visible + .track{ outline:3px solid var(--ring); outline-offset:2px; }
+.admin-editor{ padding:16px; border-radius:15px; border:1px solid var(--border); background:var(--surface-hi); margin:0 0 12px; }
+.admin-editor .cols{ display:grid; gap:12px; grid-template-columns:1fr; }
+@media (min-width:700px){ .admin-editor .cols{ grid-template-columns:1fr 1fr; } }
+.note{
+  padding:14px 16px; border-radius:15px; font-size:.88rem; font-weight:600;
+  background:color-mix(in srgb, var(--brand) 12%, transparent);
+  border:1px solid color-mix(in srgb, var(--brand) 30%, transparent); color:var(--text-2);
+}
+.note.warn{ background:rgba(245,158,11,.12); border-color:rgba(245,158,11,.4); }
+.note.ok{ background:rgba(16,185,129,.12); border-color:rgba(16,185,129,.4); }
+.steps{ counter-reset:s; list-style:none; padding:0; margin:16px 0 0; display:grid; gap:12px; }
+.steps li{ counter-increment:s; display:flex; gap:13px; font-size:.91rem; color:var(--text-2); }
+.steps li::before{
+  content:counter(s); flex:none; width:26px; height:26px; border-radius:9px; display:grid; place-items:center;
+  background:var(--brand); color:#fff; font-weight:900; font-size:.8rem;
+}
+code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; font-size:.86em; font-family:ui-monospace,Menlo,Consolas,monospace; color:var(--brand-2); }
+#jsonOut{ width:100%; min-height:260px; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.78rem; line-height:1.5;
+  padding:14px; border-radius:15px; background:var(--bg); border:1px solid var(--border); resize:vertical; }
+.draft-banner{
+  position:fixed; left:50%; transform:translateX(-50%); bottom:18px; z-index:110;
+  display:none; align-items:center; gap:14px; padding:12px 18px; border-radius:16px;
+  background:var(--surface-solid); border:1px solid rgba(245,158,11,.5); box-shadow:var(--shadow-lg);
+  font-size:.87rem; font-weight:700; max-width:calc(100% - 32px);
+}
+.draft-banner.show{ display:flex; }
+.toast{
+  position:fixed; left:50%; transform:translateX(-50%) translateY(20px); bottom:90px; z-index:160;
+  background:#0f172a; color:#fff; padding:13px 22px; border-radius:14px; font-weight:800; font-size:.9rem;
+  box-shadow:var(--shadow-lg); opacity:0; pointer-events:none; transition:.28s; border:1px solid rgba(255,255,255,.14);
+}
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* ===========================================================
+   IMPRESIÓN + MOVIMIENTO REDUCIDO
+   =========================================================== */
+@media print{
+  body::before, .site-header, .toolbar-wrap, .hero-cta, .modal, .draft-banner, .card-foot, .site-footer, .no-print{ display:none !important; }
+  body{ background:#fff; color:#000; }
+  .card{ break-inside:avoid; border:1px solid #bbb; box-shadow:none; background:#fff; color:#000; }
+  .grid{ grid-template-columns:1fr 1fr; }
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+  html{ scroll-behavior:auto; }
+  .reveal{ opacity:1; transform:none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#catalogo">Saltar al catálogo de apps</a>
+
+<!-- ============================ HEADER ============================ -->
+<header class="site-header no-print">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Inicio">
+      <span class="brand-mark" id="brandMark">NC</span>
+      <span class="brand-text">
+        <span class="brand-name" id="brandName">Nuria Calvo</span>
+        <span class="brand-sub" id="brandSub">English Apps · IES Goya</span>
+      </span>
+    </a>
+
+    <nav class="header-nav" aria-label="Navegación principal">
+      <a href="#catalogo">Apps</a>
+      <a href="#destacadas">Destacadas</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#como-usar">Cómo se usa</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="themeBtn" type="button" title="Cambiar entre modo claro y oscuro" aria-label="Cambiar tema">
+        <i class="fa-solid fa-moon" aria-hidden="true"></i>
+      </button>
+      <a class="icon-btn" id="ghLink" href="https://github.com/nuriacalvo-teacher" target="_blank" rel="noopener" title="Repositorios en GitHub" aria-label="GitHub">
+        <i class="fa-brands fa-github" aria-hidden="true"></i>
+      </a>
+      <button class="btn btn-primary btn-sm" type="button" onclick="openTeacher()">
+        <i class="fa-solid fa-user-gear" aria-hidden="true"></i> <span class="hide-xs">Profesora</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> <span id="heroBadge">IES Goya · Zaragoza</span></span>
+        <h1>Aprende inglés <span class="grad">con Nuria Calvo</span></h1>
+        <p class="hero-lead" id="heroLead">Aplicaciones interactivas para practicar gramática, vocabulario, writing y speaking. Gratis, sin instalar nada y desde cualquier dispositivo.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#catalogo"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Ver todas las apps</a>
+          <button class="btn btn-ghost" type="button" onclick="focusSearch()"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Buscar una app</button>
+        </div>
+        <p class="hero-meta">
+          <span><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> Móvil, tablet y pizarra digital</span>
+          <span><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Sin registro para practicar</span>
+          <span><i class="fa-solid fa-euro-sign" aria-hidden="true"></i> Totalmente gratuitas</span>
+        </p>
+      </div>
+
+      <div class="stats" id="heroStats"></div>
+    </div>
+  </section>
+
+  <!-- ============================ DESTACADAS ============================ -->
+  <section id="destacadas" class="section" style="padding-bottom:0" hidden>
+    <div class="wrap">
+      <div class="section-head" data-accent="amber">
+        <div>
+          <h2 class="section-title"><span class="dot"><i class="fa-solid fa-star" aria-hidden="true"></i></span> Destacadas</h2>
+          <p class="section-sub">Lo que estamos trabajando ahora mismo en clase.</p>
+        </div>
+      </div>
+      <div class="grid" id="featuredGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================ TOOLBAR ============================ -->
+  <div class="toolbar-wrap no-print" id="toolbarWrap">
+    <div class="wrap">
+      <div class="toolbar" role="search">
+        <div class="search-row">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <label class="sr-only" for="searchInput">Buscar una app</label>
+            <input id="searchInput" type="search" placeholder="Buscar: present simple, verbos, writing…" autocomplete="off">
+            <span class="search-kbd" aria-hidden="true">/</span>
+          </div>
+          <label class="sr-only" for="levelSelect">Filtrar por curso</label>
+          <select class="control" id="levelSelect"><option value="">Todos los cursos</option></select>
+          <label class="sr-only" for="sortSelect">Ordenar</label>
+          <select class="control" id="sortSelect">
+            <option value="order">Orden de la profesora</option>
+            <option value="recent">Más recientes primero</option>
+            <option value="az">Nombre (A → Z)</option>
+          </select>
+        </div>
+
+        <div class="chips" id="categoryChips" role="group" aria-label="Filtrar por tipo de contenido"></div>
+
+        <div class="toolbar-foot">
+          <p class="result-count" id="resultCount" aria-live="polite"></p>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" type="button" id="clearBtn" onclick="clearFilters()" hidden>
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i> Quitar filtros
+            </button>
+            <div class="view-toggle" role="group" aria-label="Tipo de vista">
+              <button type="button" id="viewGrid"  aria-pressed="true"  onclick="setView('grid')"><i class="fa-solid fa-grip" aria-hidden="true"></i> Tarjetas</button>
+              <button type="button" id="viewList"  aria-pressed="false" onclick="setView('list')"><i class="fa-solid fa-list" aria-hidden="true"></i> Lista</button>
+              <button type="button" id="viewCats"  aria-pressed="false" onclick="setView('cats')"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Por temas</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ CATÁLOGO ============================ -->
+  <section id="catalogo" class="section">
+    <div class="wrap">
+      <div id="catalogArea"></div>
+    </div>
+  </section>
+
+  <!-- ============================ CÓMO SE USA ============================ -->
+  <section id="como-usar" class="section">
+    <div class="wrap">
+      <div class="section-head" data-accent="sky">
+        <div>
+          <h2 class="section-title"><span class="dot"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></span> Cómo se usa</h2>
+          <p class="section-sub">Tres pasos y a practicar.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card" data-accent="indigo">
+          <div class="card-top"><div class="card-icon"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i></div></div>
+          <h3>1. Elige tu app</h3>
+          <p class="card-desc">Filtra por curso o por tipo de contenido (gramática, vocabulario, writing…) y abre la que necesites repasar.</p>
+        </article>
+        <article class="card" data-accent="emerald">
+          <div class="card-top"><div class="card-icon"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i></div></div>
+          <h3>2. Practica</h3>
+          <p class="card-desc">Cada app tiene teoría con ejemplos y ejercicios con corrección inmediata. Puedes repetirla las veces que quieras.</p>
+        </article>
+        <article class="card" data-accent="amber">
+          <div class="card-top"><div class="card-icon"><i class="fa-solid fa-qrcode" aria-hidden="true"></i></div></div>
+          <h3>3. En clase</h3>
+          <p class="card-desc">Pulsa el botón <i class="fa-solid fa-qrcode" aria-hidden="true"></i> de cualquier app para proyectar su código QR y que todo el grupo entre al momento.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ SOBRE MÍ ============================ -->
+  <section id="sobre-mi" class="section">
+    <div class="wrap">
+      <div class="about" style="display:block">
+        <div class="about-head">
+          <div><div class="avatar-big" id="aboutAvatar">NC</div></div>
+          <div>
+            <span class="eyebrow"><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Sobre mí</span>
+            <h2 id="aboutName">Nuria Calvo</h2>
+            <p class="about-lead" id="aboutHeadline"></p>
+            <p id="aboutBio"></p>
+            <ul class="about-list">
+              <li><i class="fa-solid fa-school" aria-hidden="true"></i> <span id="aboutSchool">Profesora de Inglés en el IES Goya (Zaragoza)</span></li>
+              <li><i class="fa-solid fa-code" aria-hidden="true"></i> <span>Todas las apps son de código abierto y están publicadas en GitHub.</span></li>
+            </ul>
+            <div class="hero-cta">
+              <a class="btn btn-ghost" id="aboutGh" href="https://github.com/nuriacalvo-teacher" target="_blank" rel="noopener">
+                <i class="fa-brands fa-github" aria-hidden="true"></i> Ver el código en GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="stats" id="aboutHighlights"></div>
+      </div>
+
+      <div class="about-grid" id="aboutCards"></div>
+      <div id="aboutClosing"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p style="margin:0" id="footText">© <span id="year"></span> Nuria Calvo · IES Goya, Zaragoza</p>
+    <div class="footer-links">
+      <a href="#catalogo">Apps</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="https://github.com/nuriacalvo-teacher" target="_blank" rel="noopener">GitHub</a>
+      <button class="btn btn-ghost btn-sm" type="button" onclick="window.print()"><i class="fa-solid fa-print" aria-hidden="true"></i> Imprimir listado</button>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ MODAL QR ============================ -->
+<div class="modal" id="qrModal" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h2 id="qrTitle">Código QR</h2>
+        <p>Proyéctalo para que el alumnado entre con el móvil.</p>
+      </div>
+      <button class="icon-btn" type="button" onclick="closeModal('qrModal')" aria-label="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div id="qrCanvas"></div>
+    <p class="qr-url" id="qrUrl"></p>
+    <div class="hero-cta" style="margin-top:18px">
+      <a class="btn btn-primary" id="qrOpen" href="#" target="_blank" rel="noopener" style="flex:1"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Abrir app</a>
+      <button class="btn btn-ghost" type="button" id="qrCopy"><i class="fa-solid fa-copy" aria-hidden="true"></i> Copiar enlace</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ MODAL LOGIN ============================ -->
+<div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="modal-box" style="max-width:420px">
+    <div class="modal-head">
+      <div>
+        <h2 id="loginTitle">Acceso de la profesora</h2>
+        <p>Para gestionar el catálogo de apps.</p>
+      </div>
+      <button class="icon-btn" type="button" onclick="closeModal('loginModal')" aria-label="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <form onsubmit="doLogin(event)">
+      <label class="field">
+        <span>Contraseña</span>
+        <input type="password" id="teacherPass" autocomplete="current-password" required>
+      </label>
+      <p id="loginError" class="note warn" hidden><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Contraseña incorrecta.</p>
+      <button class="btn btn-primary" type="submit" style="width:100%; margin-top:6px"><i class="fa-solid fa-unlock" aria-hidden="true"></i> Entrar</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============================ PANEL PROFESORA ============================ -->
+<div class="modal" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+  <div class="modal-box wide">
+    <div class="modal-head">
+      <div>
+        <h2 id="adminTitle">Panel de Nuria · Gestión del catálogo</h2>
+        <p>Elige qué apps se ven en la web, ordénalas y publica los cambios.</p>
+      </div>
+      <button class="icon-btn" type="button" onclick="closeModal('adminModal')" aria-label="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true"  onclick="showTab('apps')"    id="tab-apps">Mis apps</button>
+      <button role="tab" aria-selected="false" onclick="showTab('github')"  id="tab-github">Repositorios de GitHub</button>
+      <button role="tab" aria-selected="false" onclick="showTab('perfil')"  id="tab-perfil">Portada y perfil</button>
+      <button role="tab" aria-selected="false" onclick="showTab('publicar')" id="tab-publicar">Publicar cambios</button>
+    </div>
+
+    <!-- TAB: MIS APPS -->
+    <div id="panel-apps">
+      <p class="note" style="margin-bottom:16px">
+        <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+        Activa el interruptor para que una app se vea en la web. Usa las flechas para cambiar el orden y el lápiz para editar sus textos.
+        Cuando termines, ve a <b>Publicar cambios</b>.
+      </p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px">
+        <button class="btn btn-ghost btn-sm" type="button" onclick="addBlankApp()"><i class="fa-solid fa-plus" aria-hidden="true"></i> Añadir app manualmente</button>
+        <button class="btn btn-ghost btn-sm" type="button" onclick="showTab('github')"><i class="fa-brands fa-github" aria-hidden="true"></i> Buscar en mis repositorios</button>
+        <button class="btn btn-ghost btn-sm" type="button" onclick="discardDraft()"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Descartar cambios</button>
+      </div>
+      <div id="adminList"></div>
+    </div>
+
+    <!-- TAB: GITHUB -->
+    <div id="panel-github" hidden>
+      <p class="note" style="margin-bottom:16px">
+        <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i>
+        Aquí aparecen <b>todos</b> tus repositorios de GitHub. Marca solo los que quieras publicar en la web: los demás no se muestran a nadie.
+      </p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; align-items:center">
+        <button class="btn btn-primary btn-sm" type="button" onclick="fetchRepos()"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Cargar mis repositorios</button>
+        <button class="btn btn-ghost btn-sm" type="button" onclick="addSelectedRepos()"><i class="fa-solid fa-plus" aria-hidden="true"></i> Añadir seleccionados al catálogo</button>
+        <span id="repoStatus" class="result-count"></span>
+      </div>
+      <div id="repoList"></div>
+    </div>
+
+    <!-- TAB: PERFIL -->
+    <div id="panel-perfil" hidden>
+      <div class="admin-editor">
+        <div class="cols">
+          <label class="field"><span>Nombre</span><input id="pf-name"></label>
+          <label class="field"><span>Cargo</span><input id="pf-role"></label>
+          <label class="field"><span>Centro</span><input id="pf-school"></label>
+          <label class="field"><span>Localidad</span><input id="pf-city"></label>
+          <label class="field"><span>Usuario de GitHub</span><input id="pf-github"></label>
+          <label class="field"><span>Frase de portada</span><input id="pf-tagline"></label>
+        </div>
+        <label class="field"><span>Texto de «Sobre mí»</span><textarea id="pf-bio"></textarea></label>
+        <button class="btn btn-primary btn-sm" type="button" onclick="saveProfile()"><i class="fa-solid fa-check" aria-hidden="true"></i> Aplicar</button>
+      </div>
+    </div>
+
+    <!-- TAB: PUBLICAR -->
+    <div id="panel-publicar" hidden>
+      <div class="note ok" style="margin-bottom:16px">
+        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+        Tus cambios están guardados <b>solo en este ordenador</b>. Para que los vea el alumnado hay que subir el fichero <code class="inline">apps.json</code> a GitHub:
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px">
+        <button class="btn btn-primary btn-sm" type="button" onclick="downloadJson()"><i class="fa-solid fa-download" aria-hidden="true"></i> Descargar apps.json</button>
+        <button class="btn btn-ghost btn-sm" type="button" onclick="copyJson()"><i class="fa-solid fa-copy" aria-hidden="true"></i> Copiar el contenido</button>
+        <a class="btn btn-ghost btn-sm" id="editOnGh" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> Abrir apps.json en GitHub</a>
+      </div>
+      <ol class="steps">
+        <li>Pulsa <b>Descargar apps.json</b> (o <b>Copiar el contenido</b>).</li>
+        <li>Abre tu repositorio en GitHub y entra en el fichero <code class="inline">apps.json</code>.</li>
+        <li>Pulsa el lápiz ✏️ para editarlo, borra todo y pega el contenido nuevo.</li>
+        <li>Pulsa <b>Commit changes</b>. En un minuto la web ya muestra los cambios.</li>
+      </ol>
+      <label class="field" style="margin-top:20px"><span>Contenido de apps.json</span><textarea id="jsonOut" readonly spellcheck="false"></textarea></label>
+    </div>
+  </div>
+</div>
+
+<div class="draft-banner no-print" id="draftBanner">
+  <span><i class="fa-solid fa-eye" aria-hidden="true" style="color:#f59e0b"></i> Vista previa local sin publicar</span>
+  <button class="btn btn-primary btn-sm" type="button" onclick="openTeacher()">Publicar</button>
+  <button class="btn btn-ghost btn-sm" type="button" onclick="discardDraft()">Descartar</button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<style>
+  @media (max-width:480px){ .hide-xs{ display:none; } }
+  .repo-row{ display:flex; align-items:center; gap:12px; padding:11px 14px; border-radius:14px; border:1px solid var(--border); background:var(--bg); margin-bottom:8px; }
+  .repo-row.in-catalog{ border-color:color-mix(in srgb,#10b981 45%,transparent); background:rgba(16,185,129,.07); }
+  .repo-row input[type="checkbox"]{ width:19px; height:19px; accent-color:var(--brand); flex:none; cursor:pointer; }
+</style>
+
+<!-- Catálogo de reserva: se usa si no se puede leer apps.json (por ejemplo al abrir el fichero desde el disco) -->
+<script type="application/json" id="fallbackCatalog">{
+  "version": 1,
+  "updated": "2026-09-18",
+  "teacher": {
+    "name": "Nuria Calvo",
+    "role": "Profesora de Inglés",
+    "school": "IES Goya",
+    "city": "Zaragoza",
+    "github": "nuriacalvo-teacher",
+    "tagline": "Apps interactivas para aprender inglés en clase y en casa.",
+    "bio": "Aquí reúno las aplicaciones que voy creando para mis grupos de ESO y Bachillerato del IES Goya. Todas son gratuitas, funcionan en el móvil, en la tablet y en la pizarra digital, y no hace falta instalar nada: solo abrir y practicar."
+  },
+  "categories": [
+    {
+      "id": "grammar",
+      "name": "Gramática",
+      "icon": "fa-diagram-project",
+      "accent": "indigo"
+    },
+    {
+      "id": "vocabulary",
+      "name": "Vocabulario",
+      "icon": "fa-book-open",
+      "accent": "emerald"
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "icon": "fa-pen-nib",
+      "accent": "amber"
+    },
+    {
+      "id": "speaking",
+      "name": "Speaking",
+      "icon": "fa-microphone-lines",
+      "accent": "rose"
+    },
+    {
+      "id": "reading",
+      "name": "Reading & Literatura",
+      "icon": "fa-book-bookmark",
+      "accent": "sky"
+    },
+    {
+      "id": "exams",
+      "name": "Exámenes y repaso",
+      "icon": "fa-clipboard-check",
+      "accent": "violet"
+    },
+    {
+      "id": "tools",
+      "name": "Aula y herramientas",
+      "icon": "fa-toolbox",
+      "accent": "slate"
+    },
+    {
+      "id": "other",
+      "name": "Otros proyectos",
+      "icon": "fa-globe",
+      "accent": "teal"
+    }
+  ],
+  "levels": [
+    "1º ESO",
+    "2º ESO",
+    "3º ESO",
+    "4º ESO",
+    "1º Bach",
+    "2º Bach",
+    "B1",
+    "B2"
+  ],
+  "apps": [
+    {
+      "id": "present-tenses",
+      "repo": "nuriacalvo-teacher/present-tenses",
+      "url": "https://nuriacalvo-teacher.github.io/present-tenses/",
+      "title": "Present Tenses",
+      "subtitle": "Domina todos los presentes",
+      "description": "Teoría, ejemplos y test de 10 preguntas por bloque para diferenciar present simple, continuous, perfect y perfect continuous. Con informe final de evaluación.",
+      "category": "grammar",
+      "levels": [
+        "3º ESO",
+        "4º ESO"
+      ],
+      "tags": [
+        "Teoría + test",
+        "Informe de notas"
+      ],
+      "icon": "fa-clock",
+      "accent": "indigo",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-09-14"
+    },
+    {
+      "id": "sentence-formation",
+      "repo": "nuriacalvo-teacher/sentence-formation",
+      "url": "https://nuriacalvo-teacher.github.io/sentence-formation/",
+      "title": "Sentence Formation",
+      "subtitle": "Construye frases correctas",
+      "description": "Práctica del orden de las palabras en la oración inglesa: afirmativa, negativa e interrogativa.",
+      "category": "grammar",
+      "levels": [
+        "3º ESO",
+        "4º ESO"
+      ],
+      "tags": [
+        "Word order"
+      ],
+      "icon": "fa-shapes",
+      "accent": "violet",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-09-18"
+    },
+    {
+      "id": "irregular-verbs",
+      "repo": "nuriacalvo-teacher/irregular-verbs",
+      "url": "https://nuriacalvo-teacher.github.io/irregular-verbs/",
+      "title": "Irregular Verbs Ultimate",
+      "subtitle": "Los verbos irregulares, a fondo",
+      "description": "Entrenamiento completo de verbos irregulares: infinitivo, pasado simple y participio.",
+      "category": "vocabulary",
+      "levels": [
+        "2º ESO",
+        "3º ESO",
+        "4º ESO"
+      ],
+      "tags": [
+        "Verbos",
+        "Práctica"
+      ],
+      "icon": "fa-bolt",
+      "accent": "emerald",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2025-11-13"
+    },
+    {
+      "id": "irregular-verbs-review",
+      "repo": "nuriacalvo-teacher/irregular-verbs-review",
+      "url": "https://nuriacalvo-teacher.github.io/irregular-verbs-review/",
+      "title": "Irregular Verbs · Repaso",
+      "subtitle": "Repaso rápido antes del examen",
+      "description": "Aplicación interactiva para repasar los verbos irregulares en inglés de forma rápida.",
+      "category": "vocabulary",
+      "levels": [
+        "2º ESO",
+        "3º ESO",
+        "4º ESO"
+      ],
+      "tags": [
+        "Repaso exprés"
+      ],
+      "icon": "fa-rotate",
+      "accent": "emerald",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2025-11-06"
+    },
+    {
+      "id": "conditionals-reportedspeech",
+      "repo": "nuriacalvo-teacher/conditionals-reportedspeech",
+      "url": "https://nuriacalvo-teacher.github.io/conditionals-reportedspeech/",
+      "title": "Conditionals & Reported Speech",
+      "subtitle": "Dos bloques clave de Bachillerato",
+      "description": "Condicionales (tipos 0, 1, 2 y 3) y estilo indirecto explicados y practicados en una sola aplicación.",
+      "category": "grammar",
+      "levels": [
+        "1º Bach",
+        "2º Bach"
+      ],
+      "tags": [
+        "Conditionals",
+        "Reported speech"
+      ],
+      "icon": "fa-code-branch",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-05-28"
+    },
+    {
+      "id": "reported_speech",
+      "repo": "nuriacalvo-teacher/reported_speech",
+      "url": "https://nuriacalvo-teacher.github.io/reported_speech/",
+      "title": "Reported Speech",
+      "subtitle": "Del estilo directo al indirecto",
+      "description": "Transformaciones de estilo directo a indirecto paso a paso, con cambios de tiempo verbal y de expresiones de tiempo.",
+      "category": "grammar",
+      "levels": [
+        "4º ESO",
+        "1º Bach"
+      ],
+      "tags": [
+        "Transformaciones"
+      ],
+      "icon": "fa-comment-dots",
+      "accent": "sky",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-04-21"
+    },
+    {
+      "id": "relative-clauses",
+      "repo": "nuriacalvo-teacher/relative-clauses",
+      "url": "https://nuriacalvo-teacher.github.io/relative-clauses/",
+      "title": "Relative Clauses",
+      "subtitle": "Who, which, that, whose…",
+      "description": "Repaso de las oraciones de relativo: especificativas, explicativas y uso correcto de cada pronombre.",
+      "category": "grammar",
+      "levels": [
+        "4º ESO",
+        "1º Bach"
+      ],
+      "tags": [
+        "Relativos"
+      ],
+      "icon": "fa-link",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-04-07"
+    },
+    {
+      "id": "habits",
+      "repo": "nuriacalvo-teacher/habits",
+      "url": "https://nuriacalvo-teacher.github.io/habits/",
+      "title": "Habits",
+      "subtitle": "Rutinas y hábitos en inglés",
+      "description": "Vocabulario y estructuras para hablar de hábitos y rutinas diarias, con adverbios de frecuencia.",
+      "category": "grammar",
+      "levels": [
+        "1º ESO",
+        "2º ESO"
+      ],
+      "tags": [
+        "Rutinas",
+        "Frecuencia"
+      ],
+      "icon": "fa-repeat",
+      "accent": "amber",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-09-11"
+    },
+    {
+      "id": "family",
+      "repo": "nuriacalvo-teacher/family",
+      "url": "https://nuriacalvo-teacher.github.io/family/",
+      "title": "Family & Relationships",
+      "subtitle": "Vocabulario de la familia",
+      "description": "English vocabulary: family and relationships. Léxico de parentesco y relaciones personales.",
+      "category": "vocabulary",
+      "levels": [
+        "1º ESO",
+        "2º ESO"
+      ],
+      "tags": [
+        "Léxico"
+      ],
+      "icon": "fa-people-roof",
+      "accent": "rose",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2025-12-10"
+    },
+    {
+      "id": "4ESO-Module2-vocabulary",
+      "repo": "nuriacalvo-teacher/4ESO-Module2-vocabulary",
+      "url": "https://nuriacalvo-teacher.github.io/4ESO-Module2-vocabulary/",
+      "title": "Vocabulary · Module 2",
+      "subtitle": "Vocabulario de la unidad 2",
+      "description": "Vocabulario del módulo 2 de 4º de ESO para practicar y autoevaluarse antes del examen.",
+      "category": "vocabulary",
+      "levels": [
+        "4º ESO"
+      ],
+      "tags": [
+        "Unidad 2"
+      ],
+      "icon": "fa-book-open",
+      "accent": "emerald",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2025-11-07"
+    },
+    {
+      "id": "writing-complaint",
+      "repo": "nuriacalvo-teacher/writing-complaint",
+      "url": "https://nuriacalvo-teacher.github.io/writing-complaint/",
+      "title": "Email of Complaint",
+      "subtitle": "Writing formal paso a paso",
+      "description": "Cómo escribir un correo de reclamación en inglés: estructura, registro formal y expresiones útiles.",
+      "category": "writing",
+      "levels": [
+        "1º Bach",
+        "2º Bach",
+        "B2"
+      ],
+      "tags": [
+        "Formal writing",
+        "Modelo"
+      ],
+      "icon": "fa-envelope-open-text",
+      "accent": "amber",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-05-26"
+    },
+    {
+      "id": "ANIMAL-FARM",
+      "repo": "nuriacalvo-teacher/ANIMAL-FARM",
+      "url": "https://nuriacalvo-teacher.github.io/ANIMAL-FARM/",
+      "title": "Animal Farm",
+      "subtitle": "Juego de lectura",
+      "description": "Juego interactivo sobre la lectura de Animal Farm, de George Orwell: personajes, argumento y comprensión.",
+      "category": "reading",
+      "levels": [
+        "1º Bach",
+        "2º Bach"
+      ],
+      "tags": [
+        "Lectura",
+        "Juego"
+      ],
+      "icon": "fa-feather-pointed",
+      "accent": "sky",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-02-13"
+    },
+    {
+      "id": "BRIT-B1-ORAL",
+      "repo": "nuriacalvo-teacher/BRIT-B1-ORAL",
+      "url": "https://nuriacalvo-teacher.github.io/BRIT-B1-ORAL/",
+      "title": "B1 Oral",
+      "subtitle": "Preparación de la prueba oral",
+      "description": "Práctica guiada de la prueba oral de nivel B1: preguntas tipo, turnos de habla y expresiones para el examen.",
+      "category": "speaking",
+      "levels": [
+        "B1",
+        "4º ESO",
+        "1º Bach"
+      ],
+      "tags": [
+        "Examen oral",
+        "B1"
+      ],
+      "icon": "fa-microphone-lines",
+      "accent": "rose",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-01-14"
+    },
+    {
+      "id": "PresentTenses2",
+      "repo": "nuriacalvo-teacher/PresentTenses2",
+      "url": "https://nuriacalvo-teacher.github.io/PresentTenses2/",
+      "title": "Present Tenses 2",
+      "subtitle": "Versión de trabajo",
+      "description": "Segunda versión de la aplicación de present tenses.",
+      "category": "grammar",
+      "levels": [
+        "3º ESO",
+        "4º ESO"
+      ],
+      "tags": [],
+      "icon": "fa-clock",
+      "accent": "indigo",
+      "status": "beta",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-09-18"
+    },
+    {
+      "id": "4eso.module2",
+      "repo": "nuriacalvo-teacher/4eso.module2",
+      "url": "https://nuriacalvo-teacher.github.io/4eso.module2/",
+      "title": "4º ESO · Module 2",
+      "subtitle": "Vocabulario",
+      "description": "Vocabulario del módulo 2 de 4º de ESO.",
+      "category": "vocabulary",
+      "levels": [
+        "4º ESO"
+      ],
+      "tags": [],
+      "icon": "fa-book",
+      "accent": "emerald",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2025-11-05"
+    },
+    {
+      "id": "english",
+      "repo": "nuriacalvo-teacher/english",
+      "url": "https://nuriacalvo-teacher.github.io/english/",
+      "title": "English",
+      "subtitle": "",
+      "description": "Proyecto de inglés.",
+      "category": "grammar",
+      "levels": [],
+      "tags": [],
+      "icon": "fa-language",
+      "accent": "indigo",
+      "status": "beta",
+      "featured": false,
+      "visible": false,
+      "updated": "2025-09-30"
+    },
+    {
+      "id": "pasarlista",
+      "repo": "nuriacalvo-teacher/pasarlista",
+      "url": "https://nuriacalvo-teacher.github.io/pasarlista/",
+      "title": "Pasar lista",
+      "subtitle": "Herramienta de aula",
+      "description": "Herramienta para pasar lista y controlar la asistencia del grupo.",
+      "category": "tools",
+      "levels": [],
+      "tags": [
+        "Uso docente"
+      ],
+      "icon": "fa-clipboard-user",
+      "accent": "slate",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-09-13"
+    },
+    {
+      "id": "control",
+      "repo": "nuriacalvo-teacher/control",
+      "url": "https://nuriacalvo-teacher.github.io/control/",
+      "title": "Control",
+      "subtitle": "Herramienta de aula",
+      "description": "Herramienta interna de control y seguimiento.",
+      "category": "tools",
+      "levels": [],
+      "tags": [
+        "Uso docente"
+      ],
+      "icon": "fa-sliders",
+      "accent": "slate",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2025-10-11"
+    },
+    {
+      "id": "patrimonio_IES_Goya",
+      "repo": "nuriacalvo-teacher/patrimonio_IES_Goya",
+      "url": "https://nuriacalvo-teacher.github.io/patrimonio_IES_Goya/",
+      "title": "Patrimonio IES Goya",
+      "subtitle": "Proyecto de centro",
+      "description": "Proyecto sobre el patrimonio del IES Goya de Zaragoza.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Proyecto"
+      ],
+      "icon": "fa-landmark",
+      "accent": "teal",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-05-08"
+    },
+    {
+      "id": "fichas-chino",
+      "repo": "nuriacalvo-teacher/fichas-chino",
+      "url": "https://nuriacalvo-teacher.github.io/fichas-chino/",
+      "title": "Fichas de chino",
+      "subtitle": "Otro idioma",
+      "description": "Fichas de aprendizaje de chino.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Chino"
+      ],
+      "icon": "fa-language",
+      "accent": "teal",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2025-08-21"
+    },
+    {
+      "id": "ficha-chino",
+      "repo": "nuriacalvo-teacher/ficha-chino",
+      "url": "https://nuriacalvo-teacher.github.io/ficha-chino/",
+      "title": "Ficha de chino (2)",
+      "subtitle": "Otro idioma",
+      "description": "Segunda ficha de aprendizaje de chino.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Chino"
+      ],
+      "icon": "fa-language",
+      "accent": "teal",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2025-08-21"
+    },
+    {
+      "id": "fichas-aleman",
+      "repo": "nuriacalvo-teacher/fichas-aleman",
+      "url": "https://nuriacalvo-teacher.github.io/fichas-aleman/",
+      "title": "Fichas de alemán",
+      "subtitle": "Otro idioma",
+      "description": "Fichas de aprendizaje de alemán.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Alemán"
+      ],
+      "icon": "fa-language",
+      "accent": "teal",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2025-08-22"
+    },
+    {
+      "id": "ficha-aleman",
+      "repo": "nuriacalvo-teacher/ficha-aleman",
+      "url": "https://nuriacalvo-teacher.github.io/ficha-aleman/",
+      "title": "Ficha de alemán (2)",
+      "subtitle": "Otro idioma",
+      "description": "Segunda ficha de aprendizaje de alemán.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Alemán"
+      ],
+      "icon": "fa-language",
+      "accent": "teal",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2025-08-22"
+    },
+    {
+      "id": "app",
+      "repo": "nuriacalvo-teacher/app",
+      "url": "https://nuriacalvo-teacher.github.io/app/",
+      "title": "How to create an app",
+      "subtitle": "Pruebas",
+      "description": "Repositorio de pruebas sobre cómo crear una app.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Pruebas"
+      ],
+      "icon": "fa-flask",
+      "accent": "slate",
+      "status": "beta",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-01-22"
+    },
+    {
+      "id": "prueba",
+      "repo": "nuriacalvo-teacher/prueba",
+      "url": "https://nuriacalvo-teacher.github.io/prueba/",
+      "title": "Prueba",
+      "subtitle": "Pruebas",
+      "description": "Repositorio de pruebas.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Pruebas"
+      ],
+      "icon": "fa-flask",
+      "accent": "slate",
+      "status": "beta",
+      "featured": false,
+      "visible": false,
+      "updated": "2025-09-29"
+    },
+    {
+      "id": "prueba-basica",
+      "repo": "nuriacalvo-teacher/prueba-basica",
+      "url": "https://nuriacalvo-teacher.github.io/prueba-basica/",
+      "title": "Prueba básica",
+      "subtitle": "Pruebas",
+      "description": "Repositorio de pruebas.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Pruebas"
+      ],
+      "icon": "fa-flask",
+      "accent": "slate",
+      "status": "beta",
+      "featured": false,
+      "visible": false,
+      "updated": "2025-10-06"
+    }
+  ],
+  "about": {
+    "headline": "Profesora, lingüista, artista y curiosa por naturaleza.",
+    "highlights": [
+      {
+        "value": "Nº 1",
+        "label": "Oposiciones de Inglés · Aragón",
+        "accent": "indigo"
+      },
+      {
+        "value": "+20",
+        "label": "Años de experiencia docente",
+        "accent": "violet"
+      },
+      {
+        "value": "7",
+        "label": "Idiomas",
+        "accent": "emerald"
+      },
+      {
+        "value": "4",
+        "label": "Álbumes publicados",
+        "accent": "rose"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Experiencia lingüística y educativa",
+        "icon": "fa-graduation-cap",
+        "accent": "indigo",
+        "paragraphs": [
+          "Obtuve el **n.º 1 en las oposiciones de Enseñanza Secundaria de Aragón**, en la especialidad de Inglés, y cuento con más de 20 años de experiencia docente.",
+          "Me gradué con **First-Class Honours en Trinity College Dublin** y siempre he sentido una profunda pasión por las lenguas y la comunicación. Tengo competencia en siete idiomas."
+        ],
+        "listTitle": "Idiomas",
+        "chips": [
+          "Español",
+          "Inglés",
+          "Francés",
+          "Alemán",
+          "Ruso",
+          "Catalán",
+          "Chino · pronto 😅"
+        ]
+      },
+      {
+        "title": "El mundo de las artes",
+        "icon": "fa-palette",
+        "accent": "rose",
+        "paragraphs": [
+          "Más allá de la enseñanza, siempre he estado muy vinculada al mundo artístico. Soy **retratista y caricaturista**, además de **cantautora y compositora** bajo el nombre artístico de **Krisenka Finley**.",
+          "He publicado cuatro álbumes y he recibido diversos reconocimientos internacionales por mi música. Mi trayectoria musical también incluye la producción de videoclips, jingles publicitarios y composiciones sinfónicas.",
+          "Más recientemente me he adentrado en el mundo del cine, creando cuatro cortometrajes en los que utilizo la **Inteligencia Artificial como herramienta creativa**:"
+        ],
+        "listTitle": "Cortometrajes",
+        "items": [
+          {
+            "name": "1923",
+            "meta": "2026"
+          },
+          {
+            "name": "Jerusalén Conquistada",
+            "meta": "2026"
+          },
+          {
+            "name": "Atlas Touring Club",
+            "meta": "2026"
+          },
+          {
+            "name": "La Firma",
+            "meta": "2025"
+          }
+        ]
+      },
+      {
+        "title": "Tecnología y emprendimiento",
+        "icon": "fa-microchip",
+        "accent": "emerald",
+        "paragraphs": [
+          "Me apasionan las nuevas tecnologías desde sus comienzos y siempre me ha gustado explorar todo lo que pueden hacer posible.",
+          "A principios de los años 90, mientras estudiaba en la Universidad de Zaragoza, fui **la primera estudiante en disponer de una dirección de correo electrónico** en la universidad. En una época en la que el alumnado todavía no tenía cuentas de correo individuales, conseguí que el servicio estuviera disponible para el conjunto de estudiantes a partir del curso siguiente.",
+          "También fui reconocida como **Emprendedora del Año por el Ayuntamiento de Zaragoza y SACME (CEOE)**, tras crear una microempresa que facilitaba a mis alumnos el acceso a viajes internacionales de bajo coste, eliminando intermediarios mediante Internet. Hoy puede parecer algo bastante sencillo, pero en aquel momento el concepto era realmente innovador.",
+          "Mi curiosidad por la tecnología no ha dejado de crecer: he realizado numerosos MOOCs sobre robótica y programación, y actualmente sigo matriculada en varios cursos más. Y sí… sigo apuntándome a cursos nuevos. Me encanta aprender."
+        ]
+      },
+      {
+        "title": "Otras experiencias profesionales",
+        "icon": "fa-briefcase",
+        "accent": "amber",
+        "paragraphs": [
+          "Mi trayectoria profesional también me ha llevado por ámbitos bastante diferentes:"
+        ],
+        "items": [
+          {
+            "name": "Bibliotecaria en Stuttgart",
+            "meta": "Alemania"
+          },
+          {
+            "name": "Responsable del Departamento de Compras",
+            "meta": "Filial multinacional de OPEL España"
+          },
+          {
+            "name": "…y alguna que otra aventura más por el camino",
+            "meta": ""
+          }
+        ]
+      }
+    ],
+    "closing": {
+      "title": "Y, en pocas palabras…",
+      "icon": "fa-heart",
+      "paragraphs": [
+        "Soy curiosa por naturaleza. Me encanta aprender, crear, experimentar y embarcarme en proyectos que me lleven a lugares nuevos, ya sea en el ámbito de los idiomas, la educación, el arte, la música, la tecnología, el emprendimiento o el cine.",
+        "No creo demasiado en la idea de encasillar a las personas en una única categoría. **Enseñar es lo que hago, pero la curiosidad es lo que me mueve.**",
+        "Y, por encima de todo, **soy madre**. Probablemente sea mi papel más importante de todos y, sin duda, el que me mantiene aprendiendo cada día."
+      ],
+      "quote": "Espero que mi bio te motive a seguir aprendiendo. 😅"
+    }
+  }
+}</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ==========================================================================
+   Nuria Calvo · English Apps — portal de aplicaciones educativas
+   --------------------------------------------------------------------------
+   El catálogo vive en apps.json. Esta página solo lo lee y lo pinta.
+   El panel de profesora edita una copia local y genera el apps.json nuevo.
+   ========================================================================== */
+
+const DRAFT_KEY   = 'nc-portal-draft-v1';
+const THEME_KEY   = 'nc-portal-theme';
+const VIEW_KEY    = 'nc-portal-view';
+const TEACHER_KEY = 'nuria123';          // cámbiala si quieres (ver README)
+const CATALOG_URL = 'apps.json';
+const PORTAL_REPO = 'nuriacalvo-teacher/nuriacalvo-teacher.github.io';  // repositorio donde vive este portal
+
+const ACCENTS = ['indigo','violet','emerald','amber','rose','sky','teal','cyan','pink','orange','lime','slate'];
+const ICONS = [
+  'fa-clock','fa-shapes','fa-bolt','fa-rotate','fa-code-branch','fa-comment-dots','fa-link','fa-repeat',
+  'fa-people-roof','fa-book-open','fa-envelope-open-text','fa-feather-pointed','fa-microphone-lines','fa-language',
+  'fa-pen-nib','fa-book-bookmark','fa-clipboard-check','fa-puzzle-piece','fa-gamepad','fa-headphones','fa-lightbulb',
+  'fa-graduation-cap','fa-list-check','fa-spell-check','fa-earth-europe','fa-flask','fa-toolbox','fa-clipboard-user'
+];
+const STATUS_LABEL = { live:'Disponible', beta:'En pruebas', soon:'Próximamente' };
+
+let catalog = null;          // catálogo publicado (apps.json)
+let working = null;          // copia de trabajo del panel
+let repoCache = [];
+let isDraft = false;
+let currentView = 'grid';
+let filters = { q:'', cat:'all', level:'', sort:'order' };
+let lastFocus = null;
+
+/* ------------------------------ utilidades ------------------------------ */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone = o => JSON.parse(JSON.stringify(o));
+const slug = s => String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const norm = s => String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+
+function toast(msg, ms=2600){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=> t.classList.remove('show'), ms);
+}
+function fmtDate(iso){
+  if(!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  return d.toLocaleDateString('es-ES', { day:'numeric', month:'short', year:'numeric' });
+}
+function catById(id){
+  return (catalogInUse().categories || []).find(c => c.id === id)
+      || { id:'other', name:'Otros', icon:'fa-shapes', accent:'slate' };
+}
+function catalogInUse(){ return working || catalog || { apps:[], categories:[], teacher:{} }; }
+
+/* ------------------------------ tema ------------------------------ */
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  const i = $('#themeBtn i');
+  i.className = t === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  $('#themeBtn').title = t === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro';
+}
+function initTheme(){
+  let t = null;
+  try { t = localStorage.getItem(THEME_KEY); } catch(e){}
+  if(!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  applyTheme(t);
+  $('#themeBtn').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem(THEME_KEY, next); } catch(e){}
+  });
+}
+
+/* ------------------------------ carga ------------------------------ */
+async function loadCatalog(){
+  let data = null;
+  try {
+    const res = await fetch(CATALOG_URL, { cache:'no-store' });
+    if (res.ok) data = await res.json();
+  } catch(e){ /* sin red o file:// → usamos la copia incrustada */ }
+  if (!data){
+    try { data = JSON.parse($('#fallbackCatalog').textContent); }
+    catch(e){ data = { apps:[], categories:[], teacher:{} }; }
+  }
+  catalog = data;
+
+  let draft = null;
+  try { const raw = localStorage.getItem(DRAFT_KEY); if (raw) draft = JSON.parse(raw); } catch(e){}
+  if (draft && Array.isArray(draft.apps)){
+    working = draft;
+    isDraft = true;
+    $('#draftBanner').classList.add('show');
+  }
+  renderAll();
+}
+
+/* ------------------------------ pintado ------------------------------ */
+function renderAll(){
+  const c = catalogInUse();
+  renderIdentity(c);
+  renderFilters(c);
+  renderStats(c);
+  renderFeatured(c);
+  renderAbout(c);
+  renderCatalog();
+}
+
+/* Texto con **negritas** -> HTML seguro (se escapa antes de convertir) */
+function rich(s){
+  return esc(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+}
+
+function renderAbout(c){
+  const ab = c.about;
+  const cards = $('#aboutCards'), closing = $('#aboutClosing'), hi = $('#aboutHighlights');
+  if (!ab){ cards.innerHTML = closing.innerHTML = hi.innerHTML = ''; $('#aboutHeadline').hidden = true; return; }
+
+  $('#aboutHeadline').textContent = ab.headline || '';
+  $('#aboutHeadline').hidden = !ab.headline;
+
+  hi.innerHTML = (ab.highlights||[]).map(s => `
+    <div class="stat" data-accent="${esc(s.accent||'indigo')}">
+      <div class="stat-num">${esc(s.value)}</div>
+      <div class="stat-label">${esc(s.label)}</div>
+    </div>`).join('');
+
+  cards.innerHTML = (ab.sections||[]).map(s => `
+    <article class="about-card reveal" data-accent="${esc(s.accent||'indigo')}">
+      <div class="about-card-head">
+        <div class="card-icon"><i class="fa-solid ${esc(s.icon||'fa-star')}" aria-hidden="true"></i></div>
+        <h3>${esc(s.title)}</h3>
+      </div>
+      ${(s.paragraphs||[]).map(p => `<p>${rich(p)}</p>`).join('')}
+      ${s.chips ? `<p class="mini-title">${esc(s.listTitle||'')}</p>
+        <div class="lang-chips">${s.chips.map(x=>`<span class="lang-chip">${esc(x)}</span>`).join('')}</div>` : ''}
+      ${s.items ? `${s.listTitle && !s.chips ? `<p class="mini-title">${esc(s.listTitle)}</p>` : ''}
+        <ul class="work-list">${s.items.map(it=>`<li><span>${esc(it.name)}</span>${it.meta?`<span class="meta">${esc(it.meta)}</span>`:''}</li>`).join('')}</ul>` : ''}
+    </article>`).join('');
+
+  const cl = ab.closing;
+  closing.innerHTML = !cl ? '' : `
+    <div class="about-closing reveal">
+      <h3><i class="fa-solid ${esc(cl.icon||'fa-heart')}" aria-hidden="true"></i> ${esc(cl.title||'')}</h3>
+      ${(cl.paragraphs||[]).map(p => `<p>${rich(p)}</p>`).join('')}
+      ${cl.quote ? `<p class="about-quote">${esc(cl.quote)}</p>` : ''}
+    </div>`;
+  revealCards();
+}
+
+function renderIdentity(c){
+  const t = c.teacher || {};
+  const name = t.name || 'Nuria Calvo';
+  const initials = name.split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase() || 'NC';
+  $('#brandMark').textContent = initials;
+  $('#aboutAvatar').innerHTML = t.photo
+    ? `<img src="${esc(t.photo)}" alt="Fotografía de ${esc(name)}">`
+    : esc(initials);
+  $('#brandName').textContent = name;
+  $('#aboutName').textContent = name;
+  $('#brandSub').textContent = `English Apps · ${t.school || ''}`.trim();
+  $('#heroBadge').textContent = [t.school, t.city].filter(Boolean).join(' · ');
+  if (t.tagline) $('#heroLead').textContent = t.tagline;
+  $('#aboutBio').textContent = t.bio || '';
+  $('#aboutSchool').textContent = [t.role, t.school && `en el ${t.school}`, t.city && `(${t.city})`].filter(Boolean).join(' ');
+  $('#footText').innerHTML = `© <span id="year">${new Date().getFullYear()}</span> ${esc(name)} · ${esc([t.school,t.city].filter(Boolean).join(', '))}`;
+  document.title = `${name} · English Apps | ${[t.school, t.city].filter(Boolean).join(' ')}`.trim();
+  if (t.github){
+    const u = `https://github.com/${t.github}`;
+    $('#ghLink').href = u; $('#aboutGh').href = u;
+  }
+}
+
+function publicApps(){
+  return (catalogInUse().apps || []).filter(a => a.visible !== false);
+}
+
+function renderStats(c){
+  const apps = publicApps();
+  const levels = new Set();
+  apps.forEach(a => (a.levels||[]).forEach(l => levels.add(l)));
+  const cats = new Set(apps.map(a => a.category));
+  const last = apps.map(a => a.updated).filter(Boolean).sort().pop();
+  const stats = [
+    { n: apps.length,   l: 'Apps publicadas', a:'indigo'  },
+    { n: cats.size,     l: 'Áreas de trabajo', a:'violet' },
+    { n: levels.size,   l: 'Cursos y niveles', a:'emerald' },
+    { n: '100%',        l: 'Gratis y sin anuncios', a:'amber' }
+  ];
+  $('#heroStats').innerHTML = stats.map(s => `
+    <div class="stat" data-accent="${s.a}">
+      <div class="stat-num">${esc(s.n)}</div>
+      <div class="stat-label">${esc(s.l)}</div>
+    </div>`).join('') + (last ? `
+    <div class="stat" data-accent="sky" style="grid-column:1/-1">
+      <div class="stat-label" style="margin:0 0 4px">Última actualización</div>
+      <div style="font-weight:800; font-size:1.02rem">${esc(fmtDate(last))}</div>
+    </div>` : '');
+}
+
+function renderFilters(c){
+  const apps = publicApps();
+  const used = {};
+  apps.forEach(a => { used[a.category] = (used[a.category]||0) + 1; });
+
+  const chips = [`<button class="chip" type="button" role="button" aria-pressed="${filters.cat==='all'}" data-cat="all" data-accent="indigo">
+      <i class="fa-solid fa-grip" aria-hidden="true"></i> Todas <span class="chip-count">${apps.length}</span></button>`];
+  (c.categories||[]).forEach(cat => {
+    if (!used[cat.id]) return;
+    chips.push(`<button class="chip" type="button" aria-pressed="${filters.cat===cat.id}" data-cat="${esc(cat.id)}" data-accent="${esc(cat.accent||'slate')}">
+      <i class="fa-solid ${esc(cat.icon||'fa-shapes')}" aria-hidden="true"></i> ${esc(cat.name)} <span class="chip-count">${used[cat.id]}</span></button>`);
+  });
+  $('#categoryChips').innerHTML = chips.join('');
+  $$('#categoryChips .chip').forEach(b => b.addEventListener('click', () => {
+    filters.cat = b.dataset.cat;
+    renderFilters(catalogInUse());
+    renderCatalog();
+  }));
+
+  const levels = [];
+  (c.levels || []).forEach(l => levels.push(l));
+  apps.forEach(a => (a.levels||[]).forEach(l => { if(!levels.includes(l)) levels.push(l); }));
+  const inUse = levels.filter(l => apps.some(a => (a.levels||[]).includes(l)));
+  const sel = $('#levelSelect');
+  sel.innerHTML = `<option value="">Todos los cursos</option>` +
+    inUse.map(l => `<option value="${esc(l)}"${filters.level===l?' selected':''}>${esc(l)}</option>`).join('');
+}
+
+function matches(a){
+  if (filters.cat !== 'all' && a.category !== filters.cat) return false;
+  if (filters.level && !(a.levels||[]).includes(filters.level)) return false;
+  if (filters.q){
+    const hay = norm([a.title,a.subtitle,a.description,(a.tags||[]).join(' '),(a.levels||[]).join(' '),catById(a.category).name,a.repo].join(' '));
+    if (!filters.q.split(/\s+/).every(w => hay.includes(w))) return false;
+  }
+  return true;
+}
+
+function sortApps(list){
+  const s = filters.sort;
+  const arr = list.slice();
+  if (s === 'az')     arr.sort((a,b)=> a.title.localeCompare(b.title,'es'));
+  else if (s === 'recent') arr.sort((a,b)=> String(b.updated||'').localeCompare(String(a.updated||'')));
+  return arr;
+}
+
+function cardHTML(a, opts={}){
+  const cat = catById(a.category);
+  const accent = a.accent || cat.accent || 'slate';
+  const status = a.status || 'live';
+  const soon = status === 'soon';
+  const levels = (a.levels||[]).slice(0,3).map(l => `<span class="badge level">${esc(l)}</span>`).join('');
+  const tags = (a.tags||[]).slice(0,2).map(t => `<span class="badge">${esc(t)}</span>`).join('');
+  const repoUrl = a.repo ? `https://github.com/${esc(a.repo)}` : '';
+  return `
+  <article class="card reveal${soon?' is-soon':''}${a.featured?' is-featured':''}" data-accent="${esc(accent)}">
+    <div class="card-top">
+      <div class="card-icon"><i class="fa-solid ${esc(a.icon||cat.icon||'fa-shapes')}" aria-hidden="true"></i></div>
+      <span class="card-flags">
+        ${a.featured && !opts.noFlag ? '<span class="flag-featured"><i class="fa-solid fa-star" aria-hidden="true"></i> Destacada</span>' : ''}
+        <span class="status ${esc(status)}">${status==='live'?'<span class="pulse" aria-hidden="true"></span>':''}${esc(STATUS_LABEL[status]||status)}</span>
+      </span>
+    </div>
+    <div class="card-body">
+      <h3>${soon ? esc(a.title) : `<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)}</a>`}</h3>
+      ${a.subtitle ? `<p class="card-subtitle">${esc(a.subtitle)}</p>` : ''}
+      <p class="card-desc">${esc(a.description||'')}</p>
+      <div class="badges">
+        <span class="badge" style="background:transparent"><i class="fa-solid ${esc(cat.icon)}" aria-hidden="true"></i> ${esc(cat.name)}</span>
+        ${levels}${tags}
+      </div>
+    </div>
+    <div class="card-foot">
+      ${soon
+        ? `<span class="card-open"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Próximamente</span>`
+        : `<a class="card-open" href="${esc(a.url)}" target="_blank" rel="noopener">Abrir app <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`}
+      ${!soon ? `<button class="mini-btn qr-btn" type="button" data-url="${esc(a.url)}" data-title="${esc(a.title)}" title="Código QR para proyectar" aria-label="Código QR de ${esc(a.title)}"><i class="fa-solid fa-qrcode" aria-hidden="true"></i></button>` : ''}
+      ${repoUrl ? `<a class="mini-btn" href="${repoUrl}" target="_blank" rel="noopener" title="Ver el código en GitHub" aria-label="Código de ${esc(a.title)} en GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>` : ''}
+    </div>
+  </article>`;
+}
+
+function renderFeatured(c){
+  const feat = publicApps().filter(a => a.featured);
+  const sec = $('#destacadas');
+  if (!feat.length){ sec.hidden = true; return; }
+  sec.hidden = false;
+  $('#featuredGrid').innerHTML = feat.map(a => cardHTML(a, {noFlag:true})).join('');
+}
+
+function renderCatalog(){
+  const all = publicApps();
+  const list = sortApps(all.filter(matches));
+  const area = $('#catalogArea');
+  const active = filters.q || filters.cat !== 'all' || filters.level;
+  $('#clearBtn').hidden = !active;
+
+  $('#resultCount').innerHTML = list.length === all.length
+    ? `<b>${all.length}</b> apps disponibles`
+    : `<b>${list.length}</b> de ${all.length} apps`;
+
+  if (!list.length){
+    area.innerHTML = `<div class="empty">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <h3>No hay ninguna app con esos filtros</h3>
+        <p>Prueba con otra palabra o quita los filtros.</p>
+        <button class="btn btn-primary btn-sm" type="button" onclick="clearFilters()">Ver todas las apps</button>
+      </div>`;
+    return;
+  }
+
+  if (currentView === 'cats' && !active){
+    const groups = (catalogInUse().categories||[]).map(cat => ({ cat, apps: list.filter(a => a.category === cat.id) }))
+                    .filter(g => g.apps.length);
+    area.innerHTML = groups.map(g => `
+      <section class="section" style="padding-block:14px 30px" data-accent="${esc(g.cat.accent||'slate')}">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title"><span class="dot"><i class="fa-solid ${esc(g.cat.icon)}" aria-hidden="true"></i></span> ${esc(g.cat.name)}</h2>
+            <p class="section-sub">${g.apps.length} ${g.apps.length===1?'app':'apps'}</p>
+          </div>
+        </div>
+        <div class="grid">${g.apps.map(a=>cardHTML(a)).join('')}</div>
+      </section>`).join('');
+  } else {
+    area.innerHTML = `<div class="grid${currentView==='list'?' list-view':''}">${list.map(a=>cardHTML(a)).join('')}</div>`;
+  }
+  bindCards();
+  revealCards();
+}
+
+function bindCards(){
+  $$('.qr-btn').forEach(b => b.addEventListener('click', e => {
+    e.preventDefault();
+    showQR(b.dataset.url, b.dataset.title);
+  }));
+}
+
+let observer = null;
+function revealCards(){
+  const items = $$('.reveal:not(.in)');
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    items.forEach(el => el.classList.add('in')); return;
+  }
+  if (!observer){
+    observer = new IntersectionObserver((entries)=>{
+      entries.forEach((en,i)=>{
+        if (en.isIntersecting){
+          const el = en.target;
+          setTimeout(()=> el.classList.add('in'), Math.min(i*45, 320));
+          observer.unobserve(el);
+        }
+      });
+    }, { rootMargin:'0px 0px -40px 0px', threshold:.06 });
+  }
+  items.forEach(el => observer.observe(el));
+}
+
+/* ------------------------------ filtros / vista ------------------------------ */
+function setView(v){
+  currentView = v;
+  try { localStorage.setItem(VIEW_KEY, v); } catch(e){}
+  $('#viewGrid').setAttribute('aria-pressed', v==='grid');
+  $('#viewList').setAttribute('aria-pressed', v==='list');
+  $('#viewCats').setAttribute('aria-pressed', v==='cats');
+  renderCatalog();
+}
+function clearFilters(){
+  filters = { q:'', cat:'all', level:'', sort:filters.sort };
+  $('#searchInput').value = '';
+  $('#levelSelect').value = '';
+  renderFilters(catalogInUse());
+  renderCatalog();
+}
+function focusSearch(){
+  const i = $('#searchInput');
+  i.scrollIntoView({ block:'center', behavior:'smooth' });
+  setTimeout(()=> i.focus(), 320);
+}
+
+/* ------------------------------ QR ------------------------------ */
+function showQR(url, title){
+  const box = $('#qrCanvas');
+  box.innerHTML = '';
+  if (typeof QRCode === 'undefined'){
+    box.innerHTML = `<p class="note warn" style="margin:0"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+      No se ha podido cargar el generador de códigos QR (puede que la red del centro lo bloquee).
+      Copia el enlace y compártelo con el alumnado.</p>`;
+    box.style.background = 'transparent'; box.style.padding = '0';
+  } else {
+    box.style.background = '#fff'; box.style.padding = '18px';
+    new QRCode(box, { text:url, width:236, height:236, colorDark:'#0f172a', colorLight:'#ffffff', correctLevel:QRCode.CorrectLevel.M });
+  }
+  $('#qrTitle').textContent = title;
+  $('#qrUrl').textContent = url;
+  $('#qrOpen').href = url;
+  $('#qrCopy').onclick = () => copyText(url, 'Enlace copiado');
+  openModal('qrModal');
+}
+function copyText(text, msg){
+  const done = () => toast(msg || 'Copiado');
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(()=> fallbackCopy(text, done));
+  } else fallbackCopy(text, done);
+}
+function fallbackCopy(text, done){
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); done(); } catch(e){ toast('No se ha podido copiar'); }
+  ta.remove();
+}
+
+/* ------------------------------ modales ------------------------------ */
+function openModal(id){
+  lastFocus = document.activeElement;
+  const m = $('#'+id);
+  m.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  const f = m.querySelector('input,button,select,textarea,a[href]');
+  if (f) setTimeout(()=> f.focus(), 60);
+}
+function closeModal(id){
+  $('#'+id).classList.remove('open');
+  if (!$$('.modal.open').length) document.body.style.overflow = '';
+  if (lastFocus) lastFocus.focus();
+}
+
+/* ==========================================================================
+   PANEL DE PROFESORA
+   ========================================================================== */
+function openTeacher(){
+  if (working) { openAdmin(); return; }
+  $('#loginError').hidden = true;
+  $('#teacherPass').value = '';
+  openModal('loginModal');
+}
+function doLogin(e){
+  e.preventDefault();
+  if ($('#teacherPass').value !== TEACHER_KEY){
+    $('#loginError').hidden = false;
+    return;
+  }
+  closeModal('loginModal');
+  openAdmin();
+}
+function openAdmin(){
+  if (!working) working = clone(catalog);
+  fillProfileForm();
+  renderAdminList();
+  const gh = (catalogInUse().teacher||{}).github;
+  $('#editOnGh').href = `https://github.com/${PORTAL_REPO}/edit/main/apps.json`;
+  $('#adminTitle').textContent = `Panel de ${(catalogInUse().teacher||{}).name || 'la profesora'} · Gestión del catálogo`;
+  openModal('adminModal');
+}
+function showTab(id){
+  ['apps','github','perfil','publicar'].forEach(t => {
+    $('#panel-'+t).hidden = (t !== id);
+    $('#tab-'+t).setAttribute('aria-selected', t === id);
+  });
+  if (id === 'publicar') $('#jsonOut').value = buildJson();
+}
+
+function saveDraft(){
+  working.updated = new Date().toISOString().slice(0,10);
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(working)); } catch(e){ toast('No se ha podido guardar en este navegador'); }
+  isDraft = true;
+  $('#draftBanner').classList.add('show');
+  renderAll();
+}
+function discardDraft(){
+  if (!confirm('¿Descartar los cambios que no has publicado y volver a lo que ve el alumnado?')) return;
+  try { localStorage.removeItem(DRAFT_KEY); } catch(e){}
+  working = null; isDraft = false;
+  $('#draftBanner').classList.remove('show');
+  if ($('#adminModal').classList.contains('open')) closeModal('adminModal');
+  renderAll();
+  toast('Cambios descartados');
+}
+
+/* -------------------------- listado editable -------------------------- */
+let openEditor = null;
+
+function renderAdminList(){
+  const apps = working.apps || [];
+  const vis = apps.filter(a => a.visible !== false).length;
+  $('#adminList').innerHTML = `
+    <p class="result-count" style="margin:0 0 12px"><b>${vis}</b> apps visibles de ${apps.length} en el catálogo</p>` +
+    apps.map((a,i) => adminRowHTML(a,i)).join('');
+  $$('#adminList [data-act]').forEach(el => el.addEventListener('click', ev => {
+    const i = Number(el.dataset.i);
+    const act = el.dataset.act;
+    if (act === 'up')     { if (i>0){ const [x]=working.apps.splice(i,1); working.apps.splice(i-1,0,x); saveDraft(); renderAdminList(); } }
+    if (act === 'down')   { if (i<working.apps.length-1){ const [x]=working.apps.splice(i,1); working.apps.splice(i+1,0,x); saveDraft(); renderAdminList(); } }
+    if (act === 'edit')   { openEditor = (openEditor === i) ? null : i; renderAdminList(); }
+    if (act === 'del')    { if (confirm(`¿Quitar "${working.apps[i].title}" del catálogo?`)){ working.apps.splice(i,1); openEditor=null; saveDraft(); renderAdminList(); } }
+    if (act === 'star')   { working.apps[i].featured = !working.apps[i].featured; saveDraft(); renderAdminList(); }
+  }));
+  $$('#adminList .vis-toggle').forEach(el => el.addEventListener('change', () => {
+    working.apps[Number(el.dataset.i)].visible = el.checked;
+    saveDraft(); renderAdminList();
+  }));
+  if (openEditor !== null) bindEditor(openEditor);
+}
+
+function adminRowHTML(a,i){
+  const cat = catById(a.category);
+  const editing = openEditor === i;
+  const row = `
+  <div class="admin-row ${a.visible===false?'hidden-app':''}" data-accent="${esc(a.accent||cat.accent)}">
+    <label class="switch" title="Mostrar en la web">
+      <input type="checkbox" class="vis-toggle" data-i="${i}" ${a.visible!==false?'checked':''} aria-label="Mostrar ${esc(a.title)} en la web">
+      <span class="track"></span>
+    </label>
+    <span class="card-icon" style="width:38px;height:38px;font-size:.95rem;border-radius:11px"><i class="fa-solid ${esc(a.icon||cat.icon)}" aria-hidden="true"></i></span>
+    <span class="grow">
+      <strong>${esc(a.title)} ${a.featured?'<i class="fa-solid fa-star" style="color:#f59e0b;font-size:.8em" title="Destacada"></i>':''}</strong>
+      <small>${esc(cat.name)}${a.levels&&a.levels.length?' · '+esc(a.levels.join(', ')):''} · ${esc(a.repo||'')}</small>
+    </span>
+    <span style="display:flex; gap:5px">
+      <button class="mini-btn" type="button" data-act="star" data-i="${i}" title="Destacar en la portada" aria-label="Destacar ${esc(a.title)}"><i class="fa-${a.featured?'solid':'regular'} fa-star" aria-hidden="true"></i></button>
+      <button class="mini-btn" type="button" data-act="up"   data-i="${i}" title="Subir" aria-label="Subir ${esc(a.title)}"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+      <button class="mini-btn" type="button" data-act="down" data-i="${i}" title="Bajar" aria-label="Bajar ${esc(a.title)}"><i class="fa-solid fa-arrow-down" aria-hidden="true"></i></button>
+      <button class="mini-btn" type="button" data-act="edit" data-i="${i}" title="Editar textos" aria-label="Editar ${esc(a.title)}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>
+      <button class="mini-btn" type="button" data-act="del"  data-i="${i}" title="Quitar del catálogo" aria-label="Quitar ${esc(a.title)}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+    </span>
+  </div>`;
+  return editing ? row + editorHTML(a,i) : row;
+}
+
+function editorHTML(a,i){
+  const cats = (working.categories||[]).map(c => `<option value="${esc(c.id)}"${a.category===c.id?' selected':''}>${esc(c.name)}</option>`).join('');
+  const icons = ICONS.map(ic => `<option value="${ic}"${a.icon===ic?' selected':''}>${ic.replace('fa-','')}</option>`).join('');
+  const accs = ACCENTS.map(c => `<option value="${c}"${a.accent===c?' selected':''}>${c}</option>`).join('');
+  const sts = Object.entries(STATUS_LABEL).map(([k,v]) => `<option value="${k}"${(a.status||'live')===k?' selected':''}>${v}</option>`).join('');
+  return `
+  <div class="admin-editor" data-editor="${i}">
+    <div class="cols">
+      <label class="field"><span>Título</span><input data-f="title" value="${esc(a.title)}"></label>
+      <label class="field"><span>Subtítulo</span><input data-f="subtitle" value="${esc(a.subtitle||'')}"></label>
+    </div>
+    <label class="field"><span>Descripción</span><textarea data-f="description">${esc(a.description||'')}</textarea></label>
+    <div class="cols">
+      <label class="field"><span>Enlace de la app</span><input data-f="url" value="${esc(a.url||'')}"></label>
+      <label class="field"><span>Repositorio (usuario/nombre)</span><input data-f="repo" value="${esc(a.repo||'')}"></label>
+      <label class="field"><span>Tipo de contenido</span><select data-f="category">${cats}</select></label>
+      <label class="field"><span>Cursos (separados por comas)</span><input data-f="levels" value="${esc((a.levels||[]).join(', '))}"></label>
+      <label class="field"><span>Etiquetas (separadas por comas)</span><input data-f="tags" value="${esc((a.tags||[]).join(', '))}"></label>
+      <label class="field"><span>Estado</span><select data-f="status">${sts}</select></label>
+      <label class="field"><span>Icono</span><select data-f="icon">${icons}</select></label>
+      <label class="field"><span>Color</span><select data-f="accent">${accs}</select></label>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap">
+      <button class="btn btn-primary btn-sm" type="button" data-save="${i}"><i class="fa-solid fa-check" aria-hidden="true"></i> Guardar</button>
+      <button class="btn btn-ghost btn-sm" type="button" data-cancel="1">Cerrar</button>
+    </div>
+  </div>`;
+}
+
+function bindEditor(i){
+  const box = $(`[data-editor="${i}"]`);
+  if (!box) return;
+  box.querySelector('[data-save]').addEventListener('click', () => {
+    const a = working.apps[i];
+    box.querySelectorAll('[data-f]').forEach(el => {
+      const f = el.dataset.f;
+      const v = el.value.trim();
+      if (f === 'levels' || f === 'tags') a[f] = v ? v.split(',').map(s=>s.trim()).filter(Boolean) : [];
+      else a[f] = v;
+    });
+    if (!a.id) a.id = slug(a.title);
+    a.updated = new Date().toISOString().slice(0,10);
+    openEditor = null;
+    saveDraft(); renderAdminList();
+    toast('App actualizada');
+  });
+  box.querySelector('[data-cancel]').addEventListener('click', () => { openEditor = null; renderAdminList(); });
+}
+
+function addBlankApp(){
+  const name = prompt('Nombre de la nueva app:');
+  if (!name) return;
+  const gh = (working.teacher||{}).github || '';
+  working.apps.unshift({
+    id: slug(name), repo: '', url: gh ? `https://${gh}.github.io/${slug(name)}/` : '',
+    title: name, subtitle: '', description: '', category: (working.categories[0]||{}).id || 'other',
+    levels: [], tags: [], icon: 'fa-shapes', accent: 'indigo', status: 'soon',
+    featured: false, visible: false, updated: new Date().toISOString().slice(0,10)
+  });
+  openEditor = 0;
+  saveDraft(); renderAdminList();
+}
+
+/* -------------------------- repositorios de GitHub -------------------------- */
+async function fetchRepos(){
+  const user = (working.teacher||{}).github;
+  if (!user){ toast('Falta tu usuario de GitHub (pestaña «Portada y perfil»)'); return; }
+  const st = $('#repoStatus');
+  st.textContent = 'Consultando GitHub…';
+  try{
+    const res = await fetch(`https://api.github.com/users/${encodeURIComponent(user)}/repos?per_page=100&sort=pushed`);
+    if (!res.ok) throw new Error('HTTP '+res.status);
+    repoCache = await res.json();
+    st.textContent = `${repoCache.length} repositorios encontrados`;
+    renderRepoList();
+  }catch(err){
+    st.textContent = '';
+    $('#repoList').innerHTML = `<p class="note warn"><i class="fa-solid fa-triangle-exclamation"></i>
+      No se ha podido conectar con GitHub (${esc(err.message)}). Revisa la conexión o añade las apps a mano desde «Mis apps».</p>`;
+  }
+}
+function renderRepoList(){
+  const have = new Set((working.apps||[]).map(a => (a.repo||'').toLowerCase()));
+  $('#repoList').innerHTML = repoCache.map((r,i) => {
+    const inCat = have.has(r.full_name.toLowerCase());
+    return `<div class="repo-row ${inCat?'in-catalog':''}">
+      <input type="checkbox" data-repo="${i}" ${inCat?'disabled':''} aria-label="Seleccionar ${esc(r.name)}">
+      <span class="grow" style="flex:1 1 auto; min-width:0">
+        <strong>${esc(r.name)}</strong>
+        <small>${esc(r.description || 'Sin descripción')} · actualizado el ${esc(fmtDate(r.pushed_at))}</small>
+      </span>
+      ${inCat ? '<span class="status live" style="flex:none">Ya está en el catálogo</span>' : ''}
+      <a class="mini-btn" href="${esc(r.html_url)}" target="_blank" rel="noopener" title="Ver en GitHub" aria-label="Ver ${esc(r.name)} en GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+    </div>`;
+  }).join('');
+}
+function addSelectedRepos(){
+  const picks = $$('#repoList input[type="checkbox"]:checked').map(el => repoCache[Number(el.dataset.repo)]);
+  if (!picks.length){ toast('No has marcado ningún repositorio'); return; }
+  const user = (working.teacher||{}).github;
+  picks.forEach(r => {
+    working.apps.push({
+      id: slug(r.name),
+      repo: r.full_name,
+      url: r.homepage || `https://${user}.github.io/${r.name}/`,
+      title: r.name.replace(/[-_.]+/g,' ').replace(/\b\w/g, c=>c.toUpperCase()),
+      subtitle: '',
+      description: r.description || '',
+      category: (working.categories[0]||{}).id || 'other',
+      levels: [], tags: [], icon:'fa-shapes', accent:'indigo', status:'live',
+      featured:false, visible:true,
+      updated: (r.pushed_at||'').slice(0,10)
+    });
+  });
+  saveDraft();
+  renderRepoList();
+  showTab('apps'); renderAdminList();
+  toast(`${picks.length} app(s) añadidas. Revisa sus textos con el lápiz.`);
+}
+
+/* -------------------------- perfil -------------------------- */
+function fillProfileForm(){
+  const t = working.teacher || (working.teacher = {});
+  ['name','role','school','city','github','tagline','bio'].forEach(k => { const el = $('#pf-'+k); if (el) el.value = t[k] || ''; });
+}
+function saveProfile(){
+  const t = working.teacher;
+  ['name','role','school','city','github','tagline','bio'].forEach(k => { t[k] = $('#pf-'+k).value.trim(); });
+  saveDraft();
+  toast('Portada actualizada');
+}
+
+/* -------------------------- exportar -------------------------- */
+function buildJson(){
+  const out = {
+    version: 1,
+    updated: new Date().toISOString().slice(0,10),
+    teacher: working.teacher,
+    categories: working.categories,
+    levels: working.levels,
+    about: working.about,
+    apps: (working.apps||[]).map(a => ({
+      id: a.id || slug(a.title), repo: a.repo || '', url: a.url || '',
+      title: a.title || '', subtitle: a.subtitle || '', description: a.description || '',
+      category: a.category || 'other', levels: a.levels || [], tags: a.tags || [],
+      icon: a.icon || 'fa-shapes', accent: a.accent || 'indigo', status: a.status || 'live',
+      featured: !!a.featured, visible: a.visible !== false, updated: a.updated || ''
+    }))
+  };
+  return JSON.stringify(out, null, 2);
+}
+function downloadJson(){
+  const blob = new Blob([buildJson()], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'apps.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=> URL.revokeObjectURL(url), 1000);
+  toast('apps.json descargado. Ahora súbelo a GitHub.');
+}
+function copyJson(){ copyText(buildJson(), 'Contenido copiado. Pégalo en apps.json.'); }
+
+/* ==========================================================================
+   ARRANQUE
+   ========================================================================== */
+function init(){
+  initTheme();
+  try { const v = localStorage.getItem(VIEW_KEY); if (v) currentView = v; } catch(e){}
+  setView(currentView);
+
+  let t;
+  $('#searchInput').addEventListener('input', e => {
+    clearTimeout(t);
+    t = setTimeout(()=>{ filters.q = norm(e.target.value.trim()); renderCatalog(); }, 130);
+  });
+  $('#levelSelect').addEventListener('change', e => { filters.level = e.target.value; renderCatalog(); });
+  $('#sortSelect').addEventListener('change', e => { filters.sort = e.target.value; renderCatalog(); });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape'){
+      const open = $$('.modal.open');
+      if (open.length) closeModal(open[open.length-1].id);
+      else if ($('#searchInput').value){ clearFilters(); }
+      return;
+    }
+    if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){
+      e.preventDefault(); $('#searchInput').focus();
+    }
+  });
+  $$('.modal').forEach(m => m.addEventListener('mousedown', e => { if (e.target === m) closeModal(m.id); }));
+
+  const tw = $('#toolbarWrap');
+  const sentinel = document.createElement('div');
+  tw.parentNode.insertBefore(sentinel, tw);
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(([en]) => tw.classList.toggle('stuck', !en.isIntersecting), { threshold:1 }).observe(sentinel);
+    // Fuera del catálogo la barra deja de ser fija, para no estorbar al leer la bio
+    new IntersectionObserver(([en]) => {
+      tw.classList.toggle('unstick', !en.isIntersecting && en.boundingClientRect.top < 0);
+    }, { threshold:0 }).observe($('#catalogo'));
+  }
+
+  $('#year').textContent = new Date().getFullYear();
+  loadCatalog();
+}
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
