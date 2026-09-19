@@ -655,7 +655,7 @@
           {
             "title": "Discografía",
             "icon": "fa-compact-disc",
-            "note": "Pronto con enlaces a Spotify.",
+            
             "items": [
               {
                 "name": "Wasteland",
@@ -704,7 +704,7 @@
                 "url": "https://www.youtube.com/watch?v=obli-zmWarw"
               }
             ],
-            "note": "Se abren en YouTube."
+            
           }
         ]
       },
