@@ -75,7 +75,7 @@
 [data-accent="cyan"]   { --acc:#06b6d4; --acc-2:#67e8f9; }
 
 *,*::before,*::after{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; scroll-padding-top:150px; }
+html{ scroll-behavior:smooth; scroll-padding-top:90px; }
 body{
   margin:0;
   font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -134,7 +134,8 @@ button,input,select,textarea{ font:inherit; color:inherit; }
 @media (max-width:620px){ .brand-sub{ display:none; } .brand-name{ font-size:1rem; } }
 .brand-sub{ font-size:.74rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.09em; white-space:nowrap; }
 .header-nav{ display:none; gap:4px; }
-@media (min-width:1000px){ .header-nav{ display:flex; } }
+@media (min-width:820px){ .header-nav{ display:flex; } }
+@media (max-width:1000px){ .header-nav a{ padding:9px 10px; font-size:.87rem; } }
 .header-nav a{
   padding:9px 14px; border-radius:11px; font-weight:700; font-size:.92rem; color:var(--text-2);
   transition:background .18s, color .18s;
@@ -210,7 +211,6 @@ button,input,select,textarea{ font:inherit; color:inherit; }
   border-bottom:1px solid transparent; transition:border-color .2s;
 }
 .toolbar-wrap.stuck{ border-bottom-color:var(--border); }
-.toolbar-wrap.unstick{ position:relative; top:auto; border-bottom-color:transparent; }
 .toolbar{
   background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
   padding:14px; box-shadow:var(--shadow); display:grid; gap:12px;
@@ -252,6 +252,17 @@ select.control:focus{ border-color:var(--brand); outline:none; }
 }
 .chip[aria-pressed="true"] i{ color:var(--acc,var(--brand)); }
 .chip-count{ font-size:.74rem; font-weight:800; opacity:.65; }
+@media (max-width:640px){
+  .toolbar{ padding:11px; gap:10px; }
+  .search-box{ flex:1 1 100%; }
+  .search-row select.control{ flex:1 1 calc(50% - 5px); min-width:0; padding:11px 10px; font-size:.84rem; }
+  .chips{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:2px; }
+  .chips::-webkit-scrollbar{ display:none; }
+  .chip{ flex:none; padding:8px 13px; font-size:.83rem; }
+  .vt-label{ display:none; }
+  .view-toggle button{ padding:7px 11px; }
+  .toolbar-foot{ gap:8px; }
+}
 .toolbar-foot{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding-top:2px; }
 .result-count{ font-size:.86rem; font-weight:700; color:var(--muted); }
 .result-count b{ color:var(--text); }
@@ -640,7 +651,8 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
     </div>
   </section>
 
-  <!-- ============================ TOOLBAR ============================ -->
+  <!-- ============================ CATÁLOGO ============================ -->
+  <section id="catalogo" class="section" style="padding-top:0">
   <div class="toolbar-wrap no-print" id="toolbarWrap">
     <div class="wrap">
       <div class="toolbar" role="search">
@@ -670,9 +682,9 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
               <i class="fa-solid fa-xmark" aria-hidden="true"></i> Quitar filtros
             </button>
             <div class="view-toggle" role="group" aria-label="Tipo de vista">
-              <button type="button" id="viewGrid"  aria-pressed="true"  onclick="setView('grid')"><i class="fa-solid fa-grip" aria-hidden="true"></i> Tarjetas</button>
-              <button type="button" id="viewList"  aria-pressed="false" onclick="setView('list')"><i class="fa-solid fa-list" aria-hidden="true"></i> Lista</button>
-              <button type="button" id="viewCats"  aria-pressed="false" onclick="setView('cats')"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Por temas</button>
+              <button type="button" id="viewGrid"  aria-pressed="true"  onclick="setView('grid')"><i class="fa-solid fa-grip" aria-hidden="true"></i> <span class="vt-label">Tarjetas</span></button>
+              <button type="button" id="viewList"  aria-pressed="false" onclick="setView('list')"><i class="fa-solid fa-list" aria-hidden="true"></i> <span class="vt-label">Lista</span></button>
+              <button type="button" id="viewCats"  aria-pressed="false" onclick="setView('cats')"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> <span class="vt-label">Por temas</span></button>
             </div>
           </div>
         </div>
@@ -680,8 +692,6 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
     </div>
   </div>
 
-  <!-- ============================ CATÁLOGO ============================ -->
-  <section id="catalogo" class="section">
     <div class="wrap">
       <div id="catalogArea"></div>
     </div>
@@ -1518,28 +1528,6 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
   ],
   "about": {
     "headline": "Profesora, lingüista, artista y curiosa por naturaleza.",
-    "highlights": [
-      {
-        "value": "Nº 1",
-        "label": "Oposiciones de Inglés · Aragón",
-        "accent": "indigo"
-      },
-      {
-        "value": "+20",
-        "label": "Años de experiencia docente",
-        "accent": "violet"
-      },
-      {
-        "value": "7",
-        "label": "Idiomas",
-        "accent": "emerald"
-      },
-      {
-        "value": "4",
-        "label": "Álbumes publicados",
-        "accent": "rose"
-      }
-    ],
     "sections": [
       {
         "title": "Experiencia lingüística y educativa",
@@ -1757,11 +1745,12 @@ function rich(s){
 function renderAbout(c){
   const ab = c.about;
   const cards = $('#aboutCards'), closing = $('#aboutClosing'), hi = $('#aboutHighlights');
-  if (!ab){ cards.innerHTML = closing.innerHTML = hi.innerHTML = ''; $('#aboutHeadline').hidden = true; return; }
+  if (!ab){ cards.innerHTML = closing.innerHTML = hi.innerHTML = ''; hi.hidden = true; $('#aboutHeadline').hidden = true; return; }
 
   $('#aboutHeadline').textContent = ab.headline || '';
   $('#aboutHeadline').hidden = !ab.headline;
 
+  hi.hidden = !(ab.highlights||[]).length;
   hi.innerHTML = (ab.highlights||[]).map(s => `
     <div class="stat" data-accent="${esc(s.accent||'indigo')}">
       <div class="stat-num">${esc(s.value)}</div>
@@ -1769,7 +1758,7 @@ function renderAbout(c){
     </div>`).join('');
 
   cards.innerHTML = (ab.sections||[]).map(s => `
-    <article class="about-card reveal" data-accent="${esc(s.accent||'indigo')}">
+    <article class="about-card" data-accent="${esc(s.accent||'indigo')}">
       <div class="about-card-head">
         <div class="card-icon"><i class="fa-solid ${esc(s.icon||'fa-star')}" aria-hidden="true"></i></div>
         <h3>${esc(s.title)}</h3>
@@ -1783,7 +1772,7 @@ function renderAbout(c){
 
   const cl = ab.closing;
   closing.innerHTML = !cl ? '' : `
-    <div class="about-closing reveal">
+    <div class="about-closing">
       <h3><i class="fa-solid ${esc(cl.icon||'fa-heart')}" aria-hidden="true"></i> ${esc(cl.title||'')}</h3>
       ${(cl.paragraphs||[]).map(p => `<p>${rich(p)}</p>`).join('')}
       ${cl.quote ? `<p class="about-quote">${esc(cl.quote)}</p>` : ''}
@@ -1994,7 +1983,7 @@ function revealCards(){
           observer.unobserve(el);
         }
       });
-    }, { rootMargin:'0px 0px -40px 0px', threshold:.06 });
+    }, { rootMargin:'0px 0px 120px 0px', threshold:.01 });
   }
   items.forEach(el => observer.observe(el));
 }
@@ -2367,10 +2356,6 @@ function init(){
   tw.parentNode.insertBefore(sentinel, tw);
   if ('IntersectionObserver' in window){
     new IntersectionObserver(([en]) => tw.classList.toggle('stuck', !en.isIntersecting), { threshold:1 }).observe(sentinel);
-    // Fuera del catálogo la barra deja de ser fija, para no estorbar al leer la bio
-    new IntersectionObserver(([en]) => {
-      tw.classList.toggle('unstick', !en.isIntersecting && en.boundingClientRect.top < 0);
-    }, { threshold:0 }).observe($('#catalogo'));
   }
 
   $('#year').textContent = new Date().getFullYear();
