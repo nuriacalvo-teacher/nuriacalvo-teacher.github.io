@@ -85,15 +85,40 @@ lápiz ✏️, cambia el texto entre comillas y haz *Commit changes*.
 
 - `headline` → la frase grande bajo tu nombre.
 - `highlights` → las cuatro cifras destacadas (`value` es el número, `label` el texto).
-- `sections` → cada bloque de colores, con su `title`, `icon`, `accent` (color),
-  sus `paragraphs`, y opcionalmente `chips` (las etiquetas de idiomas) o `items`
-  (las listas con año o lugar a la derecha).
+- `sections` → cada bloque de colores, con su `title`, `icon`, `accent` (color)
+  y sus `paragraphs`. Además, cada bloque admite:
+  - `feature` → el recuadro destacado de arriba (como «Krisenka Finley»), con
+    `icon`, `title` y `text`.
+  - `chips` → etiquetas sueltas, como los idiomas.
+  - `lists` → una o varias listas (discografía, cortometrajes…), cada una con su
+    `title`, su `icon`, sus `items` y, si quieres, una `note` en cursiva debajo.
+  - Cada elemento de una lista es `{ "name": "...", "meta": "año o lugar",
+    "url": "enlace opcional" }`.
 - `closing` → el bloque final, con su `quote` en cursiva.
 
 Dentro de un párrafo, lo que pongas entre dos asteriscos sale **en negrita**:
 `Obtuve el **n.º 1 en las oposiciones**` se ve como *Obtuve el* **n.º 1 en las
 oposiciones**. No se admite ningún otro código: cualquier otra cosa se muestra
 tal cual, así que no se puede romper la página escribiendo texto.
+
+### Añadir enlaces a los discos o a los cortometrajes
+
+Cada disco y cada cortometraje tiene un campo `url` vacío. En cuanto tengas el
+enlace, lo pegas entre las comillas y esa fila se vuelve pinchable sola (con su
+flechita de «se abre en otra pestaña»):
+
+```json
+{ "name": "Wasteland", "meta": "2003", "url": "https://open.spotify.com/album/..." }
+```
+
+Si lo dejas vacío, la fila se ve igual pero no enlaza a ningún sitio. No hay que
+tocar nada más.
+
+**Para los vídeos:** en GitHub no caben (el límite por fichero son 100 MB y tus
+cortos ocupan 2-3 GB cada uno). Lo que va en `url` es el enlace a donde los
+tengas alojados: YouTube, Vimeo o Google Drive. Si usas Drive, el enlace tiene
+que estar compartido como *«Cualquier persona con el enlace»*, o quien entre en
+la web verá una pantalla pidiendo permiso.
 
 ### Poner tu foto en lugar de las iniciales
 
