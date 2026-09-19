@@ -648,7 +648,7 @@
         "feature": {
           "icon": "fa-music",
           "title": "Krisenka Finley",
-          "text": "Mi nombre artístico como cantautora y compositora"
+          "text": "Mi nombre artístico como cantautora y compositora",
           "url": "https://www.youtube.com/KRISENKA"
         },
         "lists": [
@@ -703,7 +703,7 @@
                 "meta": "2025",
                 "url": "https://www.youtube.com/watch?v=obli-zmWarw"
               }
-            ],
+            ]
             
           }
         ]
