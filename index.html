@@ -437,13 +437,31 @@ select.control:focus{ border-color:var(--brand); outline:none; }
   border:1px solid color-mix(in srgb, var(--acc) 32%, transparent); color:var(--acc);
 }
 :root[data-theme="light"] .lang-chip{ color:color-mix(in srgb, var(--acc) 80%, #000); }
+/* Recuadro destacado dentro de un bloque de la bio */
+.feature-box{
+  display:flex; align-items:center; gap:14px; margin:0 0 16px;
+  padding:14px 16px; border-radius:16px;
+  background:color-mix(in srgb, var(--acc) 12%, transparent);
+  border:1px solid color-mix(in srgb, var(--acc) 34%, transparent);
+}
+.feature-box i{ font-size:1.3rem; color:var(--acc); flex:none; }
+.feature-box b{ display:block; font-size:1.05rem; font-weight:900; letter-spacing:-.01em; color:var(--text); }
+.feature-box span{ font-size:.85rem; font-weight:600; color:var(--muted); }
+.list-note{ margin:9px 0 0; font-size:.82rem; font-weight:600; color:var(--muted); font-style:italic; }
+.mini-title i{ margin-right:6px; }
 .work-list{ list-style:none; padding:0; margin:0; display:grid; gap:8px; }
 .work-list li{
   display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
   padding:11px 15px; border-radius:13px; background:var(--bg); border:1px solid var(--border);
   font-weight:700; font-size:.93rem; transition:border-color .18s, transform .18s;
 }
+.work-list li{ position:relative; }
 .work-list li:hover{ border-color:color-mix(in srgb, var(--acc) 40%, transparent); transform:translateX(3px); }
+.work-list li.has-link{ cursor:pointer; }
+.work-list li.has-link:hover{ background:color-mix(in srgb, var(--acc) 10%, transparent); }
+.work-list li.has-link:focus-within{ border-color:var(--acc); outline:3px solid var(--ring); outline-offset:2px; }
+.work-link{ position:absolute; inset:0; z-index:1; border-radius:13px; }
+.work-name i{ font-size:.72em; margin-left:7px; opacity:.6; }
 .work-list .meta{
   font-size:.74rem; font-weight:900; letter-spacing:.05em; color:var(--acc);
   background:color-mix(in srgb, var(--acc) 13%, transparent); padding:3px 10px; border-radius:999px; white-space:nowrap;
@@ -1553,27 +1571,69 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
         "icon": "fa-palette",
         "accent": "rose",
         "paragraphs": [
-          "Más allá de la enseñanza, siempre he estado muy vinculada al mundo artístico. Soy **retratista y caricaturista**, además de **cantautora y compositora** bajo el nombre artístico de **Krisenka Finley**.",
-          "He publicado cuatro álbumes y he recibido diversos reconocimientos internacionales por mi música. Mi trayectoria musical también incluye la producción de videoclips, jingles publicitarios y composiciones sinfónicas.",
-          "Más recientemente me he adentrado en el mundo del cine, creando cuatro cortometrajes en los que utilizo la **Inteligencia Artificial como herramienta creativa**:"
+          "Más allá de la enseñanza, siempre he estado muy vinculada al mundo artístico. Soy **cantautora y compositora**, y también **retratista y caricaturista**.",
+          "He publicado **cuatro álbumes** y he recibido diversos reconocimientos internacionales por mi música. Mi trayectoria musical incluye además la producción de videoclips, jingles publicitarios y **composiciones sinfónicas**.",
+          "Más recientemente me he adentrado en el mundo del cine, creando cuatro cortometrajes en los que utilizo la **Inteligencia Artificial como herramienta creativa**."
         ],
-        "listTitle": "Cortometrajes",
-        "items": [
+        "feature": {
+          "icon": "fa-music",
+          "title": "Krisenka Finley",
+          "text": "Mi nombre artístico como cantautora y compositora"
+        },
+        "lists": [
           {
-            "name": "1923",
-            "meta": "2026"
+            "title": "Discografía",
+            "icon": "fa-compact-disc",
+            "note": "Pronto con enlaces a Spotify.",
+            "items": [
+              {
+                "name": "Wasteland",
+                "meta": "2003",
+                "url": ""
+              },
+              {
+                "name": "Hello Freedom",
+                "meta": "2004",
+                "url": ""
+              },
+              {
+                "name": "No está en Venta",
+                "meta": "2006",
+                "url": ""
+              },
+              {
+                "name": "10",
+                "meta": "2010",
+                "url": ""
+              }
+            ]
           },
           {
-            "name": "Jerusalén Conquistada",
-            "meta": "2026"
-          },
-          {
-            "name": "Atlas Touring Club",
-            "meta": "2026"
-          },
-          {
-            "name": "La Firma",
-            "meta": "2025"
+            "title": "Cortometrajes",
+            "icon": "fa-clapperboard",
+            "items": [
+              {
+                "name": "1923",
+                "meta": "2026",
+                "url": "https://www.youtube.com/watch?v=CfHhbhVtFEA"
+              },
+              {
+                "name": "Jerusalén Conquistada",
+                "meta": "2026",
+                "url": "https://www.youtube.com/watch?v=VofO80rB6f0"
+              },
+              {
+                "name": "Atlas Touring Club",
+                "meta": "2026",
+                "url": "https://www.youtube.com/watch?v=uGruwF--EZA"
+              },
+              {
+                "name": "La Firma",
+                "meta": "2025",
+                "url": "https://www.youtube.com/watch?v=obli-zmWarw"
+              }
+            ],
+            "note": "Se abren en YouTube."
           }
         ]
       },
@@ -1742,6 +1802,21 @@ function rich(s){
   return esc(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 }
 
+/* Un bloque puede traer varias listas (lists) o una sola (items), con enlaces opcionales */
+function listsOf(s){
+  if (Array.isArray(s.lists)) return s.lists;
+  if (Array.isArray(s.items)) return [{ title:s.listTitle, items:s.items }];
+  return [];
+}
+function itemHTML(it){
+  const url = (it.url||'').trim();
+  return `<li class="${url?'has-link':''}">
+    ${url ? `<a class="work-link" href="${esc(url)}" target="_blank" rel="noopener" aria-label="${esc(it.name)} (se abre en una pestaña nueva)"></a>` : ''}
+    <span class="work-name">${esc(it.name)}${url?' <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>':''}</span>
+    ${it.meta?`<span class="meta">${esc(it.meta)}</span>`:''}
+  </li>`;
+}
+
 function renderAbout(c){
   const ab = c.about;
   const cards = $('#aboutCards'), closing = $('#aboutClosing'), hi = $('#aboutHighlights');
@@ -1763,11 +1838,17 @@ function renderAbout(c){
         <div class="card-icon"><i class="fa-solid ${esc(s.icon||'fa-star')}" aria-hidden="true"></i></div>
         <h3>${esc(s.title)}</h3>
       </div>
+      ${s.feature ? `<div class="feature-box">
+        <i class="fa-solid ${esc(s.feature.icon||'fa-star')}" aria-hidden="true"></i>
+        <span><b>${esc(s.feature.title||'')}</b><span>${esc(s.feature.text||'')}</span></span>
+      </div>` : ''}
       ${(s.paragraphs||[]).map(p => `<p>${rich(p)}</p>`).join('')}
       ${s.chips ? `<p class="mini-title">${esc(s.listTitle||'')}</p>
         <div class="lang-chips">${s.chips.map(x=>`<span class="lang-chip">${esc(x)}</span>`).join('')}</div>` : ''}
-      ${s.items ? `${s.listTitle && !s.chips ? `<p class="mini-title">${esc(s.listTitle)}</p>` : ''}
-        <ul class="work-list">${s.items.map(it=>`<li><span>${esc(it.name)}</span>${it.meta?`<span class="meta">${esc(it.meta)}</span>`:''}</li>`).join('')}</ul>` : ''}
+      ${listsOf(s).map(l => `
+        ${l.title ? `<p class="mini-title">${l.icon?`<i class="fa-solid ${esc(l.icon)}" aria-hidden="true"></i>`:''}${esc(l.title)}</p>` : ''}
+        <ul class="work-list">${(l.items||[]).map(itemHTML).join('')}</ul>
+        ${l.note ? `<p class="list-note">${esc(l.note)}</p>` : ''}`).join('')}
     </article>`).join('');
 
   const cl = ab.closing;
