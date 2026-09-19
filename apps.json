@@ -641,27 +641,69 @@
         "icon": "fa-palette",
         "accent": "rose",
         "paragraphs": [
-          "Más allá de la enseñanza, siempre he estado muy vinculada al mundo artístico. Soy **retratista y caricaturista**, además de **cantautora y compositora** bajo el nombre artístico de **Krisenka Finley**.",
-          "He publicado cuatro álbumes y he recibido diversos reconocimientos internacionales por mi música. Mi trayectoria musical también incluye la producción de videoclips, jingles publicitarios y composiciones sinfónicas.",
-          "Más recientemente me he adentrado en el mundo del cine, creando cuatro cortometrajes en los que utilizo la **Inteligencia Artificial como herramienta creativa**:"
+          "Más allá de la enseñanza, siempre he estado muy vinculada al mundo artístico. Soy **cantautora y compositora**, y también **retratista y caricaturista**.",
+          "He publicado **cuatro álbumes** y he recibido diversos reconocimientos internacionales por mi música. Mi trayectoria musical incluye además la producción de videoclips, jingles publicitarios y **composiciones sinfónicas**.",
+          "Más recientemente me he adentrado en el mundo del cine, creando cuatro cortometrajes en los que utilizo la **Inteligencia Artificial como herramienta creativa**."
         ],
-        "listTitle": "Cortometrajes",
-        "items": [
+        "feature": {
+          "icon": "fa-music",
+          "title": "Krisenka Finley",
+          "text": "Mi nombre artístico como cantautora y compositora"
+        },
+        "lists": [
           {
-            "name": "1923",
-            "meta": "2026"
+            "title": "Discografía",
+            "icon": "fa-compact-disc",
+            "note": "Pronto con enlaces a Spotify.",
+            "items": [
+              {
+                "name": "Wasteland",
+                "meta": "2003",
+                "url": ""
+              },
+              {
+                "name": "Hello Freedom",
+                "meta": "2004",
+                "url": ""
+              },
+              {
+                "name": "No está en Venta",
+                "meta": "2006",
+                "url": ""
+              },
+              {
+                "name": "10",
+                "meta": "2010",
+                "url": ""
+              }
+            ]
           },
           {
-            "name": "Jerusalén Conquistada",
-            "meta": "2026"
-          },
-          {
-            "name": "Atlas Touring Club",
-            "meta": "2026"
-          },
-          {
-            "name": "La Firma",
-            "meta": "2025"
+            "title": "Cortometrajes",
+            "icon": "fa-clapperboard",
+            "items": [
+              {
+                "name": "1923",
+                "meta": "2026",
+                "url": "https://www.youtube.com/watch?v=CfHhbhVtFEA"
+              },
+              {
+                "name": "Jerusalén Conquistada",
+                "meta": "2026",
+                "url": "https://www.youtube.com/watch?v=VofO80rB6f0"
+              },
+              {
+                "name": "Atlas Touring Club",
+                "meta": "2026",
+                "url": "https://www.youtube.com/watch?v=uGruwF--EZA"
+              },
+              {
+                "name": "La Firma",
+                "meta": "2025",
+                "url": "https://www.youtube.com/watch?v=obli-zmWarw"
+              }
+            ],
+            "note": "Se abren en YouTube."
           }
         ]
       },
