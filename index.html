@@ -444,7 +444,14 @@ select.control:focus{ border-color:var(--brand); outline:none; }
   background:color-mix(in srgb, var(--acc) 12%, transparent);
   border:1px solid color-mix(in srgb, var(--acc) 34%, transparent);
 }
-.feature-box i{ font-size:1.3rem; color:var(--acc); flex:none; }
+.feature-box{ position:relative; transition:background .18s, border-color .18s, transform .18s; }
+.feature-box.has-link{ cursor:pointer; }
+.feature-box.has-link:hover{ background:color-mix(in srgb, var(--acc) 20%, transparent);
+  border-color:color-mix(in srgb, var(--acc) 55%, transparent); transform:translateY(-2px); }
+.feature-box.has-link:focus-within{ border-color:var(--acc); outline:3px solid var(--ring); outline-offset:2px; }
+.feature-box.has-link .work-link{ border-radius:16px; }
+.feature-box b i{ font-size:.62em; margin-left:7px; opacity:.6; }
+.feature-box > i{ font-size:1.3rem; color:var(--acc); flex:none; }
 .feature-box b{ display:block; font-size:1.05rem; font-weight:900; letter-spacing:-.01em; color:var(--text); }
 .feature-box span{ font-size:.85rem; font-weight:600; color:var(--muted); }
 .list-note{ margin:9px 0 0; font-size:.82rem; font-weight:600; color:var(--muted); font-style:italic; }
@@ -487,6 +494,8 @@ select.control:focus{ border-color:var(--brand); outline:none; }
 }
 .avatar-big img{ width:100%; height:100%; object-fit:cover; border-radius:34px; }
 
+.back-row{ margin:0 0 18px; }
+.header-nav a[aria-current="page"]{ background:color-mix(in srgb, var(--brand) 18%, transparent); color:var(--text); }
 .site-footer{ border-top:1px solid var(--border); margin-top:40px; padding-block:30px; color:var(--muted); font-size:.87rem; }
 .footer-inner{ display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center; }
 .footer-links{ display:flex; gap:16px; flex-wrap:wrap; font-weight:700; }
@@ -614,7 +623,7 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
     <nav class="header-nav" aria-label="Navegación principal">
       <a href="#catalogo">Apps</a>
       <a href="#destacadas">Destacadas</a>
-      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#/sobre-mi">Sobre mí</a>
       <a href="#como-usar">Cómo se usa</a>
     </nav>
 
@@ -635,7 +644,7 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
 <main id="top">
 
   <!-- ============================ HERO ============================ -->
-  <section class="hero">
+  <section class="hero" id="inicio">
     <div class="wrap hero-grid">
       <div>
         <span class="eyebrow"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> <span id="heroBadge">IES Goya · Zaragoza</span></span>
@@ -747,6 +756,9 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
   <!-- ============================ SOBRE MÍ ============================ -->
   <section id="sobre-mi" class="section">
     <div class="wrap">
+      <p class="back-row no-print"><a class="btn btn-ghost btn-sm" href="#inicio">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver a las apps
+      </a></p>
       <div class="about" style="display:block">
         <div class="about-head">
           <div><div class="avatar-big" id="aboutAvatar">NC</div></div>
@@ -780,7 +792,7 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
     <p style="margin:0" id="footText">© <span id="year"></span> Nuria Calvo · IES Goya, Zaragoza</p>
     <div class="footer-links">
       <a href="#catalogo">Apps</a>
-      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#/sobre-mi">Sobre mí</a>
       <a href="https://github.com/nuriacalvo-teacher" target="_blank" rel="noopener">GitHub</a>
       <button class="btn btn-ghost btn-sm" type="button" onclick="window.print()"><i class="fa-solid fa-print" aria-hidden="true"></i> Imprimir listado</button>
     </div>
@@ -916,6 +928,16 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
   <span><i class="fa-solid fa-eye" aria-hidden="true" style="color:#f59e0b"></i> Vista previa local sin publicar</span>
   <button class="btn btn-primary btn-sm" type="button" onclick="openTeacher()">Publicar</button>
   <button class="btn btn-ghost btn-sm" type="button" onclick="discardDraft()">Descartar</button>
+</div>
+
+<div class="draft-banner no-print" id="errorBanner" style="border-color:rgba(244,63,94,.6); align-items:flex-start">
+  <span style="max-width:min(60ch,68vw)">
+    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true" style="color:#f43f5e"></i>
+    <b>El fichero apps.json tiene una errata y no se puede leer.</b>
+    Se muestra la última versión guardada dentro de la página.
+    <small style="display:block;font-weight:600;color:var(--muted);margin-top:4px" id="errorDetail"></small>
+  </span>
+  <button class="btn btn-ghost btn-sm" type="button" onclick="document.getElementById('errorBanner').classList.remove('show')">Entendido</button>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1552,7 +1574,7 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
         "icon": "fa-graduation-cap",
         "accent": "indigo",
         "paragraphs": [
-          "Obtuve el **n.º 1 en las oposiciones de Enseñanza Secundaria de Aragón**, en la especialidad de Inglés, y cuento con más de 20 años de experiencia docente.",
+          "Obtuve el **n.º 1 en las oposiciones de Enseñanza Secundaria de Aragón**, en la especialidad de Inglés, y cuento con más de 25 años de experiencia docente.",
           "Me gradué con **First-Class Honours en Trinity College Dublin** y siempre he sentido una profunda pasión por las lenguas y la comunicación. Tengo competencia en siete idiomas."
         ],
         "listTitle": "Idiomas",
@@ -1567,7 +1589,7 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
         ]
       },
       {
-        "title": "El mundo de las artes",
+        "title": "Trayectoria artística",
         "icon": "fa-palette",
         "accent": "rose",
         "paragraphs": [
@@ -1578,13 +1600,13 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
         "feature": {
           "icon": "fa-music",
           "title": "Krisenka Finley",
-          "text": "Mi nombre artístico como cantautora y compositora"
+          "text": "Mi nombre artístico como cantautora y compositora",
+          "url": "https://www.youtube.com/KRISENKA"
         },
         "lists": [
           {
             "title": "Discografía",
             "icon": "fa-compact-disc",
-            "note": "Pronto con enlaces a Spotify.",
             "items": [
               {
                 "name": "Wasteland",
@@ -1632,8 +1654,7 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
                 "meta": "2025",
                 "url": "https://www.youtube.com/watch?v=obli-zmWarw"
               }
-            ],
-            "note": "Se abren en YouTube."
+            ]
           }
         ]
       },
@@ -1764,15 +1785,38 @@ function initTheme(){
 }
 
 /* ------------------------------ carga ------------------------------ */
+/* Traduce el error de JSON.parse a algo accionable: en qué línea está la errata */
+function dondeFalla(err, texto){
+  const m = /position\s+(\d+)/i.exec(err.message);
+  if (m){
+    const linea = texto.slice(0, Number(m[1])).split('\n').length;
+    return `Está en la línea ${linea} o justo encima. Casi siempre es una coma de más o de menos.`;
+  }
+  const l = /line\s+(\d+)/i.exec(err.message);
+  if (l) return `Está en la línea ${l[1]} o justo encima. Casi siempre es una coma de más o de menos.`;
+  return err.message;
+}
+
 async function loadCatalog(){
-  let data = null;
+  let data = null, fallo = null;
   try {
     const res = await fetch(CATALOG_URL, { cache:'no-store' });
-    if (res.ok) data = await res.json();
-  } catch(e){ /* sin red o file:// → usamos la copia incrustada */ }
+    if (!res.ok) throw new Error('el servidor responde ' + res.status);
+    const txt = await res.text();
+    try { data = JSON.parse(txt); }
+    catch(e){
+      // El fichero está, pero tiene una errata: hay que avisar, no disimular
+      fallo = dondeFalla(e, txt);
+      console.error('apps.json no se puede leer:', e.message);
+    }
+  } catch(e){ /* sin red, o abierto desde el disco: normal, se usa la copia incrustada */ }
   if (!data){
     try { data = JSON.parse($('#fallbackCatalog').textContent); }
     catch(e){ data = { apps:[], categories:[], teacher:{} }; }
+    if (fallo){
+      $('#errorDetail').textContent = fallo;
+      $('#errorBanner').classList.add('show');
+    }
   }
   catalog = data;
 
@@ -1808,6 +1852,15 @@ function listsOf(s){
   if (Array.isArray(s.items)) return [{ title:s.listTitle, items:s.items }];
   return [];
 }
+function featureHTML(f){
+  const url = (f.url||'').trim();
+  return `<div class="feature-box${url?' has-link':''}">
+    ${url ? `<a class="work-link" href="${esc(url)}" target="_blank" rel="noopener" aria-label="${esc(f.title||'')} (se abre en una pestaña nueva)"></a>` : ''}
+    <i class="fa-solid ${esc(f.icon||'fa-star')}" aria-hidden="true"></i>
+    <span><b>${esc(f.title||'')}${url?' <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>':''}</b><span>${esc(f.text||'')}</span></span>
+  </div>`;
+}
+
 function itemHTML(it){
   const url = (it.url||'').trim();
   return `<li class="${url?'has-link':''}">
@@ -1838,10 +1891,7 @@ function renderAbout(c){
         <div class="card-icon"><i class="fa-solid ${esc(s.icon||'fa-star')}" aria-hidden="true"></i></div>
         <h3>${esc(s.title)}</h3>
       </div>
-      ${s.feature ? `<div class="feature-box">
-        <i class="fa-solid ${esc(s.feature.icon||'fa-star')}" aria-hidden="true"></i>
-        <span><b>${esc(s.feature.title||'')}</b><span>${esc(s.feature.text||'')}</span></span>
-      </div>` : ''}
+      ${s.feature ? featureHTML(s.feature) : ''}
       ${(s.paragraphs||[]).map(p => `<p>${rich(p)}</p>`).join('')}
       ${s.chips ? `<p class="mini-title">${esc(s.listTitle||'')}</p>
         <div class="lang-chips">${s.chips.map(x=>`<span class="lang-chip">${esc(x)}</span>`).join('')}</div>` : ''}
@@ -1996,8 +2046,9 @@ function cardHTML(a, opts={}){
 function renderFeatured(c){
   const feat = publicApps().filter(a => a.featured);
   const sec = $('#destacadas');
-  if (!feat.length){ sec.hidden = true; return; }
-  sec.hidden = false;
+  const enBio = location.hash === '#/sobre-mi' || location.hash === '#sobre-mi';
+  if (!feat.length || enBio){ sec.hidden = true; if(!feat.length) return; }
+  else sec.hidden = false;
   $('#featuredGrid').innerHTML = feat.map(a => cardHTML(a, {noFlag:true})).join('');
 }
 
@@ -2404,6 +2455,48 @@ function downloadJson(){
 function copyJson(){ copyText(buildJson(), 'Contenido copiado. Pégalo en apps.json.'); }
 
 /* ==========================================================================
+   NAVEGACIÓN ENTRE PÁGINAS
+   La bio es una página aparte, pero dentro del mismo fichero: así conserva
+   la cabecera, el menú y los colores sin duplicar nada.
+   ========================================================================== */
+const PAGINA_PORTADA = ['inicio','destacadas','catalogo','como-usar'];
+
+function mostrarPagina(cual){
+  const bio = cual === 'bio';
+  PAGINA_PORTADA.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (id === 'destacadas'){ el.hidden = bio || !publicApps().some(a => a.featured); }
+    else el.hidden = bio;
+  });
+  document.getElementById('sobre-mi').hidden = !bio;
+  $$('.header-nav a').forEach(a => {
+    const activo = bio ? a.getAttribute('href') === '#/sobre-mi' : false;
+    if (activo) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+  });
+  document.title = bio
+    ? `Sobre mí · ${(catalogInUse().teacher||{}).name || 'Nuria Calvo'}`
+    : tituloPortada;
+}
+
+let tituloPortada = document.title;
+
+function enrutar(){
+  const hash = location.hash;
+  if (hash === '#/sobre-mi' || hash === '#sobre-mi'){
+    mostrarPagina('bio');
+    window.scrollTo({ top:0, behavior:'auto' });
+    return;
+  }
+  mostrarPagina('portada');
+  if (hash && hash.length > 1){
+    const destino = document.getElementById(hash.slice(1));
+    if (destino) destino.scrollIntoView();
+    else window.scrollTo({ top:0, behavior:'auto' });
+  }
+}
+
+/* ==========================================================================
    ARRANQUE
    ========================================================================== */
 function init(){
@@ -2440,7 +2533,8 @@ function init(){
   }
 
   $('#year').textContent = new Date().getFullYear();
-  loadCatalog();
+  window.addEventListener('hashchange', enrutar);
+  loadCatalog().then(enrutar);
 }
 document.addEventListener('DOMContentLoaded', init);
 </script>
