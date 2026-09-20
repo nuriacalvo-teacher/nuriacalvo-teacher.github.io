@@ -217,6 +217,7 @@
       "description": "Teoría, ejemplos y test de 10 preguntas por bloque para diferenciar present simple, continuous, perfect y perfect continuous. Con informe final de evaluación.",
       "category": "grammar",
       "levels": [
+        "2º ESO",
         "3º ESO",
         "4º ESO"
       ],
@@ -240,6 +241,7 @@
       "description": "Práctica del orden de las palabras en la oración inglesa: afirmativa, negativa e interrogativa.",
       "category": "grammar",
       "levels": [
+        "2º ESO",
         "3º ESO",
         "4º ESO"
       ],
@@ -343,7 +345,7 @@
       "accent": "indigo",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2026-05-28"
     },
     {
@@ -365,7 +367,7 @@
       "accent": "sky",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2026-04-21"
     },
     {
@@ -387,19 +389,23 @@
       "accent": "indigo",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2026-04-07"
     },
     {
       "id": "brit",
       "repo": "nuriacalvo-teacher/BRIT",
       "url": "https://nuriacalvo-teacher.github.io/BRIT/",
-      "title": "BRIT",
-      "subtitle": "",
-      "description": "",
-      "category": "grammar",
+      "title": "BRIT · B1-B2",
+      "subtitle": "Cuatro destrezas en 30 temas",
+      "description": "Reading, listening, writing y mediation en dos niveles, B1 y B2, sobre 30 temas. El listening se escucha dos veces. Las redacciones con banco de expresiones por tipo de texto. Informe final de notas.",
+      "category": "exams",
       "levels": [],
-      "tags": [],
+      "tags": [
+        "4 destrezas",
+        "Informe de notas",
+        "30 temas"
+      ],
       "icon": "fa-shapes",
       "accent": "indigo",
       "status": "live",
@@ -654,23 +660,6 @@
       "updated": "2025-08-21"
     },
     {
-      "id": "battles",
-      "repo": "nuriacalvo-teacher/battles",
-      "url": "https://nuriacalvo-teacher.github.io/battles/",
-      "title": "Battles",
-      "subtitle": "",
-      "description": "de 2 a 4 equipos se turnan para responder vocabulario de la unidad de Introducción en cinco formatos de desafío, compitiendo contra el reloj para conseguir puntos y alcanzar el podio final.",
-      "category": "vocabulary","games",
-      "levels": [],
-      "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
-      "status": "live",
-      "featured": true,
-      "visible": true,
-      "updated": "2026-09-20"
-    },
-    {
       "id": "ficha-chino",
       "repo": "nuriacalvo-teacher/ficha-chino",
       "url": "https://nuriacalvo-teacher.github.io/ficha-chino/",
@@ -783,6 +772,26 @@
       "featured": false,
       "visible": false,
       "updated": "2025-10-06"
+    },
+    {
+      "id": "battles",
+      "repo": "nuriacalvo-teacher/battles",
+      "url": "https://nuriacalvo-teacher.github.io/battles/",
+      "title": "Battles",
+      "subtitle": "",
+      "description": "De 2 a 4 equipos se turnan para responder vocabulario de la unidad de Introducción en cinco formatos de desafío, compitiendo contra el reloj para conseguir puntos y alcanzar el podio final.",
+      "category": [
+        "vocabulary",
+        "games"
+      ],
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-09-20"
     }
   ]
 }
