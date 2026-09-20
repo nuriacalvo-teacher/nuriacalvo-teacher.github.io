@@ -345,7 +345,7 @@
       "accent": "indigo",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2026-05-28"
     },
     {
@@ -367,7 +367,7 @@
       "accent": "sky",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2026-04-21"
     },
     {
@@ -389,7 +389,7 @@
       "accent": "indigo",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2026-04-07"
     },
     {
@@ -401,9 +401,11 @@
       "description": "Reading, listening, writing y mediation en dos niveles, B1 y B2, sobre 30 temas. El listening se escucha dos veces. Las redacciones con banco de expresiones por tipo de texto. Informe final de notas.",
       "category": "exams",
       "levels": [],
-      "tags": ["4 destrezas",
+      "tags": [
+        "4 destrezas",
         "Informe de notas",
-        "30 temas"],
+        "30 temas"
+      ],
       "icon": "fa-shapes",
       "accent": "indigo",
       "status": "live",
