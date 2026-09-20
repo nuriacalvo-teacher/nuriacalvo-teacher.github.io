@@ -780,10 +780,9 @@
       "title": "Battles",
       "subtitle": "",
       "description": "De 2 a 4 equipos se turnan para responder vocabulario de la unidad de Introducción en cinco formatos de desafío, compitiendo contra el reloj para conseguir puntos y alcanzar el podio final.",
-      "category": [
-        "vocabulary",
-        "games"
-      ],
+      "category": "vocabulary",
+       
+      
       "levels": [],
       "tags": [],
       "icon": "fa-shapes",
