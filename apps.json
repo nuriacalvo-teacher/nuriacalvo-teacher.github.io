@@ -391,6 +391,23 @@
       "updated": "2026-04-07"
     },
     {
+      "id": "brit",
+      "repo": "nuriacalvo-teacher/BRIT",
+      "url": "https://nuriacalvo-teacher.github.io/BRIT/",
+      "title": "BRIT",
+      "subtitle": "",
+      "description": "",
+      "category": "grammar",
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-09-20"
+    },
+    {
       "id": "family",
       "repo": "nuriacalvo-teacher/family",
       "url": "https://nuriacalvo-teacher.github.io/family/",
