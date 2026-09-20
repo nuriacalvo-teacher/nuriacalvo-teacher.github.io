@@ -409,7 +409,7 @@
       "accent": "rose",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2025-12-10"
     },
     {
@@ -430,7 +430,7 @@
       "accent": "emerald",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2025-11-07"
     },
     {
@@ -454,7 +454,7 @@
       "accent": "amber",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2026-05-26"
     },
     {
@@ -477,7 +477,7 @@
       "accent": "sky",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2026-02-13"
     },
     {
