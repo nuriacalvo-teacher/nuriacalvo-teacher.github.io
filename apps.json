@@ -250,7 +250,7 @@
       "accent": "violet",
       "status": "live",
       "featured": true,
-      "visible": true,
+      "visible": false,
       "updated": "2026-09-18"
     },
     {
@@ -276,6 +276,29 @@
       "featured": true,
       "visible": true,
       "updated": "2025-11-13"
+    },
+    {
+      "id": "habits",
+      "repo": "nuriacalvo-teacher/habits",
+      "url": "https://nuriacalvo-teacher.github.io/habits/",
+      "title": "Habits",
+      "subtitle": "Rutinas y hábitos en inglés",
+      "description": "Vocabulario y estructuras para hablar de hábitos y rutinas diarias, con adverbios de frecuencia.",
+      "category": "grammar",
+      "levels": [
+        "1º ESO",
+        "2º ESO"
+      ],
+      "tags": [
+        "Rutinas",
+        "Frecuencia"
+      ],
+      "icon": "fa-repeat",
+      "accent": "amber",
+      "status": "live",
+      "featured": true,
+      "visible": false,
+      "updated": "2026-09-11"
     },
     {
       "id": "irregular-verbs-review",
@@ -366,29 +389,6 @@
       "featured": false,
       "visible": true,
       "updated": "2026-04-07"
-    },
-    {
-      "id": "habits",
-      "repo": "nuriacalvo-teacher/habits",
-      "url": "https://nuriacalvo-teacher.github.io/habits/",
-      "title": "Habits",
-      "subtitle": "Rutinas y hábitos en inglés",
-      "description": "Vocabulario y estructuras para hablar de hábitos y rutinas diarias, con adverbios de frecuencia.",
-      "category": "grammar",
-      "levels": [
-        "1º ESO",
-        "2º ESO"
-      ],
-      "tags": [
-        "Rutinas",
-        "Frecuencia"
-      ],
-      "icon": "fa-repeat",
-      "accent": "amber",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2026-09-11"
     },
     {
       "id": "family",
