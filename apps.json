@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-18",
+  "updated": "2026-09-20",
   "teacher": {
     "name": "Nuria Calvo",
     "role": "Profesora de Inglés",
@@ -70,6 +70,143 @@
     "B1",
     "B2"
   ],
+  "about": {
+    "headline": "Profesora, lingüista, artista y curiosa por naturaleza.",
+    "sections": [
+      {
+        "title": "Experiencia lingüística y educativa",
+        "icon": "fa-graduation-cap",
+        "accent": "indigo",
+        "paragraphs": [
+          "Obtuve el **n.º 1 en las oposiciones de Enseñanza Secundaria de Aragón**, en la especialidad de Inglés, y cuento con más de 25 años de experiencia docente.",
+          "Me gradué con **First-Class Honours en Trinity College Dublin** y siempre he sentido una profunda pasión por las lenguas y la comunicación. Tengo competencia en siete idiomas."
+        ],
+        "listTitle": "Idiomas",
+        "chips": [
+          "Español",
+          "Inglés",
+          "Francés",
+          "Alemán",
+          "Ruso",
+          "Catalán",
+          "Chino · pronto 😅"
+        ]
+      },
+      {
+        "title": "Trayectoria artística",
+        "icon": "fa-palette",
+        "accent": "rose",
+        "paragraphs": [
+          "Más allá de la enseñanza, siempre he estado muy vinculada al mundo artístico. Soy **cantautora y compositora**, y también **retratista y caricaturista**.",
+          "He publicado **cuatro álbumes** y he recibido diversos reconocimientos internacionales por mi música. Mi trayectoria musical incluye además la producción de videoclips, jingles publicitarios y **composiciones sinfónicas**.",
+          "Más recientemente me he adentrado en el mundo del cine, creando cuatro cortometrajes en los que utilizo la **Inteligencia Artificial como herramienta creativa**."
+        ],
+        "feature": {
+          "icon": "fa-music",
+          "title": "Krisenka Finley",
+          "text": "Mi nombre artístico como cantautora y compositora",
+          "url": "https://www.youtube.com/KRISENKA"
+        },
+        "lists": [
+          {
+            "title": "Discografía",
+            "icon": "fa-compact-disc",
+            "items": [
+              {
+                "name": "Wasteland",
+                "meta": "2003",
+                "url": ""
+              },
+              {
+                "name": "Hello Freedom",
+                "meta": "2004",
+                "url": ""
+              },
+              {
+                "name": "No está en Venta",
+                "meta": "2006",
+                "url": ""
+              },
+              {
+                "name": "10",
+                "meta": "2010",
+                "url": ""
+              }
+            ]
+          },
+          {
+            "title": "Cortometrajes",
+            "icon": "fa-clapperboard",
+            "items": [
+              {
+                "name": "1923",
+                "meta": "2026",
+                "url": "https://www.youtube.com/watch?v=CfHhbhVtFEA"
+              },
+              {
+                "name": "Jerusalén Conquistada",
+                "meta": "2026",
+                "url": "https://www.youtube.com/watch?v=VofO80rB6f0"
+              },
+              {
+                "name": "Atlas Touring Club",
+                "meta": "2026",
+                "url": "https://www.youtube.com/watch?v=uGruwF--EZA"
+              },
+              {
+                "name": "La Firma",
+                "meta": "2025",
+                "url": "https://www.youtube.com/watch?v=obli-zmWarw"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Tecnología y emprendimiento",
+        "icon": "fa-microchip",
+        "accent": "emerald",
+        "paragraphs": [
+          "Me apasionan las nuevas tecnologías desde sus comienzos y siempre me ha gustado explorar todo lo que pueden hacer posible.",
+          "A principios de los años 90, mientras estudiaba en la Universidad de Zaragoza, fui **la primera estudiante en disponer de una dirección de correo electrónico** en la universidad. En una época en la que el alumnado todavía no tenía cuentas de correo individuales, conseguí que el servicio estuviera disponible para el conjunto de estudiantes a partir del curso siguiente.",
+          "También fui reconocida como **Emprendedora del Año por el Ayuntamiento de Zaragoza y SACME (CEOE)**, tras crear una microempresa que facilitaba a mis alumnos el acceso a viajes internacionales de bajo coste, eliminando intermediarios mediante Internet. Hoy puede parecer algo bastante sencillo, pero en aquel momento el concepto era realmente innovador.",
+          "Mi curiosidad por la tecnología no ha dejado de crecer: he realizado numerosos MOOCs sobre robótica y programación, y actualmente sigo matriculada en varios cursos más. Y sí… sigo apuntándome a cursos nuevos. Me encanta aprender."
+        ]
+      },
+      {
+        "title": "Otras experiencias profesionales",
+        "icon": "fa-briefcase",
+        "accent": "amber",
+        "paragraphs": [
+          "Mi trayectoria profesional también me ha llevado por ámbitos bastante diferentes:"
+        ],
+        "items": [
+          {
+            "name": "Bibliotecaria en Stuttgart",
+            "meta": "Alemania"
+          },
+          {
+            "name": "Responsable del Departamento de Compras",
+            "meta": "Filial multinacional de OPEL España"
+          },
+          {
+            "name": "…y alguna que otra aventura más por el camino",
+            "meta": ""
+          }
+        ]
+      }
+    ],
+    "closing": {
+      "title": "Y, en pocas palabras…",
+      "icon": "fa-heart",
+      "paragraphs": [
+        "Soy curiosa por naturaleza. Me encanta aprender, crear, experimentar y embarcarme en proyectos que me lleven a lugares nuevos, ya sea en el ámbito de los idiomas, la educación, el arte, la música, la tecnología, el emprendimiento o el cine.",
+        "No creo demasiado en la idea de encasillar a las personas en una única categoría. **Enseñar es lo que hago, pero la curiosidad es lo que me mueve.**",
+        "Y, por encima de todo, **soy madre**. Probablemente sea mi papel más importante de todos y, sin duda, el que me mantiene aprendiendo cada día."
+      ],
+      "quote": "Espero que mi bio te motive a seguir aprendiendo. 😅"
+    }
+  },
   "apps": [
     {
       "id": "present-tenses",
@@ -160,7 +297,7 @@
       "accent": "emerald",
       "status": "live",
       "featured": false,
-      "visible": true,
+      "visible": false,
       "updated": "2025-11-06"
     },
     {
@@ -613,144 +750,5 @@
       "visible": false,
       "updated": "2025-10-06"
     }
-  ],
-  "about": {
-    "headline": "Profesora, lingüista, artista y curiosa por naturaleza.",
-    "sections": [
-      {
-        "title": "Experiencia lingüística y educativa",
-        "icon": "fa-graduation-cap",
-        "accent": "indigo",
-        "paragraphs": [
-          "Obtuve el **n.º 1 en las oposiciones de Enseñanza Secundaria de Aragón**, en la especialidad de Inglés, y cuento con más de 25 años de experiencia docente.",
-          "Me gradué con **First-Class Honours en Trinity College Dublin** y siempre he sentido una profunda pasión por las lenguas y la comunicación. Tengo competencia en siete idiomas."
-        ],
-        "listTitle": "Idiomas",
-        "chips": [
-          "Español",
-          "Inglés",
-          "Francés",
-          "Alemán",
-          "Ruso",
-          "Catalán",
-          "Chino · pronto 😅"
-        ]
-      },
-      {
-        "title": "Trayectoria artística",
-        "icon": "fa-palette",
-        "accent": "rose",
-        "paragraphs": [
-          "Más allá de la enseñanza, siempre he estado muy vinculada al mundo artístico. Soy **cantautora y compositora**, y también **retratista y caricaturista**.",
-          "He publicado **cuatro álbumes** y he recibido diversos reconocimientos internacionales por mi música. Mi trayectoria musical incluye además la producción de videoclips, jingles publicitarios y **composiciones sinfónicas**.",
-          "Más recientemente me he adentrado en el mundo del cine, creando cuatro cortometrajes en los que utilizo la **Inteligencia Artificial como herramienta creativa**."
-        ],
-        "feature": {
-          "icon": "fa-music",
-          "title": "Krisenka Finley",
-          "text": "Mi nombre artístico como cantautora y compositora",
-          "url": "https://www.youtube.com/KRISENKA"
-        },
-        "lists": [
-          {
-            "title": "Discografía",
-            "icon": "fa-compact-disc",
-            
-            "items": [
-              {
-                "name": "Wasteland",
-                "meta": "2003",
-                "url": ""
-              },
-              {
-                "name": "Hello Freedom",
-                "meta": "2004",
-                "url": ""
-              },
-              {
-                "name": "No está en Venta",
-                "meta": "2006",
-                "url": ""
-              },
-              {
-                "name": "10",
-                "meta": "2010",
-                "url": ""
-              }
-            ]
-          },
-          {
-            "title": "Cortometrajes",
-            "icon": "fa-clapperboard",
-            "items": [
-              {
-                "name": "1923",
-                "meta": "2026",
-                "url": "https://www.youtube.com/watch?v=CfHhbhVtFEA"
-              },
-              {
-                "name": "Jerusalén Conquistada",
-                "meta": "2026",
-                "url": "https://www.youtube.com/watch?v=VofO80rB6f0"
-              },
-              {
-                "name": "Atlas Touring Club",
-                "meta": "2026",
-                "url": "https://www.youtube.com/watch?v=uGruwF--EZA"
-              },
-              {
-                "name": "La Firma",
-                "meta": "2025",
-                "url": "https://www.youtube.com/watch?v=obli-zmWarw"
-              }
-            ]
-            
-          }
-        ]
-      },
-      {
-        "title": "Tecnología y emprendimiento",
-        "icon": "fa-microchip",
-        "accent": "emerald",
-        "paragraphs": [
-          "Me apasionan las nuevas tecnologías desde sus comienzos y siempre me ha gustado explorar todo lo que pueden hacer posible.",
-          "A principios de los años 90, mientras estudiaba en la Universidad de Zaragoza, fui **la primera estudiante en disponer de una dirección de correo electrónico** en la universidad. En una época en la que el alumnado todavía no tenía cuentas de correo individuales, conseguí que el servicio estuviera disponible para el conjunto de estudiantes a partir del curso siguiente.",
-          "También fui reconocida como **Emprendedora del Año por el Ayuntamiento de Zaragoza y SACME (CEOE)**, tras crear una microempresa que facilitaba a mis alumnos el acceso a viajes internacionales de bajo coste, eliminando intermediarios mediante Internet. Hoy puede parecer algo bastante sencillo, pero en aquel momento el concepto era realmente innovador.",
-          "Mi curiosidad por la tecnología no ha dejado de crecer: he realizado numerosos MOOCs sobre robótica y programación, y actualmente sigo matriculada en varios cursos más. Y sí… sigo apuntándome a cursos nuevos. Me encanta aprender."
-        ]
-      },
-      {
-        "title": "Otras experiencias profesionales",
-        "icon": "fa-briefcase",
-        "accent": "amber",
-        "paragraphs": [
-          "Mi trayectoria profesional también me ha llevado por ámbitos bastante diferentes:"
-        ],
-        "items": [
-          {
-            "name": "Bibliotecaria en Stuttgart",
-            "meta": "Alemania"
-          },
-          {
-            "name": "Responsable del Departamento de Compras",
-            "meta": "Filial multinacional de OPEL España"
-          },
-          {
-            "name": "…y alguna que otra aventura más por el camino",
-            "meta": ""
-          }
-        ]
-      }
-    ],
-    "closing": {
-      "title": "Y, en pocas palabras…",
-      "icon": "fa-heart",
-      "paragraphs": [
-        "Soy curiosa por naturaleza. Me encanta aprender, crear, experimentar y embarcarme en proyectos que me lleven a lugares nuevos, ya sea en el ámbito de los idiomas, la educación, el arte, la música, la tecnología, el emprendimiento o el cine.",
-        "No creo demasiado en la idea de encasillar a las personas en una única categoría. **Enseñar es lo que hago, pero la curiosidad es lo que me mueve.**",
-        "Y, por encima de todo, **soy madre**. Probablemente sea mi papel más importante de todos y, sin duda, el que me mantiene aprendiendo cada día."
-      ],
-      "quote": "Espero que mi bio te motive a seguir aprendiendo. 😅"
-    }
-  }
+  ]
 }
