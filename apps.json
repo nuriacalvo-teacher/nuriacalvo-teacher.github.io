@@ -780,7 +780,7 @@
       "title": "Battles",
       "subtitle": "",
       "description": "De 2 a 4 equipos se turnan para responder vocabulario de la unidad de Introducción en cinco formatos de desafío, compitiendo contra el reloj para conseguir puntos y alcanzar el podio final.",
-      "category": "vocabulary",
+      "category": "other",
       "levels": [],
       "tags": [],
       "icon": "fa-shapes",
@@ -797,7 +797,7 @@
       "title": "Escape Room",
       "subtitle": "",
       "description": "",
-      "category": "grammar",
+      "category": "other",
       "levels": [
         "3º ESO",
         "4º ESO"
