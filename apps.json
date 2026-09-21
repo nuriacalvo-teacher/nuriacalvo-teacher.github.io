@@ -763,7 +763,9 @@
       "subtitle": "Pruebas",
       "description": "Repositorio de pruebas.",
       "category": "other",
-      "levels": "ALL LEVELS",
+      "levels": [
+        "ALL LEVELS"
+      ],
       "tags": [
         "Pruebas"
       ],
@@ -782,7 +784,9 @@
       "subtitle": "",
       "description": "De 2 a 4 equipos se turnan para responder vocabulario de la unidad de Introducción en cinco formatos de desafío, compitiendo contra el reloj para conseguir puntos y alcanzar el podio final.",
       "category": "other",
-      "levels": "ALL LEVELS",
+      "levels": [
+        "ALL LEVELS"
+      ],
       "tags": [],
       "icon": "fa-shapes",
       "accent": "indigo",
@@ -799,7 +803,9 @@
       "subtitle": "",
       "description": "De 2 a 6 equipos se turnan para compitiendo y resolviendo acertijos contra el reloj para escapar",
       "category": "other",
-      "levels": "ALL LEVELS",
+      "levels": [
+        "ALL LEVELS"
+      ],
       "tags": [],
       "icon": "fa-shapes",
       "accent": "indigo",
