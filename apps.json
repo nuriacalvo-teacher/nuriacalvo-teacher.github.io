@@ -68,7 +68,8 @@
     "1º Bach",
     "2º Bach",
     "B1",
-    "B2"
+    "B2",
+    "ALL LEVELS"
   ],
   "about": {
     "headline": "Profesora, lingüista, artista y curiosa por naturaleza.",
@@ -89,7 +90,7 @@
           "Alemán",
           "Ruso",
           "Catalán",
-          "Chino · pronto 😅"
+          "Chino · pronto... 😅"
         ]
       },
       {
@@ -762,7 +763,7 @@
       "subtitle": "Pruebas",
       "description": "Repositorio de pruebas.",
       "category": "other",
-      "levels": [],
+      "levels": "ALL LEVELS",
       "tags": [
         "Pruebas"
       ],
@@ -781,7 +782,7 @@
       "subtitle": "",
       "description": "De 2 a 4 equipos se turnan para responder vocabulario de la unidad de Introducción en cinco formatos de desafío, compitiendo contra el reloj para conseguir puntos y alcanzar el podio final.",
       "category": "other",
-      "levels": [],
+      "levels": "ALL LEVELS",
       "tags": [],
       "icon": "fa-shapes",
       "accent": "indigo",
@@ -796,12 +797,9 @@
       "url": "https://nuriacalvo-teacher.github.io/escape-room/",
       "title": "Escape Room",
       "subtitle": "",
-      "description": "",
+      "description": "De 2 a 6 equipos se turnan para compitiendo y resolviendo acertijos contra el reloj para escapar",
       "category": "other",
-      "levels": [
-        "3º ESO",
-        "4º ESO"
-      ],
+      "levels": "ALL LEVELS",
       "tags": [],
       "icon": "fa-shapes",
       "accent": "indigo",
