@@ -146,24 +146,23 @@
 @media (max-width: 899px) { .tm-plane { display: none; } }
 
 /* ---------- Irlanda ---------- */
-.tm-flag { transform-box: fill-box; transform-origin: 0 50%; animation: tm-wave 2.2s ease-in-out infinite; }
-@keyframes tm-wave { 0%, 100% { transform: skewY(0) scaleX(1); } 50% { transform: skewY(-6deg) scaleX(.94); } }
 .tm-lamp { filter: drop-shadow(0 0 4px rgba(251, 191, 36, .9)); animation: tm-flicker 3s ease-in-out infinite; }
 :root[data-theme="light"] .tm-lamp { filter: none; opacity: .7; }
-.tm-irl { position: absolute; left: 24%; bottom: 10px; width: 170px; height: 110px; }
-@media (max-width: 767px) { .tm-irl { left: 6%; transform: scale(.8); transform-origin: 0 100%; } }
+.tm-irl { width: 80px; height: 58px; bottom: 10px; animation: tm-drive-r 40s linear infinite; animation-delay: -26s; }
+@media (max-width: 767px) { .tm-irl { width: 64px; height: 46px; } }
 .tm-rainbow {
-  position: absolute; left: -60px; bottom: 16px; width: 220px; height: 110px; border-radius: 110px 110px 0 0;
+  position: absolute; left: 30%; bottom: 40px; width: 240px; height: 120px; border-radius: 120px 120px 0 0;
   background: radial-gradient(circle at 50% 100%, transparent 58%, rgba(139, 92, 246, .5) 58.5% 63%, rgba(59, 130, 246, .5) 63% 67%,
     rgba(34, 197, 94, .5) 67% 71%, rgba(250, 204, 21, .5) 71% 75%, rgba(249, 115, 22, .5) 75% 79%, rgba(244, 63, 94, .5) 79% 83%, transparent 83.5%);
-  -webkit-mask: linear-gradient(90deg, transparent, #000 30%, #000 100%); mask: linear-gradient(90deg, transparent, #000 30%, #000 100%);
-  opacity: 0; animation: tm-rainbow 24s ease-in-out infinite;
+  -webkit-mask: linear-gradient(transparent, #000 25%, #000 70%, transparent); mask: linear-gradient(transparent, #000 25%, #000 70%, transparent);
+  opacity: 0; animation: tm-rainbow 24s ease-in-out infinite; pointer-events: none;
 }
+@media (max-width: 767px) { .tm-rainbow { left: 8%; width: 180px; height: 90px; } }
 @keyframes tm-rainbow { 0%, 20% { opacity: 0; } 35%, 75% { opacity: .75; } 90%, 100% { opacity: 0; } }
-.tm-pot { position: absolute; left: 132px; bottom: 0; width: 40px; }
+.tm-pot { position: absolute; left: 44%; bottom: 0; width: 56%; }
 .tm-pot svg, .tm-lep svg { display: block; width: 100%; height: auto; overflow: visible; }
 .tm-spark { animation: tm-twinkle 1.4s ease-in-out infinite; }
-.tm-lep { position: absolute; left: 92px; bottom: 0; width: 34px; }
+.tm-lep { position: absolute; left: 0; bottom: 0; width: 44%; }
 .tm-lep-body { transform-box: fill-box; transform-origin: 50% 100%; animation: tm-jig .8s ease-in-out infinite; }
 .tm-lep-leg, .tm-lep-arm { transform-box: fill-box; }
 .tm-lep-leg.l { transform-origin: 50% 0; animation: tm-kick-l .8s ease-in-out infinite; }
@@ -174,5 +173,5 @@
 @keyframes tm-kick-l { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(28deg); } }
 @keyframes tm-kick-r { 0%, 100% { transform: rotate(-28deg); } 50% { transform: rotate(0); } }
 @keyframes tm-arm { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-18deg); } }
-@media (prefers-reduced-motion: reduce) { .tm-irl * { animation: none !important; } .tm-rainbow { opacity: .6; } }
+@media (prefers-reduced-motion: reduce) { .tm-irl { display: none; } .tm-rainbow { animation: none; opacity: .5; } }
 .tm-leaf.tm-clover { opacity: .7; filter: drop-shadow(0 0 4px rgba(74, 222, 128, .35)); }

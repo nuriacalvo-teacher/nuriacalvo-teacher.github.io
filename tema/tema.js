@@ -65,11 +65,9 @@
       // Irlanda: torre redonda de Glendalough y cruz celta
       '<path class="f" d="M322 124V42h16v82ZM319 42l11-20 11 20ZM328 58h4v7h-4ZM328 84h4v7h-4Z"/>' +
       '<path class="f" d="M357 124V70h7v54ZM349 80h23v6h-23Z"/><circle class="s" cx="360.5" cy="83" r="8" stroke-width="3"/>' +
-      // Ha'penny Bridge (Dublín) con sus farolas y la bandera irlandesa
+      // Ha'penny Bridge (Dublín) con sus farolas
       '<path class="s" stroke-width="4" d="M820 124Q890 84 960 124"/><path class="s" stroke-width="1.5" d="M826 121Q890 90 954 121M840 114v-6M860 106v-7M890 102v-8M920 106v-7M940 114v-6"/>' +
       '<g fill="#fbbf24" class="tm-lamp"><circle cx="860" cy="98" r="2.2"/><circle cx="890" cy="93" r="2.2"/><circle cx="920" cy="98" r="2.2"/></g>' +
-      '<path class="f" d="M972 124V58h2.5v66Z"/>' +
-      '<g class="tm-flag"><rect x="974.5" y="58" width="9" height="16" fill="#169b62"/><rect x="983.5" y="58" width="9" height="16" fill="#f8fafc"/><rect x="992.5" y="58" width="9" height="16" fill="#ff883e"/></g>' +
       // Estatua de la Libertad
       '<path class="f" d="M630 124V96h40v28ZM622 124h56v6h-56ZM638 96L644 52h12l6 44ZM650 50m-6 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0ZM654 56l8-32h4l-4 32ZM640 58l-6 12h6ZM642 44l-3-6 5 4M650 40v-7M658 44l3-6-5 4"/>' +
       '<ellipse class="tm-flame" cx="664" cy="17" rx="4" ry="7"/></svg>';
@@ -138,11 +136,12 @@
           '<path d="M24 6h12l5 6H20Z" fill="#e0e7ff" opacity=".8"/><path d="M4 20h50" stroke="#1e1b4b" stroke-dasharray="3 3" stroke-width="1.5"/>' +
           '<circle cx="15" cy="25" r="4.5" fill="#1e1b4b"/><circle cx="45" cy="25" r="4.5" fill="#1e1b4b"/></svg>'));
         sc.appendChild(el("div", "tm-mover tm-roo", ROO));
-        // Irlanda: arcoíris, olla de oro y un duende bailando una jiga
-        var irl = el("div", "tm-irl");
-        irl.appendChild(el("div", "tm-rainbow"));
-        irl.appendChild(el("div", "tm-pot", POT));
+        // Irlanda: arcoíris en el cielo y el duende cruzando la portada
+        // con su olla de oro, a saltitos de jiga
+        sc.appendChild(el("div", "tm-rainbow"));
+        var irl = el("div", "tm-mover tm-irl");
         irl.appendChild(el("div", "tm-lep", LEP));
+        irl.appendChild(el("div", "tm-pot", POT));
         sc.appendChild(irl);
         var plane = el("div", "tm-plane",
           '<svg viewBox="0 0 58 26"><path d="M4 13q0-4 6-4h30l10-8h4l-5 8q7 1 7 4t-7 4l5 8h-4l-10-8H10q-6 0-6-4Z" fill="#e0e7ff"/><path d="M22 9l-6-8h5l10 8ZM22 17l-6 8h5l10-8Z" fill="#a5b4fc"/><circle cx="14" cy="13" r="1.4" fill="#6366f1"/><circle cx="20" cy="13" r="1.4" fill="#6366f1"/></svg>' +

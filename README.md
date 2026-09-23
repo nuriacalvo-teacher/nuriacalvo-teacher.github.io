@@ -162,12 +162,13 @@ catálogo, el panel de profesora ni el modo claro/oscuro. Está en la carpeta
   - Nueva York: Estatua de la Libertad con la antorcha encendida, Empire
     State y Chrysler.
   - Dublín e Irlanda: Ha'penny Bridge con sus farolas, la torre redonda de
-    Glendalough, una cruz celta y la bandera irlandesa ondeando.
+    Glendalough y una cruz celta.
   - Toronto: CN Tower.
   - Sídney: Ópera y Harbour Bridge.
 - **Animaciones:** un autobús de dos pisos, un taxi amarillo, un canguro (con
-  su cría en la bolsa) que cruza saltando y un duende irlandés que baila una
-  jiga junto a su olla de oro bajo un arcoíris. También pasa una avioneta con
+  su cría en la bolsa) que cruza saltando y un duende irlandés que recorre la
+  portada a saltitos de jiga con su olla de oro; de vez en cuando aparece un
+  arcoíris. También pasa una avioneta con
   la pancarta «Hello! · Dia duit! · G'day! · Howdy!». También
   aparecen bocadillos con saludos de cada país y ventanas que se encienden de
   noche. En modo claro hay nubes y en modo oscuro, estrellas.
