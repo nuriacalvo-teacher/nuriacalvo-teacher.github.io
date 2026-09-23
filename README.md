@@ -146,3 +146,38 @@ conveniencia, no de seguridad: sirve para que nadie toque el panel sin querer,
 pero cualquiera que mire el código de la página puede leerla. No pasa nada,
 porque el panel solo genera un fichero que luego subes tú a GitHub: nadie puede
 modificar la web desde ahí.
+
+---
+
+## Tema decorativo «Around the English-speaking world»
+
+Es una capa **solo estética**, separada del resto: no cambia el contenido, el
+catálogo, el panel de profesora ni el modo claro/oscuro. Está en la carpeta
+`tema/` y se carga con tres líneas de `index.html` (un CSS y dos scripts).
+
+- **Portada:** un horizonte con paralaje (se mueve con el scroll y el ratón)
+  que recorre el mundo anglosajón:
+  - Londres: Big Ben con las agujas en marcha, London Eye girando, Tower
+    Bridge y cabina roja.
+  - Nueva York: Estatua de la Libertad con la antorcha encendida, Empire
+    State y Chrysler.
+  - Toronto: CN Tower.
+  - Sídney: Ópera y Harbour Bridge.
+- **Animaciones:** un autobús de dos pisos, un taxi amarillo, un canguro que
+  salta y una avioneta con la pancarta «Hello! · G'day! · Howdy!». También
+  aparecen bocadillos con saludos de cada país y ventanas que se encienden de
+  noche. En modo claro hay nubes y en modo oscuro, estrellas.
+- **Toda la página:** hojas de arce y estrellas que caen despacio, iconos muy
+  suaves que se desplazan con el scroll (Big Ben, cabina, taza de té, Estatua
+  de la Libertad, Ópera, canguro, guitarra folk) y una barra de progreso de
+  lectura con los colores de la marca.
+- **Música** (botón ♪ en la cabecera): folk relajante con arpa celta, tin
+  whistle, guitarra *fingerpicking*, un didgeridoo muy suave y, de vez en
+  cuando, las campanadas del Big Ben. Se genera en el navegador (no hay
+  ficheros de audio) y empieza con el primer clic. Suenan efectos suaves al
+  pasar por las tarjetas, al abrir una app y al cambiar de tema.
+- Usa la misma paleta del portal: índigo, violeta, rosa y azul cielo.
+- No sale al imprimir y respeta la opción del sistema «reducir movimiento».
+- Si algo del tema fallara, el portal sigue funcionando igual.
+- **Para quitarlo:** borra las tres líneas de `index.html` que apuntan a
+  `tema/`.

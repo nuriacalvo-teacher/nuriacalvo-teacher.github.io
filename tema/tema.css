@@ -1,0 +1,137 @@
+/* ==========================================================================
+   tema/tema.css · «Around the English-speaking world»
+   Capa puramente decorativa: horizonte de Londres, Nueva York, Toronto y
+   Sídney con paralaje, vehículos, saludos flotantes, hojas de arce…
+   Usa la misma paleta del portal (índigo, violeta, rosa y azul cielo) y no
+   cambia ninguna regla existente: todo cuelga de clases que empiezan por .tm-
+   ========================================================================== */
+:root {
+  --tm-far: rgba(129, 140, 248, .20);
+  --tm-mid: rgba(192, 132, 252, .26);
+  --tm-near: rgba(244, 114, 182, .22);
+  --tm-line: rgba(165, 180, 252, .45);
+  --tm-glow: rgba(129, 140, 248, .35);
+  --tm-bubble-bg: rgba(18, 24, 42, .72);
+  --tm-bubble-text: #e0e7ff;
+  --tm-icon: rgba(165, 180, 252, .10);
+}
+:root[data-theme="light"] {
+  --tm-far: rgba(99, 102, 241, .12);
+  --tm-mid: rgba(139, 92, 246, .15);
+  --tm-near: rgba(236, 72, 153, .13);
+  --tm-line: rgba(79, 70, 229, .35);
+  --tm-glow: rgba(99, 102, 241, .18);
+  --tm-bubble-bg: rgba(255, 255, 255, .85);
+  --tm-bubble-text: #3730a3;
+  --tm-icon: rgba(79, 70, 229, .07);
+}
+
+/* ---------- barra de progreso de lectura ---------- */
+.tm-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 80; pointer-events: none;
+  background: linear-gradient(90deg, #818cf8, #c084fc 50%, #f472b6); }
+
+/* ---------- botón de música (mismo aspecto que .icon-btn) ---------- */
+.tm-music svg { width: 18px; height: 18px; display: block; }
+.tm-music .tm-slash { display: none; }
+.tm-music.tm-off { opacity: .75; }
+.tm-music.tm-off .tm-slash { display: inline; }
+.tm-music:not(.tm-off) svg { animation: tm-bob 2.4s ease-in-out infinite; }
+@keyframes tm-bob { 50% { transform: translateY(-2px); } }
+
+/* ---------- escena del héroe ---------- */
+.hero { padding-bottom: 200px; }
+@media (min-width: 768px) { .hero { padding-bottom: 250px; } }
+.tm-scene { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+  -webkit-mask: linear-gradient(#000 calc(100% - 40px), transparent); mask: linear-gradient(#000 calc(100% - 40px), transparent); }
+.tm-sky { position: absolute; inset: 0; }
+.tm-star { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #e0e7ff; opacity: .6; animation: tm-twinkle 3.5s ease-in-out infinite; }
+@keyframes tm-twinkle { 50% { opacity: .1; } }
+:root[data-theme="light"] .tm-star { display: none; }
+.tm-cloud { position: absolute; height: 34px; border-radius: 40px; background: rgba(255, 255, 255, .8); filter: blur(1px); opacity: 0; animation: tm-cloud linear infinite; }
+.tm-cloud::before, .tm-cloud::after { content: ""; position: absolute; background: inherit; border-radius: 50%; }
+.tm-cloud::before { width: 46%; height: 150%; left: 14%; top: -60%; }
+.tm-cloud::after { width: 36%; height: 120%; right: 16%; top: -40%; }
+:root[data-theme="light"] .tm-cloud { opacity: .9; }
+@keyframes tm-cloud { from { transform: translateX(-30vw); } to { transform: translateX(120vw); } }
+
+.tm-layer { position: absolute; left: -3%; width: 106%; bottom: 0; will-change: transform; }
+.tm-layer svg { display: block; width: 100%; height: 100%; }
+.tm-far { height: 250px; } .tm-mid { height: 230px; } .tm-near { height: 150px; }
+@media (max-width: 767px) { .tm-far { height: 190px; } .tm-mid { height: 175px; } .tm-near { height: 115px; } }
+.tm-far .f { fill: var(--tm-far); } .tm-far .s { stroke: var(--tm-far); fill: none; }
+.tm-mid .f { fill: var(--tm-mid); } .tm-mid .s { stroke: var(--tm-mid); fill: none; }
+.tm-near .f { fill: var(--tm-near); } .tm-near .s { stroke: var(--tm-near); fill: none; }
+.tm-eye { transform-box: fill-box; transform-origin: center; animation: tm-spin 90s linear infinite; }
+@keyframes tm-spin { to { transform: rotate(360deg); } }
+.tm-flame { fill: #fbbf24; filter: drop-shadow(0 0 6px rgba(251, 191, 36, .9)); animation: tm-flicker 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes tm-flicker { 50% { transform: scale(.85, 1.1); opacity: .85; } }
+.tm-clock { fill: rgba(224, 231, 255, .55); }
+:root[data-theme="light"] .tm-clock { fill: rgba(255, 255, 255, .9); }
+.tm-hand { stroke: rgba(49, 46, 129, .8); stroke-width: 1.6; stroke-linecap: round; transform-box: view-box; }
+.tm-hand.m { animation: tm-spin 60s linear infinite; }
+.tm-hand.h { animation: tm-spin 720s linear infinite; }
+.tm-window { fill: #fde68a; opacity: 0; animation: tm-win 7s ease-in-out infinite; }
+:root[data-theme="light"] .tm-window { display: none; }
+@keyframes tm-win { 40%, 60% { opacity: .55; } }
+
+/* agua del puerto de Sídney */
+.tm-water { position: absolute; left: 0; right: 0; bottom: 0; height: 26px;
+  background: repeating-linear-gradient(90deg, transparent 0 18px, var(--tm-line) 18px 30px, transparent 30px 52px);
+  -webkit-mask: linear-gradient(transparent, #000 40%); mask: linear-gradient(transparent, #000 40%);
+  opacity: .35; animation: tm-waves 6s linear infinite; }
+@keyframes tm-waves { to { background-position: 104px 0; } }
+
+/* vehículos, canguro y avioneta */
+.tm-mover { position: absolute; bottom: 10px; will-change: transform; }
+.tm-mover svg { display: block; width: 100%; height: auto; }
+.tm-bus { width: 86px; animation: tm-drive-r 34s linear infinite; }
+.tm-taxi { width: 58px; bottom: 6px; animation: tm-drive-l 26s linear infinite; animation-delay: -9s; }
+.tm-roo { width: 46px; bottom: 16px; animation: tm-roo-go 30s linear infinite; animation-delay: -18s; }
+.tm-roo svg { animation: tm-hop .7s ease-in-out infinite; }
+@keyframes tm-drive-r { from { transform: translateX(-120px); } to { transform: translateX(calc(100vw + 40px)); } }
+@keyframes tm-drive-l { from { transform: translateX(calc(100vw + 40px)) scaleX(-1); } to { transform: translateX(-120px) scaleX(-1); } }
+@keyframes tm-roo-go { from { transform: translateX(calc(100vw + 40px)) scaleX(-1); } to { transform: translateX(-80px) scaleX(-1); } }
+@keyframes tm-hop { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-18px) rotate(-6deg); } }
+.tm-plane { position: absolute; top: 9%; left: 0; display: flex; align-items: center; gap: 0; animation: tm-fly 46s linear infinite; animation-delay: -12s; }
+.tm-plane svg { width: 58px; flex: none; }
+.tm-banner { margin-left: -2px; padding: 4px 12px; border-radius: 4px 10px 10px 4px; font-weight: 800; font-size: 12px; letter-spacing: .04em; white-space: nowrap;
+  color: #fff; background: linear-gradient(90deg, #6366f1, #c084fc, #f472b6); box-shadow: 0 6px 18px -8px rgba(99, 102, 241, .8);
+  transform-origin: left center; animation: tm-flutter 1.2s ease-in-out infinite; }
+.tm-plane .tm-rope { width: 26px; height: 1px; background: var(--tm-line); flex: none; }
+@keyframes tm-fly { from { transform: translateX(calc(100vw + 60px)); } to { transform: translateX(-380px); } }
+@keyframes tm-flutter { 50% { transform: skewY(-2deg) scaleY(.94); } }
+
+/* saludos flotantes */
+.tm-hello {
+  position: absolute; padding: 7px 13px; border-radius: 16px 16px 16px 4px; font-weight: 800; font-size: 14px; white-space: nowrap;
+  color: var(--tm-bubble-text); background: var(--tm-bubble-bg); border: 1px solid var(--tm-line);
+  box-shadow: 0 10px 30px -14px var(--tm-glow); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  animation: tm-float 7s ease-out forwards; opacity: 0;
+}
+.tm-hello small { display: block; font-size: 10px; font-weight: 700; opacity: .7; letter-spacing: .06em; text-transform: uppercase; }
+@keyframes tm-float {
+  0% { opacity: 0; transform: translateY(18px) scale(.9); }
+  15% { opacity: .95; transform: translateY(0) scale(1); }
+  75% { opacity: .9; }
+  100% { opacity: 0; transform: translateY(-46px) scale(.98); }
+}
+
+/* ---------- fondo de toda la página ---------- */
+.tm-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.tm-icon { position: absolute; width: 90px; height: 90px; color: var(--tm-icon); will-change: transform; }
+.tm-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.tm-leaf { position: absolute; top: -30px; width: 18px; height: 18px; opacity: .4; animation: tm-fall linear infinite; }
+.tm-leaf svg { width: 100%; height: 100%; }
+@keyframes tm-fall {
+  0% { transform: translate3d(0, -40px, 0) rotate(0); }
+  100% { transform: translate3d(var(--dx, 60px), 110vh, 0) rotate(var(--rot, 420deg)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tm-scene *, .tm-bg *, .tm-music svg { animation: none !important; }
+  .tm-leaf, .tm-hello, .tm-plane, .tm-mover, .tm-cloud { display: none !important; }
+}
+@media print { .tm-scene, .tm-bg, .tm-progress, .tm-music { display: none !important; } }
+
+/* En pantallas estrechas la avioneta taparía el título: no se muestra. */
+@media (max-width: 899px) { .tm-plane { display: none; } }
