@@ -86,12 +86,21 @@
 .tm-mover svg { display: block; width: 100%; height: auto; }
 .tm-bus { width: 86px; animation: tm-drive-r 34s linear infinite; }
 .tm-taxi { width: 58px; bottom: 6px; animation: tm-drive-l 26s linear infinite; animation-delay: -9s; }
-.tm-roo { width: 46px; bottom: 16px; animation: tm-roo-go 30s linear infinite; animation-delay: -18s; }
-.tm-roo svg { animation: tm-hop .7s ease-in-out infinite; }
+.tm-roo { width: 66px; bottom: 12px; animation: tm-roo-go 32s linear infinite; animation-delay: -18s; }
+.tm-roo svg { overflow: visible; }
+.tm-roo-body { transform-box: fill-box; transform-origin: 40% 100%; animation: tm-hop .9s cubic-bezier(.3, 0, .4, 1) infinite; }
+.tm-roo-leg { transform-box: fill-box; transform-origin: 20% 10%; animation: tm-roo-kick .9s ease-in-out infinite; }
 @keyframes tm-drive-r { from { transform: translateX(-120px); } to { transform: translateX(calc(100vw + 40px)); } }
 @keyframes tm-drive-l { from { transform: translateX(calc(100vw + 40px)) scaleX(-1); } to { transform: translateX(-120px) scaleX(-1); } }
 @keyframes tm-roo-go { from { transform: translateX(calc(100vw + 40px)) scaleX(-1); } to { transform: translateX(-80px) scaleX(-1); } }
-@keyframes tm-hop { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-18px) rotate(-6deg); } }
+/* salto natural: se agacha, se impulsa inclinándose hacia delante y aterriza */
+@keyframes tm-hop {
+  0%, 100% { transform: translateY(0) rotate(0) scale(1, .96); }
+  15% { transform: translateY(0) rotate(4deg) scale(1.02, .92); }
+  50% { transform: translateY(-20px) rotate(-10deg) scale(1, 1.03); }
+  85% { transform: translateY(-2px) rotate(-2deg) scale(1, 1); }
+}
+@keyframes tm-roo-kick { 0%, 15%, 100% { transform: rotate(0); } 45% { transform: rotate(-22deg); } 70% { transform: rotate(8deg); } }
 .tm-plane { position: absolute; top: 9%; left: 0; display: flex; align-items: center; gap: 0; animation: tm-fly 46s linear infinite; animation-delay: -12s; }
 .tm-plane svg { width: 58px; flex: none; }
 .tm-banner { margin-left: -2px; padding: 4px 12px; border-radius: 4px 10px 10px 4px; font-weight: 800; font-size: 12px; letter-spacing: .04em; white-space: nowrap;
@@ -135,3 +144,35 @@
 
 /* En pantallas estrechas la avioneta taparía el título: no se muestra. */
 @media (max-width: 899px) { .tm-plane { display: none; } }
+
+/* ---------- Irlanda ---------- */
+.tm-flag { transform-box: fill-box; transform-origin: 0 50%; animation: tm-wave 2.2s ease-in-out infinite; }
+@keyframes tm-wave { 0%, 100% { transform: skewY(0) scaleX(1); } 50% { transform: skewY(-6deg) scaleX(.94); } }
+.tm-lamp { filter: drop-shadow(0 0 4px rgba(251, 191, 36, .9)); animation: tm-flicker 3s ease-in-out infinite; }
+:root[data-theme="light"] .tm-lamp { filter: none; opacity: .7; }
+.tm-irl { position: absolute; left: 24%; bottom: 10px; width: 170px; height: 110px; }
+@media (max-width: 767px) { .tm-irl { left: 6%; transform: scale(.8); transform-origin: 0 100%; } }
+.tm-rainbow {
+  position: absolute; left: -60px; bottom: 16px; width: 220px; height: 110px; border-radius: 110px 110px 0 0;
+  background: radial-gradient(circle at 50% 100%, transparent 58%, rgba(139, 92, 246, .5) 58.5% 63%, rgba(59, 130, 246, .5) 63% 67%,
+    rgba(34, 197, 94, .5) 67% 71%, rgba(250, 204, 21, .5) 71% 75%, rgba(249, 115, 22, .5) 75% 79%, rgba(244, 63, 94, .5) 79% 83%, transparent 83.5%);
+  -webkit-mask: linear-gradient(90deg, transparent, #000 30%, #000 100%); mask: linear-gradient(90deg, transparent, #000 30%, #000 100%);
+  opacity: 0; animation: tm-rainbow 24s ease-in-out infinite;
+}
+@keyframes tm-rainbow { 0%, 20% { opacity: 0; } 35%, 75% { opacity: .75; } 90%, 100% { opacity: 0; } }
+.tm-pot { position: absolute; left: 132px; bottom: 0; width: 40px; }
+.tm-pot svg, .tm-lep svg { display: block; width: 100%; height: auto; overflow: visible; }
+.tm-spark { animation: tm-twinkle 1.4s ease-in-out infinite; }
+.tm-lep { position: absolute; left: 92px; bottom: 0; width: 34px; }
+.tm-lep-body { transform-box: fill-box; transform-origin: 50% 100%; animation: tm-jig .8s ease-in-out infinite; }
+.tm-lep-leg, .tm-lep-arm { transform-box: fill-box; }
+.tm-lep-leg.l { transform-origin: 50% 0; animation: tm-kick-l .8s ease-in-out infinite; }
+.tm-lep-leg.r { transform-origin: 50% 0; animation: tm-kick-r .8s ease-in-out infinite; }
+.tm-lep-arm.l { transform-origin: 100% 100%; animation: tm-arm .8s ease-in-out infinite; }
+.tm-lep-arm.r { transform-origin: 0 100%; animation: tm-arm .8s ease-in-out infinite reverse; }
+@keyframes tm-jig { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-7px) rotate(3deg); } }
+@keyframes tm-kick-l { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(28deg); } }
+@keyframes tm-kick-r { 0%, 100% { transform: rotate(-28deg); } 50% { transform: rotate(0); } }
+@keyframes tm-arm { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-18deg); } }
+@media (prefers-reduced-motion: reduce) { .tm-irl * { animation: none !important; } .tm-rainbow { opacity: .6; } }
+.tm-leaf.tm-clover { opacity: .7; filter: drop-shadow(0 0 4px rgba(74, 222, 128, .35)); }

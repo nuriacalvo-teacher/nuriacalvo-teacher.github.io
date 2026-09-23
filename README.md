@@ -161,22 +161,36 @@ catálogo, el panel de profesora ni el modo claro/oscuro. Está en la carpeta
     Bridge y cabina roja.
   - Nueva York: Estatua de la Libertad con la antorcha encendida, Empire
     State y Chrysler.
+  - Dublín e Irlanda: Ha'penny Bridge con sus farolas, la torre redonda de
+    Glendalough, una cruz celta y la bandera irlandesa ondeando.
   - Toronto: CN Tower.
   - Sídney: Ópera y Harbour Bridge.
-- **Animaciones:** un autobús de dos pisos, un taxi amarillo, un canguro que
-  salta y una avioneta con la pancarta «Hello! · G'day! · Howdy!». También
+- **Animaciones:** un autobús de dos pisos, un taxi amarillo, un canguro (con
+  su cría en la bolsa) que cruza saltando y un duende irlandés que baila una
+  jiga junto a su olla de oro bajo un arcoíris. También pasa una avioneta con
+  la pancarta «Hello! · Dia duit! · G'day! · Howdy!». También
   aparecen bocadillos con saludos de cada país y ventanas que se encienden de
   noche. En modo claro hay nubes y en modo oscuro, estrellas.
-- **Toda la página:** hojas de arce y estrellas que caen despacio, iconos muy
-  suaves que se desplazan con el scroll (Big Ben, cabina, taza de té, Estatua
-  de la Libertad, Ópera, canguro, guitarra folk) y una barra de progreso de
+- **Toda la página:** tréboles verdes, hojas de arce y estrellas que caen
+  despacio, e iconos muy suaves que se desplazan con el scroll (Big Ben,
+  cabina, taza de té, Estatua de la Libertad, Ópera, canguro, trébol, arpa
+  celta, guitarra folk) y una barra de progreso de
   lectura con los colores de la marca.
-- **Música** (botón ♪ en la cabecera): folk relajante con arpa celta, tin
-  whistle, guitarra *fingerpicking*, un didgeridoo muy suave y, de vez en
-  cuando, las campanadas del Big Ben. Se genera en el navegador (no hay
-  ficheros de audio) y empieza con el primer clic. Suenan efectos suaves al
+- **Música** (botón ♪ en la cabecera): un popurrí de melodías tradicionales
+  (de dominio público) tocadas despacio con flauta o tin whistle, arpa y un
+  colchón de cuerdas:
+  - *Greensleeves* (Inglaterra);
+  - *The Irish Washerwoman* (Irlanda);
+  - *Amazing Grace* (EE. UU.);
+  - *Auld Lang Syne* (Escocia).
+
+  Entre canción y canción suena un didgeridoo con clapsticks (Australia) o
+  las campanadas del Big Ben. Se genera en el navegador (no hay ficheros de
+  audio) y empieza con el primer clic. Suenan efectos suaves al
   pasar por las tarjetas, al abrir una app y al cambiar de tema.
 - Usa la misma paleta del portal: índigo, violeta, rosa y azul cielo.
+- El portal se abre en **modo noche** por defecto. Si alguien pulsa ☀️, se
+  recuerda su elección.
 - No sale al imprimir y respeta la opción del sistema «reducir movimiento».
 - Si algo del tema fallara, el portal sigue funcionando igual.
 - **Para quitarlo:** borra las tres líneas de `index.html` que apuntan a

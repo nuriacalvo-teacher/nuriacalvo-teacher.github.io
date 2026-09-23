@@ -4,10 +4,11 @@
    Todo se sintetiza en el navegador (Web Audio), sin ficheros:
    - efectos: cuerdas punteadas tipo guzheng (Karplus-Strong), gong,
      bloque de madera y campanillas (iguales que en HSK1)
-   - música del portal: «folk alrededor del mundo anglosajón», relajante:
-     arpa celta y tin whistle (Irlanda y Reino Unido), guitarra con
-     fingerpicking (Norteamérica), un didgeridoo muy suave (Australia) y, de
-     vez en cuando, las campanadas del Big Ben (Westminster Quarters).
+   - música del portal: popurrí de melodías tradicionales (dominio público)
+     tocadas despacio con flauta/tin whistle, arpa y un colchón de cuerdas:
+     Greensleeves (Inglaterra), The Irish Washerwoman (Irlanda), Amazing
+     Grace (EE. UU.) y Auld Lang Syne (Escocia). Entre canción y canción,
+     didgeridoo con clapsticks (Australia) o las campanadas del Big Ben.
    */
 (function (global) {
   "use strict";
@@ -151,14 +152,46 @@
   }
 
   // ------------------------------------------------------------ música de fondo
-  // Re mayor (jónico) con algún do natural (mixolidio), muy de folk celta.
-  var MBASE = 146.83;           // re3
-  var MAJ = [0, 2, 4, 5, 7, 9, 11];
-  function dm(i, mixo) {
-    var oct = Math.floor(i / 7), deg = ((i % 7) + 7) % 7;
-    var st = MAJ[deg] - (mixo && deg === 6 ? 1 : 0);
-    return MBASE * Math.pow(2, oct + st / 12);
-  }
+  // Popurrí de melodías tradicionales (dominio público) del mundo anglosajón,
+  // tocadas despacio con tin whistle y arpa, y entre una y otra un interludio:
+  // didgeridoo con clapsticks (Australia) o las campanadas del Big Ben (Londres).
+  function mf(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+  var CH = {
+    Am: [57, 60, 64], G: [55, 59, 62], F: [53, 57, 60], E: [52, 56, 59], C: [48, 52, 55],
+    Em: [52, 55, 59], D: [50, 54, 57], Bb: [46, 50, 53], Dm: [50, 53, 57]
+  };
+  var SONGS = [
+    { name: "Greensleeves", from: "Inglaterra", beat: 0.62, bar: 3, pickup: 1, voice: "flute",
+      notes: [[69,1],
+        [72,2],[74,1],[76,1.5],[77,.5],[76,1],[74,2],[71,1],[67,1.5],[69,.5],[71,1],[72,2],[69,1],[69,1.5],[68,.5],[69,1],[71,2],[68,1],[64,2],[69,1],
+        [72,2],[74,1],[76,1.5],[77,.5],[76,1],[74,2],[71,1],[67,1.5],[69,.5],[71,1],[72,1.5],[71,.5],[69,1],[68,1.5],[66,.5],[68,1],[69,3],
+        [79,3],[79,1.5],[78,.5],[76,1],[74,2],[71,1],[67,1.5],[69,.5],[71,1],[72,2],[69,1],[69,1.5],[68,.5],[69,1],[71,2],[68,1],[64,3],
+        [79,3],[79,1.5],[78,.5],[76,1],[74,2],[71,1],[67,1.5],[69,.5],[71,1],[72,1.5],[71,.5],[69,1],[68,1.5],[66,.5],[68,1],[69,3]],
+      chords: ["Am","Am","G","G","F","E","E","Am", "Am","Am","G","G","Am","E","Am",
+               "C","G","G","Em","Am","E","E","E", "C","G","G","Em","Am","E","Am"] },
+    { name: "The Irish Washerwoman", from: "Irlanda", beat: 0.25, bar: 6, pickup: 2, voice: "whistle",
+      notes: [[74,1],[72,1],
+        [71,1],[67,1],[67,1],[62,1],[67,1],[67,1], [71,1],[67,1],[71,1],[74,1],[72,1],[71,1],
+        [72,1],[69,1],[69,1],[64,1],[69,1],[69,1], [72,1],[69,1],[72,1],[76,1],[74,1],[72,1],
+        [71,1],[67,1],[67,1],[62,1],[67,1],[67,1], [71,1],[67,1],[71,1],[74,1],[72,1],[71,1],
+        [72,1],[71,1],[72,1],[69,1],[74,1],[72,1], [71,1],[67,1],[67,1],[67,1],[74,1],[72,1],
+        [71,1],[67,1],[67,1],[62,1],[67,1],[67,1], [71,1],[67,1],[71,1],[74,1],[72,1],[71,1],
+        [72,1],[69,1],[69,1],[64,1],[69,1],[69,1], [72,1],[69,1],[72,1],[76,1],[74,1],[72,1],
+        [71,1],[67,1],[67,1],[62,1],[67,1],[67,1], [71,1],[67,1],[71,1],[74,1],[72,1],[71,1],
+        [72,1],[71,1],[72,1],[69,1],[74,1],[72,1], [71,1],[67,1],[67,1],[67,3]],
+      chords: ["G","G","Am","D","G","G","D","G", "G","G","Am","D","G","G","D","G"] },
+    { name: "Amazing Grace", from: "Estados Unidos", beat: 0.72, bar: 3, pickup: 1, voice: "flute",
+      notes: [[62,1],
+        [67,2],[71,.5],[67,.5],[71,2],[69,1],[67,2],[64,1],[62,2],[62,1],[67,2],[71,.5],[67,.5],[71,2],[69,1],[74,5],[71,1],
+        [74,2],[71,.5],[67,.5],[71,2],[69,1],[67,2],[64,1],[62,2],[62,1],[67,2],[71,.5],[67,.5],[71,2],[69,1],[67,5]],
+      chords: ["G","G","C","G","G","D","D","G", "G","G","C","G","G","D","G","G"] },
+    { name: "Auld Lang Syne", from: "Escocia", beat: 0.66, bar: 4, pickup: 1, voice: "flute",
+      notes: [[60,1],
+        [65,1.5],[65,.5],[65,1],[69,1],[67,1.5],[65,.5],[67,1],[69,1],[65,1.5],[65,.5],[69,1],[72,1],[74,3],[74,1],
+        [72,1.5],[69,.5],[69,1],[65,1],[67,1.5],[65,.5],[67,1],[69,1],[65,1.5],[62,.5],[62,1],[60,1],[65,4]],
+      chords: ["F","C","F","Bb","F","C","Bb","F"] }
+  ];
+
   var noiseBuf = null;
   function noise() {
     if (noiseBuf) return noiseBuf;
@@ -167,107 +200,141 @@
     for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
     return noiseBuf;
   }
-  /** Tin whistle: tono puro y brillante, con un poco de soplo y vibrato tardío. */
-  function whistle(freq, when, dur, vol, cut) {
+  /** Tin whistle / flauta: tono redondo, soplo al atacar y vibrato que llega tarde. */
+  function whistle(freq, when, dur, vol, bright) {
     var out = ctx.createGain(); out.gain.value = 0; out.connect(musicBus);
+    var lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = bright ? 5000 : 2600;
     var o = ctx.createOscillator(); o.type = "sine";
     var o2 = ctx.createOscillator(); o2.type = "triangle";
-    var g2 = ctx.createGain(); g2.gain.value = 0.08;
-    o.connect(out); o2.connect(g2); g2.connect(out);
-    // «cut»: nota de adorno rápida por encima, típica del folk irlandés
-    if (cut) {
-      o.frequency.setValueAtTime(freq * 1.122, when); o2.frequency.setValueAtTime(freq * 2.244, when);
-      o.frequency.setValueAtTime(freq, when + 0.06); o2.frequency.setValueAtTime(freq * 2, when + 0.06);
-    } else { o.frequency.value = freq; o2.frequency.value = freq * 2; }
+    var g2 = ctx.createGain(); g2.gain.value = bright ? 0.14 : 0.06;
+    o.connect(lp); o2.connect(g2); g2.connect(lp); lp.connect(out);
+    o.frequency.value = freq; o2.frequency.value = freq * 2;
     var lfo = ctx.createOscillator(), lg = ctx.createGain();
-    lfo.frequency.value = 5.5; lg.gain.setValueAtTime(0, when);
-    lg.gain.linearRampToValueAtTime(freq * 0.006, when + Math.min(0.7, dur * 0.6));
+    lfo.frequency.value = 5.2; lg.gain.setValueAtTime(0, when);
+    lg.gain.setValueAtTime(0, when + Math.min(0.35, dur * 0.4));
+    lg.gain.linearRampToValueAtTime(freq * (dur > 0.8 ? 0.008 : 0.003), when + Math.max(0.4, dur * 0.8));
     lfo.connect(lg); lg.connect(o.frequency);
+    var att = bright ? 0.02 : 0.07, rel = Math.min(0.25, dur * 0.35);
     out.gain.setValueAtTime(0, when);
-    out.gain.linearRampToValueAtTime(vol, when + 0.05);
-    out.gain.setValueAtTime(vol * 0.9, when + dur * 0.75);
-    out.gain.linearRampToValueAtTime(0, when + dur);
+    out.gain.linearRampToValueAtTime(vol, when + att);
+    out.gain.setValueAtTime(vol * 0.85, Math.max(when + att, when + dur - rel));
+    out.gain.linearRampToValueAtTime(0, when + dur + 0.05);
     var n = ctx.createBufferSource(); n.buffer = noise(); n.loop = true;
-    var bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = freq * 3; bp.Q.value = 2;
-    var ng = ctx.createGain(); ng.gain.setValueAtTime(vol * 0.12, when); ng.gain.linearRampToValueAtTime(0, when + 0.2);
+    var bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = freq * 2.5; bp.Q.value = 1.5;
+    var ng = ctx.createGain(); ng.gain.setValueAtTime(vol * 0.25, when); ng.gain.linearRampToValueAtTime(vol * 0.03, when + 0.12);
+    ng.gain.linearRampToValueAtTime(0, when + dur);
     n.connect(bp); bp.connect(ng); ng.connect(musicBus);
-    [o, o2, lfo].forEach(function (x) { x.start(when); x.stop(when + dur + 0.1); });
-    n.start(when, Math.random()); n.stop(when + 0.25);
+    [o, o2, lfo].forEach(function (x) { x.start(when); x.stop(when + dur + 0.15); });
+    n.start(when, Math.random()); n.stop(when + dur + 0.1);
   }
-  /** Didgeridoo muy suave: nota grave con formante que se mueve. */
-  var didj = null;
-  function startDidge() {
-    var o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = MBASE / 2;
-    var bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 320; bp.Q.value = 5;
+  /** Colchón de cuerdas muy suave bajo cada acorde. */
+  function pad(notes, when, dur, vol) {
+    var g = ctx.createGain(); g.gain.value = 0;
+    var lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900;
+    g.connect(musicBus); lp.connect(g);
+    notes.forEach(function (m, k) {
+      [-5, 5].forEach(function (det) {
+        var o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = mf(m + 12); o.detune.value = det;
+        o.connect(lp); o.start(when); o.stop(when + dur + 0.6);
+      });
+    });
+    g.gain.setValueAtTime(0, when);
+    g.gain.linearRampToValueAtTime(vol, when + Math.min(0.6, dur * 0.4));
+    g.gain.setValueAtTime(vol, when + dur - 0.1);
+    g.gain.linearRampToValueAtTime(0, when + dur + 0.5);
+  }
+  /** Didgeridoo con formante que se mueve (Australia). */
+  function didge(when, dur, vol) {
+    var o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = 73.4;
+    var bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 300; bp.Q.value = 5;
     var lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900;
     var g = ctx.createGain(); g.gain.value = 0;
     o.connect(bp); bp.connect(lp); lp.connect(g); g.connect(musicBus);
     var lfo = ctx.createOscillator(), lg = ctx.createGain();
-    lfo.frequency.value = 0.35; lg.gain.value = 140; lfo.connect(lg); lg.connect(bp.frequency);
-    var br = ctx.createOscillator(), bg = ctx.createGain();
-    br.frequency.value = 0.08; bg.gain.value = 0.012; br.connect(bg); bg.connect(g.gain);
-    [o, lfo, br].forEach(function (x) { x.start(); });
-    g.gain.setTargetAtTime(0.03, ctx.currentTime, 3);
-    didj = { g: g, oscs: [o, lfo, br] };
+    lfo.frequency.value = 0.6; lg.gain.value = 170; lfo.connect(lg); lg.connect(bp.frequency);
+    g.gain.setValueAtTime(0, when);
+    g.gain.linearRampToValueAtTime(vol, when + 1.2);
+    g.gain.setValueAtTime(vol, when + dur - 1.5);
+    g.gain.linearRampToValueAtTime(0, when + dur);
+    [o, lfo].forEach(function (x) { x.start(when); x.stop(when + dur + 0.1); });
   }
-  /** Campanadas del Big Ben (Westminster Quarters), lejanas. */
-  // Las cinco «changes» auténticas, en re mayor: fa# mi re la, re fa# mi la, re mi fa# re, fa# re mi la, la mi fa# re.
-  var WQ = [[2, 1, 0, -3], [0, 2, 1, -3], [0, 1, 2, 0], [2, 0, 1, -3], [-3, 1, 2, 0]];
-  function westminster(when) {
-    var frase = WQ[Math.floor(Math.random() * WQ.length)];
-    frase.forEach(function (d, k) {
-      var f = dm(d + 7);
-      [[1, 1], [2.0, 0.35], [2.76, 0.2], [5.4, 0.08]].forEach(function (p) {
-        tone(f * p[0], when + k * 0.75, 3.2, 0.028 * p[1], "sine", musicBus, 0.004);
-      });
+  function clap(when, vol) {
+    var o = ctx.createOscillator(), g = ctx.createGain(), f = ctx.createBiquadFilter();
+    o.type = "triangle"; o.frequency.setValueAtTime(1500, when); o.frequency.exponentialRampToValueAtTime(900, when + 0.05);
+    f.type = "bandpass"; f.frequency.value = 1400; f.Q.value = 6;
+    g.gain.setValueAtTime(vol, when); g.gain.exponentialRampToValueAtTime(0.0001, when + 0.09);
+    o.connect(f); f.connect(g); g.connect(musicBus); o.start(when); o.stop(when + 0.12);
+  }
+  /** Campanadas del Big Ben: las auténticas «Westminster Quarters» (en mi mayor). */
+  var WQ = [[68, 66, 64, 59], [64, 68, 66, 59], [64, 66, 68, 64], [68, 64, 66, 59], [59, 66, 68, 64]];
+  function bell(m, when, vol) {
+    [[1, 1], [2.0, 0.4], [2.76, 0.22], [5.4, 0.08]].forEach(function (p) {
+      tone(mf(m) * p[0], when, 3.4, vol * p[1], "sine", musicBus, 0.004);
     });
   }
 
-  var timer = null, playing = false, pos = 9, beat = 0, nextT = 0, bar = 0;
-  var CHORDS = [[0, 2, 4], [3, 5, 7], [4, 6, 8], [0, 2, 4], [5, 7, 9], [3, 5, 7], [4, 6, 8], [0, 2, 4]];
-  function startDrone() { startDidge(); }
-  function stopDrone() {
-    if (!didj) return;
-    var d = didj; didj = null;
-    d.g.gain.setTargetAtTime(0, ctx.currentTime, 0.6);
-    setTimeout(function () { d.oscs.forEach(function (o) { try { o.stop(); } catch (e) { /* nada */ } }); }, 3000);
+  // ------------------------------------------------------------ partitura → eventos
+  var timer = null, playing = false, events = [], cursor = 0, songIdx = Math.floor(Math.random() * SONGS.length), inter = 0, nextIsSong = true;
+  function at(t, fn) { events.push({ t: t, fn: fn }); }
+  function addSong(song, t0) {
+    var b = song.beat, t = t0;
+    song.notes.forEach(function (n) {
+      var m = n[0], d = n[1] * b;
+      (function (m, d, tt) { at(tt, function (w) { whistle(mf(m + (song.voice === "whistle" ? 12 : 12)), w, d * 0.95, song.voice === "whistle" ? 0.045 : 0.055, song.voice === "whistle"); }); })(m, d, t);
+      t += d;
+    });
+    var end = t;
+    // acompañamiento: arpa arpegiando + bajo + colchón, compás a compás
+    var start = t0 + song.pickup * b, barLen = song.bar * b;
+    song.chords.forEach(function (name, i) {
+      var c = CH[name], tb = start + i * barLen;
+      if (tb >= end) return;
+      var pat;
+      if (song.bar === 6) pat = [c[0] - 12, c[1], c[2], c[0], c[1], c[2]];
+      else if (song.bar === 4) pat = [c[0] - 12, c[1], c[2], c[0] + 12, c[2], c[1], c[2], c[0] + 12];
+      else pat = [c[0] - 12, c[1], c[2], c[0] + 12, c[2], c[1]];
+      var step = barLen / pat.length;
+      pat.forEach(function (m, k) {
+        (function (m, tt, first) { at(tt, function (w) { pluck(mf(m + (first ? 0 : 12)), w, first ? 0.24 : 0.12, musicBus, !first); }); })(m, tb + k * step, k === 0);
+      });
+      (function (c, tt) { at(tt, function (w) { pad(c, w, barLen, 0.012); }); })(c, tb);
+    });
+    return end + 1.2;
+  }
+  function addInterlude(t0) {
+    inter++;
+    if (inter % 2) {
+      // Australia: didgeridoo y clapsticks
+      at(t0, function (w) { didge(w, 9, 0.05); });
+      for (var k = 0; k < 14; k++) (function (tt) { at(tt, function (w) { clap(w, 0.09); }); })(t0 + 1.4 + k * 0.5);
+      return t0 + 9.5;
+    }
+    // Londres: un cuarto del Big Ben, lejano
+    var fr = WQ[Math.floor(Math.random() * WQ.length)];
+    fr.forEach(function (m, k) { (function (m, tt) { at(tt, function (w) { bell(m + 12, w, 0.03); }); })(m, t0 + k * 0.85); });
+    return t0 + 6;
   }
   function schedule() {
-    // Un compás de 6/8 tranquilo: guitarra/arpa arpegiando el acorde y, encima,
-    // una melodía de tin whistle que respira. Cada 16 compases, el Big Ben.
-    var beatLen = 0.42;
-    while (nextT < ctx.currentTime + 2.5) {
-      var t = nextT;
-      var ch = CHORDS[bar % CHORDS.length];
-      // fingerpicking: bajo alternado + arpegio
-      var patt = [ch[0] - 7, ch[1], ch[2], ch[0], ch[1], ch[2]];
-      patt.forEach(function (d, k) {
-        pluck(dm(d + 7, bar % 4 === 2), t + k * beatLen, k === 0 ? 0.3 : 0.17, musicBus, k !== 0);
-      });
-      // melodía: 2-4 notas por compás, a veces descansa
-      if (bar % 8 < 6 && Math.random() < 0.85) {
-        var n = 2 + Math.floor(Math.random() * 3), tt = t;
-        for (var k = 0; k < n; k++) {
-          pos += [-2, -1, -1, 1, 1, 2, 0][Math.floor(Math.random() * 7)];
-          if (Math.random() < 0.35) pos = ch[Math.floor(Math.random() * 3)] + 14;
-          if (pos < 12) pos = 13; if (pos > 20) pos = 18;
-          var dur = (6 / n) * beatLen * (0.9 + Math.random() * 0.2);
-          whistle(dm(pos), tt, dur, 0.055, Math.random() < 0.3);
-          tt += dur;
-        }
-      }
-      if (bar % 16 === 15) westminster(t + 0.5);
-      bar++;
-      nextT += 6 * beatLen;
+    var horizon = ctx.currentTime + 2;
+    while (cursor < horizon + 6) {
+      if (nextIsSong) cursor = addSong(SONGS[songIdx++ % SONGS.length], cursor);
+      else cursor = addInterlude(cursor);
+      nextIsSong = !nextIsSong;
+      events.sort(function (a, b) { return a.t - b.t; });
+    }
+    while (events.length && events[0].t < horizon) {
+      var e = events.shift();
+      if (e.t >= ctx.currentTime - 0.05) e.fn(e.t);
     }
   }
+  function startDrone() { events = []; cursor = ctx.currentTime + 0.4; nextIsSong = true; }
+  function stopDrone() { events = []; }
   function musicOn() {
     if (playing || !prefs.music || mode !== "menu" || !unlocked || !init()) return;
     if (ctx.state === "suspended") ctx.resume();
     playing = true;
     musicBus.gain.cancelScheduledValues(ctx.currentTime);
     musicBus.gain.setTargetAtTime(0.55 * prefs.musicVol, ctx.currentTime, 1.2);
-    nextT = ctx.currentTime + 0.3; beat = 0; bar = 0;
     startDrone();
     timer = setInterval(schedule, 500);
     schedule();

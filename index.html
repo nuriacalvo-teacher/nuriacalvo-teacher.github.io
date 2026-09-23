@@ -1776,7 +1776,7 @@ function applyTheme(t){
 function initTheme(){
   let t = null;
   try { t = localStorage.getItem(THEME_KEY); } catch(e){}
-  if(!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  if(!t) t = 'dark';   // por defecto, modo noche (si el alumno elige otro, se respeta)
   applyTheme(t);
   $('#themeBtn').addEventListener('click', () => {
     const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
