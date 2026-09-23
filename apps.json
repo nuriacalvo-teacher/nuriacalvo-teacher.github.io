@@ -245,7 +245,7 @@
       "icon": "fa-repeat",
       "accent": "amber",
       "status": "live",
-      "featured": true,
+      "featured": false,
       "visible": true,
       "updated": "2026-09-11"
     },
