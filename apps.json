@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-23",
+  "updated": "2026-09-24",
   "teacher": {
     "name": "Nuria Calvo",
     "role": "Profesora de Inglés",
@@ -210,6 +210,44 @@
   },
   "apps": [
     {
+      "id": "battles",
+      "repo": "nuriacalvo-teacher/battles",
+      "url": "https://nuriacalvo-teacher.github.io/battles/",
+      "title": "Battles",
+      "subtitle": "",
+      "description": "De 2 a 4 equipos se turnan para responder vocabulario de la unidad de Introducción en cinco formatos de desafío, compitiendo contra el reloj para conseguir puntos y alcanzar el podio final.",
+      "category": "other",
+      "levels": [
+        "ALL LEVELS"
+      ],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-09-20"
+    },
+    {
+      "id": "escape-room",
+      "repo": "nuriacalvo-teacher/escape-room",
+      "url": "https://nuriacalvo-teacher.github.io/escape-room/",
+      "title": "Escape Room",
+      "subtitle": "",
+      "description": "De 2 a 6 equipos se turnan para compitiendo y resolviendo acertijos contra el reloj para escapar",
+      "category": "other",
+      "levels": [
+        "ALL LEVELS"
+      ],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-09-21"
+    },
+    {
       "id": "past-tenses",
       "repo": "nuriacalvo-teacher/past-tenses",
       "url": "https://nuriacalvo-teacher.github.io/past-tenses/",
@@ -222,7 +260,7 @@
       "icon": "fa-shapes",
       "accent": "indigo",
       "status": "live",
-      "featured": false,
+      "featured": true,
       "visible": true,
       "updated": "2026-09-23"
     },
@@ -511,44 +549,6 @@
       "featured": false,
       "visible": false,
       "updated": "2026-05-08"
-    },
-    {
-      "id": "battles",
-      "repo": "nuriacalvo-teacher/battles",
-      "url": "https://nuriacalvo-teacher.github.io/battles/",
-      "title": "Battles",
-      "subtitle": "",
-      "description": "De 2 a 4 equipos se turnan para responder vocabulario de la unidad de Introducción en cinco formatos de desafío, compitiendo contra el reloj para conseguir puntos y alcanzar el podio final.",
-      "category": "other",
-      "levels": [
-        "ALL LEVELS"
-      ],
-      "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
-      "status": "live",
-      "featured": true,
-      "visible": true,
-      "updated": "2026-09-20"
-    },
-    {
-      "id": "escape-room",
-      "repo": "nuriacalvo-teacher/escape-room",
-      "url": "https://nuriacalvo-teacher.github.io/escape-room/",
-      "title": "Escape Room",
-      "subtitle": "",
-      "description": "De 2 a 6 equipos se turnan para compitiendo y resolviendo acertijos contra el reloj para escapar",
-      "category": "other",
-      "levels": [
-        "ALL LEVELS"
-      ],
-      "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
-      "status": "live",
-      "featured": true,
-      "visible": true,
-      "updated": "2026-09-21"
     }
   ]
 }
