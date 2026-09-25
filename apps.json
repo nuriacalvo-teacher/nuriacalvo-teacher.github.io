@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-24",
+  "updated": "2026-09-25",
   "teacher": {
     "name": "Nuria Calvo",
     "role": "Profesora de Inglés",
@@ -549,6 +549,23 @@
       "featured": false,
       "visible": false,
       "updated": "2026-05-08"
+    },
+    {
+      "id": "future",
+      "repo": "nuriacalvo-teacher/future",
+      "url": "https://nuriacalvo-teacher.github.io/future/",
+      "title": "Future",
+      "subtitle": "",
+      "description": "",
+      "category": "grammar",
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-09-25"
     }
   ]
 }
