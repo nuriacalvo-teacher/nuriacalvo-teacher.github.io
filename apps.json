@@ -563,7 +563,7 @@
       "icon": "fa-shapes",
       "accent": "indigo",
       "status": "live",
-      "featured": false,
+      "featured": true,
       "visible": true,
       "updated": "2026-09-25"
     }
