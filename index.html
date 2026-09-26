@@ -323,6 +323,13 @@ select.control:focus{ border-color:var(--brand); outline:none; }
 .card h3 a::after{ content:""; position:absolute; inset:0; z-index:1; }
 .card-subtitle{ margin:4px 0 0; font-size:.83rem; font-weight:700; color:var(--acc); }
 .card-desc{ margin:12px 0 0; font-size:.93rem; color:var(--text-2); flex:1 1 auto; }
+.card-content{
+  margin:12px 0 0; padding:9px 12px; border-radius:12px;
+  background:color-mix(in srgb, var(--acc) 9%, transparent);
+  border:1px solid color-mix(in srgb, var(--acc) 22%, transparent);
+  font-size:.83rem; font-weight:700; color:var(--text-2); line-height:1.45;
+}
+.card-content i{ color:var(--acc); margin-right:7px; }
 .badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
 .badge{
   font-size:.71rem; font-weight:800; padding:4px 10px; border-radius:999px;
@@ -558,6 +565,23 @@ select.control:focus{ border-color:var(--brand); outline:none; }
 .switch input:checked + .track::before{ transform:translateX(20px); background:#fff; }
 .switch input:focus-visible + .track{ outline:3px solid var(--ring); outline-offset:2px; }
 .admin-editor{ padding:16px; border-radius:15px; border:1px solid var(--border); background:var(--surface-hi); margin:0 0 12px; }
+.picks{ display:flex; flex-wrap:wrap; gap:7px; }
+.pick{
+  display:inline-flex; align-items:center; gap:7px; cursor:pointer;
+  padding:7px 13px; border-radius:999px; border:1px solid var(--border);
+  background:var(--bg); font-size:.85rem; font-weight:700; color:var(--text-2);
+  transition:.15s; user-select:none;
+}
+.pick:hover{ border-color:var(--border-hi); color:var(--text); }
+.pick input{ position:absolute; opacity:0; width:0; height:0; }
+.pick i{ font-size:.85em; color:var(--muted); }
+.pick.on{
+  background:color-mix(in srgb, var(--acc) 17%, transparent);
+  border-color:color-mix(in srgb, var(--acc) 52%, transparent);
+  color:var(--text);
+}
+.pick.on i{ color:var(--acc); }
+.pick:focus-within{ outline:3px solid var(--ring); outline-offset:2px; }
 .admin-editor .cols{ display:grid; gap:12px; grid-template-columns:1fr; }
 @media (min-width:700px){ .admin-editor .cols{ grid-template-columns:1fr 1fr; } }
 .note{
@@ -624,6 +648,7 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
     <nav class="header-nav" aria-label="Navegación principal">
       <a href="#catalogo">Apps</a>
       <a href="#destacadas">Destacadas</a>
+      <a href="#juegos">Juegos</a>
       <a href="#/sobre-mi">Sobre mí</a>
       <a href="#como-usar">Cómo se usa</a>
     </nav>
@@ -676,6 +701,19 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
         </div>
       </div>
       <div class="grid" id="featuredGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================ JUEGOS ============================ -->
+  <section id="juegos" class="section" style="padding-bottom:0" hidden>
+    <div class="wrap">
+      <div class="section-head" data-accent="violet">
+        <div>
+          <h2 class="section-title"><span class="dot"><i class="fa-solid fa-gamepad" aria-hidden="true"></i></span> Juegos</h2>
+          <p class="section-sub">Para jugar en clase por equipos.</p>
+        </div>
+      </div>
+      <div class="grid" id="gamesGrid"></div>
     </div>
   </section>
 
@@ -793,6 +831,7 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
     <p style="margin:0" id="footText">© <span id="year"></span> Nuria Calvo · IES Goya, Zaragoza</p>
     <div class="footer-links">
       <a href="#catalogo">Apps</a>
+      <a href="#juegos">Juegos</a>
       <a href="#/sobre-mi">Sobre mí</a>
       <a href="https://github.com/nuriacalvo-teacher" target="_blank" rel="noopener">GitHub</a>
       <button class="btn btn-ghost btn-sm" type="button" onclick="window.print()"><i class="fa-solid fa-print" aria-hidden="true"></i> Imprimir listado</button>
@@ -953,7 +992,7 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
 <!-- Catálogo de reserva: se usa si no se puede leer apps.json (por ejemplo al abrir el fichero desde el disco) -->
 <script type="application/json" id="fallbackCatalog">{
   "version": 1,
-  "updated": "2026-09-18",
+  "updated": "2026-09-25",
   "teacher": {
     "name": "Nuria Calvo",
     "role": "Profesora de Inglés",
@@ -977,10 +1016,16 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
       "accent": "emerald"
     },
     {
-      "id": "writing",
-      "name": "Writing",
-      "icon": "fa-pen-nib",
-      "accent": "amber"
+      "id": "reading",
+      "name": "Reading",
+      "icon": "fa-book-bookmark",
+      "accent": "sky"
+    },
+    {
+      "id": "listening",
+      "name": "Listening",
+      "icon": "fa-headphones",
+      "accent": "cyan"
     },
     {
       "id": "speaking",
@@ -989,28 +1034,28 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
       "accent": "rose"
     },
     {
-      "id": "reading",
-      "name": "Reading & Literatura",
-      "icon": "fa-book-bookmark",
-      "accent": "sky"
+      "id": "writing",
+      "name": "Writing",
+      "icon": "fa-pen-nib",
+      "accent": "amber"
     },
     {
-      "id": "exams",
-      "name": "Exámenes y repaso",
-      "icon": "fa-clipboard-check",
+      "id": "culture",
+      "name": "Culture",
+      "icon": "fa-earth-europe",
+      "accent": "teal"
+    },
+    {
+      "id": "games",
+      "name": "Games",
+      "icon": "fa-gamepad",
       "accent": "violet"
     },
     {
-      "id": "tools",
-      "name": "Aula y herramientas",
-      "icon": "fa-toolbox",
-      "accent": "slate"
-    },
-    {
       "id": "other",
-      "name": "Otros proyectos",
-      "icon": "fa-globe",
-      "accent": "teal"
+      "name": "Other",
+      "icon": "fa-shapes",
+      "accent": "slate"
     }
   ],
   "levels": [
@@ -1021,551 +1066,8 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
     "1º Bach",
     "2º Bach",
     "B1",
-    "B2"
-  ],
-  "apps": [
-    {
-      "id": "present-tenses",
-      "repo": "nuriacalvo-teacher/present-tenses",
-      "url": "https://nuriacalvo-teacher.github.io/present-tenses/",
-      "title": "Present Tenses",
-      "subtitle": "Domina todos los presentes",
-      "description": "Teoría, ejemplos y test de 10 preguntas por bloque para diferenciar present simple, continuous, perfect y perfect continuous. Con informe final de evaluación.",
-      "category": "grammar",
-      "levels": [
-        "3º ESO",
-        "4º ESO"
-      ],
-      "tags": [
-        "Teoría + test",
-        "Informe de notas"
-      ],
-      "icon": "fa-clock",
-      "accent": "indigo",
-      "status": "live",
-      "featured": true,
-      "visible": true,
-      "updated": "2026-09-14"
-    },
-    {
-      "id": "sentence-formation",
-      "repo": "nuriacalvo-teacher/sentence-formation",
-      "url": "https://nuriacalvo-teacher.github.io/sentence-formation/",
-      "title": "Sentence Formation",
-      "subtitle": "Construye frases correctas",
-      "description": "Práctica del orden de las palabras en la oración inglesa: afirmativa, negativa e interrogativa.",
-      "category": "grammar",
-      "levels": [
-        "3º ESO",
-        "4º ESO"
-      ],
-      "tags": [
-        "Word order"
-      ],
-      "icon": "fa-shapes",
-      "accent": "violet",
-      "status": "live",
-      "featured": true,
-      "visible": true,
-      "updated": "2026-09-18"
-    },
-    {
-      "id": "irregular-verbs",
-      "repo": "nuriacalvo-teacher/irregular-verbs",
-      "url": "https://nuriacalvo-teacher.github.io/irregular-verbs/",
-      "title": "Irregular Verbs Ultimate",
-      "subtitle": "Los verbos irregulares, a fondo",
-      "description": "Entrenamiento completo de verbos irregulares: infinitivo, pasado simple y participio.",
-      "category": "vocabulary",
-      "levels": [
-        "2º ESO",
-        "3º ESO",
-        "4º ESO"
-      ],
-      "tags": [
-        "Verbos",
-        "Práctica"
-      ],
-      "icon": "fa-bolt",
-      "accent": "emerald",
-      "status": "live",
-      "featured": true,
-      "visible": true,
-      "updated": "2025-11-13"
-    },
-    {
-      "id": "irregular-verbs-review",
-      "repo": "nuriacalvo-teacher/irregular-verbs-review",
-      "url": "https://nuriacalvo-teacher.github.io/irregular-verbs-review/",
-      "title": "Irregular Verbs · Repaso",
-      "subtitle": "Repaso rápido antes del examen",
-      "description": "Aplicación interactiva para repasar los verbos irregulares en inglés de forma rápida.",
-      "category": "vocabulary",
-      "levels": [
-        "2º ESO",
-        "3º ESO",
-        "4º ESO"
-      ],
-      "tags": [
-        "Repaso exprés"
-      ],
-      "icon": "fa-rotate",
-      "accent": "emerald",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2025-11-06"
-    },
-    {
-      "id": "conditionals-reportedspeech",
-      "repo": "nuriacalvo-teacher/conditionals-reportedspeech",
-      "url": "https://nuriacalvo-teacher.github.io/conditionals-reportedspeech/",
-      "title": "Conditionals & Reported Speech",
-      "subtitle": "Dos bloques clave de Bachillerato",
-      "description": "Condicionales (tipos 0, 1, 2 y 3) y estilo indirecto explicados y practicados en una sola aplicación.",
-      "category": "grammar",
-      "levels": [
-        "1º Bach",
-        "2º Bach"
-      ],
-      "tags": [
-        "Conditionals",
-        "Reported speech"
-      ],
-      "icon": "fa-code-branch",
-      "accent": "indigo",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2026-05-28"
-    },
-    {
-      "id": "reported_speech",
-      "repo": "nuriacalvo-teacher/reported_speech",
-      "url": "https://nuriacalvo-teacher.github.io/reported_speech/",
-      "title": "Reported Speech",
-      "subtitle": "Del estilo directo al indirecto",
-      "description": "Transformaciones de estilo directo a indirecto paso a paso, con cambios de tiempo verbal y de expresiones de tiempo.",
-      "category": "grammar",
-      "levels": [
-        "4º ESO",
-        "1º Bach"
-      ],
-      "tags": [
-        "Transformaciones"
-      ],
-      "icon": "fa-comment-dots",
-      "accent": "sky",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2026-04-21"
-    },
-    {
-      "id": "relative-clauses",
-      "repo": "nuriacalvo-teacher/relative-clauses",
-      "url": "https://nuriacalvo-teacher.github.io/relative-clauses/",
-      "title": "Relative Clauses",
-      "subtitle": "Who, which, that, whose…",
-      "description": "Repaso de las oraciones de relativo: especificativas, explicativas y uso correcto de cada pronombre.",
-      "category": "grammar",
-      "levels": [
-        "4º ESO",
-        "1º Bach"
-      ],
-      "tags": [
-        "Relativos"
-      ],
-      "icon": "fa-link",
-      "accent": "indigo",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2026-04-07"
-    },
-    {
-      "id": "habits",
-      "repo": "nuriacalvo-teacher/habits",
-      "url": "https://nuriacalvo-teacher.github.io/habits/",
-      "title": "Habits",
-      "subtitle": "Rutinas y hábitos en inglés",
-      "description": "Vocabulario y estructuras para hablar de hábitos y rutinas diarias, con adverbios de frecuencia.",
-      "category": "grammar",
-      "levels": [
-        "1º ESO",
-        "2º ESO"
-      ],
-      "tags": [
-        "Rutinas",
-        "Frecuencia"
-      ],
-      "icon": "fa-repeat",
-      "accent": "amber",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2026-09-11"
-    },
-    {
-      "id": "family",
-      "repo": "nuriacalvo-teacher/family",
-      "url": "https://nuriacalvo-teacher.github.io/family/",
-      "title": "Family & Relationships",
-      "subtitle": "Vocabulario de la familia",
-      "description": "English vocabulary: family and relationships. Léxico de parentesco y relaciones personales.",
-      "category": "vocabulary",
-      "levels": [
-        "1º ESO",
-        "2º ESO"
-      ],
-      "tags": [
-        "Léxico"
-      ],
-      "icon": "fa-people-roof",
-      "accent": "rose",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2025-12-10"
-    },
-    {
-      "id": "4ESO-Module2-vocabulary",
-      "repo": "nuriacalvo-teacher/4ESO-Module2-vocabulary",
-      "url": "https://nuriacalvo-teacher.github.io/4ESO-Module2-vocabulary/",
-      "title": "Vocabulary · Module 2",
-      "subtitle": "Vocabulario de la unidad 2",
-      "description": "Vocabulario del módulo 2 de 4º de ESO para practicar y autoevaluarse antes del examen.",
-      "category": "vocabulary",
-      "levels": [
-        "4º ESO"
-      ],
-      "tags": [
-        "Unidad 2"
-      ],
-      "icon": "fa-book-open",
-      "accent": "emerald",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2025-11-07"
-    },
-    {
-      "id": "writing-complaint",
-      "repo": "nuriacalvo-teacher/writing-complaint",
-      "url": "https://nuriacalvo-teacher.github.io/writing-complaint/",
-      "title": "Email of Complaint",
-      "subtitle": "Writing formal paso a paso",
-      "description": "Cómo escribir un correo de reclamación en inglés: estructura, registro formal y expresiones útiles.",
-      "category": "writing",
-      "levels": [
-        "1º Bach",
-        "2º Bach",
-        "B2"
-      ],
-      "tags": [
-        "Formal writing",
-        "Modelo"
-      ],
-      "icon": "fa-envelope-open-text",
-      "accent": "amber",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2026-05-26"
-    },
-    {
-      "id": "ANIMAL-FARM",
-      "repo": "nuriacalvo-teacher/ANIMAL-FARM",
-      "url": "https://nuriacalvo-teacher.github.io/ANIMAL-FARM/",
-      "title": "Animal Farm",
-      "subtitle": "Juego de lectura",
-      "description": "Juego interactivo sobre la lectura de Animal Farm, de George Orwell: personajes, argumento y comprensión.",
-      "category": "reading",
-      "levels": [
-        "1º Bach",
-        "2º Bach"
-      ],
-      "tags": [
-        "Lectura",
-        "Juego"
-      ],
-      "icon": "fa-feather-pointed",
-      "accent": "sky",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2026-02-13"
-    },
-    {
-      "id": "BRIT-B1-ORAL",
-      "repo": "nuriacalvo-teacher/BRIT-B1-ORAL",
-      "url": "https://nuriacalvo-teacher.github.io/BRIT-B1-ORAL/",
-      "title": "B1 Oral",
-      "subtitle": "Preparación de la prueba oral",
-      "description": "Práctica guiada de la prueba oral de nivel B1: preguntas tipo, turnos de habla y expresiones para el examen.",
-      "category": "speaking",
-      "levels": [
-        "B1",
-        "4º ESO",
-        "1º Bach"
-      ],
-      "tags": [
-        "Examen oral",
-        "B1"
-      ],
-      "icon": "fa-microphone-lines",
-      "accent": "rose",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2026-01-14"
-    },
-    {
-      "id": "PresentTenses2",
-      "repo": "nuriacalvo-teacher/PresentTenses2",
-      "url": "https://nuriacalvo-teacher.github.io/PresentTenses2/",
-      "title": "Present Tenses 2",
-      "subtitle": "Versión de trabajo",
-      "description": "Segunda versión de la aplicación de present tenses.",
-      "category": "grammar",
-      "levels": [
-        "3º ESO",
-        "4º ESO"
-      ],
-      "tags": [],
-      "icon": "fa-clock",
-      "accent": "indigo",
-      "status": "beta",
-      "featured": false,
-      "visible": false,
-      "updated": "2026-09-18"
-    },
-    {
-      "id": "4eso.module2",
-      "repo": "nuriacalvo-teacher/4eso.module2",
-      "url": "https://nuriacalvo-teacher.github.io/4eso.module2/",
-      "title": "4º ESO · Module 2",
-      "subtitle": "Vocabulario",
-      "description": "Vocabulario del módulo 2 de 4º de ESO.",
-      "category": "vocabulary",
-      "levels": [
-        "4º ESO"
-      ],
-      "tags": [],
-      "icon": "fa-book",
-      "accent": "emerald",
-      "status": "live",
-      "featured": false,
-      "visible": false,
-      "updated": "2025-11-05"
-    },
-    {
-      "id": "english",
-      "repo": "nuriacalvo-teacher/english",
-      "url": "https://nuriacalvo-teacher.github.io/english/",
-      "title": "English",
-      "subtitle": "",
-      "description": "Proyecto de inglés.",
-      "category": "grammar",
-      "levels": [],
-      "tags": [],
-      "icon": "fa-language",
-      "accent": "indigo",
-      "status": "beta",
-      "featured": false,
-      "visible": false,
-      "updated": "2025-09-30"
-    },
-    {
-      "id": "pasarlista",
-      "repo": "nuriacalvo-teacher/pasarlista",
-      "url": "https://nuriacalvo-teacher.github.io/pasarlista/",
-      "title": "Pasar lista",
-      "subtitle": "Herramienta de aula",
-      "description": "Herramienta para pasar lista y controlar la asistencia del grupo.",
-      "category": "tools",
-      "levels": [],
-      "tags": [
-        "Uso docente"
-      ],
-      "icon": "fa-clipboard-user",
-      "accent": "slate",
-      "status": "live",
-      "featured": false,
-      "visible": false,
-      "updated": "2026-09-13"
-    },
-    {
-      "id": "control",
-      "repo": "nuriacalvo-teacher/control",
-      "url": "https://nuriacalvo-teacher.github.io/control/",
-      "title": "Control",
-      "subtitle": "Herramienta de aula",
-      "description": "Herramienta interna de control y seguimiento.",
-      "category": "tools",
-      "levels": [],
-      "tags": [
-        "Uso docente"
-      ],
-      "icon": "fa-sliders",
-      "accent": "slate",
-      "status": "live",
-      "featured": false,
-      "visible": false,
-      "updated": "2025-10-11"
-    },
-    {
-      "id": "patrimonio_IES_Goya",
-      "repo": "nuriacalvo-teacher/patrimonio_IES_Goya",
-      "url": "https://nuriacalvo-teacher.github.io/patrimonio_IES_Goya/",
-      "title": "Patrimonio IES Goya",
-      "subtitle": "Proyecto de centro",
-      "description": "Proyecto sobre el patrimonio del IES Goya de Zaragoza.",
-      "category": "other",
-      "levels": [],
-      "tags": [
-        "Proyecto"
-      ],
-      "icon": "fa-landmark",
-      "accent": "teal",
-      "status": "live",
-      "featured": false,
-      "visible": false,
-      "updated": "2026-05-08"
-    },
-    {
-      "id": "fichas-chino",
-      "repo": "nuriacalvo-teacher/fichas-chino",
-      "url": "https://nuriacalvo-teacher.github.io/fichas-chino/",
-      "title": "Fichas de chino",
-      "subtitle": "Otro idioma",
-      "description": "Fichas de aprendizaje de chino.",
-      "category": "other",
-      "levels": [],
-      "tags": [
-        "Chino"
-      ],
-      "icon": "fa-language",
-      "accent": "teal",
-      "status": "live",
-      "featured": false,
-      "visible": false,
-      "updated": "2025-08-21"
-    },
-    {
-      "id": "ficha-chino",
-      "repo": "nuriacalvo-teacher/ficha-chino",
-      "url": "https://nuriacalvo-teacher.github.io/ficha-chino/",
-      "title": "Ficha de chino (2)",
-      "subtitle": "Otro idioma",
-      "description": "Segunda ficha de aprendizaje de chino.",
-      "category": "other",
-      "levels": [],
-      "tags": [
-        "Chino"
-      ],
-      "icon": "fa-language",
-      "accent": "teal",
-      "status": "live",
-      "featured": false,
-      "visible": false,
-      "updated": "2025-08-21"
-    },
-    {
-      "id": "fichas-aleman",
-      "repo": "nuriacalvo-teacher/fichas-aleman",
-      "url": "https://nuriacalvo-teacher.github.io/fichas-aleman/",
-      "title": "Fichas de alemán",
-      "subtitle": "Otro idioma",
-      "description": "Fichas de aprendizaje de alemán.",
-      "category": "other",
-      "levels": [],
-      "tags": [
-        "Alemán"
-      ],
-      "icon": "fa-language",
-      "accent": "teal",
-      "status": "live",
-      "featured": false,
-      "visible": false,
-      "updated": "2025-08-22"
-    },
-    {
-      "id": "ficha-aleman",
-      "repo": "nuriacalvo-teacher/ficha-aleman",
-      "url": "https://nuriacalvo-teacher.github.io/ficha-aleman/",
-      "title": "Ficha de alemán (2)",
-      "subtitle": "Otro idioma",
-      "description": "Segunda ficha de aprendizaje de alemán.",
-      "category": "other",
-      "levels": [],
-      "tags": [
-        "Alemán"
-      ],
-      "icon": "fa-language",
-      "accent": "teal",
-      "status": "live",
-      "featured": false,
-      "visible": false,
-      "updated": "2025-08-22"
-    },
-    {
-      "id": "app",
-      "repo": "nuriacalvo-teacher/app",
-      "url": "https://nuriacalvo-teacher.github.io/app/",
-      "title": "How to create an app",
-      "subtitle": "Pruebas",
-      "description": "Repositorio de pruebas sobre cómo crear una app.",
-      "category": "other",
-      "levels": [],
-      "tags": [
-        "Pruebas"
-      ],
-      "icon": "fa-flask",
-      "accent": "slate",
-      "status": "beta",
-      "featured": false,
-      "visible": false,
-      "updated": "2026-01-22"
-    },
-    {
-      "id": "prueba",
-      "repo": "nuriacalvo-teacher/prueba",
-      "url": "https://nuriacalvo-teacher.github.io/prueba/",
-      "title": "Prueba",
-      "subtitle": "Pruebas",
-      "description": "Repositorio de pruebas.",
-      "category": "other",
-      "levels": [],
-      "tags": [
-        "Pruebas"
-      ],
-      "icon": "fa-flask",
-      "accent": "slate",
-      "status": "beta",
-      "featured": false,
-      "visible": false,
-      "updated": "2025-09-29"
-    },
-    {
-      "id": "prueba-basica",
-      "repo": "nuriacalvo-teacher/prueba-basica",
-      "url": "https://nuriacalvo-teacher.github.io/prueba-basica/",
-      "title": "Prueba básica",
-      "subtitle": "Pruebas",
-      "description": "Repositorio de pruebas.",
-      "category": "other",
-      "levels": [],
-      "tags": [
-        "Pruebas"
-      ],
-      "icon": "fa-flask",
-      "accent": "slate",
-      "status": "beta",
-      "featured": false,
-      "visible": false,
-      "updated": "2025-10-06"
-    }
+    "B2",
+    "ALL LEVELS"
   ],
   "about": {
     "headline": "Profesora, lingüista, artista y curiosa por naturaleza.",
@@ -1586,7 +1088,7 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
           "Alemán",
           "Ruso",
           "Catalán",
-          "Chino · pronto 😅"
+          "Chino · pronto... 😅"
         ]
       },
       {
@@ -1703,7 +1205,435 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
       ],
       "quote": "Espero que mi bio te motive a seguir aprendiendo. 😅"
     }
-  }
+  },
+  "apps": [
+    {
+      "id": "battles",
+      "repo": "nuriacalvo-teacher/battles",
+      "url": "https://nuriacalvo-teacher.github.io/battles/",
+      "title": "Battles",
+      "subtitle": "",
+      "description": "De 2 a 4 equipos se turnan para responder vocabulario de la unidad de Introducción en cinco formatos de desafío, compitiendo contra el reloj para conseguir puntos y alcanzar el podio final.",
+      "category": "games",
+      "levels": [
+        "ALL LEVELS"
+      ],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-09-20",
+      "skills": [
+        "games"
+      ],
+      "content": "Juego por equipos · vocabulario a contrarreloj"
+    },
+    {
+      "id": "escape-room",
+      "repo": "nuriacalvo-teacher/escape-room",
+      "url": "https://nuriacalvo-teacher.github.io/escape-room/",
+      "title": "Escape Room",
+      "subtitle": "",
+      "description": "De 2 a 6 equipos se turnan para compitiendo y resolviendo acertijos contra el reloj para escapar",
+      "category": "games",
+      "levels": [
+        "ALL LEVELS"
+      ],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-09-21",
+      "skills": [
+        "games"
+      ],
+      "content": "Juego de escape por equipos · retos y pistas"
+    },
+    {
+      "id": "past-tenses",
+      "repo": "nuriacalvo-teacher/past-tenses",
+      "url": "https://nuriacalvo-teacher.github.io/past-tenses/",
+      "title": "Past Tenses",
+      "subtitle": "",
+      "description": "",
+      "category": "grammar",
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-09-23",
+      "skills": [
+        "grammar"
+      ],
+      "content": "Past simple, continuous y perfect"
+    },
+    {
+      "id": "habits",
+      "repo": "nuriacalvo-teacher/habits",
+      "url": "https://nuriacalvo-teacher.github.io/habits/",
+      "title": "Habits",
+      "subtitle": "Rutinas y hábitos en inglés",
+      "description": "Vocabulario y estructuras para hablar de hábitos y rutinas diarias, con adverbios de frecuencia.",
+      "category": "grammar",
+      "levels": [
+        "1º ESO",
+        "2º ESO"
+      ],
+      "tags": [
+        "Rutinas",
+        "Frecuencia"
+      ],
+      "icon": "fa-repeat",
+      "accent": "amber",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-09-11",
+      "skills": [
+        "grammar"
+      ],
+      "content": "Rutinas, adverbios de frecuencia y vocabulario del día a día"
+    },
+    {
+      "id": "sentence-formation",
+      "repo": "nuriacalvo-teacher/sentence-formation",
+      "url": "https://nuriacalvo-teacher.github.io/sentence-formation/",
+      "title": "Sentence Formation",
+      "subtitle": "Construye frases correctas",
+      "description": "Práctica del orden de las palabras en la oración inglesa: afirmativa, negativa e interrogativa.",
+      "category": "grammar",
+      "levels": [
+        "2º ESO",
+        "3º ESO",
+        "4º ESO"
+      ],
+      "tags": [
+        "Word order"
+      ],
+      "icon": "fa-shapes",
+      "accent": "violet",
+      "status": "live",
+      "featured": true,
+      "visible": false,
+      "updated": "2026-09-18",
+      "skills": [
+        "grammar"
+      ],
+      "content": ""
+    },
+    {
+      "id": "present-tenses",
+      "repo": "nuriacalvo-teacher/present-tenses",
+      "url": "https://nuriacalvo-teacher.github.io/present-tenses/",
+      "title": "Present Tenses",
+      "subtitle": "Domina todos los presentes",
+      "description": "Teoría, ejemplos y test de 10 preguntas por bloque para diferenciar present simple, continuous, perfect y perfect continuous. Con informe final de evaluación.",
+      "category": "grammar",
+      "levels": [
+        "2º ESO",
+        "3º ESO",
+        "4º ESO"
+      ],
+      "tags": [
+        "Teoría + test",
+        "Informe de notas"
+      ],
+      "icon": "fa-clock",
+      "accent": "indigo",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-09-14",
+      "skills": [
+        "grammar"
+      ],
+      "content": "3 niveles · present simple, continuous, perfect y perfect continuous"
+    },
+    {
+      "id": "irregular-verbs",
+      "repo": "nuriacalvo-teacher/irregular-verbs",
+      "url": "https://nuriacalvo-teacher.github.io/irregular-verbs/",
+      "title": "Irregular Verbs Ultimate",
+      "subtitle": "Los verbos irregulares, a fondo",
+      "description": "Entrenamiento completo de verbos irregulares: infinitivo, pasado simple y participio.",
+      "category": "vocabulary",
+      "levels": [
+        "2º ESO",
+        "3º ESO",
+        "4º ESO"
+      ],
+      "tags": [
+        "Verbos",
+        "Práctica"
+      ],
+      "icon": "fa-bolt",
+      "accent": "emerald",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2025-11-13",
+      "skills": [
+        "vocabulary"
+      ],
+      "content": "5 módulos · 3 niveles · las tres formas, huecos y traducción"
+    },
+    {
+      "id": "conditionals-reportedspeech",
+      "repo": "nuriacalvo-teacher/conditionals-reportedspeech",
+      "url": "https://nuriacalvo-teacher.github.io/conditionals-reportedspeech/",
+      "title": "Conditionals & Reported Speech",
+      "subtitle": "Dos bloques clave de Bachillerato",
+      "description": "Condicionales (tipos 0, 1, 2 y 3) y estilo indirecto explicados y practicados en una sola aplicación.",
+      "category": "grammar",
+      "levels": [
+        "1º Bach",
+        "2º Bach"
+      ],
+      "tags": [
+        "Conditionals",
+        "Reported speech"
+      ],
+      "icon": "fa-code-branch",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-05-28",
+      "skills": [
+        "grammar"
+      ],
+      "content": ""
+    },
+    {
+      "id": "reported_speech",
+      "repo": "nuriacalvo-teacher/reported_speech",
+      "url": "https://nuriacalvo-teacher.github.io/reported_speech/",
+      "title": "Reported Speech",
+      "subtitle": "Del estilo directo al indirecto",
+      "description": "Transformaciones de estilo directo a indirecto paso a paso, con cambios de tiempo verbal y de expresiones de tiempo.",
+      "category": "grammar",
+      "levels": [
+        "4º ESO",
+        "1º Bach"
+      ],
+      "tags": [
+        "Transformaciones"
+      ],
+      "icon": "fa-comment-dots",
+      "accent": "sky",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-04-21",
+      "skills": [
+        "grammar"
+      ],
+      "content": ""
+    },
+    {
+      "id": "relative-clauses",
+      "repo": "nuriacalvo-teacher/relative-clauses",
+      "url": "https://nuriacalvo-teacher.github.io/relative-clauses/",
+      "title": "Relative Clauses",
+      "subtitle": "Who, which, that, whose…",
+      "description": "Repaso de las oraciones de relativo: especificativas, explicativas y uso correcto de cada pronombre.",
+      "category": "grammar",
+      "levels": [
+        "4º ESO",
+        "1º Bach"
+      ],
+      "tags": [
+        "Relativos"
+      ],
+      "icon": "fa-link",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-04-07",
+      "skills": [
+        "grammar"
+      ],
+      "content": ""
+    },
+    {
+      "id": "brit",
+      "repo": "nuriacalvo-teacher/BRIT",
+      "url": "https://nuriacalvo-teacher.github.io/BRIT/",
+      "title": "BRIT · B1-B2",
+      "subtitle": "Cuatro destrezas en 30 temas",
+      "description": "Reading, listening, writing y mediation en dos niveles, B1 y B2, sobre 30 temas. El listening se escucha dos veces. Las redacciones con banco de expresiones por tipo de texto. Informe final de notas.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "4 destrezas",
+        "Informe de notas",
+        "30 temas"
+      ],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-09-20",
+      "skills": [
+        "other"
+      ],
+      "content": "Reading, listening, writing y mediation · B1 y B2"
+    },
+    {
+      "id": "ANIMAL-FARM",
+      "repo": "nuriacalvo-teacher/ANIMAL-FARM",
+      "url": "https://nuriacalvo-teacher.github.io/ANIMAL-FARM/",
+      "title": "Animal Farm",
+      "subtitle": "Juego de lectura",
+      "description": "Juego interactivo sobre la lectura de Animal Farm, de George Orwell: personajes, argumento y comprensión.",
+      "category": "reading",
+      "levels": [
+        "1º Bach",
+        "2º Bach"
+      ],
+      "tags": [
+        "Lectura",
+        "Juego"
+      ],
+      "icon": "fa-feather-pointed",
+      "accent": "sky",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-02-13",
+      "skills": [
+        "reading"
+      ],
+      "content": ""
+    },
+    {
+      "id": "BRIT-B1-ORAL",
+      "repo": "nuriacalvo-teacher/BRIT-B1-ORAL",
+      "url": "https://nuriacalvo-teacher.github.io/BRIT-B1-ORAL/",
+      "title": "B1 Oral",
+      "subtitle": "Preparación de la prueba oral",
+      "description": "Práctica guiada de la prueba oral de nivel B1: preguntas tipo, turnos de habla y expresiones para el examen.",
+      "category": "speaking",
+      "levels": [
+        "B1",
+        "4º ESO",
+        "1º Bach"
+      ],
+      "tags": [
+        "Examen oral",
+        "B1"
+      ],
+      "icon": "fa-microphone-lines",
+      "accent": "rose",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-01-14",
+      "skills": [
+        "speaking"
+      ],
+      "content": "Prueba oral B1 · preguntas tipo y expresiones de examen"
+    },
+    {
+      "id": "pasarlista",
+      "repo": "nuriacalvo-teacher/pasarlista",
+      "url": "https://nuriacalvo-teacher.github.io/pasarlista/",
+      "title": "Pasar lista",
+      "subtitle": "Herramienta de aula",
+      "description": "Herramienta para pasar lista y controlar la asistencia del grupo.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Uso docente"
+      ],
+      "icon": "fa-clipboard-user",
+      "accent": "slate",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-09-13",
+      "skills": [
+        "other"
+      ],
+      "content": ""
+    },
+    {
+      "id": "control",
+      "repo": "nuriacalvo-teacher/control",
+      "url": "https://nuriacalvo-teacher.github.io/control/",
+      "title": "Control",
+      "subtitle": "Herramienta de aula",
+      "description": "Herramienta interna de control y seguimiento.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Uso docente"
+      ],
+      "icon": "fa-sliders",
+      "accent": "slate",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2025-10-11",
+      "skills": [
+        "other"
+      ],
+      "content": ""
+    },
+    {
+      "id": "patrimonio_IES_Goya",
+      "repo": "nuriacalvo-teacher/patrimonio_IES_Goya",
+      "url": "https://nuriacalvo-teacher.github.io/patrimonio_IES_Goya/",
+      "title": "Patrimonio IES Goya",
+      "subtitle": "Proyecto de centro",
+      "description": "Proyecto sobre el patrimonio del IES Goya de Zaragoza.",
+      "category": "other",
+      "levels": [],
+      "tags": [
+        "Proyecto"
+      ],
+      "icon": "fa-landmark",
+      "accent": "teal",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-05-08",
+      "skills": [
+        "other"
+      ],
+      "content": ""
+    },
+    {
+      "id": "future",
+      "repo": "nuriacalvo-teacher/future",
+      "url": "https://nuriacalvo-teacher.github.io/future/",
+      "title": "Future",
+      "subtitle": "",
+      "description": "",
+      "category": "grammar",
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-09-25",
+      "skills": [
+        "grammar"
+      ],
+      "content": "Will, be going to y present continuous con valor de futuro"
+    }
+  ]
 }</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -1935,6 +1865,14 @@ function renderIdentity(c){
   }
 }
 
+/* Una app puede trabajar varias skills. Si es antigua y solo trae "category",
+   se usa esa, para que nada deje de funcionar. */
+function skillsOf(a){
+  const s = Array.isArray(a.skills) ? a.skills.filter(Boolean) : [];
+  return s.length ? s : (a.category ? [a.category] : ['other']);
+}
+function isGame(a){ return skillsOf(a).indexOf('games') >= 0; }
+
 function publicApps(){
   return (catalogInUse().apps || []).filter(a => a.visible !== false);
 }
@@ -1943,7 +1881,7 @@ function renderStats(c){
   const apps = publicApps();
   const levels = new Set();
   apps.forEach(a => (a.levels||[]).forEach(l => levels.add(l)));
-  const cats = new Set(apps.map(a => a.category));
+  const cats = new Set(); apps.forEach(a => skillsOf(a).forEach(s => cats.add(s)));
   const last = apps.map(a => a.updated).filter(Boolean).sort().pop();
   const stats = [
     { n: apps.length,   l: 'Apps publicadas', a:'indigo'  },
@@ -1965,7 +1903,7 @@ function renderStats(c){
 function renderFilters(c){
   const apps = publicApps();
   const used = {};
-  apps.forEach(a => { used[a.category] = (used[a.category]||0) + 1; });
+  apps.forEach(a => skillsOf(a).forEach(s => { used[s] = (used[s]||0) + 1; }));
 
   const chips = [`<button class="chip" type="button" role="button" aria-pressed="${filters.cat==='all'}" data-cat="all" data-accent="indigo">
       <i class="fa-solid fa-grip" aria-hidden="true"></i> Todas <span class="chip-count">${apps.length}</span></button>`];
@@ -1991,10 +1929,11 @@ function renderFilters(c){
 }
 
 function matches(a){
-  if (filters.cat !== 'all' && a.category !== filters.cat) return false;
+  if (filters.cat !== 'all' && skillsOf(a).indexOf(filters.cat) < 0) return false;
   if (filters.level && !(a.levels||[]).includes(filters.level)) return false;
   if (filters.q){
-    const hay = norm([a.title,a.subtitle,a.description,(a.tags||[]).join(' '),(a.levels||[]).join(' '),catById(a.category).name,a.repo].join(' '));
+    const nombresSkill = skillsOf(a).map(s => catById(s).name).join(' ');
+    const hay = norm([a.title,a.subtitle,a.description,a.content,(a.tags||[]).join(' '),(a.levels||[]).join(' '),nombresSkill,a.repo].join(' '));
     if (!filters.q.split(/\s+/).every(w => hay.includes(w))) return false;
   }
   return true;
@@ -2009,7 +1948,8 @@ function sortApps(list){
 }
 
 function cardHTML(a, opts={}){
-  const cat = catById(a.category);
+  const skills = skillsOf(a);
+  const cat = catById(skills[0]);
   const accent = a.accent || cat.accent || 'slate';
   const status = a.status || 'live';
   const soon = status === 'soon';
@@ -2029,8 +1969,10 @@ function cardHTML(a, opts={}){
       <h3>${soon ? esc(a.title) : `<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)}</a>`}</h3>
       ${a.subtitle ? `<p class="card-subtitle">${esc(a.subtitle)}</p>` : ''}
       <p class="card-desc">${esc(a.description||'')}</p>
+      ${a.content ? `<p class="card-content"><i class="fa-solid fa-list-ul" aria-hidden="true"></i> ${esc(a.content)}</p>` : ''}
       <div class="badges">
-        <span class="badge" style="background:transparent"><i class="fa-solid ${esc(cat.icon)}" aria-hidden="true"></i> ${esc(cat.name)}</span>
+        ${skills.slice(0,3).map(s => { const k = catById(s);
+          return `<span class="badge" style="background:transparent"><i class="fa-solid ${esc(k.icon)}" aria-hidden="true"></i> ${esc(k.name)}</span>`; }).join('')}
         ${levels}${tags}
       </div>
     </div>
@@ -2045,24 +1987,35 @@ function cardHTML(a, opts={}){
 }
 
 function renderFeatured(c){
+  const enBio = location.hash === '#/sobre-mi' || location.hash === '#sobre-mi';
+
   const feat = publicApps().filter(a => a.featured);
   const sec = $('#destacadas');
-  const enBio = location.hash === '#/sobre-mi' || location.hash === '#sobre-mi';
-  if (!feat.length || enBio){ sec.hidden = true; if(!feat.length) return; }
-  else sec.hidden = false;
-  $('#featuredGrid').innerHTML = feat.map(a => cardHTML(a, {noFlag:true})).join('');
+  sec.hidden = enBio || !feat.length;
+  if (feat.length) $('#featuredGrid').innerHTML = feat.map(a => cardHTML(a, {noFlag:true})).join('');
+
+  // Juegos: las destacadas mandan, para que ninguna app salga dos veces seguidas
+  const games = publicApps().filter(a => isGame(a) && !a.featured);
+  const secJ = $('#juegos');
+  secJ.hidden = enBio || !games.length;
+  if (games.length) $('#gamesGrid').innerHTML = games.map(a => cardHTML(a)).join('');
 }
 
 function renderCatalog(){
   const all = publicApps();
-  const list = sortApps(all.filter(matches));
-  const area = $('#catalogArea');
   const active = filters.q || filters.cat !== 'all' || filters.level;
+  // Sin filtros, el catálogo no repite lo que ya sale arriba en Destacadas y Juegos.
+  // En cuanto se busca o se filtra, se busca sobre TODAS, para no esconder nada.
+  const base = active ? all : all.filter(a => !a.featured && !isGame(a));
+  const list = sortApps(base.filter(matches));
+  const area = $('#catalogArea');
   $('#clearBtn').hidden = !active;
 
-  $('#resultCount').innerHTML = list.length === all.length
-    ? `<b>${all.length}</b> apps disponibles`
-    : `<b>${list.length}</b> de ${all.length} apps`;
+  const arriba = all.length - base.length;
+  $('#resultCount').innerHTML = active
+    ? `<b>${list.length}</b> de ${all.length} apps`
+    : `<b>${list.length}</b> ${list.length===1?'app':'apps'} en el catálogo` +
+      (arriba ? ` <span style="opacity:.7">· ${arriba} más arriba, en destacadas y juegos</span>` : '');
 
   if (!list.length){
     area.innerHTML = `<div class="empty">
@@ -2075,7 +2028,7 @@ function renderCatalog(){
   }
 
   if (currentView === 'cats' && !active){
-    const groups = (catalogInUse().categories||[]).map(cat => ({ cat, apps: list.filter(a => a.category === cat.id) }))
+    const groups = (catalogInUse().categories||[]).map(cat => ({ cat, apps: list.filter(a => skillsOf(a)[0] === cat.id) }))
                     .filter(g => g.apps.length);
     area.innerHTML = groups.map(g => `
       <section class="section" style="padding-block:14px 30px" data-accent="${esc(g.cat.accent||'slate')}">
@@ -2269,7 +2222,7 @@ function renderAdminList(){
 }
 
 function adminRowHTML(a,i){
-  const cat = catById(a.category);
+  const cat = catById(skillsOf(a)[0]);
   const editing = openEditor === i;
   const row = `
   <div class="admin-row ${a.visible===false?'hidden-app':''}" data-accent="${esc(a.accent||cat.accent)}">
@@ -2280,7 +2233,7 @@ function adminRowHTML(a,i){
     <span class="card-icon" style="width:38px;height:38px;font-size:.95rem;border-radius:11px"><i class="fa-solid ${esc(a.icon||cat.icon)}" aria-hidden="true"></i></span>
     <span class="grow">
       <strong>${esc(a.title)} ${a.featured?'<i class="fa-solid fa-star" style="color:#f59e0b;font-size:.8em" title="Destacada"></i>':''}</strong>
-      <small>${esc(cat.name)}${a.levels&&a.levels.length?' · '+esc(a.levels.join(', ')):''} · ${esc(a.repo||'')}</small>
+      <small>${esc(skillsOf(a).map(s=>catById(s).name).join(' · '))}${a.levels&&a.levels.length?' · '+esc(a.levels.join(', ')):''} · ${esc(a.repo||'')}</small>
     </span>
     <span style="display:flex; gap:5px">
       <button class="mini-btn" type="button" data-act="star" data-i="${i}" title="Destacar en la portada" aria-label="Destacar ${esc(a.title)}"><i class="fa-${a.featured?'solid':'regular'} fa-star" aria-hidden="true"></i></button>
@@ -2294,7 +2247,17 @@ function adminRowHTML(a,i){
 }
 
 function editorHTML(a,i){
-  const cats = (working.categories||[]).map(c => `<option value="${esc(c.id)}"${a.category===c.id?' selected':''}>${esc(c.name)}</option>`).join('');
+  const misSkills = skillsOf(a);
+  const skillBoxes = (working.categories||[]).map(c => `
+    <label class="pick ${misSkills.indexOf(c.id)>=0?'on':''}" data-accent="${esc(c.accent||'slate')}">
+      <input type="checkbox" data-skill="${esc(c.id)}" ${misSkills.indexOf(c.id)>=0?'checked':''}>
+      <i class="fa-solid ${esc(c.icon)}" aria-hidden="true"></i> ${esc(c.name)}
+    </label>`).join('');
+  const misCursos = a.levels || [];
+  const cursoBoxes = (working.levels||[]).map(l => `
+    <label class="pick ${misCursos.indexOf(l)>=0?'on':''}" data-accent="indigo">
+      <input type="checkbox" data-level="${esc(l)}" ${misCursos.indexOf(l)>=0?'checked':''}> ${esc(l)}
+    </label>`).join('');
   const icons = ICONS.map(ic => `<option value="${ic}"${a.icon===ic?' selected':''}>${ic.replace('fa-','')}</option>`).join('');
   const accs = ACCENTS.map(c => `<option value="${c}"${a.accent===c?' selected':''}>${c}</option>`).join('');
   const sts = Object.entries(STATUS_LABEL).map(([k,v]) => `<option value="${k}"${(a.status||'live')===k?' selected':''}>${v}</option>`).join('');
@@ -2305,11 +2268,23 @@ function editorHTML(a,i){
       <label class="field"><span>Subtítulo</span><input data-f="subtitle" value="${esc(a.subtitle||'')}"></label>
     </div>
     <label class="field"><span>Descripción</span><textarea data-f="description">${esc(a.description||'')}</textarea></label>
+    <label class="field"><span>Qué hay dentro (una línea)</span>
+      <input data-f="content" value="${esc(a.content||'')}" placeholder="Ej.: 3 niveles · present simple, continuous, perfect y perfect continuous">
+    </label>
+    <div class="field">
+      <span>Skills que trabaja</span>
+      <div class="picks">${skillBoxes}</div>
+      <small style="display:block;margin-top:7px;color:var(--muted);font-weight:600">
+        Marca «Games» para que la app aparezca en la sección <b>Juegos</b> de la portada.
+      </small>
+    </div>
+    <div class="field">
+      <span>Cursos para los que es</span>
+      <div class="picks">${cursoBoxes}</div>
+    </div>
     <div class="cols">
       <label class="field"><span>Enlace de la app</span><input data-f="url" value="${esc(a.url||'')}"></label>
       <label class="field"><span>Repositorio (usuario/nombre)</span><input data-f="repo" value="${esc(a.repo||'')}"></label>
-      <label class="field"><span>Tipo de contenido</span><select data-f="category">${cats}</select></label>
-      <label class="field"><span>Cursos (separados por comas)</span><input data-f="levels" value="${esc((a.levels||[]).join(', '))}"></label>
       <label class="field"><span>Etiquetas (separadas por comas)</span><input data-f="tags" value="${esc((a.tags||[]).join(', '))}"></label>
       <label class="field"><span>Estado</span><select data-f="status">${sts}</select></label>
       <label class="field"><span>Icono</span><select data-f="icon">${icons}</select></label>
@@ -2333,12 +2308,19 @@ function bindEditor(i){
       if (f === 'levels' || f === 'tags') a[f] = v ? v.split(',').map(s=>s.trim()).filter(Boolean) : [];
       else a[f] = v;
     });
+    a.skills = Array.prototype.slice.call(box.querySelectorAll('[data-skill]:checked')).map(el => el.dataset.skill);
+    if (!a.skills.length) a.skills = ['other'];
+    a.category = a.skills[0];                       // se conserva por compatibilidad
+    a.levels = Array.prototype.slice.call(box.querySelectorAll('[data-level]:checked')).map(el => el.dataset.level);
     if (!a.id) a.id = slug(a.title);
     a.updated = new Date().toISOString().slice(0,10);
     openEditor = null;
     saveDraft(); renderAdminList();
     toast('App actualizada');
   });
+  box.querySelectorAll('.pick input').forEach(inp => inp.addEventListener('change', () => {
+    inp.closest('.pick').classList.toggle('on', inp.checked);
+  }));
   box.querySelector('[data-cancel]').addEventListener('click', () => { openEditor = null; renderAdminList(); });
 }
 
@@ -2348,7 +2330,8 @@ function addBlankApp(){
   const gh = (working.teacher||{}).github || '';
   working.apps.unshift({
     id: slug(name), repo: '', url: gh ? `https://${gh}.github.io/${slug(name)}/` : '',
-    title: name, subtitle: '', description: '', category: (working.categories[0]||{}).id || 'other',
+    title: name, subtitle: '', description: '', content: '',
+    category: 'other', skills: ['other'],
     levels: [], tags: [], icon: 'fa-shapes', accent: 'indigo', status: 'soon',
     featured: false, visible: false, updated: new Date().toISOString().slice(0,10)
   });
@@ -2437,7 +2420,8 @@ function buildJson(){
     apps: (working.apps||[]).map(a => ({
       id: a.id || slug(a.title), repo: a.repo || '', url: a.url || '',
       title: a.title || '', subtitle: a.subtitle || '', description: a.description || '',
-      category: a.category || 'other', levels: a.levels || [], tags: a.tags || [],
+      content: a.content || '',
+      category: skillsOf(a)[0], skills: skillsOf(a), levels: a.levels || [], tags: a.tags || [],
       icon: a.icon || 'fa-shapes', accent: a.accent || 'indigo', status: a.status || 'live',
       featured: !!a.featured, visible: a.visible !== false, updated: a.updated || ''
     }))
@@ -2460,7 +2444,7 @@ function copyJson(){ copyText(buildJson(), 'Contenido copiado. Pégalo en apps.j
    La bio es una página aparte, pero dentro del mismo fichero: así conserva
    la cabecera, el menú y los colores sin duplicar nada.
    ========================================================================== */
-const PAGINA_PORTADA = ['inicio','destacadas','catalogo','como-usar'];
+const PAGINA_PORTADA = ['inicio','destacadas','juegos','catalogo','como-usar'];
 
 function mostrarPagina(cual){
   const bio = cual === 'bio';
@@ -2468,6 +2452,7 @@ function mostrarPagina(cual){
     const el = document.getElementById(id);
     if (!el) return;
     if (id === 'destacadas'){ el.hidden = bio || !publicApps().some(a => a.featured); }
+    else if (id === 'juegos'){ el.hidden = bio || !publicApps().some(a => isGame(a) && !a.featured); }
     else el.hidden = bio;
   });
   document.getElementById('sobre-mi').hidden = !bio;
