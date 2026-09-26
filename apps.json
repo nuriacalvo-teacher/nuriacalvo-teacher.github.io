@@ -24,10 +24,16 @@
       "accent": "emerald"
     },
     {
-      "id": "writing",
-      "name": "Writing",
-      "icon": "fa-pen-nib",
-      "accent": "amber"
+      "id": "reading",
+      "name": "Reading",
+      "icon": "fa-book-bookmark",
+      "accent": "sky"
+    },
+    {
+      "id": "listening",
+      "name": "Listening",
+      "icon": "fa-headphones",
+      "accent": "cyan"
     },
     {
       "id": "speaking",
@@ -36,28 +42,28 @@
       "accent": "rose"
     },
     {
-      "id": "reading",
-      "name": "Reading & Literatura",
-      "icon": "fa-book-bookmark",
-      "accent": "sky"
+      "id": "writing",
+      "name": "Writing",
+      "icon": "fa-pen-nib",
+      "accent": "amber"
     },
     {
-      "id": "exams",
-      "name": "Exámenes y repaso",
-      "icon": "fa-clipboard-check",
+      "id": "culture",
+      "name": "Culture",
+      "icon": "fa-earth-europe",
+      "accent": "teal"
+    },
+    {
+      "id": "games",
+      "name": "Games",
+      "icon": "fa-gamepad",
       "accent": "violet"
     },
     {
-      "id": "tools",
-      "name": "Aula y herramientas",
-      "icon": "fa-toolbox",
-      "accent": "slate"
-    },
-    {
       "id": "other",
-      "name": "Otros proyectos",
-      "icon": "fa-globe",
-      "accent": "teal"
+      "name": "Other",
+      "icon": "fa-shapes",
+      "accent": "slate"
     }
   ],
   "levels": [
@@ -216,7 +222,7 @@
       "title": "Battles",
       "subtitle": "",
       "description": "De 2 a 4 equipos se turnan para responder vocabulario de la unidad de Introducción en cinco formatos de desafío, compitiendo contra el reloj para conseguir puntos y alcanzar el podio final.",
-      "category": "other",
+      "category": "games",
       "levels": [
         "ALL LEVELS"
       ],
@@ -226,7 +232,11 @@
       "status": "live",
       "featured": false,
       "visible": true,
-      "updated": "2026-09-20"
+      "updated": "2026-09-20",
+      "skills": [
+        "games"
+      ],
+      "content": "Juego por equipos · vocabulario a contrarreloj"
     },
     {
       "id": "escape-room",
@@ -235,7 +245,7 @@
       "title": "Escape Room",
       "subtitle": "",
       "description": "De 2 a 6 equipos se turnan para compitiendo y resolviendo acertijos contra el reloj para escapar",
-      "category": "other",
+      "category": "games",
       "levels": [
         "ALL LEVELS"
       ],
@@ -245,7 +255,11 @@
       "status": "live",
       "featured": false,
       "visible": true,
-      "updated": "2026-09-21"
+      "updated": "2026-09-21",
+      "skills": [
+        "games"
+      ],
+      "content": "Juego de escape por equipos · retos y pistas"
     },
     {
       "id": "past-tenses",
@@ -262,7 +276,11 @@
       "status": "live",
       "featured": true,
       "visible": true,
-      "updated": "2026-09-23"
+      "updated": "2026-09-23",
+      "skills": [
+        "grammar"
+      ],
+      "content": "Past simple, continuous y perfect"
     },
     {
       "id": "habits",
@@ -285,7 +303,11 @@
       "status": "live",
       "featured": false,
       "visible": true,
-      "updated": "2026-09-11"
+      "updated": "2026-09-11",
+      "skills": [
+        "grammar"
+      ],
+      "content": "Rutinas, adverbios de frecuencia y vocabulario del día a día"
     },
     {
       "id": "sentence-formation",
@@ -308,7 +330,11 @@
       "status": "live",
       "featured": true,
       "visible": false,
-      "updated": "2026-09-18"
+      "updated": "2026-09-18",
+      "skills": [
+        "grammar"
+      ],
+      "content": ""
     },
     {
       "id": "present-tenses",
@@ -332,7 +358,11 @@
       "status": "live",
       "featured": true,
       "visible": true,
-      "updated": "2026-09-14"
+      "updated": "2026-09-14",
+      "skills": [
+        "grammar"
+      ],
+      "content": "3 niveles · present simple, continuous, perfect y perfect continuous"
     },
     {
       "id": "irregular-verbs",
@@ -356,7 +386,11 @@
       "status": "live",
       "featured": true,
       "visible": true,
-      "updated": "2025-11-13"
+      "updated": "2025-11-13",
+      "skills": [
+        "vocabulary"
+      ],
+      "content": "5 módulos · 3 niveles · las tres formas, huecos y traducción"
     },
     {
       "id": "conditionals-reportedspeech",
@@ -379,7 +413,11 @@
       "status": "live",
       "featured": false,
       "visible": false,
-      "updated": "2026-05-28"
+      "updated": "2026-05-28",
+      "skills": [
+        "grammar"
+      ],
+      "content": ""
     },
     {
       "id": "reported_speech",
@@ -401,7 +439,11 @@
       "status": "live",
       "featured": false,
       "visible": false,
-      "updated": "2026-04-21"
+      "updated": "2026-04-21",
+      "skills": [
+        "grammar"
+      ],
+      "content": ""
     },
     {
       "id": "relative-clauses",
@@ -423,7 +465,11 @@
       "status": "live",
       "featured": false,
       "visible": false,
-      "updated": "2026-04-07"
+      "updated": "2026-04-07",
+      "skills": [
+        "grammar"
+      ],
+      "content": ""
     },
     {
       "id": "brit",
@@ -432,7 +478,7 @@
       "title": "BRIT · B1-B2",
       "subtitle": "Cuatro destrezas en 30 temas",
       "description": "Reading, listening, writing y mediation en dos niveles, B1 y B2, sobre 30 temas. El listening se escucha dos veces. Las redacciones con banco de expresiones por tipo de texto. Informe final de notas.",
-      "category": "exams",
+      "category": "other",
       "levels": [],
       "tags": [
         "4 destrezas",
@@ -444,7 +490,11 @@
       "status": "live",
       "featured": true,
       "visible": true,
-      "updated": "2026-09-20"
+      "updated": "2026-09-20",
+      "skills": [
+        "other"
+      ],
+      "content": "Reading, listening, writing y mediation · B1 y B2"
     },
     {
       "id": "ANIMAL-FARM",
@@ -467,7 +517,11 @@
       "status": "live",
       "featured": false,
       "visible": false,
-      "updated": "2026-02-13"
+      "updated": "2026-02-13",
+      "skills": [
+        "reading"
+      ],
+      "content": ""
     },
     {
       "id": "BRIT-B1-ORAL",
@@ -491,7 +545,11 @@
       "status": "live",
       "featured": false,
       "visible": true,
-      "updated": "2026-01-14"
+      "updated": "2026-01-14",
+      "skills": [
+        "speaking"
+      ],
+      "content": "Prueba oral B1 · preguntas tipo y expresiones de examen"
     },
     {
       "id": "pasarlista",
@@ -500,7 +558,7 @@
       "title": "Pasar lista",
       "subtitle": "Herramienta de aula",
       "description": "Herramienta para pasar lista y controlar la asistencia del grupo.",
-      "category": "tools",
+      "category": "other",
       "levels": [],
       "tags": [
         "Uso docente"
@@ -510,7 +568,11 @@
       "status": "live",
       "featured": false,
       "visible": false,
-      "updated": "2026-09-13"
+      "updated": "2026-09-13",
+      "skills": [
+        "other"
+      ],
+      "content": ""
     },
     {
       "id": "control",
@@ -519,7 +581,7 @@
       "title": "Control",
       "subtitle": "Herramienta de aula",
       "description": "Herramienta interna de control y seguimiento.",
-      "category": "tools",
+      "category": "other",
       "levels": [],
       "tags": [
         "Uso docente"
@@ -529,7 +591,11 @@
       "status": "live",
       "featured": false,
       "visible": false,
-      "updated": "2025-10-11"
+      "updated": "2025-10-11",
+      "skills": [
+        "other"
+      ],
+      "content": ""
     },
     {
       "id": "patrimonio_IES_Goya",
@@ -548,7 +614,11 @@
       "status": "live",
       "featured": false,
       "visible": false,
-      "updated": "2026-05-08"
+      "updated": "2026-05-08",
+      "skills": [
+        "other"
+      ],
+      "content": ""
     },
     {
       "id": "future",
@@ -565,7 +635,11 @@
       "status": "live",
       "featured": true,
       "visible": true,
-      "updated": "2026-09-25"
+      "updated": "2026-09-25",
+      "skills": [
+        "grammar"
+      ],
+      "content": "Will, be going to y present continuous con valor de futuro"
     }
   ]
 }
