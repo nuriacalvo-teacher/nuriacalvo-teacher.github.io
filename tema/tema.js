@@ -1,10 +1,13 @@
 /* ==========================================================================
    tema/tema.js · «Around the English-speaking world»
    Añade la capa decorativa del portal SIN tocar el contenido: horizonte con
-   paralaje (Londres · Dublín · Nueva York · Toronto · Sídney), autobús de dos
-   pisos, taxi amarillo, canguro, duende irlandés con su olla de oro y
-   arcoíris, avioneta con pancarta, saludos flotantes, tréboles y hojas de
-   arce, iconos de fondo, barra de progreso, música y efectos.
+   paralaje (Londres · Dublín · Nueva York · Toronto · Sídney), avioneta con
+   pancarta, globo, sol o luna, nubes, saludos flotantes, barra de progreso,
+   música y efectos.
+   Además pinta la ESTACIÓN que elige la profesora en su panel (primavera,
+   verano, otoño o invierno): colores del paisaje, hojas, lluvia, viento,
+   nieve que va cubriendo el suelo y los edificios, flores, arcoíris…
+   La estación llega en el atributo data-season de <html>.
    Todo va envuelto en try/catch: si algo fallase, el portal sigue igual.
    ========================================================================== */
 (function () {
@@ -17,8 +20,20 @@
     function el(tag, cls, html) { var e = doc.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; }
     function rnd(a, b) { return a + Math.random() * (b - a); }
 
+    // Florecillas para la primavera: puntitos de colores sobre la hierba
+    // (solo se ven en primavera; el resto del año están ocultas).
+    function flores(n, x0, x1, y0, y1, r) {
+      var C = ["#f472b6", "#fde047", "#ffffff", "#c084fc", "#fb7185", "#facc15"], s = '<g class="tm-flores">';
+      for (var i = 0; i < n; i++) {
+        s += '<circle cx="' + rnd(x0, x1).toFixed(0) + '" cy="' + rnd(y0, y1).toFixed(1) + '" r="' + (r * rnd(.7, 1.2)).toFixed(1) + '" fill="' + C[i % C.length] + '"/>';
+      }
+      return s + "</g>";
+    }
+
     // ------------------------------------------------------------------ horizonte
     // Tres capas SVG (lejana, media y cercana) sobre un suelo común (y = 260).
+    // Clases: .f edificios · .c colinas · .v/.v2 vegetación · .copa árboles de
+    // hoja caduca (en invierno se quedan pelados).
     var FAR = '<svg viewBox="0 0 1600 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">' +
       // bloques de ciudad de fondo
       '<path class="f" d="M0 260V190h40v-30h36v50h30v-70h44v90h26v-40h30v40h40v-60h30v60h420v-50h28v-40h34v90h40v-110h36v110h30v-60h44v60h250v-70h30v-30h40v100h36v-60h30v60h210v-80h40v80h36v-50h40v50h24V260Z"/>' +
@@ -54,12 +69,13 @@
       '<path class="f" d="M1093 260L1097 92h6l4 168ZM1086 105a14 8 0 1 0 28 0a14 8 0 1 0-28 0ZM1094 70a6 4 0 1 0 12 0a6 4 0 1 0-12 0ZM1099 70V8h2v62Z"/>' +
       // Ópera de Sídney
       '<path class="f" d="M1318 238h178v12H1318ZM1330 240Q1356 150 1402 240ZM1372 240Q1404 124 1452 240ZM1424 240Q1452 168 1486 240Z"/></svg>';
-
     var NEAR = '<svg viewBox="0 0 1600 160" preserveAspectRatio="xMidYMax slice" aria-hidden="true">' +
       // colinas y árboles
-      '<path class="f" d="M0 160V120Q120 96 240 118T480 112T720 124T960 110T1200 122T1440 108T1600 118V160Z"/>' +
-      '<g class="f"><circle cx="60" cy="104" r="16"/><rect x="58" y="104" width="4" height="18"/><circle cx="96" cy="110" r="12"/><circle cx="410" cy="100" r="15"/><circle cx="436" cy="106" r="11"/>' +
-      '<circle cx="1010" cy="98" r="14"/><circle cx="1036" cy="104" r="10"/><circle cx="1500" cy="96" r="15"/><circle cx="1528" cy="104" r="11"/></g>' +
+      '<path class="c" d="M0 160V120Q120 96 240 118T480 112T720 124T960 110T1200 122T1440 108T1600 118V160Z"/>' +
+      '<rect class="f" x="58" y="104" width="4" height="18"/>' +
+      '<g class="v copa"><circle cx="60" cy="104" r="16"/><circle cx="410" cy="100" r="15"/><circle cx="1010" cy="98" r="14"/><circle cx="1500" cy="96" r="15"/></g>' +
+      '<g class="v2 copa"><circle cx="96" cy="110" r="12"/><circle cx="436" cy="106" r="11"/><circle cx="1036" cy="104" r="10"/><circle cx="1528" cy="104" r="11"/></g>' +
+      flores(40, 0, 1600, 124, 150, 2.2) +
       // cabina roja de Londres
       '<path class="f" d="M180 124V80h22v44ZM178 80q13-10 26 0Z"/>' +
       // Irlanda: torre redonda de Glendalough y cruz celta
@@ -72,35 +88,15 @@
       '<path class="f" d="M630 124V96h40v28ZM622 124h56v6h-56ZM638 96L644 52h12l6 44ZM650 50m-6 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0ZM654 56l8-32h4l-4 32ZM640 58l-6 12h6ZM642 44l-3-6 5 4M650 40v-7M658 44l3-6-5 4"/>' +
       '<ellipse class="tm-flame" cx="664" cy="17" rx="4" ry="7"/></svg>';
 
-    // Canguro: silueta natural, con la cría asomando de la bolsa.
-    var ROO = '<svg viewBox="0 0 84 62"><g class="tm-roo-body">' +
-      '<path d="M2 57Q14 58 26 50Q32 46 34 42L40 46Q34 56 22 59Q10 61 2 59Z" fill="#b8693f"/>' +
-      '<path d="M30 28Q34 18 46 17Q56 17 60 24Q63 30 60 38Q56 48 44 50Q34 50 30 42Q27 35 30 28Z" fill="#c97b4b"/>' +
-      '<path d="M44 26Q52 24 56 30Q58 38 52 44Q46 46 44 40Z" fill="#e8b48a"/>' +
-      '<circle cx="48" cy="37" r="3.6" fill="#c97b4b"/><path d="M46 34l1-4 2 3.4Z" fill="#c97b4b"/><circle cx="49" cy="36.5" r=".7" fill="#1e1b4b"/>' +
-      '<path d="M54 22Q60 12 66 10Q72 9 76 13Q79 16 76 18L70 19Q66 22 62 28Z" fill="#c97b4b"/>' +
-      '<path d="M63 11Q61 2 64 0Q67 3 66 10Z M67 10Q67 2 70 1Q72 5 69 11Z" fill="#b8693f"/><path d="M64 9Q63 4 64.5 2Q66 5 65.5 9Z" fill="#e8b48a"/>' +
-      '<circle cx="70" cy="13" r="1.3" fill="#1e1b4b"/><circle cx="77" cy="16" r="1.1" fill="#3b2415"/>' +
-      '<path class="tm-roo-arm" d="M58 32Q63 36 64 41" stroke="#b8693f" stroke-width="3" stroke-linecap="round" fill="none"/>' +
-      '<g class="tm-roo-leg"><path d="M36 38Q46 40 46 50L44 54Q40 48 34 46Z" fill="#b8693f"/><path d="M40 53L62 55Q66 57 62 59L38 59Q36 56 40 53Z" fill="#9c5530"/></g>' +
-      '</g></svg>';
-    // Duende irlandés (leprechaun)
-    var LEP = '<svg viewBox="0 0 44 64"><g class="tm-lep-body">' +
-      '<rect x="12" y="4" width="20" height="13" rx="1.5" fill="#15803d"/><rect x="8" y="16" width="28" height="3.4" rx="1.7" fill="#166534"/>' +
-      '<rect x="12" y="12" width="20" height="3.4" fill="#1e1b4b"/><rect x="19.5" y="11.4" width="5" height="4.6" fill="none" stroke="#fbbf24" stroke-width="1.2"/>' +
-      '<path d="M30 6q3-3 5 0q-3 1-5 0Z M30 6q2 3 0 5q-1-3 0-5Z" fill="#4ade80"/>' +
-      '<circle cx="22" cy="25" r="6.5" fill="#fcd9b6"/><circle cx="19.5" cy="24" r=".9" fill="#1e1b4b"/><circle cx="24.5" cy="24" r=".9" fill="#1e1b4b"/>' +
-      '<circle cx="18" cy="26.5" r="1.4" fill="#fb7185" opacity=".6"/><circle cx="26" cy="26.5" r="1.4" fill="#fb7185" opacity=".6"/>' +
-      '<path d="M14.5 25Q15 37 22 38Q29 37 29.5 25Q26 30 22 30Q18 30 14.5 25Z" fill="#f97316"/><path d="M19.5 29.5q2.5 1.6 5 0" stroke="#7c2d12" stroke-width=".8" fill="none"/>' +
-      '<path d="M13 38Q22 35 31 38L33 50L11 50Z" fill="#16a34a"/><rect x="11.5" y="45" width="21" height="3" fill="#1e1b4b"/><rect x="19.5" y="44.2" width="5" height="4.6" fill="none" stroke="#fbbf24" stroke-width="1.2"/>' +
-      '<path class="tm-lep-arm l" d="M14 40L6 32" stroke="#16a34a" stroke-width="3.4" stroke-linecap="round"/><path class="tm-lep-arm r" d="M30 40L38 32" stroke="#16a34a" stroke-width="3.4" stroke-linecap="round"/>' +
-      '<g class="tm-lep-leg l"><rect x="15" y="50" width="4.4" height="8" fill="#1e1b4b"/><ellipse cx="15.5" cy="59.5" rx="5" ry="2.4" fill="#111827"/><rect x="13.6" y="58" width="3" height="2" fill="#fbbf24"/></g>' +
-      '<g class="tm-lep-leg r"><rect x="24.6" y="50" width="4.4" height="8" fill="#1e1b4b"/><ellipse cx="28.5" cy="59.5" rx="5" ry="2.4" fill="#111827"/><rect x="27.4" y="58" width="3" height="2" fill="#fbbf24"/></g>' +
-      '</g></svg>';
-    // Olla de oro
-    var POT = '<svg viewBox="0 0 44 36"><g fill="#fbbf24"><circle cx="12" cy="11" r="5"/><circle cx="20" cy="8" r="5"/><circle cx="28" cy="10" r="5"/><circle cx="34" cy="13" r="4"/><circle cx="16" cy="13" r="4"/></g>' +
-      '<path d="M6 14h32q2 0 2 2t-2 2h-1q2 12-15 14Q5 30 7 18H6q-2 0-2-2t2-2Z" fill="#1f2937"/><path d="M9 20q13 4 26 0" stroke="#4b5563" stroke-width="1.4" fill="none"/>' +
-      '<g class="tm-spark" fill="#fef3c7"><path d="M22 0l1 3 3 1-3 1-1 3-1-3-3-1 3-1Z"/><path d="M36 4l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7Z"/></g></svg>';
+    var AVION = '<svg viewBox="0 0 58 26"><path d="M4 13q0-4 6-4h30l10-8h4l-5 8q7 1 7 4t-7 4l5 8h-4l-10-8H10q-6 0-6-4Z" fill="#e0e7ff"/><path d="M22 9l-6-8h5l10 8ZM22 17l-6 8h5l10-8Z" fill="#a5b4fc"/><circle cx="14" cy="13" r="1.4" fill="#6366f1"/><circle cx="20" cy="13" r="1.4" fill="#6366f1"/></svg>';
+
+    // Nube: el --d guarda su duración, para que el otoño la acelere con calc()
+    function nube(cls, top, w, dur) {
+      var cl = el("i", cls);
+      cl.style.top = top + "%"; cl.style.width = w + "px";
+      cl.style.setProperty("--d", dur + "s"); cl.style.animationDelay = -rnd(0, dur) + "s";
+      return cl;
+    }
 
     function scene(hero) {
       var sc = el("div", "tm-scene no-print");
@@ -113,11 +109,10 @@
         s.style.animationDelay = -rnd(0, 4) + "s";
         sky.appendChild(s);
       }
-      [[12, 180, 70], [26, 130, 95], [40, 220, 120]].forEach(function (c) {
-        var cl = el("i", "tm-cloud");
-        cl.style.top = c[0] + "%"; cl.style.width = c[1] + "px";
-        cl.style.animationDuration = c[2] + "s"; cl.style.animationDelay = -rnd(0, c[2]) + "s";
-        sky.appendChild(cl);
+      // las tres primeras salen siempre de día; las «tm-mas» solo cuando la
+      // estación trae el cielo más cubierto (otoño, invierno, primavera)
+      [[12, 180, 70, ""], [26, 130, 95, ""], [40, 220, 120, ""], [6, 160, 84, " tm-mas"], [20, 240, 110, " tm-mas"], [33, 150, 76, " tm-mas"]].forEach(function (c) {
+        sky.appendChild(nube("tm-cloud" + c[3], c[0], c[1], c[2]));
       });
       sc.appendChild(sky);
       var far = el("div", "tm-layer tm-far", FAR); far.setAttribute("data-tm-speed", "0.06"); far.setAttribute("data-tm-depth", "8");
@@ -126,27 +121,8 @@
       sc.appendChild(far); sc.appendChild(mid); sc.appendChild(near);
       sc.appendChild(el("div", "tm-water"));
       if (!reduce) {
-        sc.appendChild(el("div", "tm-mover tm-bus",
-          '<svg viewBox="0 0 86 52"><rect x="2" y="4" width="80" height="40" rx="7" fill="#f43f5e"/><rect x="2" y="22" width="80" height="3" fill="#be123c"/>' +
-          '<g fill="#e0e7ff" opacity=".85"><rect x="8" y="9" width="11" height="9" rx="2"/><rect x="23" y="9" width="11" height="9" rx="2"/><rect x="38" y="9" width="11" height="9" rx="2"/><rect x="53" y="9" width="11" height="9" rx="2"/><rect x="68" y="9" width="10" height="9" rx="2"/>' +
-          '<rect x="8" y="28" width="11" height="9" rx="2"/><rect x="23" y="28" width="11" height="9" rx="2"/><rect x="38" y="28" width="11" height="9" rx="2"/><rect x="68" y="28" width="10" height="12" rx="2"/></g>' +
-          '<circle cx="18" cy="45" r="6" fill="#1e1b4b"/><circle cx="66" cy="45" r="6" fill="#1e1b4b"/><circle cx="18" cy="45" r="2.4" fill="#a5b4fc"/><circle cx="66" cy="45" r="2.4" fill="#a5b4fc"/></svg>'));
-        sc.appendChild(el("div", "tm-mover tm-taxi",
-          '<svg viewBox="0 0 58 30"><path d="M4 18q0-6 6-6h6l6-8h16l7 8h5q4 0 4 5v7H4Z" fill="#f59e0b"/><rect x="22" y="1" width="12" height="4" rx="1" fill="#fcd34d"/>' +
-          '<path d="M24 6h12l5 6H20Z" fill="#e0e7ff" opacity=".8"/><path d="M4 20h50" stroke="#1e1b4b" stroke-dasharray="3 3" stroke-width="1.5"/>' +
-          '<circle cx="15" cy="25" r="4.5" fill="#1e1b4b"/><circle cx="45" cy="25" r="4.5" fill="#1e1b4b"/></svg>'));
-        sc.appendChild(el("div", "tm-mover tm-roo", ROO));
-        // Irlanda: arcoíris en el cielo y el duende cruzando la portada
-        // con su olla de oro, a saltitos de jiga
-        sc.appendChild(el("div", "tm-rainbow"));
-        var irl = el("div", "tm-mover tm-irl");
-        irl.appendChild(el("div", "tm-lep", LEP));
-        irl.appendChild(el("div", "tm-pot", POT));
-        sc.appendChild(irl);
-        var plane = el("div", "tm-plane",
-          '<svg viewBox="0 0 58 26"><path d="M4 13q0-4 6-4h30l10-8h4l-5 8q7 1 7 4t-7 4l5 8h-4l-10-8H10q-6 0-6-4Z" fill="#e0e7ff"/><path d="M22 9l-6-8h5l10 8ZM22 17l-6 8h5l10-8Z" fill="#a5b4fc"/><circle cx="14" cy="13" r="1.4" fill="#6366f1"/><circle cx="20" cy="13" r="1.4" fill="#6366f1"/></svg>' +
-          '<span class="tm-rope"></span><span class="tm-banner">Hello! · Dia duit! · G\'day! · Howdy! · Hiya! · Welcome!</span>');
-        sc.appendChild(plane);
+        sc.appendChild(el("div", "tm-plane", AVION +
+          '<span class="tm-rope"></span><span class="tm-banner">Hello! · Dia duit! · G\'day! · Howdy! · Hiya! · Welcome!</span>'));
       }
       hero.insertBefore(sc, hero.firstChild);
       return sc;
@@ -181,67 +157,6 @@
       setTimeout(one, 1200);
       setInterval(one, 3200);
     }
-
-    // ------------------------------------------------------------------ fondo de la página
-    var ICONS = [
-      // Big Ben
-      '<path d="M40 88V34h20v54M36 34h28M40 34l10-22 10 22M50 12V4"/><circle cx="50" cy="44" r="6"/><path d="M50 44v-3M50 44h3"/>',
-      // cabina telefónica
-      '<rect x="32" y="24" width="36" height="64" rx="3"/><path d="M28 24q22-18 44 0M38 34h24v26H38zM50 34v26M38 47h24"/>',
-      // Estatua de la Libertad
-      '<path d="M40 90h20M44 90l4-50h8l4 50M52 40a6 6 0 1 0 0-12a6 6 0 1 0 0 12M58 30l8-22M64 6q2-4 4 0q-2 4-4 0"/>',
-      // Ópera de Sídney
-      '<path d="M14 80h72M18 80q10-40 34 0M38 80q14-52 38 0M62 80q10-28 22 0"/>',
-      // hoja de arce
-      '<path d="M50 88V60M50 60l-8 6 2-10-12-2 8-8-8-10 12 2 4-12 4 8 4-8 4 12 12-2-8 10 8 8-12 2 2 10Z"/>',
-      // taza de té
-      '<path d="M24 46h44v14q0 20-22 20T24 60ZM68 50q12 0 10 10t-12 6M20 86h56M40 38q-4-6 0-12M50 38q-4-6 0-12"/>',
-      // canguro (señal)
-      '<path d="M50 6l40 44-40 44-40-44Z"/><path d="M58 34q4-4 6 0l-2 4q-2 8-8 10l4 10h-4l-4-6q-6 2-10 0l-6 6q-3 0 0-3l4-5q-2-6 4-10q6-4 16-6Z"/>',
-      // trébol (Irlanda)
-      '<path d="M50 50q-22-4-18-20t18 2q4-22 18-18t0 22q18-4 20 12t-20 4q4 14-4 18t-14-20ZM50 52q2 20 12 34"/>',
-      // arpa celta (Irlanda)
-      '<path d="M30 88L28 14q30 0 44 30T70 88ZM30 88h40M38 26v58M46 30v54M54 38v46M62 50v34"/>',
-      // guitarra (country / folk)
-      '<path d="M66 10l10 10M71 15L48 38M44 36q-18-4-22 10q-4 14 10 22t22-6q6-12-6-18"/><circle cx="36" cy="54" r="5"/>'
-    ];
-    var bgIcons = [];
-    function background() {
-      var bg = el("div", "tm-bg no-print");
-      bg.setAttribute("aria-hidden", "true");
-      var n = window.innerWidth < 700 ? 6 : 10;
-      for (var i = 0; i < n; i++) {
-        var ic = el("div", "tm-icon", '<svg viewBox="0 0 100 100">' + ICONS[i % ICONS.length] + "</svg>");
-        var left = (i % 2 ? rnd(78, 94) : rnd(1, 12));
-        ic.style.left = left + "%";
-        var sz = rnd(70, 120); ic.style.width = ic.style.height = sz + "px";
-        ic.style.transform = "rotate(" + rnd(-14, 14) + "deg)";
-        bgIcons.push({ el: ic, y: i * 42 + rnd(0, 20), speed: rnd(0.15, 0.35), rot: rnd(-14, 14) });
-        bg.appendChild(ic);
-      }
-      if (!reduce) {
-        var LEAF = '<svg viewBox="0 0 24 24"><path fill="COLOR" d="M12 22v-5l-4 1 1-3-5-3 2-1-2-4 4 1 1-3 3 3v-6l2 3 2-3v6l3-3 1 3 4-1-2 4 2 1-5 3 1 3-4-1v5Z"/></svg>';
-        var CLOVER = '<svg viewBox="0 0 24 24"><g fill="COLOR"><circle cx="12" cy="6.5" r="4.4"/><circle cx="6.8" cy="12.5" r="4.4"/><circle cx="17.2" cy="12.5" r="4.4"/><circle cx="12" cy="11.5" r="3"/></g><path d="M12 13q1 6 4 9" stroke="COLOR" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>';
-        var GREENS = ["#22c55e", "#4ade80", "#16a34a", "#86efac"];
-        var STAR = '<svg viewBox="0 0 24 24"><path fill="COLOR" d="M12 2l3 7h7l-5.5 4.5 2 7.5L12 16.5 5.5 21l2-7.5L2 9h7Z"/></svg>';
-        var COLORS = ["#f472b6", "#fbbf24", "#818cf8", "#c084fc", "#fb7185"];
-        var nl = window.innerWidth < 700 ? 10 : 18;
-        for (var k = 0; k < nl; k++) {
-          // la mitad son tréboles verdes; el resto, hojas de arce y estrellas
-          var shape = k % 2 === 0 ? CLOVER.replace(/COLOR/g, GREENS[(k / 2) % GREENS.length]) : (k % 4 === 3 ? STAR : LEAF).replace("COLOR", COLORS[k % COLORS.length]);
-          var lf = el("i", "tm-leaf" + (k % 2 === 0 ? " tm-clover" : ""), shape);
-          lf.style.left = rnd(0, 100) + "%";
-          lf.style.animationDuration = rnd(18, 34) + "s";
-          lf.style.animationDelay = -rnd(0, 34) + "s";
-          lf.style.setProperty("--dx", rnd(-60, 140) + "px");
-          lf.style.setProperty("--rot", rnd(200, 620) + "deg");
-          var z = rnd(12, 22); lf.style.width = lf.style.height = z + "px";
-          bg.appendChild(lf);
-        }
-      }
-      doc.body.insertBefore(bg, doc.body.firstChild);
-    }
-
     // ------------------------------------------------------------------ paralaje
     var layers = [], mx = 0, tx = 0, bar;
     function frame() {
@@ -251,11 +166,6 @@
         var sp = +l.getAttribute("data-tm-speed"), d = +l.getAttribute("data-tm-depth");
         l.style.transform = "translate3d(" + (-tx * d).toFixed(1) + "px," + (y * sp).toFixed(1) + "px,0)";
       });
-      var span = vh + 260;
-      bgIcons.forEach(function (ic) {
-        var top = (((ic.y / 100) * span - y * ic.speed) % span + span) % span - 130;
-        ic.el.style.transform = "translate3d(0," + top.toFixed(1) + "px,0) rotate(" + ic.rot.toFixed(1) + "deg)";
-      });
       moverMundo(y, tx);
       var h = root.scrollHeight - vh;
       if (bar) bar.style.width = (h > 0 ? Math.min(100, y / h * 100) : 0) + "%";
@@ -264,13 +174,13 @@
 
     // ------------------------------------------------------------------ el mundo que pasa
     // Franja de paisaje fija al pie de la ventana, en tres capas que viajan a
-    // distinta velocidad al bajar por la página, más un cielo con nubes.
+    // distinta velocidad al bajar por la página.
 
-    // --- capa lejana: montañas y colinas
+    // --- capa lejana: montañas, colinas y pinos
     var W_FAR = '<svg viewBox="0 0 1500 300" aria-hidden="true">' +
       '<g opacity=".7"><path class="f" d="M0 300V208l64-72 46 52 38-34 70 86 58-48 86 74 72-62 104 84 78-70 96 82 74-56 86 68 72-44 156 92V300Z"/></g>' +
-      '<path class="f" d="M0 300V254q76-34 156-14t166 8 150-28 164 24 152-16 166 22 146 10 160-16 140 12V300Z"/>' +
-      '<g class="f" opacity=".8"><path d="M210 254l12-30 12 30zM232 254l10-24 10 24zM700 252l11-28 11 28zM1062 254l12-30 12 30z"/></g>' +
+      '<path class="c" d="M0 300V254q76-34 156-14t166 8 150-28 164 24 152-16 166 22 146 10 160-16 140 12V300Z"/>' +
+      '<g class="v" opacity=".8"><path d="M210 254l12-30 12 30zM232 254l10-24 10 24zM700 252l11-28 11 28zM1062 254l12-30 12 30z"/></g>' +
       '</svg>';
 
     // --- capa media: los monumentos del mundo angloparlante
@@ -309,13 +219,15 @@
     // --- capa cercana: el suelo, los árboles y el mobiliario de la calle
     var W_NEAR = '<svg viewBox="0 0 1500 300" aria-hidden="true">' +
       '<path class="g" d="M0 268q100-16 200-8t200 12 200-14 200 10 200-12 200 8 200-10 100 6V300H0Z"/>' +
+      flores(70, 0, 1500, 272, 286, 1.8) +
       '<path class="r" d="M0 288h1500v12H0z"/>' +
       '<g class="r"><path d="M20 292h40v4H20zM100 292h40v4h-40zM180 292h40v4h-40zM260 292h40v4h-40zM340 292h40v4h-40zM420 292h40v4h-40zM500 292h40v4h-40zM580 292h40v4h-40zM660 292h40v4h-40zM740 292h40v4h-40zM820 292h40v4h-40zM900 292h40v4h-40zM980 292h40v4h-40zM1060 292h40v4h-40zM1140 292h40v4h-40zM1220 292h40v4h-40zM1300 292h40v4h-40zM1380 292h40v4h-40zM1460 292h40v4h-40z"/></g>' +
-      // árboles
-      '<g class="f"><circle cx="86" cy="246" r="20"/><circle cx="110" cy="254" r="14"/><path d="M92 256h7v26h-7z"/>' +
-      '<circle cx="466" cy="244" r="18"/><circle cx="446" cy="252" r="13"/><path d="M462 254h7v28h-7z"/>' +
-      '<circle cx="874" cy="246" r="19"/><circle cx="896" cy="254" r="13"/><path d="M878 256h7v26h-7z"/>' +
-      '<path d="M646 282l-14-38h28zM648 258l-12-30h24zM652 244h6v38h-6z"/></g>' +
+      // árboles: primero los troncos, luego las copas
+      '<g class="f"><path d="M92 256h7v26h-7zM462 254h7v28h-7zM878 256h7v26h-7zM652 244h6v38h-6zM1252 258h6v24h-6zM1400 259h6v23h-6z"/></g>' +
+      '<g class="v copa"><circle cx="86" cy="246" r="20"/><circle cx="466" cy="244" r="18"/><circle cx="874" cy="246" r="19"/><circle cx="1248" cy="248" r="17"/><circle cx="1404" cy="250" r="15"/></g>' +
+      '<g class="v2 copa"><circle cx="110" cy="254" r="14"/><circle cx="446" cy="252" r="13"/><circle cx="896" cy="254" r="13"/><circle cx="1268" cy="256" r="12"/><circle cx="1386" cy="257" r="11"/></g>' +
+      // un abeto, que no pierde la hoja en invierno
+      '<g class="v"><path d="M646 282l-14-38h28zM648 258l-12-30h24z"/></g>' +
       // cabina telefónica roja
       '<path class="d" d="M146 282v-48h24v48zM144 234q13-10 28 0Z"/>' +
       '<path class="r" d="M150 240h7v14h-7zM159 240h7v14h-7zM150 258h7v14h-7zM159 258h7v14h-7z"/>' +
@@ -330,194 +242,9 @@
       // farolas con su luz
       '<g class="d"><path d="M396 282v-46h3.5v46zM392 234h12v4h-12zM1122 282v-46h3.5v46zM1118 234h12v4h-12z"/></g>' +
       '<g class="tm-lamp" fill="#fbbf24"><circle cx="398" cy="232" r="3"/><circle cx="1124" cy="232" r="3"/></g>' +
-      // el tramo de campo abierto antes de que el paisaje vuelva a empezar
-      '<g class="f"><circle cx="1248" cy="248" r="17"/><circle cx="1268" cy="256" r="12"/><path d="M1252 258h6v24h-6z"/>' +
-      '<circle cx="1404" cy="250" r="15"/><circle cx="1386" cy="257" r="11"/><path d="M1400 259h6v23h-6z"/>' +
-      '<path d="M1300 282q14-10 28 0zM1332 282q10-7 20 0zM1446 282q12-9 24 0z"/></g>' +
+      // matorrales en el tramo de campo abierto
+      '<g class="v2"><path d="M1300 282q14-10 28 0zM1332 282q10-7 20 0zM1446 282q12-9 24 0z"/></g>' +
       '</svg>';
-
-    // ------------------------------------------------------------------ personajes
-    // Guardia real británico
-    var GUARDIA = '<svg viewBox="0 0 40 78"><g class="tm-walk">' +
-      '<g class="tm-leg l"><rect x="14.4" y="52" width="5" height="19" rx="1.4" fill="#111827"/><rect x="18.2" y="52" width="1.4" height="19" fill="#dc2626" opacity=".6"/><path d="M11.8 71h8.6v4.4h-8.6z" fill="#0b1120"/></g>' +
-      '<g class="tm-leg r"><rect x="20.6" y="52" width="5" height="19" rx="1.4" fill="#1f2937"/><rect x="24.4" y="52" width="1.4" height="19" fill="#dc2626" opacity=".6"/><path d="M19.6 71h8.6v4.4h-8.6z" fill="#111827"/></g>' +
-      '<path d="M12.5 30h15v24h-15z" fill="#dc2626"/><path d="M12.5 30h15v4h-15z" fill="#b91c1c"/><path d="M12.5 46.5h15v3.4h-15z" fill="#f8fafc"/>' +
-      '<g fill="#fbbf24"><circle cx="20" cy="35" r="1"/><circle cx="20" cy="39.5" r="1"/><circle cx="20" cy="44" r="1"/></g>' +
-      '<rect class="tm-arm2 l" x="8.8" y="31" width="4" height="17" rx="2" fill="#dc2626"/>' +
-      '<rect class="tm-arm2 r" x="27.2" y="31" width="4" height="17" rx="2" fill="#dc2626"/>' +
-      '<circle cx="20" cy="25.6" r="5.2" fill="#f1c9a5"/><circle cx="18.2" cy="25" r=".8" fill="#1e1b4b"/><circle cx="21.8" cy="25" r=".8" fill="#1e1b4b"/>' +
-      '<path d="M13.6 23.6V13.4Q13.6 5 20 5t6.4 8.4v10.2z" fill="#111827"/><path d="M13.6 21.4h12.8v2.6H13.6z" fill="#000" opacity=".5"/>' +
-      '<path d="M20 25.6v4.6" stroke="#e5e7eb" stroke-width=".9"/>' +
-      '<path d="M30.4 21l-2.6 27" stroke="#52525b" stroke-width="2.4" stroke-linecap="round"/><path d="M30 26.5l3.6-1" stroke="#92400e" stroke-width="2" stroke-linecap="round"/>' +
-      '</g></svg>';
-
-    // Corgi
-    var CORGI = '<svg viewBox="0 0 44 30"><g class="tm-bob">' +
-      '<path class="tm-wag" d="M9 16q-6-3-7 1 4 3 7 1z" fill="#fef3c7"/>' +
-      '<path d="M9 21q0-8 9-8h10q8 0 8 8v2q0 2-2 2H11q-2 0-2-2z" fill="#d97706"/>' +
-      '<g class="tm-leg l"><path d="M14 23h4.4v5.4H14z" fill="#b45309"/></g>' +
-      '<g class="tm-leg r"><path d="M27 23h4.4v5.4H27z" fill="#a1540a"/></g>' +
-      '<path d="M13 18q8-4 17 0v7H13z" fill="#fef3c7"/>' +
-      '<path d="M28.6 8.4l-1.4-7 6 3.6zM37.4 7l3.2-5.6 1.6 6.2z" fill="#d97706"/>' +
-      '<ellipse cx="35" cy="13" rx="7" ry="6.4" fill="#d97706"/><path d="M31 15q4 3 8 0-1 4-4 4t-4-4z" fill="#fef3c7"/>' +
-      '<circle cx="36.4" cy="11.4" r=".9" fill="#1f2937"/><ellipse cx="41" cy="14" rx="1.8" ry="1.4" fill="#1f2937"/>' +
-      '</g></svg>';
-
-    // Gaitero escocés
-    var GAITERO = '<svg viewBox="0 0 50 78"><g class="tm-walk">' +
-      '<g class="tm-leg l"><rect x="16" y="60" width="5" height="10" fill="#f8fafc"/><path d="M13.6 70h8.4v4.4h-8.4z" fill="#111827"/></g>' +
-      '<g class="tm-leg r"><rect x="23" y="60" width="5" height="10" fill="#e2e8f0"/><path d="M21.4 70h8.4v4.4h-8.4z" fill="#0b1120"/></g>' +
-      '<path d="M13.6 46h17v16h-17z" fill="#1d4ed8"/>' +
-      '<g stroke="#dc2626" stroke-width="1.2" opacity=".85"><path d="M17 46v16M23 46v16M29 46v16M13.6 51h17M13.6 57h17"/></g>' +
-      '<g stroke="#15803d" stroke-width=".8" opacity=".7"><path d="M20 46v16M26 46v16M13.6 48.4h17M13.6 54.4h17"/></g>' +
-      '<path d="M14 29h16v18H14z" fill="#1f2937"/><path d="M14 29h16v3H14z" fill="#0b1120"/>' +
-      '<rect class="tm-arm2 l" x="10.6" y="30" width="3.8" height="16" rx="1.9" fill="#1f2937"/>' +
-      '<circle cx="22" cy="24" r="5.2" fill="#f1c9a5"/>' +
-      '<path d="M16.8 25q1.4 7 5.2 7t5.2-7q-2.6 2.6-5.2 2.6T16.8 25z" fill="#ea580c"/>' +
-      '<circle cx="20.2" cy="23.4" r=".8" fill="#1e1b4b"/><circle cx="23.8" cy="23.4" r=".8" fill="#1e1b4b"/>' +
-      '<path d="M16 19.6h12v3.2H16zM16 19.6q6-5.6 12 0z" fill="#111827"/><circle cx="27.4" cy="18.4" r="2" fill="#dc2626"/>' +
-      '<path d="M30 33q10-4 13 3t-7 9q-7 1-8-5z" fill="#166534"/>' +
-      '<g stroke="#f8fafc" stroke-width=".9" opacity=".6"><path d="M32 34l10 6M36 31l6 12"/></g>' +
-      '<g stroke="#d6d3d1" stroke-width="2.2" stroke-linecap="round"><path d="M34 33L30 9M38 33l-1-24M42 35l5-22"/></g>' +
-      '<g fill="#111827"><circle cx="30" cy="8" r="1.6"/><circle cx="37" cy="8" r="1.6"/><circle cx="47.2" cy="12" r="1.6"/></g>' +
-      '<rect class="tm-arm2 r" x="28.6" y="31" width="3.8" height="14" rx="1.9" fill="#1f2937"/>' +
-      '</g></svg>';
-
-    // Vaquero a caballo: el caballo trota y el jinete se mece en la silla
-    var VAQUERO = '<svg viewBox="0 0 96 78"><g class="tm-walk">' +
-      '<path d="M18 40q-9 4-11 18 7-3 11-11z" fill="#5b2d0b"/>' +
-      '<g class="tm-pata b1"><path d="M24 50l-3 20h5.4l3.6-20z" fill="#8a5212"/><path d="M19.6 70h8v4.4h-8z" fill="#2f1b0a"/></g>' +
-      '<g class="tm-pata d1"><path d="M62 48l-2 22h5.4l3-22z" fill="#8a5212"/><path d="M58.6 70h8v4.4h-8z" fill="#2f1b0a"/></g>' +
-      '<path d="M20 42q3-14 22-14h24q11 0 14 9 3 9-3 13-6 4-21 4H30q-11 0-10-12z" fill="#a16207"/>' +
-      '<g class="tm-pata b2"><path d="M32 50l-2 20h5.4l3-20z" fill="#b97e1c"/><path d="M28.6 70h8v4.4h-8z" fill="#3f2512"/></g>' +
-      '<g class="tm-pata d2"><path d="M70 48l-1 22h5.4l2-22z" fill="#b97e1c"/><path d="M67.6 70h8v4.4h-8z" fill="#3f2512"/></g>' +
-      '<path d="M66 32q6-13 13-21l9.4 4.4q-5.4 12-11.4 21z" fill="#a16207"/>' +
-      '<path d="M78 14q7-6 13-2.6l2.6 9.4-4 7.2-12-5.4z" fill="#a16207"/>' +
-      '<path d="M80 10l-1.4-7.4 5.4 5.4M88.6 8l3-6 1 7.4z" fill="#a16207"/>' +
-      '<circle cx="86" cy="15" r="1.4" fill="#1f2937"/><path d="M89.4 22l4.6 2.2-1.2 3.2-5.4-2.2z" fill="#7c4a12"/>' +
-      '<path d="M70 16q7.4-8.6 15-9.6-3.2 7.4-7.4 11.6zM64 30q4-10.6 8.6-15-1 9.6-4.4 16z" fill="#5b2d0b"/>' +
-      '<path d="M36 32h18v5.4H36z" fill="#7c2d12"/><path d="M54 33L82 20" stroke="#7c2d12" stroke-width="1.4" fill="none"/>' +
-      '<g class="tm-jinete">' +
-      '<path d="M40 34h5.4v10H40z" fill="#1e3a8a"/><path d="M37.6 44h8.6v4.6h-8.6z" fill="#92400e"/>' +
-      '<path d="M37 17h12.6v17H37z" fill="#60a5fa"/><path d="M37 17h4.2v17H37zM45.4 17h4.2v17h-4.2z" fill="#92400e"/>' +
-      '<path d="M37 29.4h12.6v3.2H37z" fill="#78350f"/>' +
-      '<circle cx="43.4" cy="12.4" r="4.6" fill="#e8b48a"/><circle cx="41.8" cy="11.8" r=".7" fill="#1e1b4b"/><circle cx="45" cy="11.8" r=".7" fill="#1e1b4b"/>' +
-      '<path d="M38.6 15.6q4.8 3 9.6 0l-1 3.4h-7.6z" fill="#dc2626"/>' +
-      '<path d="M33.4 7.4q11.4-5.4 22 0-4.4 3.4-11 3.4t-11-3.4z" fill="#a16207"/><path d="M39.4 7.4q0-8 5-8t5 8z" fill="#b45309"/><path d="M39.2 5.6h11.4v2.4H39.2z" fill="#78350f"/>' +
-      '<rect class="tm-arm2 r" x="48.6" y="18" width="3.6" height="13" rx="1.8" fill="#60a5fa"/>' +
-      '</g></g></svg>';
-    // Policía montada del Canadá
-    var MONTADA = '<svg viewBox="0 0 44 78"><g class="tm-walk">' +
-      '<g class="tm-leg l"><rect x="15" y="52" width="5.4" height="12" fill="#1e293b"/><rect x="19.4" y="52" width="1.4" height="12" fill="#fbbf24" opacity=".8"/><path d="M14 64h7.4v10H14z" fill="#78350f"/></g>' +
-      '<g class="tm-leg r"><rect x="22" y="52" width="5.4" height="12" fill="#334155"/><rect x="26.4" y="52" width="1.4" height="12" fill="#fbbf24" opacity=".8"/><path d="M21.4 64h7.4v10h-7.4z" fill="#92400e"/></g>' +
-      '<path d="M14 32h16v21H14z" fill="#dc2626"/><path d="M14 46.6h16v3.6H14z" fill="#78350f"/>' +
-      '<path d="M16.4 32l12 15" stroke="#a16207" stroke-width="3" fill="none"/>' +
-      '<rect class="tm-arm2 l" x="10.6" y="33" width="3.8" height="16" rx="1.9" fill="#dc2626"/>' +
-      '<rect class="tm-arm2 r" x="29.6" y="33" width="3.8" height="16" rx="1.9" fill="#dc2626"/>' +
-      '<circle cx="22" cy="26" r="5.2" fill="#f1c9a5"/><circle cx="20.2" cy="25.4" r=".8" fill="#1e1b4b"/><circle cx="23.8" cy="25.4" r=".8" fill="#1e1b4b"/>' +
-      '<path d="M9 21q13-5.4 26 0-5 3.6-13 3.6T9 21z" fill="#a16207"/><path d="M16.4 21q0-9 5.6-9t5.6 9z" fill="#b45309"/>' +
-      '<path d="M18 13.4q4 3 8 0" stroke="#78350f" stroke-width="1.4" fill="none"/>' +
-      '</g></svg>';
-
-    // Surfista con su tabla
-    var SURFISTA = '<svg viewBox="0 0 56 76"><g class="tm-walk">' +
-      '<ellipse cx="44" cy="40" rx="7" ry="30" fill="#f8fafc"/><path d="M44 12v56" stroke="#f97316" stroke-width="3"/>' +
-      '<g class="tm-leg l"><rect x="15" y="50" width="5.4" height="20" fill="#e8b48a"/><path d="M13.6 70h8v4h-8z" fill="#0f766e"/></g>' +
-      '<g class="tm-leg r"><rect x="22" y="50" width="5.4" height="20" fill="#dba97c"/><path d="M21.4 70h8v4h-8z" fill="#115e59"/></g>' +
-      '<path d="M14.4 42h15v10h-15z" fill="#14b8a6"/><path d="M14.4 42h15v3h-15z" fill="#0d9488"/>' +
-      '<path d="M15 31h14v12H15z" fill="#e8b48a"/>' +
-      '<rect class="tm-ola" x="29" y="30" width="3.8" height="15" rx="1.9" fill="#e8b48a"/>' +
-      '<rect class="tm-arm2 l" x="11.2" y="31" width="3.8" height="14" rx="1.9" fill="#e8b48a"/>' +
-      '<circle cx="22" cy="25" r="5.2" fill="#f1c9a5"/>' +
-      '<path d="M16.8 24q0-6 5.2-6t5.2 6q-3-2.6-5.2-2.6T16.8 24z" fill="#fde047"/>' +
-      '<path d="M17.4 24.4h9.2v2.4h-9.2z" fill="#1e293b"/>' +
-      '</g></svg>';
-
-    // Kiwi de Nueva Zelanda
-    var KIWI = '<svg viewBox="0 0 54 32"><g class="tm-bob">' +
-      '<ellipse cx="19" cy="18" rx="15" ry="11.6" fill="#92400e"/>' +
-      '<g stroke="#78350f" stroke-width="1.2" opacity=".7"><path d="M8 14q6 2 12 0M8 20q8 2 16 0M12 25q6 1 12 0"/></g>' +
-      '<path d="M30 11q6 1 8 6-4 3-9 2z" fill="#a16207"/>' +
-      '<circle cx="33.6" cy="13.2" r="1.6" fill="#f8fafc"/><circle cx="34" cy="13.4" r="1" fill="#1f2937"/>' +
-      '<path d="M37.6 16.4l16 3.4-16 2.6z" fill="#57534e"/>' +
-      '<g stroke="#44403c" stroke-width="2" stroke-linecap="round">' +
-      '<g class="tm-leg l"><path d="M14 28.4v3.4"/></g><g class="tm-leg r"><path d="M23 28.4v3.4"/></g></g>' +
-      '</g></svg>';
-
-    // Escocés de las Tierras Altas, con su tartán y su escudo redondo
-    var CLAN = '<svg viewBox="0 0 50 78"><g class="tm-walk">' +
-      '<g class="tm-leg l"><rect x="16" y="60" width="5" height="10" fill="#fef3c7"/><path d="M13.6 70h8.4v4.4h-8.4z" fill="#44403c"/></g>' +
-      '<g class="tm-leg r"><rect x="23" y="60" width="5" height="10" fill="#fde68a"/><path d="M21.4 70h8.4v4.4h-8.4z" fill="#292524"/></g>' +
-      '<path d="M13.6 46h17v16h-17z" fill="#166534"/>' +
-      '<g stroke="#1e293b" stroke-width="1.2" opacity=".75"><path d="M18 46v16M24 46v16M29 46v16M13.6 51h17M13.6 57h17"/></g>' +
-      '<g stroke="#fbbf24" stroke-width=".8" opacity=".8"><path d="M21 46v16M26.5 46v16M13.6 48.6h17M13.6 54.6h17"/></g>' +
-      '<path d="M14.6 30h15v17h-15z" fill="#fef3c7"/>' +
-      '<path d="M28 29L16.6 47l4 2.4L32 31z" fill="#166534"/>' +
-      '<g stroke="#1e293b" stroke-width="1" opacity=".7"><path d="M29.6 31.6L18.4 49.4M24 29.6L13.6 46.6"/></g>' +
-      '<rect class="tm-arm2 l" x="11" y="31" width="3.8" height="16" rx="1.9" fill="#fef3c7"/>' +
-      '<rect class="tm-arm2 r" x="29.4" y="31" width="3.8" height="16" rx="1.9" fill="#fef3c7"/>' +
-      '<circle cx="22" cy="24.6" r="5.2" fill="#f1c9a5"/>' +
-      '<path d="M16.8 25.6q1.4 7.4 5.2 7.4t5.2-7.4q-2.6 2.8-5.2 2.8t-5.2-2.8z" fill="#dc2626"/>' +
-      '<circle cx="20.2" cy="24" r=".8" fill="#1e1b4b"/><circle cx="23.8" cy="24" r=".8" fill="#1e1b4b"/>' +
-      '<path d="M15.4 20.4h13.2v3.2H15.4zM15.4 20.4q6.6-6 13.2 0z" fill="#1e3a8a"/>' +
-      '<circle cx="17.2" cy="19" r="1.8" fill="#f8fafc"/><path d="M28 19q4-7 6-8-1 6-4 9z" fill="#e2e8f0"/>' +
-      '<g><circle cx="10" cy="42" r="7.4" fill="#92400e"/><circle cx="10" cy="42" r="4.6" fill="none" stroke="#fbbf24" stroke-width="1.2"/><circle cx="10" cy="42" r="1.6" fill="#fbbf24"/></g>' +
-      '</g></svg>';
-
-    // Jugador de béisbol
-    var BEISBOL = '<svg viewBox="0 0 52 78"><g class="tm-walk">' +
-      '<g class="tm-leg l"><rect x="15.4" y="50" width="5.4" height="12" fill="#f8fafc"/><rect x="15.4" y="62" width="5.4" height="8" fill="#1e3a8a"/><path d="M13.6 70h8.4v4.4h-8.4z" fill="#111827"/></g>' +
-      '<g class="tm-leg r"><rect x="22.4" y="50" width="5.4" height="12" fill="#e2e8f0"/><rect x="22.4" y="62" width="5.4" height="8" fill="#1d4ed8"/><path d="M21.6 70h8.4v4.4h-8.4z" fill="#0b1120"/></g>' +
-      '<path d="M14.4 31h16v20h-16z" fill="#f8fafc"/>' +
-      '<g stroke="#1e3a8a" stroke-width=".9" opacity=".7"><path d="M17.6 31v20M21.4 31v20M25.2 31v20M29 31v20"/></g>' +
-      '<path d="M14.4 46.6h16v3.2h-16z" fill="#1e3a8a"/>' +
-      '<path d="M19.6 31q2.8 4 5.6 0" fill="none" stroke="#dc2626" stroke-width="1.4"/>' +
-      '<rect class="tm-arm2 l" x="11" y="32" width="3.8" height="15" rx="1.9" fill="#f8fafc"/>' +
-      '<rect class="tm-arm2 r" x="30.2" y="32" width="3.8" height="15" rx="1.9" fill="#f8fafc"/>' +
-      '<circle cx="22.4" cy="25.4" r="5.2" fill="#e8b48a"/><circle cx="20.6" cy="24.8" r=".8" fill="#1e1b4b"/><circle cx="24.2" cy="24.8" r=".8" fill="#1e1b4b"/>' +
-      '<path d="M16.6 22.6q5.8-7 11.6 0z" fill="#1e3a8a"/><path d="M27 22.6h8.4v2.8H27z" fill="#1d4ed8"/><circle cx="22.4" cy="16.6" r="1.4" fill="#dc2626"/>' +
-      '<path d="M33.6 46L38 15" stroke="#b45309" stroke-width="3.2" stroke-linecap="round"/><path d="M38.2 17.4L39 11" stroke="#92400e" stroke-width="4.4" stroke-linecap="round"/>' +
-      '</g></svg>';
-
-    // Arce canadiense: la copa en tonos de otoño y alguna hoja cayendo
-    var ARCE = '<svg viewBox="0 0 64 80">' +
-      '<path d="M29 80V48h6v32z" fill="#78350f"/><path d="M32 60l-8-8M32 52l8-8" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>' +
-      '<circle cx="22" cy="34" r="15" fill="#b91c1c"/><circle cx="42" cy="32" r="15" fill="#dc2626"/>' +
-      '<circle cx="32" cy="20" r="14" fill="#ea580c"/><circle cx="32" cy="38" r="15" fill="#c2410c"/>' +
-      '<circle cx="46" cy="44" r="10" fill="#b91c1c"/><circle cx="18" cy="46" r="10" fill="#dc2626"/>' +
-      '<circle cx="24" cy="24" r="8" fill="#f97316" opacity=".55"/><circle cx="40" cy="40" r="7" fill="#fb923c" opacity=".45"/>' +
-      '<g fill="#ea580c">' +
-      '<path class="tm-hoja" style="animation-delay:-1s" d="M12 52v-3l-2 .6.4-1.8-2.6-1.4 1-.6-1-2 2 .4.6-1.6 1.6 1.6v-3l1 1.6 1-1.6v3l1.6-1.6.6 1.6 2-.4-1 2 1 .6-2.6 1.4.4 1.8-2-.6v3z"/>' +
-      '<path class="tm-hoja" style="animation-delay:-4.5s" d="M44 48v-3l-2 .6.4-1.8-2.6-1.4 1-.6-1-2 2 .4.6-1.6 1.6 1.6v-3l1 1.6 1-1.6v3l1.6-1.6.6 1.6 2-.4-1 2 1 .6-2.6 1.4.4 1.8-2-.6v3z" fill="#dc2626"/>' +
-      '<path class="tm-hoja" style="animation-delay:-7s" d="M30 54v-3l-2 .6.4-1.8-2.6-1.4 1-.6-1-2 2 .4.6-1.6 1.6 1.6v-3l1 1.6 1-1.6v3l1.6-1.6.6 1.6 2-.4-1 2 1 .6-2.6 1.4.4 1.8-2-.6v3z" fill="#f97316"/>' +
-      '</g></svg>';
-    // Autobús de dos pisos y taxi amarillo para la franja
-    var W_BUS = '<svg viewBox="0 0 86 52"><rect x="2" y="4" width="80" height="40" rx="7" fill="#f43f5e"/><rect x="2" y="22" width="80" height="3" fill="#be123c"/>' +
-      '<g fill="#e0e7ff" opacity=".85"><rect x="8" y="9" width="11" height="9" rx="2"/><rect x="23" y="9" width="11" height="9" rx="2"/><rect x="38" y="9" width="11" height="9" rx="2"/><rect x="53" y="9" width="11" height="9" rx="2"/><rect x="68" y="9" width="10" height="9" rx="2"/>' +
-      '<rect x="8" y="28" width="11" height="9" rx="2"/><rect x="23" y="28" width="11" height="9" rx="2"/><rect x="38" y="28" width="11" height="9" rx="2"/><rect x="68" y="28" width="10" height="12" rx="2"/></g>' +
-      '<circle cx="18" cy="45" r="6" fill="#1e1b4b"/><circle cx="66" cy="45" r="6" fill="#1e1b4b"/><circle cx="18" cy="45" r="2.4" fill="#a5b4fc"/><circle cx="66" cy="45" r="2.4" fill="#a5b4fc"/></svg>';
-    var W_TAXI = '<svg viewBox="0 0 58 30"><path d="M4 18q0-6 6-6h6l6-8h16l7 8h5q4 0 4 5v7H4Z" fill="#f59e0b"/><rect x="22" y="1" width="12" height="4" rx="1" fill="#fcd34d"/>' +
-      '<path d="M24 6h12l5 6H20Z" fill="#e0e7ff" opacity=".8"/><path d="M4 20h50" stroke="#1e1b4b" stroke-dasharray="3 3" stroke-width="1.5"/>' +
-      '<circle cx="15" cy="25" r="4.5" fill="#1e1b4b"/><circle cx="45" cy="25" r="4.5" fill="#1e1b4b"/></svg>';
-
-    // Reparto: posición dentro de la baldosa (%), ancho en píxeles y si se
-    // mantiene en móvil (los marcados "opt" se ocultan para no amontonarse).
-    // "par" es el personaje con el que se saluda: se colocan de dos en dos y
-    // mirándose, para que el saludo se entienda.
-    var REPARTO = [
-      { n: "guardia",   x: 3,  w: 26, html: GUARDIA,  paso: "desfile",  gesto: "firmes",    say: ["Hello!", "Good morning!"], par: 1 },
-      { n: "corgi",     x: 9,  w: 30, html: CORGI,    paso: "menudo",   gesto: "ladra", b: 12, mira: "izq", say: ["Woof!", "Hello!"], par: 0 },
-      { n: "gaitero",   x: 18, w: 32, html: GAITERO,  paso: "solemne",  gesto: "toca",      opt: true, say: ["Hullo!", "Och, aye!"], par: 3 },
-      { n: "escocés",   x: 26, w: 32, html: CLAN,     paso: "solemne",  opt: true, mira: "izq", say: ["Hullo there!", "Grand day!"], par: 2 },
-      { n: "duende",    x: 34, w: 50, html: '<div class="tm-lep">' + LEP + '</div><div class="tm-pot">' + POT + '</div>', lep: true, say: ["Top o' the mornin'!", "Dia duit!"] },
-      { n: "vaquero",   x: 43, w: 58, html: VAQUERO,  paso: "trote",    gesto: "encabrita", say: ["Howdy!", "Howdy, partner!"], par: 6 },
-      { n: "béisbol",   x: 53, w: 34, html: BEISBOL,  paso: "atlético", gesto: "batea",     opt: true, mira: "izq", say: ["Play ball!", "Hi there!"], par: 5 },
-      { n: "montada",   x: 61, w: 28, html: MONTADA,  paso: "solemne",  opt: true, say: ["Hi there!", "How's it going?"] },
-      { n: "arce",      x: 68, w: 40, html: ARCE,     b: 0, arbol: true },
-      { n: "canguro",   x: 77, w: 46, html: ROO,      roo: true, say: ["G'day, mate!", "No worries!"], par: 10 },
-      { n: "surfista",  x: 85, w: 36, html: SURFISTA, paso: "tranquilo", opt: true, mira: "izq", say: ["G'day!", "Awesome!"], par: 9 },
-      { n: "kiwi",      x: 94, w: 30, html: KIWI,     paso: "menudo",   gesto: "otea", b: 12, say: ["Kia ora!"] }
-    ];
 
     var worldEl = null, worldLayers = [], tileW = 1200;
     function mundo() {
@@ -526,33 +253,14 @@
       [["tm-w-far", .10, 4, W_FAR], ["tm-w-mid", .24, 9, W_MID], ["tm-w-near", .46, 16, W_NEAR]].forEach(function (c) {
         var l = el("div", "tm-wl " + c[0]);
         l.setAttribute("data-tw-speed", c[1]); l.setAttribute("data-tw-depth", c[2]);
-        var tile = el("div", "tm-wtile", c[3]);
-        if (c[0] === "tm-w-near") REPARTO.forEach(function (p, idx) {
-          if (reduce && (p.lep || p.roo)) return;
-          var ch = el("div", "tm-ch anda" + (p.opt ? " tm-ch-opt" : ""),
-            '<span class="tm-flip"><span class="tm-fig">' + p.html + '</span></span>');
-          ch.style.left = p.x + "%"; ch.style.width = p.w + "px";
-          if (p.b != null) ch.style.bottom = p.b + "px";
-          // el duende y su olla van colocados uno al lado del otro, como en la portada
-          if (p.lep) ch.style.height = Math.round(p.w * 0.72) + "px";
-          if (p.mira) ch.setAttribute("data-mira", p.mira);
-          if (p.paso) ch.setAttribute("data-paso", p.paso);
-          ch.setAttribute("data-i", idx);
-          tile.appendChild(ch);
-        });
-        l.appendChild(tile);
+        l.appendChild(el("div", "tm-wtile", c[3]));
         w.appendChild(l);
         worldLayers.push(l);
       });
-      if (!reduce) {
-        w.appendChild(el("div", "tm-wmover tm-wbus", W_BUS));
-        w.appendChild(el("div", "tm-wmover tm-wtaxi", W_TAXI));
-      }
-      var bg = doc.querySelector(".tm-bg");
-      if (bg && bg.parentNode) bg.parentNode.insertBefore(w, bg.nextSibling);
-      else doc.body.insertBefore(w, doc.body.firstChild);
+      // el manto de nieve que va creciendo en invierno
+      w.appendChild(el("div", "tm-manto"));
       worldEl = w;
-      ajustarMundo();
+      return w;
     }
     // Tantas copias de la baldosa como hagan falta para cubrir la ventana.
     function ajustarMundo() {
@@ -562,122 +270,9 @@
       worldEl.style.setProperty("--tw-tile", tileW + "px");
       var n = Math.ceil(window.innerWidth / tileW) + 1;
       worldLayers.forEach(function (l) {
-        while (l.children.length < n) {
-          var copia = l.firstElementChild.cloneNode(true);
-          // la copia no hereda el gesto ni la agenda del original
-          Array.prototype.forEach.call(copia.querySelectorAll(".tm-ch"), function (ch) {
-            ch.classList.remove("quieto", "saluda", "salta", "firmes", "ladra", "toca", "batea", "encabrita", "otea");
-            ch.classList.add("anda");
-            delete ch.dataset.vive; delete ch.dataset.ocupado;
-            Array.prototype.forEach.call(ch.querySelectorAll(".tm-say"), function (b) { b.remove(); });
-          });
-          l.appendChild(copia);
-        }
+        while (l.children.length < n) l.appendChild(l.firstElementChild.cloneNode(true));
         while (l.children.length > n) l.removeChild(l.lastElementChild);
       });
-      animarReparto();
-    }
-    // --- gestos, saludos entre vecinos y reacción al ratón
-    var GESTOS = ["anda", "quieto", "saluda", "salta", "firmes", "ladra", "toca", "batea", "encabrita", "otea"];
-    function estado(ch, s) {
-      for (var i = 0; i < GESTOS.length; i++) ch.classList.remove(GESTOS[i]);
-      ch.classList.add(s);
-    }
-    function frase(i) {
-      var p = REPARTO[i], l = (p && p.say) || ["Hello!"];
-      return l[Math.floor(Math.random() * l.length)];
-    }
-    function habla(ch, texto) {
-      var b = el("span", "tm-say");
-      b.textContent = texto;
-      ch.appendChild(b);
-      setTimeout(function () { b.remove(); }, 2500);
-    }
-    // No todos a la vez: como mucho dos conversaciones a la vista y un hueco
-    // entre saludos espontáneos, para que la franja no parezca un gallinero.
-    var ultSaludo = 0;
-    function saludar(ch, conVecino, porElRaton) {
-      if (reduce || ch.dataset.ocupado === "1") return;
-      if (worldEl && worldEl.querySelectorAll(".tm-say").length >= 3) return;
-      var ahora = Date.now();
-      if (!porElRaton && ahora - ultSaludo < 2800) return;
-      ultSaludo = ahora;
-      var i = +ch.getAttribute("data-i"), p = REPARTO[i];
-      ch.dataset.ocupado = "1";
-      estado(ch, "saluda");
-      habla(ch, frase(i));
-      if (conVecino && p && p.par != null && ch.parentNode) {
-        var otro = ch.parentNode.querySelector('.tm-ch[data-i="' + p.par + '"]');
-        if (otro && otro.dataset.ocupado !== "1" && otro.offsetParent !== null) {
-          otro.dataset.ocupado = "1";
-          setTimeout(function () {
-            estado(otro, "saluda");
-            habla(otro, frase(p.par));
-            setTimeout(function () { otro.dataset.ocupado = ""; estado(otro, "anda"); }, 2400);
-          }, 640);
-        }
-      }
-      setTimeout(function () { ch.dataset.ocupado = ""; estado(ch, "anda"); }, 2600);
-    }
-    // cada personaje lleva su propia agenda: anda, se para, pega un salto o
-    // saluda al de al lado, a intervalos distintos para que no vayan a una
-    function agenda(ch) {
-      setTimeout(function paso() {
-        if (!ch.isConnected) return;
-        if (!doc.hidden && ch.dataset.ocupado !== "1" && ch.offsetParent !== null) {
-          var propio = (REPARTO[+ch.getAttribute("data-i")] || {}).gesto;
-          var r = Math.random();
-          if (r < .20) saludar(ch, true);
-          else if (r < .40 && propio) {
-            estado(ch, propio);
-            setTimeout(function () { if (ch.dataset.ocupado !== "1") estado(ch, "anda"); }, 2200);
-          } else if (r < .58) {
-            estado(ch, "quieto");
-            setTimeout(function () { if (ch.dataset.ocupado !== "1") estado(ch, "anda"); }, 1800 + Math.random() * 3000);
-          } else if (r < .70) {
-            estado(ch, "salta");
-            setTimeout(function () { if (ch.dataset.ocupado !== "1") estado(ch, "anda"); }, 1700);
-          } else estado(ch, "anda");
-        }
-        setTimeout(paso, 3500 + Math.random() * 9000);
-      }, 1500 + Math.random() * 9000);
-    }
-    function animarReparto() {
-      if (reduce || !worldEl) return;
-      Array.prototype.forEach.call(worldEl.querySelectorAll(".tm-ch"), function (ch) {
-        if (ch.dataset.vive === "1") return;
-        ch.dataset.vive = "1";
-        var p = REPARTO[+ch.getAttribute("data-i")];
-        if (p && p.arbol) return;   // el arce ya suelta sus hojas por su cuenta
-        agenda(ch);
-      });
-    }
-    var ultRaton = 0;
-    function ratonSaluda(e) {
-      if (reduce || !worldEl) return;
-      var ahora = Date.now();
-      if (ahora - ultRaton < 260) return;
-      var caja = worldEl.getBoundingClientRect();
-      if (e.clientY < caja.top - 30) return;
-      ultRaton = ahora;
-      var mejor = null, mejorD = 64;
-      Array.prototype.forEach.call(worldEl.querySelectorAll(".tm-ch"), function (ch) {
-        if (ch.dataset.ocupado === "1" || ch.offsetParent === null) return;
-        var p = REPARTO[+ch.getAttribute("data-i")];
-        if (p && p.arbol) return;
-        var r = ch.getBoundingClientRect();
-        if (!r.width) return;
-        var d = Math.abs(r.left + r.width / 2 - e.clientX);
-        if (d < mejorD) { mejorD = d; mejor = ch; }
-      });
-      if (!mejor) return;
-      // se vuelve hacia el ratón y luego saluda
-      var r2 = mejor.getBoundingClientRect(), antes = mejor.getAttribute("data-mira");
-      mejor.setAttribute("data-mira", e.clientX < r2.left + r2.width / 2 ? "izq" : "der");
-      saludar(mejor, false, true);
-      setTimeout(function () {
-        if (antes) mejor.setAttribute("data-mira", antes); else mejor.removeAttribute("data-mira");
-      }, 2700);
     }
 
     var ultOpac = -1;
@@ -698,7 +293,6 @@
     }
 
     // ------------------------------------------------------------------ el cielo
-    var PAJAROS = '<svg viewBox="0 0 60 20"><path d="M2 10q5-7 10 0"/><path d="M14 10q5-7 10 0"/><path d="M22 5q5-7 10 0"/><path d="M36 11q5-7 10 0"/></svg>';
     var GLOBO = '<svg viewBox="0 0 40 58"><path d="M20 2q14 0 14 15 0 11-14 23Q6 28 6 17 6 2 20 2z" fill="#f472b6"/>' +
       '<path d="M20 2q5 0 5 15 0 11-5 23-5-12-5-23 0-15 5-15z" fill="#fbbf24" opacity=".85"/>' +
       '<path d="M14 40h12l-2 6H16z" fill="#92400e"/><path d="M15 40l2-4M25 40l-2-4" stroke="#78350f" stroke-width="1"/></svg>';
@@ -706,24 +300,277 @@
       var sk = el("div", "tm-weather no-print");
       sk.setAttribute("aria-hidden", "true");
       sk.appendChild(el("i", "tm-astro"));
-      [[8, 190, 110], [17, 140, 86], [28, 230, 140], [38, 120, 96]].forEach(function (c) {
-        var cl = el("i", "tm-wcloud");
-        cl.style.top = c[0] + "%"; cl.style.width = c[1] + "px";
-        cl.style.animationDuration = c[2] + "s"; cl.style.animationDelay = -rnd(0, c[2]) + "s";
-        sk.appendChild(cl);
+      sk.appendChild(el("i", "tm-arcoiris"));
+      [[8, 190, 110, ""], [17, 140, 86, ""], [28, 230, 140, ""], [38, 120, 96, ""],
+       [4, 260, 124, " tm-mas"], [13, 170, 92, " tm-mas"], [23, 210, 132, " tm-mas"], [33, 160, 104, " tm-mas"]].forEach(function (c) {
+        sk.appendChild(nube("tm-wcloud" + c[3], c[0], c[1], c[2]));
       });
-      if (!reduce) {
-        var p = el("div", "tm-bird", PAJAROS);
-        p.style.top = "22%"; p.style.animationDelay = "-26s";
-        sk.appendChild(p);
-        var p2 = el("div", "tm-bird", PAJAROS);
-        p2.style.top = "34%"; p2.style.width = "40px"; p2.style.animationDelay = "-58s";
-        sk.appendChild(p2);
-        sk.appendChild(el("div", "tm-globo", GLOBO));
+      if (!reduce) sk.appendChild(el("div", "tm-globo", GLOBO));
+      return sk;
+    }
+
+    // ------------------------------------------------------------------ estaciones
+    // La profesora elige la estación en su panel; el portal la deja en
+    // <html data-season="…">. Aquí se encienden los efectos de cada una:
+    //   otoño     → hojas secas, ráfagas de viento y chaparrones de vez en cuando
+    //   invierno  → nieve que va cuajando en el suelo y encima de los edificios
+    //   primavera → pétalos, chubascos cortos y arcoíris al escampar
+    //   verano    → motas de luz dorada de día y luciérnagas de noche
+    // Los colores del paisaje y del cielo los pone tema.css.
+    var ESTACIONES = ["primavera", "verano", "otono", "invierno"];
+    var est = null, cv = null, cx = null, W = 0, H = 0, DPR = 1;
+    var parts = [], viento = 0, vientoObj = 0, vientoBase = 0, lluvia = 0, lluviaObj = 0, nieve = 0;
+    var timers = [], loopOn = false, tPrev = 0, dyEl = null;
+    var escala = window.innerWidth < 700 ? .55 : 1;
+    var HOJAS = ["#d97706", "#b45309", "#ca8a04", "#c2410c", "#9a3412", "#a16207", "#7e22ce", "#9333ea", "#eab308"];
+    var PETALOS = ["#fbcfe8", "#f9a8d4", "#f472b6", "#fff1f2", "#fde68a"];
+
+    function luz() { return root.getAttribute("data-theme") === "light"; }
+    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+
+    // Filtro SVG que pinta de blanco el borde de arriba de todo lo que toca:
+    // así la nieve «cuaja» sobre tejados, torres, puentes y colinas. Su grosor
+    // (dy) crece poco a poco mientras dura el invierno.
+    function filtroNieve() {
+      var d = el("div", "tm-defs", '<svg width="0" height="0" aria-hidden="true" focusable="false">' +
+        '<filter id="tm-nieve" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB">' +
+        '<feComponentTransfer in="SourceAlpha" result="a"><feFuncA type="linear" slope="12"/></feComponentTransfer>' +
+        '<feOffset in="a" dx="0" dy="0" result="b"/>' +
+        '<feComposite in="a" in2="b" operator="out" result="borde"/>' +
+        '<feFlood flood-color="#ffffff" flood-opacity=".95"/>' +
+        '<feComposite in2="borde" operator="in" result="nieve"/>' +
+        '<feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="nieve"/></feMerge></filter></svg>');
+      dyEl = d.querySelector("feOffset");
+      return d;
+    }
+    function ponNieve(n) {
+      nieve = n;
+      root.style.setProperty("--nieve", n.toFixed(3));
+      if (dyEl) dyEl.setAttribute("dy", (n * 5).toFixed(2));
+    }
+    // en minuto y medio la nieve ya lo cubre todo
+    function acumular() {
+      if (est !== "invierno") return;
+      if (nieve < 1) ponNieve(Math.min(1, nieve + 1 / 90));
+      if (nieve < 1) later(acumular, 1000);
+    }
+
+    // Llueve a ratos: un chaparrón, escampa y, en primavera, sale el arcoíris.
+    // El primero llega enseguida, para que se vea nada más elegir la estación.
+    function chaparron(primera) {
+      later(function () {
+        lluviaObj = est === "otono" ? 1 : .6;
+        root.classList.add("tm-llueve");
+        later(function () {
+          lluviaObj = 0;
+          root.classList.remove("tm-llueve");
+          if (est === "primavera") {
+            root.classList.add("tm-arco");
+            later(function () { root.classList.remove("tm-arco"); }, 24000);
+          }
+          chaparron(false);
+        }, rnd(14000, 24000));
+      }, primera ? rnd(6000, 10000) : rnd(35000, 70000));
+    }
+    // Otoño: ráfagas de viento que arrastran las hojas y la lluvia
+    function rafagas() {
+      later(function () {
+        vientoObj = rnd(170, 270);
+        root.classList.add("tm-rafaga");
+        later(function () { vientoObj = vientoBase; root.classList.remove("tm-rafaga"); rafagas(); }, rnd(2500, 4500));
+      }, rnd(6000, 14000));
+    }
+
+    // --- partículas
+    function nueva(tipo, enPantalla) {
+      var p = { t: tipo, ph: rnd(0, 6.3) };
+      p.x = rnd(-20, W + 20);
+      p.y = enPantalla ? rnd(-20, H) : rnd(-60, -10);
+      if (tipo === "hoja") {
+        p.s = rnd(5, 10); p.vy = rnd(38, 75); p.k = rnd(.6, 1.2); p.sw = rnd(18, 40); p.fs = rnd(1, 2.4);
+        p.rot = rnd(0, 6.3); p.vr = rnd(-2, 2); p.flip = rnd(0, 6.3); p.ff = rnd(2, 5);
+        p.c = HOJAS[Math.floor(Math.random() * HOJAS.length)];
+      } else if (tipo === "petalo") {
+        p.s = rnd(3, 5.5); p.vy = rnd(22, 45); p.k = rnd(.7, 1.3); p.sw = rnd(14, 30); p.fs = rnd(1, 2);
+        p.rot = rnd(0, 6.3); p.vr = rnd(-1.5, 1.5); p.flip = rnd(0, 6.3); p.ff = rnd(1.5, 4);
+        p.c = PETALOS[Math.floor(Math.random() * PETALOS.length)];
+      } else if (tipo === "copo") {
+        p.r = rnd(1, 3.3); p.vy = 14 + p.r * 14 + rnd(0, 10); p.sw = rnd(6, 16); p.fs = rnd(.6, 1.6); p.a = rnd(.55, .95);
+      } else if (tipo === "gota") {
+        p.l = rnd(10, 20); p.vy = rnd(650, 950); p.y = enPantalla ? rnd(-20, H) : rnd(-120, -20);
+      } else if (tipo === "mota") {
+        p.r = rnd(1, 2.6); p.vy = rnd(6, 18); p.sw = rnd(6, 14); p.fs = rnd(.4, 1); p.y = enPantalla ? rnd(0, H) : H + 10;
+      } else if (tipo === "luciernaga") {
+        p.y = rnd(H * .35, H * .95); p.ang = rnd(0, 6.3); p.v = rnd(10, 24); p.r = rnd(1.4, 2.4);
+      } else if (tipo === "estela") {
+        p.x = -260; p.y = rnd(H * .1, H * .8); p.len = rnd(120, 240); p.v = rnd(700, 1000); p.amp = rnd(6, 16);
       }
-      var bg = doc.querySelector(".tm-bg");
-      if (bg && bg.parentNode) bg.parentNode.insertBefore(sk, bg.nextSibling);
-      else doc.body.insertBefore(sk, doc.body.firstChild);
+      return p;
+    }
+    function principal() {
+      return est === "otono" ? ["hoja", 30] : est === "primavera" ? ["petalo", 22] :
+        est === "invierno" ? ["copo", 130] : est === "verano" ? [luz() ? "mota" : "luciernaga", 22] : null;
+    }
+    function cuenta(tipo) { var n = 0; for (var i = 0; i < parts.length; i++) if (parts[i].t === tipo) n++; return n; }
+    function poblar() {
+      var pr = principal(); if (!pr) return;
+      var n = Math.round(pr[1] * escala);
+      for (var i = 0; i < n; i++) parts.push(nueva(pr[0], true));
+    }
+
+    function mover(p, dt) {
+      switch (p.t) {
+        case "hoja": case "petalo":
+          p.ph += p.fs * dt; p.flip += p.ff * dt;
+          p.rot += p.vr * dt * (1 + viento / 90);
+          p.x += (viento * p.k + Math.sin(p.ph) * p.sw) * dt;
+          p.y += p.vy * dt * (1 + viento / 500);
+          return p.y < H + 20 && p.x < W + 60 && p.x > -60;
+        case "copo":
+          p.ph += p.fs * dt;
+          p.x += (viento * .6 + Math.sin(p.ph) * p.sw) * dt; p.y += p.vy * dt;
+          return p.y < H + 10 && p.x < W + 30 && p.x > -30;
+        case "gota":
+          p.x += (viento * 1.3 + 40) * dt; p.y += p.vy * dt;
+          return p.y < H + 20 && p.x < W + 60;
+        case "mota":
+          p.ph += p.fs * dt;
+          p.x += (Math.sin(p.ph) * p.sw + viento * .3) * dt; p.y -= p.vy * dt;
+          return p.y > -10;
+        case "luciernaga":
+          p.ph += dt; p.ang += rnd(-1.6, 1.6) * dt;
+          p.x += Math.cos(p.ang) * p.v * dt; p.y += Math.sin(p.ang) * p.v * dt * .6;
+          if (p.y < H * .3 || p.y > H) p.ang = -p.ang;
+          return p.x > -20 && p.x < W + 20;
+        case "estela":
+          p.x += p.v * dt;
+          return p.x < W + 40;
+      }
+      return false;
+    }
+    function pintar(p) {
+      var c = cx;
+      switch (p.t) {
+        case "hoja": case "petalo":
+          c.save(); c.translate(p.x, p.y); c.rotate(p.rot); c.scale(Math.cos(p.flip), 1);
+          c.globalAlpha = p.t === "hoja" ? .85 : .8;
+          c.fillStyle = p.c; c.beginPath();
+          c.moveTo(0, -p.s);
+          c.quadraticCurveTo(p.s * .85, -p.s * .15, 0, p.s);
+          c.quadraticCurveTo(-p.s * .85, -p.s * .15, 0, -p.s);
+          c.fill();
+          if (p.t === "hoja") {
+            c.strokeStyle = "rgba(0,0,0,.22)"; c.lineWidth = .7;
+            c.beginPath(); c.moveTo(0, -p.s * .8); c.lineTo(0, p.s * 1.35); c.stroke();
+          }
+          c.restore();
+          break;
+        case "copo":
+          c.globalAlpha = p.a; c.fillStyle = "#fff";
+          c.beginPath(); c.arc(p.x, p.y, p.r, 0, 6.283); c.fill();
+          if (luz()) { c.strokeStyle = "rgba(71,85,105,.35)"; c.lineWidth = .8; c.stroke(); }
+          break;
+        case "gota":
+          c.globalAlpha = 1; c.strokeStyle = luz() ? "rgba(51,65,85,.38)" : "rgba(191,203,235,.42)"; c.lineWidth = 1.1;
+          var k = (viento * 1.3 + 40) / p.vy;
+          c.beginPath(); c.moveTo(p.x, p.y); c.lineTo(p.x - k * p.l, p.y - p.l); c.stroke();
+          break;
+        case "mota":
+          c.globalAlpha = .45 + .35 * Math.sin(p.ph * 3);
+          c.fillStyle = "#facc15"; c.beginPath(); c.arc(p.x, p.y, p.r, 0, 6.283); c.fill();
+          break;
+        case "luciernaga":
+          var b = Math.max(0, Math.sin(p.ph * 2.2));
+          if (b < .05) break;
+          c.globalAlpha = b * .9;
+          var g = c.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
+          g.addColorStop(0, "rgba(217,249,157,1)"); g.addColorStop(.3, "rgba(190,242,100,.55)"); g.addColorStop(1, "rgba(190,242,100,0)");
+          c.fillStyle = g; c.beginPath(); c.arc(p.x, p.y, p.r * 5, 0, 6.283); c.fill();
+          break;
+        case "estela":
+          c.globalAlpha = 1; c.strokeStyle = luz() ? "rgba(100,116,139,.22)" : "rgba(226,232,240,.18)"; c.lineWidth = 1.3;
+          c.beginPath(); c.moveTo(p.x, p.y);
+          c.bezierCurveTo(p.x + p.len * .33, p.y - p.amp, p.x + p.len * .66, p.y + p.amp, p.x + p.len, p.y);
+          c.stroke();
+          break;
+      }
+    }
+
+    function bucle(t) {
+      if (!loopOn) return;
+      requestAnimationFrame(bucle);
+      if (doc.hidden) { tPrev = 0; return; }
+      var dt = tPrev ? Math.min(.05, (t - tPrev) / 1000) : .016; tPrev = t;
+      viento += (vientoObj - viento) * Math.min(1, dt * 1.2);
+      lluvia += (lluviaObj - lluvia) * Math.min(1, dt * .5);
+      var pr = principal();
+      // el verano cambia de motas a luciérnagas si se pasa a modo noche
+      if (est === "verano") {
+        var otro = pr[0] === "mota" ? "luciernaga" : "mota";
+        if (cuenta(otro)) { parts = parts.filter(function (p) { return p.t !== otro; }); poblar(); }
+      }
+      var objetivo = { gota: Math.round(170 * lluvia * escala) };
+      if (pr) objetivo[pr[0]] = Math.round(pr[1] * escala);
+      if (root.classList.contains("tm-rafaga") && cuenta("estela") < 4 && Math.random() < dt * 3) parts.push(nueva("estela"));
+      for (var j = cuenta("gota"); j < objetivo.gota; j += 6) parts.push(nueva("gota"));
+      cx.clearRect(0, 0, W, H);
+      var vivas = [], tipos = {};
+      for (var i = 0; i < parts.length; i++) {
+        var p = parts[i];
+        if (mover(p, dt)) { vivas.push(p); pintar(p); tipos[p.t] = (tipos[p.t] || 0) + 1; }
+        else if (objetivo[p.t] && (tipos[p.t] || 0) < objetivo[p.t]) {
+          // la que sale por abajo vuelve a entrar por arriba (si aún hacen falta)
+          var q = nueva(p.t); vivas.push(q); tipos[p.t] = (tipos[p.t] || 0) + 1;
+        }
+      }
+      // las que sobran (cuando escampa) no vuelven a entrar
+      parts = vivas;
+      cx.globalAlpha = 1;
+    }
+    function medir() {
+      if (!cv) return;
+      DPR = Math.min(2, window.devicePixelRatio || 1);
+      W = window.innerWidth; H = window.innerHeight;
+      cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+      cx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    function arrancar() {
+      if (loopOn || !cx) return;
+      loopOn = true; tPrev = 0;
+      requestAnimationFrame(bucle);
+    }
+    function parar() {
+      loopOn = false;
+      if (cx) cx.clearRect(0, 0, W, H);
+    }
+
+    function aplicarEstacion() {
+      var s = root.getAttribute("data-season");
+      if (ESTACIONES.indexOf(s) < 0) s = null;
+      if (s === est) return;
+      est = s;
+      timers.forEach(clearTimeout); timers = [];
+      root.classList.remove("tm-llueve", "tm-arco", "tm-rafaga");
+      lluvia = lluviaObj = 0;
+      vientoBase = s === "otono" ? 45 : s === "primavera" ? 14 : s === "invierno" ? 12 : 0;
+      viento = vientoObj = vientoBase;
+      parts = [];
+      ponNieve(s === "invierno" && reduce ? 1 : 0);
+      if (!s || reduce || !cx) { parar(); return; }
+      if (s === "invierno") acumular();
+      if (s === "otono" || s === "primavera") chaparron(true);
+      if (s === "otono") rafagas();
+      poblar();
+      arrancar();
+    }
+    function estaciones() {
+      cv = el("canvas", "tm-season no-print");
+      cv.setAttribute("aria-hidden", "true");
+      try { cx = cv.getContext("2d"); } catch (e) { cx = null; }
+      medir();
+      window.addEventListener("resize", medir, { passive: true });
+      new MutationObserver(aplicarEstacion).observe(root, { attributes: true, attributeFilter: ["data-season"] });
+      return cv;
     }
 
     // ------------------------------------------------------------------ música y efectos
@@ -770,7 +617,6 @@
       var now = Date.now();
       if (now - lastHover > 700) { lastHover = now; SND.sfx("hover"); }
     });
-
     // ------------------------------------------------------------------ arranque
     function start() {
       var hero = doc.querySelector("section.hero");
@@ -779,11 +625,16 @@
         layers = Array.prototype.slice.call(sc.querySelectorAll("[data-tm-speed]"));
         hellos(sc);
       }
-      background();
-      cielo();
-      mundo();
+      // al fondo de la página, por este orden: tinte de la estación, cielo y
+      // paisaje; la lluvia, la nieve y las hojas van al final para caer por
+      // delante de los edificios (pero siempre por detrás del contenido)
+      var tinte = el("div", "tm-tinte no-print"); tinte.setAttribute("aria-hidden", "true");
+      var fondo = [filtroNieve(), tinte, cielo(), mundo()];
+      for (var i = fondo.length - 1; i >= 0; i--) doc.body.insertBefore(fondo[i], doc.body.firstChild);
+      doc.body.appendChild(estaciones());
+      ajustarMundo();
+      aplicarEstacion();
       window.addEventListener("resize", ajustarMundo, { passive: true });
-      if (fine && !reduce) window.addEventListener("mousemove", ratonSaluda, { passive: true });
       bar = el("div", "tm-progress no-print"); bar.setAttribute("aria-hidden", "true");
       doc.body.appendChild(bar);
       musicButton();
@@ -795,7 +646,6 @@
           var h = root.scrollHeight - window.innerHeight;
           bar.style.width = (h > 0 ? window.scrollY / h * 100 : 0) + "%";
         }, { passive: true });
-        bgIcons.forEach(function (ic) { ic.el.style.top = ic.y + "%"; });
       }
     }
     if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", start); else start();

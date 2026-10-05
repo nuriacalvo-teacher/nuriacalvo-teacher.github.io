@@ -10,6 +10,9 @@
     "tagline": "Apps interactivas para aprender inglés en clase y en casa.",
     "bio": "Aquí reúno las aplicaciones que voy creando para mis grupos de ESO y Bachillerato del IES Goya. Todas son gratuitas, funcionan en el móvil, en la tablet y en la pizarra digital, y no hace falta instalar nada: solo abrir y practicar."
   },
+  "site": {
+    "season": "auto"
+  },
   "categories": [
     {
       "id": "grammar",
