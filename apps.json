@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-01",
+  "updated": "2026-10-05",
   "teacher": {
     "name": "Nuria Calvo",
     "role": "Profesora de Inglés",
@@ -385,7 +385,7 @@
       "icon": "fa-repeat",
       "accent": "amber",
       "status": "live",
-      "featured": false,
+      "featured": true,
       "visible": true,
       "updated": "2026-09-11"
     },
