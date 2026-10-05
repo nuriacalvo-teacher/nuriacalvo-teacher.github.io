@@ -1,7 +1,8 @@
 /* ==========================================================================
    tema/tema.css · «Around the English-speaking world»
-   Capa puramente decorativa: horizonte de Londres, Nueva York, Toronto y
-   Sídney con paralaje, vehículos, saludos flotantes, hojas de arce…
+   Capa puramente decorativa: horizonte de Londres, Dublín, Nueva York,
+   Toronto y Sídney con paralaje, avioneta, globo, saludos flotantes y las
+   cuatro estaciones que elige la profesora (ver el final del fichero).
    Usa la misma paleta del portal (índigo, violeta, rosa y azul cielo) y no
    cambia ninguna regla existente: todo cuelga de clases que empiezan por .tm-
    ========================================================================== */
@@ -13,7 +14,6 @@
   --tm-glow: rgba(129, 140, 248, .35);
   --tm-bubble-bg: rgba(18, 24, 42, .72);
   --tm-bubble-text: #e0e7ff;
-  --tm-icon: rgba(165, 180, 252, .10);
 }
 :root[data-theme="light"] {
   --tm-far: rgba(99, 102, 241, .12);
@@ -23,7 +23,6 @@
   --tm-glow: rgba(99, 102, 241, .18);
   --tm-bubble-bg: rgba(255, 255, 255, .85);
   --tm-bubble-text: #3730a3;
-  --tm-icon: rgba(79, 70, 229, .07);
 }
 
 /* ---------- barra de progreso de lectura ---------- */
@@ -81,26 +80,6 @@
   opacity: .35; animation: tm-waves 6s linear infinite; }
 @keyframes tm-waves { to { background-position: 104px 0; } }
 
-/* vehículos, canguro y avioneta */
-.tm-mover { position: absolute; bottom: 10px; will-change: transform; }
-.tm-mover svg { display: block; width: 100%; height: auto; }
-.tm-bus { width: 86px; animation: tm-drive-r 34s linear infinite; }
-.tm-taxi { width: 58px; bottom: 6px; animation: tm-drive-l 26s linear infinite; animation-delay: -9s; }
-.tm-roo { width: 66px; bottom: 12px; animation: tm-roo-go 32s linear infinite; animation-delay: -18s; }
-.tm-roo svg { overflow: visible; }
-.tm-roo-body { transform-box: fill-box; transform-origin: 40% 100%; animation: tm-hop .9s cubic-bezier(.3, 0, .4, 1) infinite; }
-.tm-roo-leg { transform-box: fill-box; transform-origin: 20% 10%; animation: tm-roo-kick .9s ease-in-out infinite; }
-@keyframes tm-drive-r { from { transform: translateX(-120px); } to { transform: translateX(calc(100vw + 40px)); } }
-@keyframes tm-drive-l { from { transform: translateX(calc(100vw + 40px)) scaleX(-1); } to { transform: translateX(-120px) scaleX(-1); } }
-@keyframes tm-roo-go { from { transform: translateX(calc(100vw + 40px)) scaleX(-1); } to { transform: translateX(-80px) scaleX(-1); } }
-/* salto natural: se agacha, se impulsa inclinándose hacia delante y aterriza */
-@keyframes tm-hop {
-  0%, 100% { transform: translateY(0) rotate(0) scale(1, .96); }
-  15% { transform: translateY(0) rotate(4deg) scale(1.02, .92); }
-  50% { transform: translateY(-20px) rotate(-10deg) scale(1, 1.03); }
-  85% { transform: translateY(-2px) rotate(-2deg) scale(1, 1); }
-}
-@keyframes tm-roo-kick { 0%, 15%, 100% { transform: rotate(0); } 45% { transform: rotate(-22deg); } 70% { transform: rotate(8deg); } }
 .tm-plane { position: absolute; top: 9%; left: 0; display: flex; align-items: center; gap: 0; animation: tm-fly 46s linear infinite; animation-delay: -12s; }
 .tm-plane svg { width: 58px; flex: none; }
 .tm-banner { margin-left: -2px; padding: 4px 12px; border-radius: 4px 10px 10px 4px; font-weight: 800; font-size: 12px; letter-spacing: .04em; white-space: nowrap;
@@ -125,61 +104,22 @@
   100% { opacity: 0; transform: translateY(-46px) scale(.98); }
 }
 
-/* ---------- fondo de toda la página ---------- */
-.tm-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.tm-icon { position: absolute; width: 90px; height: 90px; color: var(--tm-icon); will-change: transform; }
-.tm-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-.tm-leaf { position: absolute; top: -30px; width: 18px; height: 18px; opacity: .4; animation: tm-fall linear infinite; }
-.tm-leaf svg { width: 100%; height: 100%; }
-@keyframes tm-fall {
-  0% { transform: translate3d(0, -40px, 0) rotate(0); }
-  100% { transform: translate3d(var(--dx, 60px), 110vh, 0) rotate(var(--rot, 420deg)); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .tm-scene *, .tm-bg *, .tm-music svg { animation: none !important; }
-  .tm-leaf, .tm-hello, .tm-plane, .tm-mover, .tm-cloud { display: none !important; }
+  .tm-scene *, .tm-music svg { animation: none !important; }
+  .tm-hello, .tm-plane, .tm-cloud { display: none !important; }
 }
-@media print { .tm-scene, .tm-bg, .tm-progress, .tm-music { display: none !important; } }
+@media print { .tm-scene, .tm-progress, .tm-music { display: none !important; } }
 
 /* En pantallas estrechas la avioneta taparía el título: no se muestra. */
 @media (max-width: 899px) { .tm-plane { display: none; } }
 
-/* ---------- Irlanda ---------- */
 .tm-lamp { filter: drop-shadow(0 0 4px rgba(251, 191, 36, .9)); animation: tm-flicker 3s ease-in-out infinite; }
 :root[data-theme="light"] .tm-lamp { filter: none; opacity: .7; }
-.tm-irl { width: 80px; height: 58px; bottom: 10px; animation: tm-drive-r 40s linear infinite; animation-delay: -26s; }
-@media (max-width: 767px) { .tm-irl { width: 64px; height: 46px; } }
-.tm-rainbow {
-  position: absolute; left: 30%; bottom: 40px; width: 240px; height: 120px; border-radius: 120px 120px 0 0;
-  background: radial-gradient(circle at 50% 100%, transparent 58%, rgba(139, 92, 246, .5) 58.5% 63%, rgba(59, 130, 246, .5) 63% 67%,
-    rgba(34, 197, 94, .5) 67% 71%, rgba(250, 204, 21, .5) 71% 75%, rgba(249, 115, 22, .5) 75% 79%, rgba(244, 63, 94, .5) 79% 83%, transparent 83.5%);
-  -webkit-mask: linear-gradient(transparent, #000 25%, #000 70%, transparent); mask: linear-gradient(transparent, #000 25%, #000 70%, transparent);
-  opacity: 0; animation: tm-rainbow 24s ease-in-out infinite; pointer-events: none;
-}
-@media (max-width: 767px) { .tm-rainbow { left: 8%; width: 180px; height: 90px; } }
-@keyframes tm-rainbow { 0%, 20% { opacity: 0; } 35%, 75% { opacity: .75; } 90%, 100% { opacity: 0; } }
-.tm-pot { position: absolute; left: 44%; bottom: 0; width: 56%; }
-.tm-pot svg, .tm-lep svg { display: block; width: 100%; height: auto; overflow: visible; }
-.tm-spark { animation: tm-twinkle 1.4s ease-in-out infinite; }
-.tm-lep { position: absolute; left: 0; bottom: 0; width: 44%; }
-.tm-lep-body { transform-box: fill-box; transform-origin: 50% 100%; animation: tm-jig .8s ease-in-out infinite; }
-.tm-lep-leg, .tm-lep-arm { transform-box: fill-box; }
-.tm-lep-leg.l { transform-origin: 50% 0; animation: tm-kick-l .8s ease-in-out infinite; }
-.tm-lep-leg.r { transform-origin: 50% 0; animation: tm-kick-r .8s ease-in-out infinite; }
-.tm-lep-arm.l { transform-origin: 100% 100%; animation: tm-arm .8s ease-in-out infinite; }
-.tm-lep-arm.r { transform-origin: 0 100%; animation: tm-arm .8s ease-in-out infinite reverse; }
-@keyframes tm-jig { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-7px) rotate(3deg); } }
-@keyframes tm-kick-l { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(28deg); } }
-@keyframes tm-kick-r { 0%, 100% { transform: rotate(-28deg); } 50% { transform: rotate(0); } }
-@keyframes tm-arm { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-18deg); } }
-@media (prefers-reduced-motion: reduce) { .tm-irl { display: none; } .tm-rainbow { animation: none; opacity: .5; } }
-.tm-leaf.tm-clover { opacity: .7; filter: drop-shadow(0 0 4px rgba(74, 222, 128, .35)); }
 
 /* ==========================================================================
    «El mundo que pasa» · fondo con paralaje para toda la página
    Una franja de paisaje anclada al pie de la ventana (colinas, ciudades y
-   personajes) y un cielo con nubes, sol o luna. Al bajar por la página el
+   árboles) y un cielo con nubes, sol o luna. Al bajar por la página el
    paisaje viaja de derecha a izquierda, cada capa a su velocidad.
    En modo oscuro las siluetas son claras; en modo claro se oscurecen, para
    que siempre contrasten con el fondo.
@@ -228,147 +168,7 @@
 .tm-wwin { fill: #fde68a; opacity: 0; animation: tm-win 8s ease-in-out infinite; }
 :root[data-theme="light"] .tm-wwin { display: none; }
 
-/* ---------- los personajes que viajan con el paisaje ---------- */
-/* Cada uno va en tres capas: .tm-ch coloca, .tm-flip mira a un lado o a otro
-   y .tm-fig hace el gesto (saltar, saludar). Así los tres no se pisan. */
-.tm-ch { position: absolute; bottom: 14px; }
-.tm-ch svg { display: block; width: 100%; height: auto; overflow: visible; }
-.tm-flip, .tm-fig { display: block; }
-.tm-flip { transition: transform .35s cubic-bezier(.2,.8,.3,1); }
-.tm-ch[data-mira="izq"] .tm-flip { transform: scaleX(-1); }
-@media (max-width: 767px) { .tm-ch { bottom: 8px; transform: scale(.72); transform-origin: 50% 100%; } .tm-ch-opt { display: none; } }
-
-/* al andar, el cuerpo sube y baja y los brazos y piernas se mueven */
-.tm-walk { transform-box: fill-box; transform-origin: 50% 100%; }
-.tm-leg, .tm-arm2 { transform-box: fill-box; transform-origin: 50% 6%; }
-.tm-ch.anda .tm-walk { animation: tm-step .72s ease-in-out infinite; }
-.tm-ch.anda .tm-leg.l, .tm-ch.anda .tm-arm2.r { animation: tm-swing .72s ease-in-out infinite; }
-.tm-ch.anda .tm-leg.r, .tm-ch.anda .tm-arm2.l { animation: tm-swing .72s ease-in-out infinite reverse; }
-@keyframes tm-step { 0%, 100% { transform: translateY(0) rotate(-.6deg); } 50% { transform: translateY(-2px) rotate(.6deg); } }
-@keyframes tm-swing { 0%, 100% { transform: rotate(16deg); } 50% { transform: rotate(-16deg); } }
-
-/* parado: solo respira */
-.tm-ch.quieto .tm-walk { animation: tm-respira 3.4s ease-in-out infinite; }
-@keyframes tm-respira { 50% { transform: translateY(-1px) scaleY(1.015); } }
-
-/* saludando: levanta el brazo y da un brinquito; vale para todos, tengan
-   brazos o no (el perro, el kiwi y el canguro solo brincan) */
-.tm-ch.saluda { z-index: 3; }
-.tm-ch.saluda .tm-fig { animation: tm-brinca .52s ease-in-out 3; }
-.tm-ch.saluda .tm-walk { animation: tm-respira 1.6s ease-in-out infinite; }
-.tm-ch.saluda .tm-arm2.r { animation: tm-mano .42s ease-in-out 5; transform-origin: 50% 10%; }
-@keyframes tm-brinca { 0%, 100% { transform: translateY(0); } 42% { transform: translateY(-5px); } }
-@keyframes tm-mano { 0%, 100% { transform: rotate(152deg); } 50% { transform: rotate(118deg); } }
-
-/* un salto suelto, para romper la monotonía */
-.tm-ch.salta .tm-fig { animation: tm-salto .78s cubic-bezier(.3,0,.4,1) 2; }
-.tm-ch.salta .tm-walk { animation: tm-step .72s ease-in-out infinite; }
-@keyframes tm-salto { 0%, 100% { transform: translateY(0) scaleY(1); } 18% { transform: translateY(0) scaleY(.92); } 55% { transform: translateY(-13px) scaleY(1.04); } 85% { transform: translateY(0) scaleY(.97); } }
-
-/* ---------- cada uno anda a su manera ---------- */
-/* el guardia real: paso de desfile, rodilla alta, brazo recto y cadencia seca */
-.tm-ch.anda[data-paso="desfile"] .tm-walk { animation: tm-firme .64s cubic-bezier(.45,0,.55,1) infinite; }
-.tm-ch.anda[data-paso="desfile"] .tm-leg.l { animation: tm-desfile-pie .64s cubic-bezier(.45,0,.55,1) infinite; }
-.tm-ch.anda[data-paso="desfile"] .tm-leg.r { animation: tm-desfile-pie .64s cubic-bezier(.45,0,.55,1) infinite reverse; }
-.tm-ch.anda[data-paso="desfile"] .tm-arm2.r { animation: tm-desfile-brazo .64s cubic-bezier(.45,0,.55,1) infinite; }
-.tm-ch.anda[data-paso="desfile"] .tm-arm2.l { animation: tm-desfile-brazo .64s cubic-bezier(.45,0,.55,1) infinite reverse; }
-@keyframes tm-firme { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1px); } }
-@keyframes tm-desfile-pie { 0%, 100% { transform: rotate(19deg); } 50% { transform: rotate(-19deg); } }
-@keyframes tm-desfile-brazo { 0%, 100% { transform: rotate(46deg); } 50% { transform: rotate(-46deg); } }
-
-/* gaitero, escocés y policía montada: paso solemne y corto */
-.tm-ch.anda[data-paso="solemne"] .tm-walk { animation: tm-step 1.05s ease-in-out infinite; }
-.tm-ch.anda[data-paso="solemne"] .tm-leg.l, .tm-ch.anda[data-paso="solemne"] .tm-arm2.r { animation: tm-corto 1.05s ease-in-out infinite; }
-.tm-ch.anda[data-paso="solemne"] .tm-leg.r, .tm-ch.anda[data-paso="solemne"] .tm-arm2.l { animation: tm-corto 1.05s ease-in-out infinite reverse; }
-@keyframes tm-corto { 0%, 100% { transform: rotate(11deg); } 50% { transform: rotate(-11deg); } }
-
-/* el bateador: paso atlético y con rebote */
-.tm-ch.anda[data-paso="atlético"] .tm-walk { animation: tm-bote .58s ease-in-out infinite; }
-.tm-ch.anda[data-paso="atlético"] .tm-leg.l, .tm-ch.anda[data-paso="atlético"] .tm-arm2.r { animation: tm-swing .58s ease-in-out infinite; }
-.tm-ch.anda[data-paso="atlético"] .tm-leg.r, .tm-ch.anda[data-paso="atlético"] .tm-arm2.l { animation: tm-swing .58s ease-in-out infinite reverse; }
-@keyframes tm-bote { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3.5px); } }
-
-/* el surfista: va a su aire, balanceándose */
-.tm-ch.anda[data-paso="tranquilo"] .tm-walk { animation: tm-balanceo 1.15s ease-in-out infinite; }
-.tm-ch.anda[data-paso="tranquilo"] .tm-leg.l { animation: tm-corto 1.15s ease-in-out infinite; }
-.tm-ch.anda[data-paso="tranquilo"] .tm-leg.r { animation: tm-corto 1.15s ease-in-out infinite reverse; }
-.tm-ch.anda[data-paso="tranquilo"] .tm-arm2.l { animation: tm-corto 1.15s ease-in-out infinite reverse; }
-@keyframes tm-balanceo { 0%, 100% { transform: translateY(0) rotate(-2.5deg); } 50% { transform: translateY(-2px) rotate(2.5deg); } }
-
-/* el perro y el kiwi: pasitos cortos y rápidos */
-.tm-ch[data-paso="menudo"] .tm-bob { animation-duration: 1.1s; }
-.tm-ch.anda[data-paso="menudo"] .tm-leg.l { animation: tm-trotecito .34s ease-in-out infinite; }
-.tm-ch.anda[data-paso="menudo"] .tm-leg.r { animation: tm-trotecito .34s ease-in-out infinite reverse; }
-@keyframes tm-trotecito { 0%, 100% { transform: rotate(14deg); } 50% { transform: rotate(-14deg); } }
-
-/* el caballo: trote, con el jinete meciéndose en la silla */
-.tm-pata, .tm-jinete { transform-box: fill-box; }
-.tm-pata { transform-origin: 50% 4%; }
-.tm-jinete { transform-origin: 50% 100%; }
-.tm-ch.anda[data-paso="trote"] .tm-walk { animation: tm-galope .46s ease-in-out infinite; }
-.tm-ch.anda[data-paso="trote"] .tm-pata.b1, .tm-ch.anda[data-paso="trote"] .tm-pata.d2 { animation: tm-trote .46s ease-in-out infinite; }
-.tm-ch.anda[data-paso="trote"] .tm-pata.b2, .tm-ch.anda[data-paso="trote"] .tm-pata.d1 { animation: tm-trote .46s ease-in-out infinite reverse; }
-.tm-ch.anda[data-paso="trote"] .tm-jinete { animation: tm-silla .46s ease-in-out infinite; }
-.tm-ch.anda[data-paso="trote"] .tm-arm2 { animation: none; transform: rotate(16deg); }
-@keyframes tm-trote { 0%, 100% { transform: rotate(17deg); } 50% { transform: rotate(-17deg); } }
-@keyframes tm-galope { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
-@keyframes tm-silla { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-2px) rotate(-2.5deg); } }
-
-/* ---------- el gesto propio de cada uno ---------- */
-/* el guardia se cuadra y se queda inmóvil */
-.tm-ch.firmes .tm-walk, .tm-ch.firmes .tm-leg, .tm-ch.firmes .tm-arm2 { animation: none; transform: rotate(0deg); }
-/* el caballo se encabrita */
-.tm-ch.encabrita .tm-fig { animation: tm-encabrita 1.9s cubic-bezier(.3,0,.3,1); transform-origin: 26% 100%; }
-@keyframes tm-encabrita { 0%, 100% { transform: rotate(0); } 26%, 62% { transform: rotate(-19deg); } }
-/* el bateador batea */
-.tm-ch.batea .tm-arm2.r { animation: tm-bate .62s cubic-bezier(.3,0,.2,1) 3; transform-origin: 50% 10%; }
-.tm-ch.batea .tm-walk { animation: tm-torso .62s ease-in-out 3; }
-@keyframes tm-bate { 0% { transform: rotate(-36deg); } 55% { transform: rotate(96deg); } 100% { transform: rotate(-36deg); } }
-@keyframes tm-torso { 0%, 100% { transform: rotate(0); } 55% { transform: rotate(-7deg); } }
-/* el gaitero aprieta el fuelle */
-.tm-ch.toca .tm-arm2.r { animation: tm-fuelle .55s ease-in-out infinite; transform-origin: 50% 10%; }
-.tm-ch.toca .tm-walk { animation: tm-respira 1.4s ease-in-out infinite; }
-@keyframes tm-fuelle { 0%, 100% { transform: rotate(20deg); } 50% { transform: rotate(-2deg); } }
-/* el perro ladra y el kiwi picotea */
-.tm-ch.ladra .tm-fig { animation: tm-brinca .34s ease-in-out 5; }
-.tm-ch.otea .tm-bob { animation: tm-picotea .6s ease-in-out 4; transform-origin: 72% 100%; }
-@keyframes tm-picotea { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(15deg); } }
-
-/* lo que dicen al saludarse */
-.tm-say { position: absolute; left: 50%; bottom: 100%; margin-bottom: 5px; padding: 3px 9px;
-  border-radius: 11px 11px 11px 3px; font-size: 11px; font-weight: 800; line-height: 1.25; white-space: nowrap;
-  color: var(--tm-bubble-text); background: var(--tm-bubble-bg); border: 1px solid var(--tm-line);
-  box-shadow: 0 8px 20px -12px var(--tm-glow); animation: tm-say-pop 2.4s ease-out forwards; }
-@keyframes tm-say-pop {
-  0% { opacity: 0; transform: translate(-50%, 7px) scale(.82); }
-  14% { opacity: 1; transform: translate(-50%, 0) scale(1); }
-  78% { opacity: 1; transform: translate(-50%, 0) scale(1); }
-  100% { opacity: 0; transform: translate(-50%, -9px) scale(.98); }
-}
-
-/* el arce canadiense va soltando hojas */
-.tm-hoja { transform-box: fill-box; transform-origin: 50% 50%; animation: tm-hoja-cae 9s linear infinite; }
-@keyframes tm-hoja-cae {
-  0% { opacity: 0; transform: translate(0, 0) rotate(0); }
-  6% { opacity: .9; }
-  70% { opacity: .9; }
-  100% { opacity: 0; transform: translate(14px, 46px) rotate(260deg); }
-}
-.tm-bob { transform-box: fill-box; transform-origin: 50% 100%; animation: tm-bobup 2.4s ease-in-out infinite; }
-@keyframes tm-bobup { 50% { transform: translateY(-4px); } }
-.tm-wag { transform-box: fill-box; transform-origin: 0% 100%; animation: tm-wagit .5s ease-in-out infinite; }
-@keyframes tm-wagit { 0%, 100% { transform: rotate(-16deg); } 50% { transform: rotate(18deg); } }
-.tm-ola { transform-box: fill-box; transform-origin: 50% 100%; animation: tm-saluda 1.5s ease-in-out infinite; }
-@keyframes tm-saluda { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(22deg); } }
-
-/* vehículos que cruzan la franja aunque no se baje por la página */
-.tm-wmover { position: absolute; bottom: 16px; will-change: transform; }
-.tm-wmover svg { display: block; width: 100%; height: auto; }
-.tm-wbus  { width: 78px; animation: tm-drive-r 46s linear infinite; animation-delay: -4s; }
-.tm-wtaxi { width: 52px; bottom: 12px; animation: tm-drive-l 38s linear infinite; animation-delay: -21s; }
-@media (max-width: 767px) { .tm-wbus { width: 58px; } .tm-wtaxi { width: 40px; } }
-
-/* ---------- el cielo: nubes, sol o luna, pájaros, globo ---------- */
+/* ---------- el cielo: nubes, sol o luna y globo ---------- */
 .tm-weather { position: fixed; left: 0; right: 0; top: 0; height: 68vh; z-index: -1; pointer-events: none; overflow: hidden; }
 .tm-wcloud { position: absolute; height: 30px; border-radius: 40px; background: var(--tw-cloud);
   animation: tm-cloud linear infinite; will-change: transform; }
@@ -381,17 +181,145 @@
 :root[data-theme="light"] .tm-astro { opacity: .65; }
 /* de día es el sol; de noche, una luna en cuarto creciente */
 :root:not([data-theme="light"]) .tm-astro { background: radial-gradient(circle 40px at 74% 22%, transparent 0 40px, var(--tw-sun) 41px); }
-.tm-bird { position: absolute; width: 58px; color: var(--tw-detail); opacity: .5; animation: tm-fly 70s linear infinite; }
-.tm-bird svg { display: block; width: 100%; }
-.tm-bird path { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round;
-  animation: tm-alas 1.1s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
-@keyframes tm-alas { 50% { transform: scaleY(.45); } }
 .tm-globo { position: absolute; width: 60px; left: 6%; animation: tm-subir 54s linear infinite; }
 .tm-globo svg { display: block; width: 100%; }
 @keyframes tm-subir { from { transform: translate3d(0, 70vh, 0); } to { transform: translate3d(26vw, -28vh, 0); } }
 
 @media (prefers-reduced-motion: reduce) {
   .tm-world *, .tm-weather * { animation: none !important; }
-  .tm-wmover, .tm-bird, .tm-globo, .tm-wcloud, .tm-say { display: none !important; }
+  .tm-globo { display: none !important; }
 }
-@media print { .tm-world, .tm-weather { display: none !important; } }
+@media print { .tm-world, .tm-weather, .tm-season, .tm-tinte, .tm-defs { display: none !important; } }
+
+/* ==========================================================================
+   LAS CUATRO ESTACIONES
+   La profesora elige la estación en su panel (pestaña «Ambiente») y el
+   portal la deja en <html data-season="primavera|verano|otono|invierno">.
+   Aquí van los colores del paisaje y del cielo; la lluvia, la nieve, las
+   hojas y el viento los pinta tema.js en el lienzo .tm-season.
+   Mientras llueve, tema.js pone la clase .tm-llueve en <html>; al escampar
+   en primavera, .tm-arco (sale el arcoíris).
+   ========================================================================== */
+.tm-wcloud, .tm-cloud { animation-duration: var(--d, 100s); }
+.tm-mas, .tm-flores { display: none; }
+.tm-season { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.tm-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.tm-tinte { position: fixed; inset: 0; z-index: -2; pointer-events: none; transition: background 1.5s; }
+.tm-tinte::after { content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity 4s;
+  background: linear-gradient(rgba(51, 65, 85, .30), rgba(51, 65, 85, .08)); }
+:root[data-theme="light"] .tm-tinte::after { background: linear-gradient(rgba(100, 116, 139, .22), rgba(100, 116, 139, .05)); }
+:root.tm-llueve .tm-tinte::after { opacity: 1; }
+
+/* vegetación y colinas: sin estación, el mismo color que su capa */
+.tm-near .c  { fill: var(--s-c,  var(--tm-near)); }
+.tm-near .v  { fill: var(--s-v,  var(--tm-near)); }
+.tm-near .v2 { fill: var(--s-v2, var(--tm-near)); }
+.tm-w-far .c { fill: var(--s-c,  var(--tw-far)); }
+.tm-w-far .v { fill: var(--s-vf, var(--tw-far)); }
+.tm-w-near .v  { fill: var(--s-v,  var(--tw-near)); }
+.tm-w-near .v2 { fill: var(--s-v2, var(--tw-near)); }
+.tm-w-near .g  { fill: var(--s-g,  var(--tw-grass)); }
+.tm-near .c, .tm-near .v, .tm-near .v2, .tm-w-far .c, .tm-w-far .v,
+.tm-w-near .v, .tm-w-near .v2, .tm-w-near .g { transition: fill 1.5s; }
+
+/* más nubes en otoño, invierno y primavera */
+:root[data-season="otono"] .tm-mas, :root[data-season="invierno"] .tm-mas,
+:root[data-season="primavera"] .tm-mas { display: block; }
+:root[data-season="otono"] .tm-cloud, :root[data-season="invierno"] .tm-cloud { opacity: .16; }
+:root[data-season="otono"][data-theme="light"] .tm-cloud, :root[data-season="invierno"][data-theme="light"] .tm-cloud { opacity: .9; }
+
+/* mientras llueve: nubes grises, el sol (o la luna) se esconde y el cielo se apaga */
+:root.tm-llueve[data-season] { --tw-cloud: rgba(148, 163, 184, .30); }
+:root.tm-llueve[data-season][data-theme="light"] { --tw-cloud: rgba(148, 163, 184, .88); }
+:root.tm-llueve .tm-cloud { opacity: .3; background: rgba(148, 163, 184, .7); }
+:root.tm-llueve .tm-astro { opacity: .08 !important; }
+.tm-astro, .tm-cloud, .tm-wcloud { transition: opacity 4s, background 4s; }
+
+/* ---------- OTOÑO: ocres, amarillos y violetas; viento y nubes rápidas ---------- */
+:root[data-season="otono"] {
+  --s-c: rgba(202, 138, 4, .30); --s-v: rgba(234, 179, 8, .46); --s-v2: rgba(192, 132, 252, .42);
+  --s-vf: rgba(161, 98, 7, .42); --s-g: rgba(217, 119, 6, .32); --tw-cloud: rgba(203, 213, 225, .20);
+}
+:root[data-season="otono"][data-theme="light"] {
+  --s-c: rgba(161, 98, 7, .30); --s-v: rgba(202, 138, 4, .62); --s-v2: rgba(126, 34, 206, .45);
+  --s-vf: rgba(133, 77, 14, .45); --s-g: rgba(180, 83, 9, .36); --tw-cloud: rgba(203, 213, 225, .92);
+}
+:root[data-season="otono"] .tm-tinte { background:
+  radial-gradient(1000px 600px at 10% 0%, rgba(217, 119, 6, .16), transparent 65%),
+  radial-gradient(900px 600px at 95% 10%, rgba(147, 51, 234, .15), transparent 65%),
+  linear-gradient(180deg, rgba(100, 116, 139, .14), transparent 50%, rgba(180, 83, 9, .14)); }
+:root[data-season="otono"] .tm-wcloud, :root[data-season="otono"] .tm-cloud { animation-duration: calc(var(--d, 100s) * .35); }
+
+/* ---------- INVIERNO: árboles pelados, nieve que cuaja en suelo y edificios ---------- */
+:root[data-season="invierno"] {
+  --s-c: rgba(241, 245, 249, .34); --s-v: rgba(203, 213, 225, .60); --s-v2: rgba(203, 213, 225, .50);
+  --s-vf: rgba(110, 160, 140, .38); --s-g: rgba(241, 245, 249, .30); --tw-cloud: rgba(226, 232, 240, .20);
+}
+:root[data-season="invierno"][data-theme="light"] {
+  --s-c: rgba(148, 163, 184, .42); --s-v: rgba(71, 85, 105, .62); --s-v2: rgba(71, 85, 105, .52);
+  --s-vf: rgba(21, 94, 79, .42); --s-g: rgba(148, 163, 184, .40); --tw-cloud: rgba(241, 245, 249, .95);
+}
+:root[data-season="invierno"] .tm-tinte { background:
+  linear-gradient(180deg, rgba(148, 163, 184, .20), rgba(186, 230, 253, .08) 60%, rgba(241, 245, 249, .10)); }
+:root[data-season="invierno"][data-theme="light"] .tm-tinte { background:
+  linear-gradient(180deg, rgba(100, 116, 139, .20), rgba(148, 163, 184, .12) 60%, rgba(100, 116, 139, .10)); }
+/* las copas se quedan en ramas: solo el contorno, a trazos */
+:root[data-season="invierno"] .copa { fill: transparent; stroke: var(--s-v); stroke-width: 1.6; stroke-dasharray: 3 2.4; }
+/* la nieve se posa encima de todo lo que dibuja el paisaje (ver el filtro en tema.js) */
+:root[data-season="invierno"] .tm-layer svg, :root[data-season="invierno"] .tm-wtile > svg { filter: url(#tm-nieve); }
+:root[data-season="invierno"] .tm-astro { --tw-sun: #e2e8f0; --tw-halo: rgba(226, 232, 240, .18); }
+/* el manto de nieve del suelo crece con --nieve (de 0 a 1) */
+.tm-manto { position: absolute; left: 0; right: 0; bottom: 0; display: none; pointer-events: none;
+  height: calc(var(--tw-h) * .11 * var(--nieve, 0) + 2px); opacity: calc(var(--nieve, 0) * .92);
+  background: linear-gradient(#ffffff, #e2e8f0);
+  -webkit-mask: linear-gradient(transparent, #000 45%); mask: linear-gradient(transparent, #000 45%); }
+:root[data-season="invierno"] .tm-manto { display: block; }
+
+/* ---------- PRIMAVERA: verde, flores, chubascos y arcoíris ---------- */
+:root[data-season="primavera"] {
+  --s-c: rgba(74, 222, 128, .26); --s-v: rgba(74, 222, 128, .46); --s-v2: rgba(244, 114, 182, .46);
+  --s-vf: rgba(34, 197, 94, .36); --s-g: rgba(74, 222, 128, .32);
+}
+:root[data-season="primavera"][data-theme="light"] {
+  --s-c: rgba(22, 163, 74, .26); --s-v: rgba(22, 163, 74, .52); --s-v2: rgba(219, 39, 119, .42);
+  --s-vf: rgba(21, 128, 61, .42); --s-g: rgba(22, 163, 74, .40);
+}
+:root[data-season="primavera"] .tm-flores { display: inline; }
+:root[data-season="primavera"] .tm-tinte { background:
+  radial-gradient(900px 600px at 90% 0%, rgba(244, 114, 182, .11), transparent 65%),
+  radial-gradient(1100px 600px at 20% 0%, rgba(56, 189, 248, .12), transparent 65%),
+  radial-gradient(1200px 500px at 50% 110%, rgba(74, 222, 128, .14), transparent 65%); }
+.tm-arcoiris { position: absolute; left: 10%; top: 16%; width: 560px; height: 280px; border-radius: 280px 280px 0 0; opacity: 0;
+  background: radial-gradient(circle at 50% 100%, transparent 58%, rgba(139, 92, 246, .55) 58.5% 63%, rgba(59, 130, 246, .55) 63% 67%,
+    rgba(34, 197, 94, .55) 67% 71%, rgba(250, 204, 21, .55) 71% 75%, rgba(249, 115, 22, .55) 75% 79%, rgba(244, 63, 94, .55) 79% 83%, transparent 83.5%);
+  -webkit-mask: linear-gradient(#000 55%, transparent); mask: linear-gradient(#000 55%, transparent);
+  transition: opacity 5s; }
+@media (max-width: 767px) { .tm-arcoiris { left: 4%; width: 320px; height: 160px; } }
+:root.tm-arco[data-season="primavera"] .tm-arcoiris { opacity: .5; }
+:root.tm-arco[data-season="primavera"][data-theme="light"] .tm-arcoiris { opacity: .75; }
+
+/* ---------- VERANO: mucho sol, campos dorados, pocas nubes ---------- */
+:root[data-season="verano"] {
+  --s-c: rgba(250, 204, 21, .24); --s-v: rgba(34, 197, 94, .44); --s-v2: rgba(250, 204, 21, .42);
+  --s-vf: rgba(22, 163, 74, .36); --s-g: rgba(234, 179, 8, .30);
+}
+:root[data-season="verano"][data-theme="light"] {
+  --s-c: rgba(202, 138, 4, .30); --s-v: rgba(21, 128, 61, .52); --s-v2: rgba(202, 138, 4, .52);
+  --s-vf: rgba(21, 128, 61, .42); --s-g: rgba(202, 138, 4, .40);
+}
+:root[data-season="verano"] .tm-tinte { background:
+  radial-gradient(900px 700px at 90% 8%, rgba(251, 191, 36, .14), transparent 65%),
+  radial-gradient(1200px 500px at 50% 110%, rgba(251, 146, 60, .10), transparent 65%); }
+:root[data-season="verano"][data-theme="light"] .tm-tinte { background:
+  radial-gradient(900px 700px at 90% 8%, rgba(251, 191, 36, .26), transparent 65%),
+  radial-gradient(1200px 600px at 30% 0%, rgba(56, 189, 248, .14), transparent 65%),
+  radial-gradient(1200px 500px at 50% 110%, rgba(251, 146, 60, .12), transparent 65%); }
+:root[data-season="verano"] .tm-wcloud { opacity: .5; }
+:root[data-season="verano"][data-theme="light"] .tm-astro { width: 118px; height: 118px; opacity: .92; }
+.tm-astro::before { content: ""; position: absolute; inset: -48px; border-radius: 50%; display: none;
+  background: repeating-conic-gradient(rgba(251, 191, 36, .45) 0 5deg, transparent 5deg 22.5deg);
+  -webkit-mask: radial-gradient(circle, transparent 46%, #000 50%, transparent 72%); mask: radial-gradient(circle, transparent 46%, #000 50%, transparent 72%);
+  animation: tm-spin 80s linear infinite; }
+:root[data-season="verano"][data-theme="light"] .tm-astro::before { display: block; }
+
+@media (prefers-reduced-motion: reduce) { .tm-season { display: none; } .tm-astro::before { animation: none; } }

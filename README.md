@@ -49,6 +49,10 @@ En un minuto la página muestra los cambios al alumnado.
 - **Marcar como «Próximamente»:** en el lápiz ✏️, campo *Estado*. La app aparece
   anunciada pero sin enlace, hasta que la termines.
 - **Cambiar tu nombre, centro o el texto de portada:** pestaña *Portada y perfil*.
+- **Cambiar la estación del paisaje:** pestaña *Ambiente*. Elige *Primavera*,
+  *Verano*, *Otoño*, *Invierno*, *Clásica* (sin estación) o *Automática* (cambia
+  sola según la fecha). Lo ves al momento; para que lo vea el alumnado, publica
+  el `apps.json` como siempre (se guarda en `"site": { "season": "…" }`).
 
 ## En clase
 
@@ -165,18 +169,24 @@ catálogo, el panel de profesora ni el modo claro/oscuro. Está en la carpeta
     Glendalough y una cruz celta.
   - Toronto: CN Tower.
   - Sídney: Ópera y Harbour Bridge.
-- **Animaciones:** un autobús de dos pisos, un taxi amarillo, un canguro (con
-  su cría en la bolsa) que cruza saltando y un duende irlandés que recorre la
-  portada a saltitos de jiga con su olla de oro; de vez en cuando aparece un
-  arcoíris. También pasa una avioneta con
-  la pancarta «Hello! · Dia duit! · G'day! · Howdy!». También
-  aparecen bocadillos con saludos de cada país y ventanas que se encienden de
-  noche. En modo claro hay nubes y en modo oscuro, estrellas.
-- **Toda la página:** tréboles verdes, hojas de arce y estrellas que caen
-  despacio, e iconos muy suaves que se desplazan con el scroll (Big Ben,
-  cabina, taza de té, Estatua de la Libertad, Ópera, canguro, trébol, arpa
-  celta, guitarra folk) y una barra de progreso de
-  lectura con los colores de la marca.
+- **Animaciones:** una avioneta con la pancarta «Hello! · Dia duit! · G'day! ·
+  Howdy!», un globo que sube por la pantalla, nubes, el sol (de día) o la luna
+  (de noche), bocadillos con saludos de cada país y ventanas que se encienden
+  de noche. Al bajar por la página, una franja de paisaje con los monumentos
+  viaja al pie de la ventana.
+- **Tarjetas:** translúcidas y con el color de su categoría; de noche se ven
+  más claras y de día, con un tono más intenso.
+- **Estaciones** (las eliges en el panel, pestaña *Ambiente*):
+  - *Primavera:* paisaje verde con árboles en flor y florecillas, pétalos que
+    caen, chubascos cortos y arcoíris al escampar.
+  - *Verano:* mucho sol (con rayos), campos dorados, pocas nubes, motas de luz
+    de día y luciérnagas de noche.
+  - *Otoño:* vegetación amarilla, ocre y violeta, hojas secas que caen,
+    ráfagas de viento, nubes rápidas, cielo más cubierto y lluvia a ratos.
+  - *Invierno:* árboles pelados y nieve que va cayendo y, poco a poco, cubre
+    el suelo y los tejados de los edificios.
+  - *Clásica:* el paisaje sin estación. *Automática:* cambia sola con la fecha.
+  - Los edificios de cada ciudad son siempre los mismos.
 - **Música** (botón ♪ en la cabecera): un popurrí de melodías tradicionales
   (de dominio público) tocadas despacio con flauta o tin whistle, arpa y un
   colchón de cuerdas:
