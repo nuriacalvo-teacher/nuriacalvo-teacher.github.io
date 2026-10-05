@@ -307,31 +307,36 @@
       "updated": "2026-09-20"
     },
     {
-      "id": "escape-room",
-      "repo": "nuriacalvo-teacher/escape-room",
-      "url": "https://nuriacalvo-teacher.github.io/escape-room/",
-      "title": "Escape Room",
-      "subtitle": "",
-      "description": "De 2 a 6 equipos se turnan para compitiendo y resolviendo acertijos contra el reloj para escapar",
-      "content": "Juego de escape por equipos · retos y pistas",
+      "id": "present-tenses",
+      "repo": "nuriacalvo-teacher/present-tenses",
+      "url": "https://nuriacalvo-teacher.github.io/present-tenses/",
+      "title": "Present Tenses",
+      "subtitle": "Domina todos los presentes",
+      "description": "Teoría, ejemplos y test de 10 preguntas por bloque para diferenciar present simple, continuous, perfect y perfect continuous. Con informe final de evaluación.",
+      "content": "3 niveles · present simple, continuous, perfect y perfect continuous",
       "kind": "app",
       "exam": false,
       "practiceUrl": "",
       "practiceLabel": "",
-      "category": "games",
+      "category": "grammar",
       "skills": [
-        "games"
+        "grammar"
       ],
       "levels": [
-        "ALL LEVELS"
+        "2º ESO",
+        "3º ESO",
+        "4º ESO"
       ],
-      "tags": [],
-      "icon": "fa-shapes",
+      "tags": [
+        "Teoría + test",
+        "Informe de notas"
+      ],
+      "icon": "fa-clock",
       "accent": "indigo",
       "status": "live",
-      "featured": false,
+      "featured": true,
       "visible": true,
-      "updated": "2026-09-21"
+      "updated": "2026-09-14"
     },
     {
       "id": "past-tenses",
@@ -359,35 +364,31 @@
       "updated": "2026-09-23"
     },
     {
-      "id": "habits",
-      "repo": "nuriacalvo-teacher/habits",
-      "url": "https://nuriacalvo-teacher.github.io/habits/",
-      "title": "Habits",
-      "subtitle": "Rutinas y hábitos en inglés",
-      "description": "Vocabulario y estructuras para hablar de hábitos y rutinas diarias, con adverbios de frecuencia.",
-      "content": "Rutinas, adverbios de frecuencia y vocabulario del día a día",
+      "id": "escape-room",
+      "repo": "nuriacalvo-teacher/escape-room",
+      "url": "https://nuriacalvo-teacher.github.io/escape-room/",
+      "title": "Escape Room",
+      "subtitle": "",
+      "description": "De 2 a 6 equipos se turnan para compitiendo y resolviendo acertijos contra el reloj para escapar",
+      "content": "Juego de escape por equipos · retos y pistas",
       "kind": "app",
       "exam": false,
       "practiceUrl": "",
       "practiceLabel": "",
-      "category": "grammar",
+      "category": "games",
       "skills": [
-        "grammar"
+        "games"
       ],
       "levels": [
-        "1º ESO",
-        "2º ESO"
+        "ALL LEVELS"
       ],
-      "tags": [
-        "Rutinas",
-        "Frecuencia"
-      ],
-      "icon": "fa-repeat",
-      "accent": "amber",
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
       "status": "live",
-      "featured": true,
+      "featured": false,
       "visible": true,
-      "updated": "2026-09-11"
+      "updated": "2026-09-21"
     },
     {
       "id": "sentence-formation",
@@ -421,13 +422,38 @@
       "updated": "2026-09-18"
     },
     {
-      "id": "present-tenses",
-      "repo": "nuriacalvo-teacher/present-tenses",
-      "url": "https://nuriacalvo-teacher.github.io/present-tenses/",
-      "title": "Present Tenses",
-      "subtitle": "Domina todos los presentes",
-      "description": "Teoría, ejemplos y test de 10 preguntas por bloque para diferenciar present simple, continuous, perfect y perfect continuous. Con informe final de evaluación.",
-      "content": "3 niveles · present simple, continuous, perfect y perfect continuous",
+      "id": "future",
+      "repo": "nuriacalvo-teacher/future",
+      "url": "https://nuriacalvo-teacher.github.io/future/",
+      "title": "Future",
+      "subtitle": "",
+      "description": "",
+      "content": "Will, be going to y present continuous con valor de futuro",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "grammar",
+      "skills": [
+        "grammar"
+      ],
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-09-25"
+    },
+    {
+      "id": "habits",
+      "repo": "nuriacalvo-teacher/habits",
+      "url": "https://nuriacalvo-teacher.github.io/habits/",
+      "title": "Habits",
+      "subtitle": "Rutinas y hábitos en inglés",
+      "description": "Vocabulario y estructuras para hablar de hábitos y rutinas diarias, con adverbios de frecuencia.",
+      "content": "Rutinas, adverbios de frecuencia y vocabulario del día a día",
       "kind": "app",
       "exam": false,
       "practiceUrl": "",
@@ -437,20 +463,19 @@
         "grammar"
       ],
       "levels": [
-        "2º ESO",
-        "3º ESO",
-        "4º ESO"
+        "1º ESO",
+        "2º ESO"
       ],
       "tags": [
-        "Teoría + test",
-        "Informe de notas"
+        "Rutinas",
+        "Frecuencia"
       ],
-      "icon": "fa-clock",
-      "accent": "indigo",
+      "icon": "fa-repeat",
+      "accent": "amber",
       "status": "live",
       "featured": true,
       "visible": true,
-      "updated": "2026-09-14"
+      "updated": "2026-09-11"
     },
     {
       "id": "irregular-verbs",
@@ -668,33 +693,6 @@
       "updated": "2026-01-14"
     },
     {
-      "id": "pasarlista",
-      "repo": "nuriacalvo-teacher/pasarlista",
-      "url": "https://nuriacalvo-teacher.github.io/pasarlista/",
-      "title": "Pasar lista",
-      "subtitle": "Herramienta de aula",
-      "description": "Herramienta para pasar lista y controlar la asistencia del grupo.",
-      "content": "",
-      "kind": "app",
-      "exam": false,
-      "practiceUrl": "",
-      "practiceLabel": "",
-      "category": "other",
-      "skills": [
-        "other"
-      ],
-      "levels": [],
-      "tags": [
-        "Uso docente"
-      ],
-      "icon": "fa-clipboard-user",
-      "accent": "slate",
-      "status": "live",
-      "featured": false,
-      "visible": false,
-      "updated": "2026-09-13"
-    },
-    {
       "id": "control",
       "repo": "nuriacalvo-teacher/control",
       "url": "https://nuriacalvo-teacher.github.io/control/",
@@ -722,6 +720,33 @@
       "updated": "2025-10-11"
     },
     {
+      "id": "pasarlista",
+      "repo": "nuriacalvo-teacher/pasarlista",
+      "url": "https://nuriacalvo-teacher.github.io/pasarlista/",
+      "title": "Pasar lista",
+      "subtitle": "Herramienta de aula",
+      "description": "Herramienta para pasar lista y controlar la asistencia del grupo.",
+      "content": "",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "other",
+      "skills": [
+        "other"
+      ],
+      "levels": [],
+      "tags": [
+        "Uso docente"
+      ],
+      "icon": "fa-clipboard-user",
+      "accent": "slate",
+      "status": "live",
+      "featured": false,
+      "visible": false,
+      "updated": "2026-09-13"
+    },
+    {
       "id": "patrimonio_IES_Goya",
       "repo": "nuriacalvo-teacher/patrimonio_IES_Goya",
       "url": "https://nuriacalvo-teacher.github.io/patrimonio_IES_Goya/",
@@ -747,31 +772,6 @@
       "featured": false,
       "visible": false,
       "updated": "2026-05-08"
-    },
-    {
-      "id": "future",
-      "repo": "nuriacalvo-teacher/future",
-      "url": "https://nuriacalvo-teacher.github.io/future/",
-      "title": "Future",
-      "subtitle": "",
-      "description": "",
-      "content": "Will, be going to y present continuous con valor de futuro",
-      "kind": "app",
-      "exam": false,
-      "practiceUrl": "",
-      "practiceLabel": "",
-      "category": "grammar",
-      "skills": [
-        "grammar"
-      ],
-      "levels": [],
-      "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
-      "status": "live",
-      "featured": true,
-      "visible": true,
-      "updated": "2026-09-25"
     }
   ]
 }
