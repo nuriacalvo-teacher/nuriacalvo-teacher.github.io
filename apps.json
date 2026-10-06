@@ -224,7 +224,7 @@
       "url": "https://nuriacalvo-teacher.github.io/present-tenses/video/",
       "title": "Present lab",
       "subtitle": "Vídeo-lección narrada",
-      "description": "Vídeo-lección narrada sobre el futuro, con audio grabado\nLección animada y narrada en inglés sobre el presente: simple, continuo, perfecto, perfecto continuo, state verbs, adverbios de frecuencia... Termina con un quiz y un botón a los ejercicios.\n\nHecha por Nuria Calvo, profesora de inglés del IES Goya (Zaragoza).",
+      "description": "Vídeo-lección narrada en inglés nativo sobre el presente: simple, continuo, perfecto, perfecto continuo, state verbs, adverbios de frecuencia... Termina con un quiz y un botón a los ejercicios.\n\nHecha por Nuria Calvo, profesora de inglés del IES Goya (Zaragoza).",
       "content": "",
       "kind": "video",
       "exam": false,
@@ -275,7 +275,7 @@
       "icon": "fa-clock",
       "accent": "rose",
       "status": "live",
-      "featured": true,
+      "featured": false,
       "visible": true,
       "updated": "2026-10-01"
     },
