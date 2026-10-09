@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-06",
+  "updated": "2026-10-09",
   "teacher": {
     "name": "Nuria Calvo",
     "role": "Profesora de Inglés",
@@ -245,6 +245,37 @@
       "featured": true,
       "visible": true,
       "updated": "2026-10-06"
+    },
+    {
+      "id": "https-nuriacalvo-teacher-github-io-past-tenses-video",
+      "repo": "nuriacalvo-teacher/past-tenses",
+      "url": "https://nuriacalvo-teacher.github.io/past-tenses/video/",
+      "title": "Past Lab",
+      "subtitle": "Vídeo-lección narrada",
+      "description": "final y enlace a app de ejercicios multinivel.",
+      "content": "Vídeo-lección · past tenses · con quiz",
+      "kind": "video",
+      "exam": false,
+      "practiceUrl": "https://nuriacalvo-teacher.github.io/past-tenses",
+      "practiceLabel": "",
+      "category": "grammar",
+      "skills": [
+        "grammar",
+        "other"
+      ],
+      "levels": [
+        "ALL LEVELS"
+      ],
+      "tags": [
+        "Vídeo",
+        "Quiz final"
+      ],
+      "icon": "fa-toolbox",
+      "accent": "lime",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-10-09"
     },
     {
       "id": "habits-video",
