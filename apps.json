@@ -346,21 +346,23 @@
       "repo": "nuriacalvo-teacher/goyaland",
       "url": "https://nuriacalvo-teacher.github.io/goyaland/",
       "title": "Goyaland",
-      "subtitle": "",
-      "description": "",
-      "content": "",
+      "subtitle": "Build Your Nation, Master English!",
+      "description": "Videojuego educativo y social donde los alumnos del IES Goya deben fundar, gestionar y hacer crecer su propia nación comprando parcelas y construyendo edificios. Para conseguir la moneda del juego (GOYUX), superan historias sociales interactivas y minijuegos de vida cotidiana en inglés (A2–B2). Para expandir su territorio, responden a retos de lengua inglesa y cultura general sobre países anglófonos, y para progresar deben superar retos cotidianos en inglés y visitar las naciones de sus compañeros y firmar tratados diplomáticos basados en los Objetivos de Desarrollo Sostenible (ODS 2030)",
+      "content": "Games",
       "kind": "app",
       "exam": false,
       "practiceUrl": "",
       "practiceLabel": "",
-      "category": "grammar",
+      "category": "games",
       "skills": [
-        "grammar"
+        "games"
       ],
-      "levels": [],
+      "levels": [
+        "ALL LEVELS"
+      ],
       "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
+      "icon": "fa-gamepad",
+      "accent": "orange",
       "status": "live",
       "featured": true,
       "visible": true,
