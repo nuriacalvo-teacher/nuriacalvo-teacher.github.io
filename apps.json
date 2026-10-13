@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-09",
+  "updated": "2026-10-13",
   "teacher": {
     "name": "Nuria Calvo",
     "role": "Profesora de Inglés",
@@ -342,6 +342,31 @@
       "updated": "2026-10-01"
     },
     {
+      "id": "goyaland",
+      "repo": "nuriacalvo-teacher/goyaland",
+      "url": "https://nuriacalvo-teacher.github.io/goyaland/",
+      "title": "Goyaland",
+      "subtitle": "",
+      "description": "",
+      "content": "",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "grammar",
+      "skills": [
+        "grammar"
+      ],
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-10-13"
+    },
+    {
       "id": "battles",
       "repo": "nuriacalvo-teacher/battles",
       "url": "https://nuriacalvo-teacher.github.io/battles/",
@@ -367,6 +392,31 @@
       "featured": false,
       "visible": true,
       "updated": "2026-09-20"
+    },
+    {
+      "id": "past-tenses",
+      "repo": "nuriacalvo-teacher/past-tenses",
+      "url": "https://nuriacalvo-teacher.github.io/past-tenses/",
+      "title": "Past Tenses",
+      "subtitle": "",
+      "description": "",
+      "content": "Past simple, continuous y perfect",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "grammar",
+      "skills": [
+        "grammar"
+      ],
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2026-09-23"
     },
     {
       "id": "present-tenses",
@@ -401,58 +451,6 @@
       "updated": "2026-09-14"
     },
     {
-      "id": "past-tenses",
-      "repo": "nuriacalvo-teacher/past-tenses",
-      "url": "https://nuriacalvo-teacher.github.io/past-tenses/",
-      "title": "Past Tenses",
-      "subtitle": "",
-      "description": "",
-      "content": "Past simple, continuous y perfect",
-      "kind": "app",
-      "exam": false,
-      "practiceUrl": "",
-      "practiceLabel": "",
-      "category": "grammar",
-      "skills": [
-        "grammar"
-      ],
-      "levels": [],
-      "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
-      "status": "live",
-      "featured": true,
-      "visible": true,
-      "updated": "2026-09-23"
-    },
-    {
-      "id": "escape-room",
-      "repo": "nuriacalvo-teacher/escape-room",
-      "url": "https://nuriacalvo-teacher.github.io/escape-room/",
-      "title": "Escape Room",
-      "subtitle": "",
-      "description": "De 2 a 6 equipos se turnan para compitiendo y resolviendo acertijos contra el reloj para escapar",
-      "content": "Juego de escape por equipos · retos y pistas",
-      "kind": "app",
-      "exam": false,
-      "practiceUrl": "",
-      "practiceLabel": "",
-      "category": "games",
-      "skills": [
-        "games"
-      ],
-      "levels": [
-        "ALL LEVELS"
-      ],
-      "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
-      "status": "live",
-      "featured": false,
-      "visible": true,
-      "updated": "2026-09-21"
-    },
-    {
       "id": "sentence-formation",
       "repo": "nuriacalvo-teacher/sentence-formation",
       "url": "https://nuriacalvo-teacher.github.io/sentence-formation/",
@@ -482,6 +480,33 @@
       "featured": true,
       "visible": false,
       "updated": "2026-09-18"
+    },
+    {
+      "id": "escape-room",
+      "repo": "nuriacalvo-teacher/escape-room",
+      "url": "https://nuriacalvo-teacher.github.io/escape-room/",
+      "title": "Escape Room",
+      "subtitle": "",
+      "description": "De 2 a 6 equipos se turnan para compitiendo y resolviendo acertijos contra el reloj para escapar",
+      "content": "Juego de escape por equipos · retos y pistas",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "games",
+      "skills": [
+        "games"
+      ],
+      "levels": [
+        "ALL LEVELS"
+      ],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-09-21"
     },
     {
       "id": "future",
