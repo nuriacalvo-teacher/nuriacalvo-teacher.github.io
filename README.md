@@ -22,7 +22,7 @@ crees una app nueva.
 Cada vez que subas una app nueva a GitHub:
 
 1. Abre la página y pulsa el botón **⚙️ Profesora** (arriba a la derecha).
-2. Escribe la contraseña (por defecto: `nuria123`).
+2. Escribe la contraseña (por defecto:).
 3. Ve a la pestaña **Repositorios de GitHub** y pulsa **Cargar mis repositorios**.
    Aparecerán *todos* tus repositorios, incluidos los que no tienen nada que ver
    con inglés.
