@@ -1946,10 +1946,10 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
    El panel de profesora edita una copia local y genera el apps.json nuevo.
    ========================================================================== */
 
-const DRAFT_KEY   = 'nc-portal-draft-v1';
+const DRAFT_KEY   = 'nc-portal-draft-v2';
 const THEME_KEY   = 'nc-portal-theme';
 const VIEW_KEY    = 'nc-portal-view';
-const TEACHER_KEY = 'hbarbtc';          // cámbiala si quieres (ver README)
+const TEACHER_HASH = 'd09d8557f2dc48ed0f8800c216659f7dfd7fa08e8196cff6ad952435e3aee3e1';
 const CATALOG_URL = 'apps.json';
 const PORTAL_REPO = 'nuriacalvo-teacher/nuriacalvo-teacher.github.io';  // repositorio donde vive este portal
 
@@ -2586,12 +2586,11 @@ function openTeacher(){
   $('#teacherPass').value = '';
   openModal('loginModal');
 }
-function doLogin(e){
+async function doLogin(e){
   e.preventDefault();
-  if ($('#teacherPass').value !== TEACHER_KEY){
-    $('#loginError').hidden = false;
-    return;
-  }
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode($('#teacherPass').value));
+  const h = [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2,'0')).join('');
+  if (h !== TEACHER_HASH){ $('#loginError').hidden = false; return; }
   closeModal('loginModal');
   openAdmin();
 }
