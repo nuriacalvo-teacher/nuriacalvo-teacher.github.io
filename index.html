@@ -841,9 +841,6 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
       <button class="icon-btn" id="themeBtn" type="button" title="Cambiar entre modo claro y oscuro" aria-label="Cambiar tema">
         <i class="fa-solid fa-moon" aria-hidden="true"></i>
       </button>
-      <a class="icon-btn" id="ghLink" href="https://github.com/nuriacalvo-teacher" target="_blank" rel="noopener" title="Repositorios en GitHub" aria-label="GitHub">
-        <i class="fa-brands fa-github" aria-hidden="true"></i>
-      </a>
       <button class="btn btn-primary btn-sm" type="button" onclick="openTeacher()">
         <i class="fa-solid fa-user-gear" aria-hidden="true"></i> <span class="hide-xs">Profesora</span>
       </button>
@@ -1029,13 +1026,10 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
             <p id="aboutBio"></p>
             <ul class="about-list">
               <li><i class="fa-solid fa-school" aria-hidden="true"></i> <span id="aboutSchool">Profesora de Inglés en el IES Goya (Zaragoza)</span></li>
-              <li><i class="fa-solid fa-code" aria-hidden="true"></i> <span>Todas las apps son de código abierto y están publicadas en GitHub.</span></li>
+            
             </ul>
             <div class="hero-cta">
-              <a class="btn btn-ghost" id="aboutGh" href="https://github.com/nuriacalvo-teacher" target="_blank" rel="noopener">
-                <i class="fa-brands fa-github" aria-hidden="true"></i> Ver el código en GitHub
-              </a>
-            </div>
+
           </div>
         </div>
         <div class="stats" id="aboutHighlights"></div>
@@ -1057,7 +1051,6 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
       <a href="#juegos">Juegos</a>
       <a href="#como-usar">Cómo se usa</a>
       <a href="#/sobre-mi">Sobre mí</a>
-      <a href="https://github.com/nuriacalvo-teacher" target="_blank" rel="noopener">GitHub</a>
       <button class="btn btn-ghost btn-sm" type="button" onclick="window.print()"><i class="fa-solid fa-print" aria-hidden="true"></i> Imprimir listado</button>
     </div>
   </div>
@@ -2164,9 +2157,6 @@ function renderIdentity(c){
   $('#footText').innerHTML = `© <span id="year">${new Date().getFullYear()}</span> ${esc(name)} · ${esc([t.school,t.city].filter(Boolean).join(', '))}`;
   document.title = `${name} · English Apps | ${[t.school, t.city].filter(Boolean).join(' ')}`.trim();
   if (t.github){
-    const u = `https://github.com/${t.github}`;
-    $('#ghLink').href = u; $('#aboutGh').href = u;
-  }
 }
 
 /* Una app puede trabajar varias skills. Si es antigua y solo trae "category",
@@ -2346,7 +2336,6 @@ function cardHTML(a, opts={}){
   const nivelesCard = isExam(a) ? (a.levels||[]).slice(0,3) : ['ALL LEVELS'];
   const levels = nivelesCard.map(l => `<span class="badge level">${esc(l)}</span>`).join('');
   const tags = (a.tags||[]).slice(0,2).map(t => `<span class="badge">${esc(t)}</span>`).join('');
-  const repoUrl = a.repo ? `https://github.com/${esc(a.repo)}` : '';
   const video = isVideo(a);
   const resumen = a.content || (a.description || '').slice(0, 95) + ((a.description||'').length > 95 ? '…' : '');
   return `
@@ -2382,7 +2371,6 @@ function cardHTML(a, opts={}){
             ? '<i class="fa-solid fa-play" aria-hidden="true"></i> Ver el vídeo'
             : 'Abrir app'} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`}
       ${!soon ? `<button class="mini-btn qr-btn" type="button" data-url="${esc(a.url)}" data-title="${esc(a.title)}" title="Código QR para proyectar" aria-label="Código QR de ${esc(a.title)}"><i class="fa-solid fa-qrcode" aria-hidden="true"></i></button>` : ''}
-      ${repoUrl ? `<a class="mini-btn" href="${repoUrl}" target="_blank" rel="noopener" title="Ver el código en GitHub" aria-label="Código de ${esc(a.title)} en GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>` : ''}
     </div>
     ${a.practiceUrl ? `<a class="practice-link" href="${esc(a.practiceUrl)}" target="_blank" rel="noopener">
       <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
