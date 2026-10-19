@@ -142,7 +142,7 @@ viendo las iniciales sobre el fondo de color.
 En `index.html`, busca la línea:
 
 ```js
-const TEACHER_KEY = 'nuria123';
+const TEACHER_KEY = 'hbarbtc';
 ```
 
 y cambia el texto entre comillas. Ten en cuenta que es una contraseña de
