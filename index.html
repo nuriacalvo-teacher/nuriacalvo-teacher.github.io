@@ -1024,12 +1024,9 @@ code.inline{ background:var(--surface-hi); padding:2px 7px; border-radius:6px; f
             <h2 id="aboutName">Nuria Calvo</h2>
             <p class="about-lead" id="aboutHeadline"></p>
             <p id="aboutBio"></p>
-            <ul class="about-list">
+                        <ul class="about-list">
               <li><i class="fa-solid fa-school" aria-hidden="true"></i> <span id="aboutSchool">Profesora de Inglés en el IES Goya (Zaragoza)</span></li>
-            
             </ul>
-            <div class="hero-cta">
-
           </div>
         </div>
         <div class="stats" id="aboutHighlights"></div>
@@ -2155,8 +2152,7 @@ function renderIdentity(c){
   $('#aboutBio').textContent = t.bio || '';
   $('#aboutSchool').textContent = [t.role, t.school && `en el ${t.school}`, t.city && `(${t.city})`].filter(Boolean).join(' ');
   $('#footText').innerHTML = `© <span id="year">${new Date().getFullYear()}</span> ${esc(name)} · ${esc([t.school,t.city].filter(Boolean).join(', '))}`;
-  document.title = `${name} · English Apps | ${[t.school, t.city].filter(Boolean).join(' ')}`.trim();
-  if (t.github){
+    document.title = `${name} · English Apps | ${[t.school, t.city].filter(Boolean).join(' ')}`.trim();
 }
 
 /* Una app puede trabajar varias skills. Si es antigua y solo trae "category",
