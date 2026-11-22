@@ -846,6 +846,33 @@
       "updated": "2026-11-22"
     },
     {
+      "id": "comparatives",
+      "repo": "nuriacalvo-teacher/comparatives",
+      "url": "https://nuriacalvo-teacher.github.io/comparatives/",
+      "title": "Comparatives",
+      "subtitle": "Comparatives & Superlatives",
+      "description": "Degrees of Comparison: Grammatical structures used to compare qualities and quantities by expressing equality (as... as), superiority (-er / more... than), inferiority (less... than), and the highest degree (the -est / the most).",
+      "content": "",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "grammar",
+      "skills": [
+        "grammar"
+      ],
+      "levels": [
+        "ALL LEVELS"
+      ],
+      "tags": [],
+      "icon": "fa-puzzle-piece",
+      "accent": "slate",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-11-22"
+    },
+    {
       "id": "brit",
       "repo": "nuriacalvo-teacher/BRIT",
       "url": "https://nuriacalvo-teacher.github.io/BRIT/",
