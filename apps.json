@@ -535,12 +535,12 @@
         "ALL LEVELS"
       ],
       "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
+      "icon": "fa-comment-dots",
+      "accent": "rose",
       "status": "live",
       "featured": false,
       "visible": true,
-      "updated": "2026-09-21"
+      "updated": "2026-11-22"
     },
     {
       "id": "future",
@@ -610,18 +610,18 @@
       "exam": false,
       "practiceUrl": "",
       "practiceLabel": "",
-      "category": "grammar",
+      "category": "writing",
       "skills": [
-        "grammar"
+        "writing"
       ],
       "levels": [],
       "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
+      "icon": "fa-bolt",
+      "accent": "violet",
       "status": "live",
       "featured": true,
       "visible": true,
-      "updated": "2026-11-19"
+      "updated": "2026-11-22"
     },
     {
       "id": "conditionals-reportedspeech",
@@ -730,14 +730,16 @@
       "skills": [
         "grammar"
       ],
-      "levels": [],
+      "levels": [
+        "ALL LEVELS"
+      ],
       "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
+      "icon": "fa-rotate",
+      "accent": "emerald",
       "status": "live",
       "featured": false,
       "visible": true,
-      "updated": "2026-11-20"
+      "updated": "2026-11-22"
     },
     {
       "id": "modals",
@@ -757,8 +759,8 @@
       ],
       "levels": [],
       "tags": [],
-      "icon": "fa-shapes",
-      "accent": "indigo",
+      "icon": "fa-code-branch",
+      "accent": "amber",
       "status": "live",
       "featured": false,
       "visible": true,
