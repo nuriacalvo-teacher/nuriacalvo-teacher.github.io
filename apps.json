@@ -655,36 +655,6 @@
       "updated": "2026-05-28"
     },
     {
-      "id": "reported_speech",
-      "repo": "nuriacalvo-teacher/reported_speech",
-      "url": "https://nuriacalvo-teacher.github.io/reported_speech/",
-      "title": "Reported Speech",
-      "subtitle": "Del estilo directo al indirecto",
-      "description": "Transformaciones de estilo directo a indirecto paso a paso, con cambios de tiempo verbal y de expresiones de tiempo.",
-      "content": "",
-      "kind": "app",
-      "exam": false,
-      "practiceUrl": "",
-      "practiceLabel": "",
-      "category": "grammar",
-      "skills": [
-        "grammar"
-      ],
-      "levels": [
-        "4º ESO",
-        "1º Bach"
-      ],
-      "tags": [
-        "Transformaciones"
-      ],
-      "icon": "fa-comment-dots",
-      "accent": "sky",
-      "status": "live",
-      "featured": false,
-      "visible": false,
-      "updated": "2026-04-21"
-    },
-    {
       "id": "relative-clauses",
       "repo": "nuriacalvo-teacher/relative-clauses",
       "url": "https://nuriacalvo-teacher.github.io/relative-clauses/",
@@ -740,6 +710,36 @@
       "featured": false,
       "visible": true,
       "updated": "2026-11-22"
+    },
+    {
+      "id": "reported_speech",
+      "repo": "nuriacalvo-teacher/reported_speech",
+      "url": "https://nuriacalvo-teacher.github.io/reported_speech/",
+      "title": "Reported Speech",
+      "subtitle": "Del estilo directo al indirecto",
+      "description": "Transformaciones de estilo directo a indirecto paso a paso, con cambios de tiempo verbal y de expresiones de tiempo.",
+      "content": "",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "grammar",
+      "skills": [
+        "grammar"
+      ],
+      "levels": [
+        "4º ESO",
+        "1º Bach"
+      ],
+      "tags": [
+        "Transformaciones"
+      ],
+      "icon": "fa-comment-dots",
+      "accent": "sky",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-04-21"
     },
     {
       "id": "modals",
