@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-13",
+  "updated": "2026-11-22",
   "teacher": {
     "name": "Nuria Calvo",
     "role": "Profesora de Inglés",
@@ -453,6 +453,38 @@
       "updated": "2026-09-14"
     },
     {
+      "id": "irregular-verbs",
+      "repo": "nuriacalvo-teacher/irregular-verbs",
+      "url": "https://nuriacalvo-teacher.github.io/irregular-verbs/",
+      "title": "Irregular Verbs Ultimate",
+      "subtitle": "Los verbos irregulares, a fondo",
+      "description": "Entrenamiento completo de verbos irregulares: infinitivo, pasado simple y participio.",
+      "content": "5 módulos · 3 niveles · las tres formas, huecos y traducción",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "vocabulary",
+      "skills": [
+        "vocabulary"
+      ],
+      "levels": [
+        "2º ESO",
+        "3º ESO",
+        "4º ESO"
+      ],
+      "tags": [
+        "Verbos",
+        "Práctica"
+      ],
+      "icon": "fa-bolt",
+      "accent": "emerald",
+      "status": "live",
+      "featured": true,
+      "visible": true,
+      "updated": "2025-11-13"
+    },
+    {
       "id": "sentence-formation",
       "repo": "nuriacalvo-teacher/sentence-formation",
       "url": "https://nuriacalvo-teacher.github.io/sentence-formation/",
@@ -567,36 +599,29 @@
       "updated": "2026-09-11"
     },
     {
-      "id": "irregular-verbs",
-      "repo": "nuriacalvo-teacher/irregular-verbs",
-      "url": "https://nuriacalvo-teacher.github.io/irregular-verbs/",
-      "title": "Irregular Verbs Ultimate",
-      "subtitle": "Los verbos irregulares, a fondo",
-      "description": "Entrenamiento completo de verbos irregulares: infinitivo, pasado simple y participio.",
-      "content": "5 módulos · 3 niveles · las tres formas, huecos y traducción",
+      "id": "writing1",
+      "repo": "nuriacalvo-teacher/writing1",
+      "url": "https://nuriacalvo-teacher.github.io/writing1/",
+      "title": "Writing1",
+      "subtitle": "",
+      "description": "writing blog posts and articles 3ESO",
+      "content": "",
       "kind": "app",
       "exam": false,
       "practiceUrl": "",
       "practiceLabel": "",
-      "category": "vocabulary",
+      "category": "grammar",
       "skills": [
-        "vocabulary"
+        "grammar"
       ],
-      "levels": [
-        "2º ESO",
-        "3º ESO",
-        "4º ESO"
-      ],
-      "tags": [
-        "Verbos",
-        "Práctica"
-      ],
-      "icon": "fa-bolt",
-      "accent": "emerald",
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
       "status": "live",
       "featured": true,
       "visible": true,
-      "updated": "2025-11-13"
+      "updated": "2026-11-19"
     },
     {
       "id": "conditionals-reportedspeech",
@@ -688,6 +713,56 @@
       "featured": false,
       "visible": true,
       "updated": "2026-04-07"
+    },
+    {
+      "id": "passive",
+      "repo": "nuriacalvo-teacher/passive",
+      "url": "https://nuriacalvo-teacher.github.io/passive/",
+      "title": "Passive",
+      "subtitle": "",
+      "description": "",
+      "content": "",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "grammar",
+      "skills": [
+        "grammar"
+      ],
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-11-20"
+    },
+    {
+      "id": "modals",
+      "repo": "nuriacalvo-teacher/modals",
+      "url": "https://nuriacalvo-teacher.github.io/modals/",
+      "title": "Modals",
+      "subtitle": "",
+      "description": "",
+      "content": "",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "grammar",
+      "skills": [
+        "grammar"
+      ],
+      "levels": [],
+      "tags": [],
+      "icon": "fa-shapes",
+      "accent": "indigo",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-11-22"
     },
     {
       "id": "brit",
