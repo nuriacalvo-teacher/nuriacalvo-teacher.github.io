@@ -767,6 +767,60 @@
       "updated": "2026-11-22"
     },
     {
+      "id": "conditionals",
+      "repo": "nuriacalvo-teacher/conditionals",
+      "url": "https://nuriacalvo-teacher.github.io/conditionals/",
+      "title": "Conditionals & Wishes",
+      "subtitle": "",
+      "description": "",
+      "content": "",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "grammar",
+      "skills": [
+        "grammar"
+      ],
+      "levels": [
+        "ALL LEVELS"
+      ],
+      "tags": [],
+      "icon": "fa-repeat",
+      "accent": "sky",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-11-22"
+    },
+    {
+      "id": "gerunds-infinitives",
+      "repo": "nuriacalvo-teacher/gerunds-infinitives",
+      "url": "https://nuriacalvo-teacher.github.io/gerunds-infinitives/",
+      "title": "Gerunds & Infinitives",
+      "subtitle": "",
+      "description": "",
+      "content": "",
+      "kind": "app",
+      "exam": false,
+      "practiceUrl": "",
+      "practiceLabel": "",
+      "category": "grammar",
+      "skills": [
+        "grammar"
+      ],
+      "levels": [
+        "ALL LEVELS"
+      ],
+      "tags": [],
+      "icon": "fa-book-open",
+      "accent": "teal",
+      "status": "live",
+      "featured": false,
+      "visible": true,
+      "updated": "2026-11-22"
+    },
+    {
       "id": "brit",
       "repo": "nuriacalvo-teacher/BRIT",
       "url": "https://nuriacalvo-teacher.github.io/BRIT/",
